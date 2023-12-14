@@ -1,17 +1,10 @@
-# Fresh project
+# Webmaster (2023-2024)
 
-Your new Fresh project is ready to go. You can follow the Fresh "Getting
-Started" guide here: <https://fresh.deno.dev/docs/getting-started>.
+Webmaster for the 2023-2024 school year.
 
-## Usage
+## Topic
 
-Make sure to install Deno:
-<https://deno.land/manual/getting_started/installation>.
-
-Then start the project:
-
-```shell
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
+The topic for the 2023-2024 school year is "**Green energy initiatives:**"
+"Develop a website that compiles information for homeowners on green and clean
+energy home solutions and other initiatives. The website should provide basic
+information, cost, tax rebate information, and clean/green energy practices."
