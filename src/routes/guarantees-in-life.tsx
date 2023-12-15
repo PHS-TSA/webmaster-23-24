@@ -5,9 +5,7 @@ export default function Taxes() {
   return (
     <>
       <Head>
-        <title>
-          Ben!
-        </title>
+        <title>Ben! | Why Switch?</title>
       </Head>
       <div class="px-4 py-8 mx-auto bg-green-400">
         <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
