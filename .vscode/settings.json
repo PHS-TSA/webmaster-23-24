@@ -10,7 +10,7 @@
   "[markdown]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[json][jsonc]": {
+  "[json]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "css.customData": [
