@@ -12,7 +12,7 @@ export default function Header({ active }: Props) {
   ];
 
   return (
-    <div class="bg-white w-full py-6 px-8 flex flex-col md:flex-row gap-4">
+    <div class="bg-white w-full py-6 px-8 flex flex-col sm:flex-row gap-4">
       <div class="flex items-center flex-1">
         <IconSolarPanel2 aria-hidden="true" />
         <div class="text-2xl ml-1 font-bold">
