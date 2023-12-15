@@ -1,4 +1,4 @@
-import IconSolarPanel2 from "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/solar-panel-2.tsx";
+import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 
 type Props = {
   active: string;
