@@ -38,8 +38,7 @@
   },
   "nodeModulesDir": true,
   "fmt": {
-    "options": {
-      "proseWrap": "preserve"
-    }
-  }
+    "proseWrap": "preserve"
+  },
+  "scopes": {}
 }
