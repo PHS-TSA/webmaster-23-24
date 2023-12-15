@@ -36,5 +36,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
   },
-  "nodeModulesDir": true
+  "nodeModulesDir": true,
+  "fmt": {
+    "options": {
+      "proseWrap": "preserve"
+    }
+  }
 }
