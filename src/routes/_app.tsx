@@ -1,6 +1,5 @@
 import type { PageProps } from "$fresh/server.ts";
 import { Partial } from "$fresh/runtime.ts";
-import Header from "../components/Header.tsx";
 
 export default function App({ Component, url }: PageProps) {
   return (
@@ -14,7 +13,6 @@ export default function App({ Component, url }: PageProps) {
 
       <body f-client-nav>
         <Partial name="body">
-          <Header active={url.pathname} />
           <Component />
         </Partial>
       </body>

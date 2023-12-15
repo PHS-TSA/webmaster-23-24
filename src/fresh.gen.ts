@@ -4,6 +4,7 @@
 
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
+import * as $_layout from "./routes/_layout.tsx";
 import * as $guarantees_in_life from "./routes/guarantees-in-life.tsx";
 import * as $index from "./routes/index.tsx";
 
