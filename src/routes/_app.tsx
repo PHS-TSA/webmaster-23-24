@@ -1,4 +1,8 @@
 import type { PageProps } from "$fresh/server.ts";
+import { Partial } from "$fresh/runtime.ts";
+import Header from "../components/Header.tsx";
+
+export default function App({ Component, url }: PageProps) {
   return (
     <html>
       <head>
@@ -7,9 +11,12 @@ import type { PageProps } from "$fresh/server.ts";
         <title>Why Switch?</title>
         <link rel="stylesheet" href="/styles.css" />
       </head>
-      <body>
-        <Header active={url.pathname} />
-        <Component />
+
+      <body f-client-nav>
+        <Partial name="body">
+          <Header active={url.pathname} />
+          <Component />
+        </Partial>
       </body>
     </html>
   );
