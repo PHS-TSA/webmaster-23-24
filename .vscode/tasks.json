@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "deno",
+      "command": "run",
+      "problemMatcher": ["$deno"],
+      "label": "deno task: start",
+      "detail": "deno run -A --watch=src/static/,src/routes/ src/dev.ts",
+      "args": ["-A", "--watch=src/static/,src/routes/", "src/dev.ts"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "server"
+      },
+      "runOptions": {
+        "runOn": "folderOpen",
+        "instanceLimit": 1
+      },
+      "promptOnClose": false,
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": true
+      }
+    }
+  ]
+}
