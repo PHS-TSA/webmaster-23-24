@@ -54,7 +54,7 @@ jobs:
           restore-keys: deno_cache-${{ runner.arch }}-${{ runner.os }}
 
       - name: 📦 Install dependencies
-        run: deno cache dev.ts
+        run: deno cache src/dev.ts
 
       - name: 🕵️ Run linter, Verify formatting
         run: deno task check
