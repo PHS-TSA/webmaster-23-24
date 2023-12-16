@@ -24,7 +24,6 @@ permissions:
 
 env:
   CI: true
-  DENO_DIR: .deno
   DENO_VERSION: v1.39.x
 
 jobs:
@@ -49,12 +48,12 @@ jobs:
       - name: ⚙️ Cache Deno dependencies
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
-          path: ${{ env.DENO_DIR }}
+          path: node_modules/
           key: deno_cache-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('deno.json') }}
           restore-keys: deno_cache-${{ runner.arch }}-${{ runner.os }}
 
       - name: 📦 Install dependencies
-        run: deno cache src/dev.ts
+        run: deno cache src/main.ts
 
       - name: 🕵️ Run linter, Verify formatting
         run: deno task check
