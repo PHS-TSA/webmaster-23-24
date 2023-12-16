@@ -24,7 +24,7 @@ permissions:
 
 env:
   CI: true
-  DENO_DIR: ~/.deno
+  DENO_DIR: .deno
   DENO_VERSION: v1.39.x
 
 jobs:
@@ -52,6 +52,9 @@ jobs:
           path: ${{ env.DENO_DIR }}
           key: deno_cache-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('deno.json') }}
           restore-keys: deno_cache-${{ runner.arch }}-${{ runner.os }}
+
+      - name: 📦 Install dependencies
+        run: deno cache dev.ts
 
       - name: 🕵️ Run linter, Verify formatting
         run: deno task check
