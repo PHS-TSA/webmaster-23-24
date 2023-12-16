@@ -5,10 +5,12 @@ import Header from "../components/Header.tsx";
 export default function Layout({ Component, url }: PageProps) {
   return (
     <>
-      <div class="layout">
+      <div class="flex flex-col min-h-screen">
         <Header active={url.pathname} />
         <Component />
-        <Footer />
+        <div class="mt-auto">
+          <Footer />
+        </div>
       </div>
     </>
   );

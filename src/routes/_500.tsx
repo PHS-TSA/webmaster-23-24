@@ -7,7 +7,7 @@ export default function Error500() {
       <Head>
         <title>500 - Internal Server Error | Why Switch?</title>
       </Head>
-      <div class="px-4 py-8 mx-auto bg-green-400">
+      <div class="px-4 py-8 mx-0 bg-green-400">
         <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
           <Logo />
           <h1 class="text-4xl font-bold">500 - Internal Server Error!</h1>
