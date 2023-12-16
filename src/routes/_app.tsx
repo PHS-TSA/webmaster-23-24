@@ -11,7 +11,7 @@ export default function App({ Component, url }: PageProps) {
         <link rel="stylesheet" href="/styles.css" />
       </head>
 
-      <body f-client-nav>
+      <body f-client-nav class="dark:bg-black">
         <Partial name="body">
           <Component />
         </Partial>

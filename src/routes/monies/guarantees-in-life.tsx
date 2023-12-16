@@ -7,11 +7,11 @@ export default function Taxes() {
       <Head>
         <title>Ben! | Why Switch?</title>
       </Head>
-      <div class="px-4 py-8 mx-0 bg-green-400">
+      <div class="px-4 py-8 mx-0 bg-green-400 dark:bg-green-600">
         <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
           <Logo />
-          <h1 class="text-4xl font-bold">Death. And Taxes.</h1>
-          <p class="my-4">
+          <h1 class="text-4xl font-bold dark:text-white">Death. And Taxes.</h1>
+          <p class="my-4 dark:text-white">
             Looking for information about tax rebates and incentives for green
             energy?
             <br />

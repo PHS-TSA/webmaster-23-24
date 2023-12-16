@@ -9,6 +9,6 @@ export function Logo() {
     //   height="128"
     //   alt="the Fresh logo: a sliced lemon dripping with juice"
     // />
-    <IconBolt size={200} color="yellow" />
+    <IconBolt size={200} class="text-yellow-200 dark:text-yellow-400" />
   );
 }
