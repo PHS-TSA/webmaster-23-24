@@ -1,6 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
+import type { PageProps } from "$fresh/server.ts";
+import type { FunctionalComponent } from "preact";
 
-export default function Monies() {
+const Monies: FunctionalComponent<PageProps> = () => {
   return (
     <>
       <Head>
@@ -12,4 +14,6 @@ export default function Monies() {
       </div>
     </>
   );
-}
+};
+
+export { Monies as default };

@@ -1,7 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
+import type { FunctionalComponent } from "preact";
 import { Logo } from "../components/Logo.tsx";
+import type { PageProps } from "$fresh/server.ts";
 
-export default function Home() {
+const Home: FunctionalComponent<PageProps> = () => {
   return (
     <>
       <Head>
@@ -19,4 +21,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export { Home as default };

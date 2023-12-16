@@ -3,8 +3,9 @@ import IconBrandDeno from "tabler_icons_tsx/brand-deno.tsx";
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import IconBrandTailwind from "tabler_icons_tsx/brand-tailwind.tsx";
 import IconBrandReact from "tabler_icons_tsx/brand-react.tsx";
+import type { FunctionalComponent } from "preact";
 
-export default function Footer() {
+const Footer: FunctionalComponent = () => {
   const menus = [
     {
       title: "Going Green?",
@@ -93,4 +94,6 @@ export default function Footer() {
       </div>
     </div>
   );
-}
+};
+
+export { Footer };

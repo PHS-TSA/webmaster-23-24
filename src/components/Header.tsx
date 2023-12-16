@@ -1,10 +1,11 @@
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
+import type { FunctionalComponent } from "preact";
 
-type Props = {
+interface Props {
   active: string;
-};
+}
 
-export default function Header({ active }: Props) {
+const Header: FunctionalComponent<Props> = ({ active }: Props) => {
   const menus = [
     { name: "Home", href: "/" },
     { name: "Going Green!", href: "/green/" },
@@ -35,4 +36,6 @@ export default function Header({ active }: Props) {
       </ul>
     </div>
   );
-}
+};
+
+export { Header };

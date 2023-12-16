@@ -1,6 +1,7 @@
 import IconBolt from "tabler_icons_tsx/bolt.tsx";
+import type { FunctionalComponent } from "preact";
 
-export function Logo() {
+const Logo: FunctionalComponent = () => {
   return (
     // <img
     //   class="my-6"
@@ -11,4 +12,6 @@ export function Logo() {
     // />
     <IconBolt size={200} class="text-yellow-200 dark:text-yellow-400" />
   );
-}
+};
+
+export { Logo };

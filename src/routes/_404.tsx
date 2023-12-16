@@ -1,7 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
+import type { PageProps } from "$fresh/server.ts";
 import { Logo } from "../components/Logo.tsx";
+import type { FunctionalComponent } from "preact";
 
-export default function Error404() {
+const Error404: FunctionalComponent<PageProps> = () => {
   return (
     <>
       <Head>
@@ -21,4 +23,6 @@ export default function Error404() {
       </div>
     </>
   );
-}
+};
+
+export { Error404 as default };

@@ -1,7 +1,8 @@
 import type { PageProps } from "$fresh/server.ts";
 import { Partial } from "$fresh/runtime.ts";
+import type { FunctionalComponent } from "preact";
 
-export default function App({ Component }: PageProps) {
+const App: FunctionalComponent<PageProps> = ({ Component }) => {
   return (
     <html>
       <head>
@@ -18,4 +19,6 @@ export default function App({ Component }: PageProps) {
       </body>
     </html>
   );
-}
+};
+
+export { App as default };

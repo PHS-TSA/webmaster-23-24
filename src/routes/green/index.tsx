@@ -1,6 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
+import type { PageProps } from "$fresh/server.ts";
+import type { FunctionalComponent } from "preact";
 
-export default function Green() {
+const Green: FunctionalComponent<PageProps> = () => {
   return (
     <>
       <Head>
@@ -11,4 +13,6 @@ export default function Green() {
       </div>
     </>
   );
-}
+};
+
+export { Green as default };

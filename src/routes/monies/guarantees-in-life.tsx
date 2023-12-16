@@ -1,7 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
+import type { PageProps } from "$fresh/server.ts";
 import { Logo } from "../../components/Logo.tsx";
+import type { FunctionalComponent } from "preact";
 
-export default function Taxes() {
+const Taxes: FunctionalComponent<PageProps> = () => {
   return (
     <>
       <Head>
@@ -24,4 +26,6 @@ export default function Taxes() {
       </div>
     </>
   );
-}
+};
+
+export { Taxes as default };
