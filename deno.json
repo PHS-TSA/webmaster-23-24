@@ -2,8 +2,9 @@
   "lock": false,
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
-    "test": "deno test -A",
-    "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
+    "test": "deno test --allow-env --allow-read --coverage=cov/",
+    "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
+    "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
     "manifest": "deno task cli manifest $(pwd)",
     "start": "deno run -A --watch=src/static/,src/routes/ src/dev.ts",
     "build": "deno run -A src/dev.ts build",
