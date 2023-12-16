@@ -19,7 +19,7 @@ const Footer: FunctionalComponent = () => {
       title: "Monies",
       url: "/monies/",
       children: [
-        { name: "Taxes", href: "/guarantees-in-life/" },
+        { name: "Taxes", href: "guarantees-in-life/" },
         { name: "Pricing", href: "pricing/" },
       ],
     },
