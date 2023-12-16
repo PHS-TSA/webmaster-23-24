@@ -1,7 +1,7 @@
 import type { PageProps } from "$fresh/server.ts";
 import { Partial } from "$fresh/runtime.ts";
 
-export default function App({ Component, url }: PageProps) {
+export default function App({ Component }: PageProps) {
   return (
     <html>
       <head>
