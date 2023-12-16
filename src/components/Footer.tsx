@@ -1,6 +1,8 @@
 import IconLemon2 from "tabler_icons_tsx/lemon-2.tsx";
 import IconBrandDeno from "tabler_icons_tsx/brand-deno.tsx";
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
+import IconBrandTailwind from "tabler_icons_tsx/brand-tailwind.tsx";
+import IconBrandReact from "tabler_icons_tsx/brand-react.tsx";
 
 export default function Footer() {
   const menus = [
@@ -69,6 +71,21 @@ export default function Footer() {
           aria-label="Deno"
         >
           <IconBrandDeno aria-hidden="true" />
+        </a>
+        <br />
+        <a
+          href="https://preactjs.com/"
+          class="inline-block hover:text-black"
+          aria-label="Preact"
+        >
+          <IconBrandReact></IconBrandReact>
+        </a>
+        <a
+          href="https://tailwindcss.com/"
+          class="inline-block hover:text-black"
+          aria-label="Tailwind"
+        >
+          <IconBrandTailwind />
         </a>
       </div>
     </div>
