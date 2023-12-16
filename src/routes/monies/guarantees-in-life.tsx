@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { Logo } from "../components/Logo.tsx";
+import { Logo } from "../../components/Logo.tsx";
 
 export default function Taxes() {
   return (

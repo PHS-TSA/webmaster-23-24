@@ -8,16 +8,18 @@ export default function Footer() {
   const menus = [
     {
       title: "Going Green?",
+      url: "/green/",
       children: [
-        { name: "Getting Started", href: "/getting_started/" },
-        { name: "Programs", href: "/programs/" },
+        { name: "Getting Started", href: "getting_started/" },
+        { name: "Programs", href: "programs/" },
       ],
     },
     {
       title: "Monies",
+      url: "/monies/",
       children: [
-        { name: "Taxes", href: "/taxes/" },
-        { name: "Pricing", href: "/pricing/" },
+        { name: "Taxes", href: "/guarantees-in-life/" },
+        { name: "Pricing", href: "pricing/" },
       ],
     },
   ];
@@ -44,7 +46,7 @@ export default function Footer() {
               <li class="mt-2" key={child.name}>
                 <a
                   class="text-gray-500 hover:text-gray-700"
-                  href={child.href}
+                  href={item.url + child.href}
                 >
                   {child.name}
                 </a>

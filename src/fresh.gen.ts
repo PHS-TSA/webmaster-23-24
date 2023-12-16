@@ -7,8 +7,10 @@ import * as $_500 from "./routes/_500.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
-import * as $guarantees_in_life from "./routes/guarantees-in-life.tsx";
+import * as $green_index from "./routes/green/index.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $monies_guarantees_in_life from "./routes/monies/guarantees-in-life.tsx";
+import * as $monies_index from "./routes/monies/index.tsx";
 
 import { type Manifest } from "$fresh/server.ts";
 
@@ -19,8 +21,10 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
-    "./routes/guarantees-in-life.tsx": $guarantees_in_life,
+    "./routes/green/index.tsx": $green_index,
     "./routes/index.tsx": $index,
+    "./routes/monies/guarantees-in-life.tsx": $monies_guarantees_in_life,
+    "./routes/monies/index.tsx": $monies_index,
   },
   islands: {},
   baseUrl: import.meta.url,
