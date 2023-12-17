@@ -1,6 +1,6 @@
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import type { FunctionalComponent } from "preact";
-import { HeaderMenu } from "../islands/HeaderMenu.tsx";
+import HeaderMenu from "../islands/HeaderMenu.tsx";
 
 interface Props {
   active: string;
@@ -38,4 +38,4 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
   );
 };
 
-export { Header };
+export { Header as default };

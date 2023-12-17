@@ -104,4 +104,4 @@ const Footer: FunctionalComponent = () => {
   );
 };
 
-export { Footer };
+export { Footer as default };

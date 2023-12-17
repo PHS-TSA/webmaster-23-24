@@ -56,4 +56,4 @@ const HeaderMenu: FunctionComponent<Props> = (
     );
 };
 
-export { HeaderMenu };
+export { HeaderMenu as default };

@@ -1,6 +1,6 @@
 import type { PageProps } from "$fresh/server.ts";
-import { Footer } from "../components/Footer.tsx";
-import { Header } from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
+import Header from "../components/Header.tsx";
 import type { FunctionalComponent } from "preact";
 
 const Layout: FunctionalComponent<PageProps> = ({ Component, url }) => {

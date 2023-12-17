@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import { Logo } from "../components/Logo.tsx";
+import Logo from "../components/Logo.tsx";
 import type { FunctionalComponent } from "preact";
 import type { PageProps } from "$fresh/server.ts";
 

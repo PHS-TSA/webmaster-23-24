@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import type { FunctionalComponent } from "preact";
-import { Logo } from "../components/Logo.tsx";
+import Logo from "../components/Logo.tsx";
 import type { PageProps } from "$fresh/server.ts";
 
 const Home: FunctionalComponent<PageProps> = () => {

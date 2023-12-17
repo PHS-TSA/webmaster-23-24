@@ -14,4 +14,4 @@ const Logo: FunctionalComponent = () => {
   );
 };
 
-export { Logo };
+export { Logo as default };
