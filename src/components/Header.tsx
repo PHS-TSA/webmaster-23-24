@@ -42,7 +42,7 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
           Why Switch?
         </div>
       </a>
-      <ul class="flex items-center gap-6">
+      <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu) => (
           <li>
             <HeaderMenu
