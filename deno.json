@@ -48,7 +48,7 @@
     "**/src/fresh.gen.ts"
   ],
   "imports": {
-    "$std/": "https://deno.land/std@0.208.0/",
+    "$std/": "https://deno.land/std@0.209.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.1/",
     "tabler_icons_tsx/": "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/",
     "@headlessui/react": "https://esm.sh/v135/*@headlessui/react@1.7.17",
@@ -56,10 +56,10 @@
     "@preact/signals": "https://esm.sh/v135/*@preact/signals@1.2.2",
     "preact": "https://esm.sh/v135/preact@10.19.3",
     "preact/": "https://esm.sh/v135/preact@10.19.3/",
-    "tailwindcss/": "npm:/tailwindcss@3.3.5/",
-    "tailwindcss/plugin": "npm:/tailwindcss@3.3.5/plugin.js",
     "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.10",
-    "tailwindcss": "npm:tailwindcss@3.3.5"
+    "tailwindcss": "npm:tailwindcss@3.3.6",
+    "tailwindcss/": "npm:tailwindcss@3.3.6/",
+    "tailwindcss/plugin": "npm:tailwindcss@3.3.6/plugin.js"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
