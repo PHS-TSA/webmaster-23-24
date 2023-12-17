@@ -1,5 +1,5 @@
 import { Menu } from "@headlessui/react";
-import type { FunctionComponent } from "preact";
+import type { FunctionalComponent } from "preact";
 import IconChevronDown from "tabler_icons_tsx/chevron-down.tsx";
 
 interface Props {
@@ -14,7 +14,7 @@ interface MenuItem {
   name: string;
 }
 
-const HeaderMenu: FunctionComponent<Props> = (
+const HeaderMenu: FunctionalComponent<Props> = (
   {
     title,
     items,
