@@ -24,6 +24,28 @@ const Footer: FunctionalComponent = () => {
       ],
     },
   ];
+  const icons = [
+    {
+      Icon: IconLemon2,
+      href: "https://fresh.deno.dev/",
+      name: "Fresh",
+    },
+    {
+      Icon: IconBrandDeno,
+      href: "https://deno.com/",
+      name: "Deno",
+    },
+    {
+      Icon: IconBrandReact,
+      href: "https://preactjs.com/",
+      name: "Preact",
+    },
+    {
+      Icon: IconBrandTailwind,
+      href: "https://tailwindcss.com/",
+      name: "Tailwind",
+    },
+  ];
 
   return (
     <div class="bg-white dark:bg-black flex flex-col sm:flex-row w-full max-w-screen-xlg gap-8 md:gap-16 px-8 py-8 text-sm">
@@ -62,35 +84,21 @@ const Footer: FunctionalComponent = () => {
         <div class="text-xs">
           Made with
         </div>
-        <a
-          href="https://fresh.deno.dev/"
-          class="inline-block hover:text-black dark:hover:text-white"
-          aria-label="Fresh"
-        >
-          <IconLemon2 aria-hidden="true" />
-        </a>
-        <a
-          href="https://deno.com/"
-          class="inline-block hover:text-black dark:hover:text-white"
-          aria-label="Deno"
-        >
-          <IconBrandDeno aria-hidden="true" />
-        </a>
-        <br />
-        <a
-          href="https://preactjs.com/"
-          class="inline-block hover:text-black dark:hover:text-white"
-          aria-label="Preact"
-        >
-          <IconBrandReact aria-hidden="true" />
-        </a>
-        <a
-          href="https://tailwindcss.com/"
-          class="inline-block hover:text-black dark:hover:text-white"
-          aria-label="Tailwind"
-        >
-          <IconBrandTailwind aria-hidden="true" />
-        </a>
+        {icons.map(({ Icon, href, name }, index) => {
+          console.log(index);
+          return (
+            <>
+              <a
+                href={href}
+                class="inline-block hover:text-black dark:hover:text-white"
+                title={name}
+              >
+                <Icon aria-hidden="true" />
+              </a>
+              {index % 2 === 1 ? <br /> : <></>}
+            </>
+          );
+        })}
       </div>
     </div>
   );
