@@ -27,7 +27,8 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
           <li>
             <HeaderMenu
               title={menu.name}
-              active={menu.href === active}
+              active={(active === "/" && menu.href === "/") ||
+                (active.startsWith(menu.href) && menu.href !== "/")}
               href={menu.href}
             />
           </li>
