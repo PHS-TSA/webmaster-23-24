@@ -11,7 +11,7 @@ const Footer: FunctionalComponent = () => {
       title: "Going Green?",
       url: "/green/",
       children: [
-        { name: "Getting Started", href: "getting_started/" },
+        { name: "Getting Started", href: "getting-started/" },
         { name: "Programs", href: "programs/" },
       ],
     },
