@@ -42,7 +42,7 @@ const Footer: FunctionalComponent = () => {
 
       {menus.map((item) => (
         <div class="mb-4" key={item.title}>
-          <span class="font-bold dark:text-white">{item.title}</span>
+          <a class="font-bold dark:text-white" href={item.url}>{item.title}</a>
           <ul class="mt-2">
             {item.children.map((child) => (
               <li class="mt-2" key={child.name}>
