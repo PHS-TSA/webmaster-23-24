@@ -8,8 +8,10 @@ const Green: FunctionalComponent<PageProps> = () => {
       <Head>
         <title>Going Green! | Why Switch?</title>
       </Head>
-      <div>
-        So you've made the decision to switch to green energy, huh?
+      <div class="flex flex-col items-center justify-center">
+        <p class="prose prose-slate">
+          So, you've made the decision to switch to green energy, huh?
+        </p>
       </div>
     </>
   );

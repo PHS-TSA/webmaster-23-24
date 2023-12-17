@@ -8,9 +8,11 @@ const Monies: FunctionalComponent<PageProps> = () => {
       <Head>
         <title>Monies | Why Switch?</title>
       </Head>
-      <div>
-        So, you're curious about the implications of going green on your wallet,
-        huh?
+      <div class="flex flex-col items-center justify-center">
+        <p class="prose prose-slate">
+          So, you're curious about the implications of going green on your
+          wallet, huh?
+        </p>
       </div>
     </>
   );
