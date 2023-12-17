@@ -82,14 +82,14 @@ const Footer: FunctionalComponent = () => {
           class="inline-block hover:text-black dark:hover:text-white"
           aria-label="Preact"
         >
-          <IconBrandReact></IconBrandReact>
+          <IconBrandReact aria-hidden="true" />
         </a>
         <a
           href="https://tailwindcss.com/"
           class="inline-block hover:text-black dark:hover:text-white"
           aria-label="Tailwind"
         >
-          <IconBrandTailwind />
+          <IconBrandTailwind aria-hidden="true" />
         </a>
       </div>
     </div>
