@@ -5,7 +5,7 @@ import IconChevronDown from "tabler_icons_tsx/chevron-down.tsx";
 interface Props {
   title: string;
   active: boolean;
-  items?: MenuItem[];
+  items: MenuItem[] | undefined;
   href?: string;
 }
 
@@ -25,7 +25,7 @@ const HeaderMenu: FunctionalComponent<Props> = (
   return items !== undefined
     ? (
       <Menu>
-        <Menu.Button class="dark:text-green-50">
+        <Menu.Button class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400">
           <span class="flex flex-row">
             <span class={active ? "font-bold border-b-2" : ""}>{title}</span>
             {" "}
@@ -48,7 +48,7 @@ const HeaderMenu: FunctionalComponent<Props> = (
     : (
       <a
         href={href}
-        class={" text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400" +
+        class={"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400" +
           (active ? " font-bold border-b-2" : "")}
       >
         {title}

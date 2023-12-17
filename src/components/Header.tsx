@@ -8,10 +8,30 @@ interface Props {
 
 const Header: FunctionalComponent<Props> = ({ active }: Props) => {
   const menus = [
-    { name: "Home", href: "/" },
-    { name: "Going Green!", href: "/green/" },
-    { name: "Monies", href: "/monies/" },
-    { name: "About", href: "/about/" },
+    {
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "Going Green!",
+      href: "/green/",
+      items: [
+        { name: "Getting Started", url: "getting-started" },
+        { name: "Programs", url: "programs/" },
+      ],
+    },
+    {
+      name: "Monies",
+      href: "/monies/",
+      items: [
+        { name: "Taxes", url: "guarantees-in-life/" },
+        { name: "Pricing", url: "pricing/" },
+      ],
+    },
+    {
+      name: "About",
+      href: "/about/",
+    },
   ];
 
   return (
@@ -30,6 +50,7 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
               active={(active === "/" && menu.href === "/") ||
                 (active.startsWith(menu.href) && menu.href !== "/")}
               href={menu.href}
+              items={menu.items}
             />
           </li>
         ))}
