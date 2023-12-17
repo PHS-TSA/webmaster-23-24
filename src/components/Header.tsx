@@ -1,5 +1,6 @@
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import type { FunctionalComponent } from "preact";
+import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 
 interface Props {
   active: string;
@@ -24,13 +25,11 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
       <ul class="flex items-center gap-6">
         {menus.map((menu) => (
           <li>
-            <a
+            <HeaderMenu
+              title={menu.name}
+              active={menu.href === active}
               href={menu.href}
-              class={" text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400" +
-                (menu.href === active ? " font-bold border-b-2" : "")}
-            >
-              {menu.name}
-            </a>
+            />
           </li>
         ))}
       </ul>

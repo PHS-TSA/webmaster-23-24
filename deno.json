@@ -51,6 +51,7 @@
     "$std/": "https://deno.land/std@0.208.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.1/",
     "tabler_icons_tsx/": "https://deno.land/x/tabler_icons_tsx@0.0.5/tsx/",
+    "@headlessui/react": "https://esm.sh/v135/*@headlessui/react@1.7.17",
     "@preact/signals-core": "https://esm.sh/v135/@preact/signals-core@1.5.1",
     "@preact/signals": "https://esm.sh/v135/*@preact/signals@1.2.2",
     "preact": "https://esm.sh/v135/preact@10.19.3",
@@ -79,5 +80,11 @@
   "fmt": {
     "proseWrap": "preserve"
   },
-  "scopes": {}
+  "scopes": {
+    "https://esm.sh/v135/": {
+      "client-only": "https://esm.sh/client-only@0.0.1",
+      "react-dom": "https://esm.sh/v135/preact@10.19.3/compat",
+      "react": "https://esm.sh/v135/preact@10.19.3/compat"
+    }
+  }
 }
