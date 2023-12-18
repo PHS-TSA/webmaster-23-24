@@ -3,7 +3,7 @@ import type { FunctionalComponent } from "preact";
 import HeaderMenu from "../islands/HeaderMenu.tsx";
 
 interface Props {
-  active: string;
+  active: string; // TODO(lishaduck): https://deno.com/blog/fresh-1.5#easier-active-link-styling
 }
 
 const Header: FunctionalComponent<Props> = ({ active }: Props) => {
