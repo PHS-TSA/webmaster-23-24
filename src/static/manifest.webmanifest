@@ -3,5 +3,19 @@
   "background_color": "#22C55E",
   "theme_color": "#22C55E",
   "description": "Why Switch is an informative website about green/green energy.",
-  "display": "standalone"
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "type": "svg",
+      "sizes": "40x40"
+    }
+  ],
+  "id": "/",
+  "short_name": "Why Switch?",
+  "orientation": "landscape",
+  "lang": "en-US",
+  "scope": "/",
+  "dir": "ltr"
 }
