@@ -85,7 +85,6 @@ const Footer: FunctionalComponent = () => {
           Made with
         </div>
         {icons.map(({ Icon, href, name }, index) => {
-          console.log(index);
           return (
             <>
               <a
