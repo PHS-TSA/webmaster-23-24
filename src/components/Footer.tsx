@@ -64,12 +64,17 @@ const Footer: FunctionalComponent = () => {
 
       {menus.map((item) => (
         <div class="mb-4" key={item.title}>
-          <a class="font-bold dark:text-white" href={item.url}>{item.title}</a>
+          <a
+            class="font-bold dark:text-white p-4"
+            href={item.url}
+          >
+            {item.title}
+          </a>
           <ul class="mt-2">
             {item.children.map((child) => (
               <li class="mt-2" key={child.name}>
                 <a
-                  class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+                  class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-4"
                   href={item.url + child.href}
                 >
                   {child.name}
@@ -81,7 +86,7 @@ const Footer: FunctionalComponent = () => {
       ))}
 
       <div class="text-gray-500 dark:text-gray-400 space-y-2 align-middle">
-        <div class="text-xs">
+        <div class="text-xs m-1">
           Made with
         </div>
         {icons.map(({ Icon, href, name }, index) => {
@@ -89,7 +94,7 @@ const Footer: FunctionalComponent = () => {
             <>
               <a
                 href={href}
-                class="inline-block hover:text-black dark:hover:text-white"
+                class="inline-block hover:text-black dark:hover:text-white m-1"
                 title={name}
               >
                 <Icon aria-hidden="true" />

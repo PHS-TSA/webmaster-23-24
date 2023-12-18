@@ -9,7 +9,7 @@ const Taxes: FunctionalComponent<PageProps> = () => {
       <Head>
         <title>Ben! | Why Switch?</title>
       </Head>
-      <div class="px-4 py-8 mx-0 bg-green-400 dark:bg-green-600">
+      <div class="px-4 py-8 mx-0 bg-green-500 dark:bg-green-700">
         <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
           <Logo />
           <h1 class="text-4xl font-bold dark:text-white">Death. And Taxes.</h1>
