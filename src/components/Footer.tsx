@@ -4,6 +4,7 @@ import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import IconBrandTailwind from "tabler_icons_tsx/brand-tailwind.tsx";
 import IconBrandReact from "tabler_icons_tsx/brand-react.tsx";
 import type { FunctionalComponent } from "preact";
+import { siteName, slogan } from "../site.ts";
 
 const Footer: FunctionalComponent = () => {
   const menus = [
@@ -55,10 +56,10 @@ const Footer: FunctionalComponent = () => {
             class="inline-block dark:text-white"
             aria-hidden="true"
           />
-          <div class="font-bold text-2xl dark:text-white">Why Switch</div>
+          <div class="font-bold text-2xl dark:text-white">{siteName}</div>
         </div>
         <div class="text-gray-500 dark:text-gray-400">
-          The Truth about Going Green!
+          {slogan}
         </div>
       </div>
 
@@ -78,7 +79,7 @@ const Footer: FunctionalComponent = () => {
               <li class="mt-2" key={child.name}>
                 <a
                   class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-4 pr-4"
-                  href={item.url + child.href}
+                  href={`${item.url}${child.href}`}
                 >
                   {child.name}
                 </a>

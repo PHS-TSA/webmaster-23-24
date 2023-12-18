@@ -28,10 +28,11 @@ const HeaderMenu: FunctionalComponent<Props> = (
         <Menu.Button class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1">
           <span class="flex flex-row">
             <span
-              class={"whitespace-nowrap" +
-                (active
+              class={`whitespace-nowrap ${
+                active
                   ? "font-bold border-b-2 border-gray-500 dark:border-gray-400 hover:border-gray-700 dark:hover:border-gray-200"
-                  : "")}
+                  : ""
+              }`}
             >
               {title}
             </span>{" "}
@@ -43,7 +44,7 @@ const HeaderMenu: FunctionalComponent<Props> = (
             {items.map(({ name, url }) => (
               <Menu.Item>
                 {({ active }) => (
-                  <a class={active ? "bg-blue-500" : ""} href={href + url}>
+                  <a class={active ? "bg-blue-500" : ""} href={`${href}${url}`}>
                     {name}
                   </a>
                 )}
@@ -56,8 +57,9 @@ const HeaderMenu: FunctionalComponent<Props> = (
     : (
       <a
         href={href}
-        class={"text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400" +
-          (active ? " font-bold border-b-2" : "")}
+        class={`text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400 ${
+          active ? "font-bold border-b-2" : ""
+        }`}
       >
         {title}
       </a>

@@ -1,6 +1,7 @@
 import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import type { FunctionalComponent } from "preact";
 import HeaderMenu from "../islands/HeaderMenu.tsx";
+import { siteName } from "../site.ts";
 
 interface Props {
   active: string; // TODO(lishaduck): https://deno.com/blog/fresh-1.5#easier-active-link-styling
@@ -39,7 +40,7 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => {
       <a class="flex items-center flex-1" href="/">
         <IconSolarPanel2 aria-hidden="true" class="dark:text-white" />
         <div class="text-2xl ml-1 font-bold dark:text-white">
-          Why Switch?
+          {siteName}
         </div>
       </a>
       <ul class="flex flex-row flex-wrap items-center gap-6">
