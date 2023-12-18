@@ -4,11 +4,20 @@ import type { FunctionalComponent } from "preact";
 
 const App: FunctionalComponent<PageProps> = ({ Component }) => {
   return (
-    <html>
+    <html lang="en-US">
       <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
         <title>Why Switch?</title>
+        <meta
+          name="description"
+          content="Why Switch is a website about green/green energy."
+          key="description"
+        >
+        </meta>
         <link rel="stylesheet" href="/styles.css" />
       </head>
 
