@@ -48,8 +48,8 @@ const Footer: FunctionalComponent = () => {
   ];
 
   return (
-    <div class="bg-white dark:bg-black flex flex-col sm:flex-row w-full max-w-screen-xlg gap-8 md:gap-16 px-8 py-8 text-sm">
-      <div class="flex-1">
+    <div class="bg-white dark:bg-black flex flex-wrap sm:flex-row w-full max-w-screen-xlg gap-8 md:gap-16 px-8 py-8 text-sm">
+      <div class="flex-1 order-first">
         <div class="flex items-center gap-1">
           <IconSolarPanel2
             class="inline-block dark:text-white"
@@ -63,7 +63,7 @@ const Footer: FunctionalComponent = () => {
       </div>
 
       {menus.map((item) => (
-        <div class="mb-4" key={item.title}>
+        <div class="mb-4 order-2" key={item.title}>
           <a
             class="font-bold dark:text-white p-4"
             href={item.url}
@@ -85,7 +85,7 @@ const Footer: FunctionalComponent = () => {
         </div>
       ))}
 
-      <div class="text-gray-500 dark:text-gray-400 space-y-2 align-middle">
+      <div class="text-gray-500 dark:text-gray-400 space-y-2 align-middle order-1 sm:order-last">
         <div class="text-xs m-1">
           Made with
         </div>
