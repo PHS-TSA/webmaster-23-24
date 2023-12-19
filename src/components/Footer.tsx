@@ -70,7 +70,7 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
 
     {menus.map((item) => (
       <div
-        class={`mb-4 row-start-2 sm:row-start-auto`}
+        class={"mb-4 row-start-2 sm:row-start-auto"}
         key={item.title}
       >
         <span class="font-bold dark:text-white py-4 pr-4">
