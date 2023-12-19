@@ -27,7 +27,7 @@
     "clientKind": "git"
   },
   "files": {
-    "ignore": [".vscode", "*.gen.ts"]
+    "ignore": [".vscode/", "*.gen.ts"]
   },
   "javascript": {
     "globals": ["Deno"]

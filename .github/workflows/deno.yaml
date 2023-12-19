@@ -59,7 +59,10 @@ jobs:
         run: deno cache src/main.ts
 
       - name: 🕵️ Run linter, Verify formatting
-        run: deno task check
+        run: deno task ci
+
+      - name: 🕵️ Typecheck
+        run: deno task typecheck
 
       - name: 🧪 Run tests
         run: deno task test
