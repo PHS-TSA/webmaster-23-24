@@ -10,10 +10,24 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "all": true,
+      "nursery": {
+        "all": false
+      },
+      "style": {
+        "noImplicitBoolean": "off"
+      }
     }
   },
+  "vcs": {
+    "enabled": true,
+    "useIgnoreFile": true,
+    "clientKind": "git"
+  },
   "files": {
-    "ignore": [".vscode", "cov"]
+    "ignore": [".vscode", "*.gen.ts"]
+  },
+  "javascript": {
+    "globals": ["Deno"]
   }
 }

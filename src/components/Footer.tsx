@@ -30,22 +30,22 @@ const menus = [
 ];
 const icons = [
   {
-    Icon: IconLemon2,
+    icon: IconLemon2,
     href: "https://fresh.deno.dev/",
     name: "Fresh",
   },
   {
-    Icon: IconBrandDeno,
+    icon: IconBrandDeno,
     href: "https://deno.com/",
     name: "Deno",
   },
   {
-    Icon: IconBrandReact,
+    icon: IconBrandReact,
     href: "https://preactjs.com/",
     name: "Preact",
   },
   {
-    Icon: IconBrandTailwind,
+    icon: IconBrandTailwind,
     href: "https://tailwindcss.com/",
     name: "Tailwind",
   },
@@ -94,7 +94,7 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
             title={tool.name}
             key={tool.name}
           >
-            <tool.Icon aria-hidden="true" class="h-6 w-6" />
+            <tool.icon aria-hidden="true" class="h-6 w-6" />
           </a>
           {index % 2 === 1 ? <br /> : <></>}
         </>
