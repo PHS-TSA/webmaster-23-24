@@ -14,6 +14,12 @@ interface MenuItem {
   name: string;
 }
 
+function makeTextStyle(active: boolean): string {
+  return `text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 whitespace-nowrap ${
+    active && "font-bold border-b-2"
+  } border-gray-500 dark:border-gray-400 hover:border-gray-700 dark:hover:border-gray-200`;
+}
+
 const HeaderMenu: FunctionalComponent<Props> = (
   {
     title,
@@ -25,29 +31,16 @@ const HeaderMenu: FunctionalComponent<Props> = (
   return items !== undefined
     ? (
       <Menu>
-        <Menu.Button class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1">
-          <span class="flex flex-row">
-            <span
-              class={`whitespace-nowrap ${
-                active
-                  ? "font-bold border-b-2 border-gray-500 dark:border-gray-400 hover:border-gray-700 dark:hover:border-gray-200"
-                  : ""
-              }`}
-            >
-              {title}
-            </span>{" "}
-            <IconChevronDown />
+        <Menu.Button>
+          <span class={`${makeTextStyle(active)} flex flex-row`}>
+            {title} <IconChevronDown />
           </span>
         </Menu.Button>
         <div class="relative">
           <Menu.Items class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none flex flex-col">
             {items.map(({ name, url }) => (
               <Menu.Item>
-                {({ active }) => (
-                  <a class={active ? "bg-blue-500" : ""} href={`${href}${url}`}>
-                    {name}
-                  </a>
-                )}
+                <a href={`${href}${url}`}>{name}</a>
               </Menu.Item>
             ))}
           </Menu.Items>
@@ -55,12 +48,7 @@ const HeaderMenu: FunctionalComponent<Props> = (
       </Menu>
     )
     : (
-      <a
-        href={href}
-        class={`text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 border-gray-500 dark:border-gray-400 ${
-          active ? "font-bold border-b-2" : ""
-        }`}
-      >
+      <a href={href} class={makeTextStyle(active)}>
         {title}
       </a>
     );
