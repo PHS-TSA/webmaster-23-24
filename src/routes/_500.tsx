@@ -13,10 +13,10 @@ const Error500: FunctionalComponent<PageProps> = () => (
     </Head>
     <Cover title={pageTitle}>
       <>
-        <p class="my-4 dark:text-white">
-          An internal server error occurred.
-        </p>
-        <a href="/" class="underline">Go back home</a>
+        <p class="my-4 dark:text-white">An internal server error occurred.</p>
+        <a href="/" class="underline">
+          Go back home
+        </a>
       </>
     </Cover>
   </>

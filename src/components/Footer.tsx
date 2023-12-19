@@ -63,19 +63,12 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
         />
         <div class="font-bold text-2xl dark:text-white">{siteName}</div>
       </div>
-      <div class="text-gray-500 dark:text-gray-400">
-        {slogan}
-      </div>
+      <div class="text-gray-500 dark:text-gray-400">{slogan}</div>
     </div>
 
     {menus.map((item) => (
-      <div
-        class={"mb-4 row-start-2 sm:row-start-auto"}
-        key={item.title}
-      >
-        <span class="font-bold dark:text-white py-4 pr-4">
-          {item.title}
-        </span>
+      <div class={"mb-4 row-start-2 sm:row-start-auto"} key={item.title}>
+        <span class="font-bold dark:text-white py-4 pr-4">{item.title}</span>
         <ul class="mt-2">
           {item.children.map((child) => (
             <li class="mt-2" key={child.name}>
@@ -92,9 +85,7 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
     ))}
 
     <div class="text-gray-500 dark:text-gray-400 space-y-2 align-middle col-start-3 col-end-4 sm:col-start-auto sm:col-end-auto row-start-1 row-end-3 sm:row-end-auto">
-      <div class="text-xs m-1">
-        Made with
-      </div>
+      <div class="text-xs m-1">Made with</div>
       {icons.map((tool, index) => (
         <>
           <a

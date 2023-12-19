@@ -1,13 +1,9 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
-export default {
-  content: [
-    "{routes,islands,components}/**/*.{ts,tsx}",
-  ],
-  plugins: [
-    typography,
-  ],
+export default ({
+  content: ["{routes,islands,components}/**/*.{ts,tsx}"],
+  plugins: [typography],
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -20,4 +16,4 @@ export default {
       },
     },
   },
-} satisfies Config;
+} satisfies Config);
