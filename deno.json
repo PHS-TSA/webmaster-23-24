@@ -1,7 +1,9 @@
 {
   "lock": false,
   "tasks": {
-    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "check": "deno task lint && deno task typecheck",
+    "typecheck": "deno check **/*.ts **/*.tsx",
+    "lint": "deno task biome check .",
     "test": "deno test --allow-env --allow-read --coverage=cov/",
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
