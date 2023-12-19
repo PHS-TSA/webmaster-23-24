@@ -27,31 +27,32 @@ const HeaderMenu: FunctionalComponent<Props> = (
     active,
     href,
   },
-) => {
-  return items !== undefined
+) =>
+  items !== undefined
     ? (
-      <Menu>
-        <Menu.Button>
-          <span class={`${makeTextStyle(active)} flex flex-row`}>
-            {title} <IconChevronDown />
-          </span>
-        </Menu.Button>
-        <div class="relative">
-          <Menu.Items class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none flex flex-col">
-            {items.map(({ name, url }) => (
-              <Menu.Item>
-                <a href={`${href}${url}`}>{name}</a>
-              </Menu.Item>
-            ))}
-          </Menu.Items>
-        </div>
-      </Menu>
+      <div class="h-8">
+        <Menu>
+          <Menu.Button>
+            <span class={`${makeTextStyle(active)} flex flex-row`}>
+              {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
+            </span>
+          </Menu.Button>
+          <div class="relative">
+            <Menu.Items class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none flex flex-col">
+              {items.map((link) => (
+                <Menu.Item>
+                  <a href={`${href}${link.url}`}>{link.name}</a>
+                </Menu.Item>
+              ))}
+            </Menu.Items>
+          </div>
+        </Menu>
+      </div>
     )
     : (
-      <a href={href} class={makeTextStyle(active)}>
+      <a href={href} class={`h-8 ${makeTextStyle(active)}`}>
         {title}
       </a>
     );
-};
 
 export { HeaderMenu as default };

@@ -38,26 +38,24 @@ const metas = (
   </>
 );
 
-const App: FunctionalComponent<PageProps> = ({ Component }) => {
-  return (
-    <html lang="en-US">
-      <Head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={desc} key="desc" />
-        <meta name="keywords" content="green, clean, renewable, tsa" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-        {metas}
-        <link rel="stylesheet" href="/styles.css" />
-      </Head>
+const App: FunctionalComponent<PageProps> = ({ Component }) => (
+  <html lang="en-US">
+    <Head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content={desc} key="desc" />
+      <meta name="keywords" content="green, clean, renewable, tsa" />
+      <link rel="manifest" href="/manifest.webmanifest" />
+      {metas}
+      <link rel="stylesheet" href="/styles.css" />
+    </Head>
 
-      <body f-client-nav class="dark:bg-black">
-        <Partial name="body">
-          <Component />
-        </Partial>
-      </body>
-    </html>
-  );
-};
+    <body f-client-nav class="dark:bg-black">
+      <Partial name="body">
+        <Component />
+      </Partial>
+    </body>
+  </html>
+);
 
 export { App as default };
