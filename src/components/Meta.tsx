@@ -14,7 +14,7 @@ const Meta: FunctionalComponent<Props> = (
   },
 ) => (
   <>
-    <Title title={title} />
+    <Title>{title}</Title>
     <meta property="og:image" content={logoSvgUrl} key="og:i" />
     <meta property="og:image:secure_url" content={logoSvgUrl} key="og:si" />
     <meta property="og:image:alt" content={logoAlt} key="og:ai" />

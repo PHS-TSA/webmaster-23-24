@@ -2,11 +2,11 @@ import type { FunctionalComponent } from "preact";
 import { makeTitle } from "../site.ts";
 
 interface Props {
-  title: string;
+  children: string;
 }
 
-const Title: FunctionalComponent<Props> = ({ title }) => (
-  <title>{makeTitle(title)}</title>
+const Title: FunctionalComponent<Props> = ({ children }) => (
+  <title>{makeTitle(children)}</title>
 );
 
 export { Title as default };
