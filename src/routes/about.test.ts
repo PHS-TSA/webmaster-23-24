@@ -1,7 +1,7 @@
 import { createHandler, ServeHandlerInfo } from "$fresh/server.ts";
-import manifest from "../fresh.gen.ts";
-import config from "../fresh.config.ts";
 import { assertStringIncludes } from "$std/assert/mod.ts";
+import config from "../fresh.config.ts";
+import manifest from "../fresh.gen.ts";
 
 const CONN_INFO: ServeHandlerInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },

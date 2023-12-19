@@ -1,6 +1,6 @@
 import type { FunctionalComponent } from "preact";
-import Title from "./Title.tsx";
 import { description, logoAlt, logoSvgUrl, siteName } from "../site.ts";
+import Title from "./Title.tsx";
 
 interface Props {
   title?: string;

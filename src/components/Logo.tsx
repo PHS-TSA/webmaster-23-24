@@ -1,5 +1,5 @@
-import IconBolt from "tabler_icons_tsx/bolt.tsx";
 import type { FunctionalComponent } from "preact";
+import IconBolt from "tabler_icons_tsx/bolt.tsx";
 
 const Logo: FunctionalComponent = () => (
   // <img

@@ -1,9 +1,9 @@
-import IconLemon2 from "tabler_icons_tsx/lemon-2.tsx";
-import IconBrandDeno from "tabler_icons_tsx/brand-deno.tsx";
-import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
-import IconBrandTailwind from "tabler_icons_tsx/brand-tailwind.tsx";
-import IconBrandReact from "tabler_icons_tsx/brand-react.tsx";
 import type { FunctionalComponent } from "preact";
+import IconBrandDeno from "tabler_icons_tsx/brand-deno.tsx";
+import IconBrandReact from "tabler_icons_tsx/brand-react.tsx";
+import IconBrandTailwind from "tabler_icons_tsx/brand-tailwind.tsx";
+import IconLemon2 from "tabler_icons_tsx/lemon-2.tsx";
+import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import { siteName, slogan } from "../site.ts";
 
 interface Props {

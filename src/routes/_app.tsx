@@ -1,5 +1,5 @@
-import type { PageProps } from "$fresh/server.ts";
 import { Head, Partial } from "$fresh/runtime.ts";
+import type { PageProps } from "$fresh/server.ts";
 import type { FunctionalComponent } from "preact";
 import { description as desc, faviconPngUrl, faviconSvgUrl } from "../site.ts";
 
