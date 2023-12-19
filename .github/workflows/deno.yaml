@@ -73,7 +73,7 @@ jobs:
       - name: 🔧 Upload to Deno Deploy
         uses: denoland/deployctl@48c9c6732097c0832ef1f2de008b6db01241c84b # 1.9.0
         with:
-          project: "loud-ape-90"
+          project: "why-switch"
           entrypoint: src/main.ts
           include: |
             src
