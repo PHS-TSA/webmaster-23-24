@@ -12,7 +12,9 @@
     "rules": {
       "all": true,
       "nursery": {
-        "all": false
+        "all": true,
+        "useImportRestrictions": "off",
+        "noDefaultExport": "off"
       },
       "style": {
         "noImplicitBoolean": "off"
