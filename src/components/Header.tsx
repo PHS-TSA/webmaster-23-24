@@ -46,7 +46,7 @@ const Header: FunctionalComponent<Props> = ({ active }: Props) => (
     </a>
     <ul class="flex flex-row flex-wrap items-center gap-6">
       {menus.map((menu) => (
-        <li key={menu.name}>
+        <li key={menu.name} class="h-8 items-end flex">
           <HeaderMenu
             title={menu.name}
             active={(active === "/" && menu.href === "/") ||
