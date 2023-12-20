@@ -48,8 +48,11 @@ const HeaderMenu: FunctionalComponent<Props> = (
 
         <Popover.Panel>
           <div class="absolute z-10 right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none grid grid-flow-row">
-            {items.map((link) => <a href={`${href}${link.url}`}>{link.name}
-            </a>)}
+            {items.map((link) => (
+              <a href={`${href}${link.url}`}>
+                {link.name}
+              </a>
+            ))}
           </div>
         </Popover.Panel>
       </Popover>
