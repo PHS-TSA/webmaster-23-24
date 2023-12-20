@@ -53,7 +53,6 @@ const App: FunctionalComponent<PageProps> = ({ Component }) => (
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link href={asset("/styles.css")} rel="preload" as="style" />
-      <link href="/manifest.webmanifest" rel="preload" as="manifest" />
       <meta name="description" content={desc} key="desc" />
       <meta name="keywords" content="green, clean, renewable, tsa" />
       <link rel="manifest" href="/manifest.webmanifest" />
