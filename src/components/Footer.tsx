@@ -51,7 +51,7 @@ const icons = [
   },
 ];
 
-const Footer: FunctionalComponent<Props> = ({ class: classes }) => (
+const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
   <footer
     class={`bg-white dark:bg-black grid grid-flow-col grid-rows-footer-mobile grid-cols-footer-mobile sm:grid-rows-footer-desktop sm:grid-cols-footer-desktop w-full max-w-screen-xlg gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16 p-8 text-sm ${classes}`}
   >

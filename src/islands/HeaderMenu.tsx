@@ -16,14 +16,14 @@ interface MenuItem {
 
 function makeTextStyle(active: boolean): string {
   return `text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 whitespace-nowrap ${
-    active && "font-bold"
+    active ? "font-bold" : ""
   }`;
 }
 
 function makeBorderStyle(active: boolean): string {
   return `border-gray-500 dark:border-gray-400 hover:border-gray-700 dark:hover:border-gray-200 ${
-    active && "border-b-2"
-  } `;
+    active ? "border-b-2" : ""
+  }`;
 }
 
 const prettyFocus =
