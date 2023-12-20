@@ -27,7 +27,7 @@ const Meta: FunctionalComponent<Props> = (
     <meta property="twitter:card" content="summary" key="t:card" />
     <meta property="twitter:title" content="Home" key="t:title" />
     <meta property="twitter:description" content={desc} key="t:desc" />
-    <meta property="twitter:image" content="/logo.svg" key="t:i" />
+    <meta property="twitter:image" content={logoSvgUrl} key="t:i" />
     <meta property="twitter:image:alt" content={logoAlt} key="t:ai" />
   </>
 );

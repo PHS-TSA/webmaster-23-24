@@ -1,4 +1,4 @@
-import { Head, Partial } from "$fresh/runtime.ts";
+import { asset, Head, Partial } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { FunctionalComponent } from "preact";
 import { description as desc, faviconPngUrl, faviconSvgUrl } from "../site.ts";
@@ -33,8 +33,17 @@ const metas = (
     <meta name="ICBM" content="38.7413922,-90.456632" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="icon" type="image/svg+xml" href={faviconSvgUrl} />
-    <link rel="icon" sizes="48x48" type="image/png" href={faviconPngUrl} />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={asset(faviconSvgUrl)}
+    />
+    <link
+      rel="icon"
+      sizes="48x48"
+      type="image/png"
+      href={asset(faviconPngUrl)}
+    />
   </>
 );
 
@@ -43,13 +52,13 @@ const App: FunctionalComponent<PageProps> = ({ Component }) => (
     <Head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link href="/styles.css" rel="preload" as="style" />
+      <link href={asset("/styles.css")} rel="preload" as="style" />
       <link href="/manifest.webmanifest" rel="preload" as="manifest" />
       <meta name="description" content={desc} key="desc" />
       <meta name="keywords" content="green, clean, renewable, tsa" />
       <link rel="manifest" href="/manifest.webmanifest" />
       {metas}
-      <link rel="stylesheet" href="/styles.css" />
+      <link rel="stylesheet" href={asset("/styles.css")} />
     </Head>
 
     <body f-client-nav class="dark:bg-black">
