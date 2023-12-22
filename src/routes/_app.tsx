@@ -1,4 +1,4 @@
-import { asset, Head, Partial } from "$fresh/runtime.ts";
+import { Head, Partial, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { FunctionalComponent } from "preact";
 import { description as desc, faviconPngUrl, faviconSvgUrl } from "../site.ts";
@@ -33,11 +33,7 @@ const metas = (
     <meta name="ICBM" content="38.7413922,-90.456632" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href={asset(faviconSvgUrl)}
-    />
+    <link rel="icon" type="image/svg+xml" href={asset(faviconSvgUrl)} />
     <link
       rel="icon"
       sizes="48x48"
