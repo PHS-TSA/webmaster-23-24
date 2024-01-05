@@ -71,7 +71,7 @@ jobs:
         run: deno task test:coverage
 
       - name: 🔧 Upload to Deno Deploy
-        uses: denoland/deployctl@48c9c6732097c0832ef1f2de008b6db01241c84b # 1.9.0
+        uses: denoland/deployctl@7a825328eecb9df78d609766c1289d4c7e8147f5 # 1.9.1
         with:
           project: "why-switch"
           entrypoint: src/main.ts
