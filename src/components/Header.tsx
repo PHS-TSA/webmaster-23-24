@@ -36,7 +36,7 @@ const menus = [
 const Header: FunctionalComponent<Props> = ({ active }: Props) => (
   <header class="max-w-screen-xlg flex h-20 w-full flex-col gap-4 bg-white px-8 py-6 dark:bg-black sm:flex-row">
     <a class="flex flex-1 items-center" href="/">
-      <IconSolarPanel2 aria-hidden="true" class="h-6 w-6 dark:text-white" />
+      <IconSolarPanel2 aria-hidden="true" class="size-6 dark:text-white" />
       <div class="ml-1 text-2xl font-bold dark:text-white">{siteName}</div>
     </a>
     <ul class="flex flex-row flex-wrap items-center gap-6">

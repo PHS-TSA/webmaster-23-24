@@ -58,7 +58,7 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
     <div class="col-start-1 col-end-3 row-start-1 row-end-2 sm:col-end-2">
       <div class="flex items-center gap-1">
         <IconSolarPanel2
-          class="inline-block h-6 w-6 dark:text-white"
+          class="inline-block size-6 dark:text-white"
           aria-hidden="true"
         />
         <div class="text-2xl font-bold dark:text-white">{siteName}</div>
@@ -94,7 +94,7 @@ const Footer: FunctionalComponent<Props> = ({ class: classes = "" }) => (
             title={tool.name}
             key={tool.name}
           >
-            <tool.icon aria-hidden="true" class="h-6 w-6" />
+            <tool.icon aria-hidden="true" class="size-6" />
           </a>
           {index % 2 === 1 ? <br /> : <></>}
         </>
