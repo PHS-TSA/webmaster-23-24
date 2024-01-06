@@ -7,12 +7,10 @@ interface Props {
   desc?: string;
 }
 
-const Meta: FunctionalComponent<Props> = (
-  {
-    title = siteName,
-    desc = description,
-  },
-) => (
+const Meta: FunctionalComponent<Props> = ({
+  title = siteName,
+  desc = description,
+}) => (
   <>
     <Title>{title}</Title>
     <meta property="og:image" content={logoSvgUrl} key="og:i" />

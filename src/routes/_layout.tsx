@@ -4,7 +4,7 @@ import Footer from "../components/Footer.tsx";
 import Header from "../components/Header.tsx";
 
 const Layout: FunctionalComponent<PageProps> = ({ Component, url }) => (
-  <div class="flex flex-col min-h-screen">
+  <div class="flex min-h-screen flex-col">
     <Header active={url.pathname} />
     <Component />
     <Footer class="mt-auto" />

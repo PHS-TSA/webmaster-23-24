@@ -12,9 +12,7 @@ const About: FunctionalComponent<PageProps> = () => (
       <Meta title={pageTitle} />
     </Head>
     <Cover title={pageTitle}>
-      <p class="my-4 dark:text-white">
-        It's us, man!
-      </p>
+      <p class="my-4 dark:text-white">It's us, man!</p>
     </Cover>
   </>
 );

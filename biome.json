@@ -1,0 +1,35 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space"
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "all": true,
+      "nursery": {
+        "all": true,
+        "useImportRestrictions": "off",
+        "noDefaultExport": "off"
+      },
+      "style": {
+        "noImplicitBoolean": "off"
+      }
+    }
+  },
+  "vcs": {
+    "enabled": true,
+    "useIgnoreFile": true,
+    "clientKind": "git"
+  },
+  "files": {
+    "ignore": [".vscode/", "*.gen.ts"]
+  },
+  "javascript": {
+    "globals": ["Deno"]
+  }
+}

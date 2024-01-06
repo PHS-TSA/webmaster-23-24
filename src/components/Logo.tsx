@@ -10,7 +10,7 @@ const Logo: FunctionalComponent = () => (
   //   alt="the Fresh logo: a sliced lemon dripping with juice"
   // />
   <IconBolt
-    class="text-yellow-200 dark:text-yellow-400 h-52 w-52"
+    class="h-52 w-52 text-yellow-200 dark:text-yellow-400"
     aria-hidden="true"
   />
 );

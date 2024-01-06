@@ -16,7 +16,9 @@ const Error404: FunctionalComponent<PageProps> = () => (
         <p class="my-4 dark:text-white">
           The page you were looking for doesn't exist.
         </p>
-        <a href="/" class="underline">Go back home</a>
+        <a href="/" class="underline">
+          Go back home
+        </a>
       </>
     </Cover>
   </>

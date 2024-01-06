@@ -1,7 +1,10 @@
 {
   "lock": false,
   "tasks": {
-    "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
+    "check": "deno task lint && deno task typecheck",
+    "ci": "deno task biome ci .",
+    "typecheck": "deno check **/*.ts **/*.tsx",
+    "lint": "deno task biome check .",
     "test": "deno test --allow-env --allow-read --coverage=cov/",
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
@@ -12,41 +15,10 @@
     "update": "deno run -A -r https://fresh.deno.dev/update .",
     "esm:add": "deno run -A https://esm.sh/v135 add",
     "esm:update": "deno run -A https://esm.sh/v135 update",
-    "esm:remove": "deno run -A https://esm.sh/v135 remove"
+    "esm:remove": "deno run -A https://esm.sh/v135 remove",
+    "biome": "deno run -A npm:@biomejs/biome"
   },
-  "lint": {
-    "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ],
-      "include": [
-        "ban-untagged-todo",
-        "camelcase",
-        "default-param-last",
-        "eqeqeq",
-        "explicit-function-return-type",
-        "explicit-module-boundary-types",
-        "guard-for-in",
-        "no-await-in-loop",
-        "no-console",
-        "no-const-assign",
-        "no-eval",
-        "no-external-import",
-        "no-implicit-declare-namespace-export",
-        "no-non-null-asserted-optional-chain",
-        "no-sparse-arrays",
-        "no-sync-fn-in-async-fn",
-        "no-throw-literal",
-        "no-undef",
-        "single-var-declarator"
-      ]
-    }
-  },
-  "exclude": [
-    "**/_fresh/*",
-    "src/fresh.gen.ts"
-  ],
+  "exclude": ["**/_fresh/*", "src/fresh.gen.ts"],
   "imports": {
     "$std/": "https://deno.land/std@0.209.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.1/",
