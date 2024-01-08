@@ -33,6 +33,7 @@ jobs:
 
     permissions:
       id-token: write # Needed for auth with Deno Deploy
+      pull-requests: write # Needed for biome comments
 
     steps:
       - name: 📚 Git checkout
