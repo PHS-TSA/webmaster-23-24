@@ -1,7 +1,7 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 
-export default ({
+export default {
   content: ["{routes,islands,components}/**/*.{ts,tsx}"],
   plugins: [typography],
   theme: {
@@ -16,4 +16,4 @@ export default ({
       },
     },
   },
-} satisfies Config);
+} satisfies Config;
