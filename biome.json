@@ -1,11 +1,12 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.5.0/schema.json",
   "organizeImports": {
     "enabled": true
   },
   "formatter": {
     "enabled": true,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "formatWithErrors": true
   },
   "linter": {
     "enabled": true,
@@ -13,21 +14,35 @@
       "all": true,
       "nursery": {
         "all": true,
-        "useImportRestrictions": "off",
-        "noDefaultExport": "off"
+        "useImportRestrictions": "off"
       },
       "style": {
-        "noImplicitBoolean": "off"
+        "noImplicitBoolean": "off",
+        "noDefaultExport": "off"
       }
     }
   },
   "vcs": {
     "enabled": true,
     "useIgnoreFile": true,
-    "clientKind": "git"
+    "clientKind": "git",
+    "defaultBranch": "main"
   },
   "files": {
-    "ignore": [".vscode/", "*.gen.ts"]
+    "include": ["src/**/*.{ts,tsx}"],
+    "ignore": [
+      "**/.vscode/**/*.json",
+      "**/*.gen.ts",
+      "src/content/",
+      "src/static/",
+      "**/*.md",
+      "**/*.svg",
+      "**/*.ico",
+      "**/*.xml",
+      "**/*.yaml",
+      "**/*.webmanifest",
+      "**/.github/**"
+    ]
   },
   "javascript": {
     "globals": ["Deno"]

@@ -1,10 +1,10 @@
 {
   "lock": false,
   "tasks": {
-    "check": "deno task lint && deno task typecheck",
+    "check": "deno task biome check . && deno task typecheck",
     "ci": "deno task biome ci .",
-    "typecheck": "deno check **/*.ts **/*.tsx",
-    "lint": "deno task biome check .",
+    "typecheck": "deno check src/**/*.ts src/**/*.tsx",
+    "lint": "deno task biome check .  --error-on-warnings",
     "test": "deno test --allow-env --allow-read --coverage=cov/",
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
