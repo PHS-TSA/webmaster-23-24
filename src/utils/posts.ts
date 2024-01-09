@@ -8,7 +8,10 @@ export interface SolutionPage {
   readonly data: SolutionData;
 }
 
-export type SolutionData = Record<string, unknown>; // TODO(lishaduck): validate w/Zod.
+/**
+ * @todo validate w/Zod.
+ */
+export type SolutionData = Record<string, unknown>;
 
 const dir = "src/content";
 
