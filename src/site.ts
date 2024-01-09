@@ -1,6 +1,6 @@
 const slogan = "The Truth About Going Green";
 const description =
-  "Why Switch is an informative website about green/green energy.";
+  "Why Switch is an informative website about clean and green energy.";
 const siteName = "Why Switch?";
 
 function makeTitle(pageTitle: string): string {
