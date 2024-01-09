@@ -1,15 +1,15 @@
 import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
-import type { FunctionalComponent } from "preact";
+import type { VNode } from "preact";
 
-interface Props {
+export interface HeaderMenuProps {
   title: string;
   active: boolean;
   items: MenuItem[] | undefined;
   href?: string;
 }
 
-interface MenuItem {
+export interface MenuItem {
   url: string;
   name: string;
 }
@@ -29,13 +29,13 @@ function makeBorderStyle(active: boolean): string {
 const prettyFocus =
   "rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75";
 
-const HeaderMenu: FunctionalComponent<Props> = ({
+export function HeaderMenu({
   title,
   items,
   active,
   href,
-}) =>
-  items !== undefined ? (
+}: HeaderMenuProps): VNode {
+  return items !== undefined ? (
     <Popover class="relative">
       <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
         <span class={`${makeTextStyle(active)} flex flex-row`}>
@@ -59,5 +59,4 @@ const HeaderMenu: FunctionalComponent<Props> = ({
       {title}
     </a>
   );
-
-export { HeaderMenu as default };
+}

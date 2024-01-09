@@ -1,17 +1,17 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { render } from "$gfm";
-import type { FunctionalComponent } from "preact";
 import IconSolarPanel from "$tabler_icons/solar-panel.tsx";
-import Cover from "../../components/Cover.tsx";
-import Meta from "../../components/Meta.tsx";
+import type { VNode } from "preact";
+import { Cover } from "../../components/Cover.tsx";
+import { Meta } from "../../components/Meta.tsx";
 import { type SolutionPage, solutions } from "../../utils/posts.ts";
 
-interface SolutionProps {
+export interface SolutionProps {
   page: SolutionPage;
 }
 
-const handler: Handlers<SolutionProps> = {
+export const handler: Handlers<SolutionProps> = {
   GET(_req, ctx) {
     const solution = solutions.find(({ slug }) => slug === ctx.params["slug"]);
 
@@ -23,7 +23,7 @@ const handler: Handlers<SolutionProps> = {
   },
 };
 
-const Solution: FunctionalComponent<PageProps<SolutionProps>> = ({ data }) => {
+export default function Solution({ data }: PageProps): VNode {
   const _pageTitle = data.page.data["title"];
   const pageTitle = typeof _pageTitle === "string" ? _pageTitle : "";
   const _description = data.page.data["description"];
@@ -56,6 +56,4 @@ const Solution: FunctionalComponent<PageProps<SolutionProps>> = ({ data }) => {
       </main>
     </>
   );
-};
-
-export { Solution as default, handler };
+}

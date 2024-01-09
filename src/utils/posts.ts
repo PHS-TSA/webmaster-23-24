@@ -2,7 +2,7 @@ import type { Extract } from "$std/front_matter/create_extractor.ts";
 import { extract } from "$std/front_matter/yaml.ts";
 import { join } from "$std/path/posix/join.ts";
 
-interface SolutionPage {
+export interface SolutionPage {
   slug: string;
   markdown: string;
   data: Record<string, unknown>;
@@ -10,7 +10,7 @@ interface SolutionPage {
 
 const dir = "src/content";
 
-const solutions = await getPosts();
+export const solutions = await getPosts();
 
 /** Get all solutions. */
 export async function getPosts(): Promise<SolutionPage[]> {
@@ -37,5 +37,3 @@ export async function getPost(slug: string): Promise<SolutionPage | null> {
   }
   return { markdown: extracted.body, data: extracted.attrs, slug };
 }
-
-export { solutions, type SolutionPage };
