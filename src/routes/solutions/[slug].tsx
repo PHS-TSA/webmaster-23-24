@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { render } from "$gfm";
 import type { FunctionalComponent } from "preact";
-import IconSolarPanel from "tabler_icons_tsx/solar-panel.tsx";
+import IconSolarPanel from "$tabler_icons/solar-panel.tsx";
 import Cover from "../../components/Cover.tsx";
 import Meta from "../../components/Meta.tsx";
 import { type SolutionPage, solutions } from "../../utils/posts.ts";

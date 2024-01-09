@@ -1,6 +1,6 @@
+import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
 import type { FunctionalComponent } from "preact";
-import IconChevronDown from "tabler_icons_tsx/chevron-down.tsx";
 
 interface Props {
   title: string;

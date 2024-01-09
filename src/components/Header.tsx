@@ -1,5 +1,5 @@
+import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { FunctionalComponent } from "preact";
-import IconSolarPanel2 from "tabler_icons_tsx/solar-panel-2.tsx";
 import HeaderMenu from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 
