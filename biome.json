@@ -20,6 +20,9 @@
       "style": {
         "noImplicitBoolean": "off",
         "noDefaultExport": "off"
+      },
+      "complexity": {
+        "useLiteralKeys": "off"
       }
     }
   },
