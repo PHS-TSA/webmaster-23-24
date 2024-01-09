@@ -1,12 +1,10 @@
-import type { FunctionalComponent } from "preact";
+import type { VNode } from "preact";
 import { makeTitle } from "../site.ts";
 
-interface Props {
-  children: string;
+export interface TitleProps {
+  readonly children: string;
 }
 
-const Title: FunctionalComponent<Props> = ({ children }) => (
-  <title>{makeTitle(children)}</title>
-);
-
-export { Title as default };
+export function Title({ children }: TitleProps): VNode {
+  return <title>{makeTitle(children)}</title>;
+}

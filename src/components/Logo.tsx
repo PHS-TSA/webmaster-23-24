@@ -1,7 +1,7 @@
-import type { FunctionalComponent } from "preact";
-import IconBolt from "tabler_icons_tsx/bolt.tsx";
+import IconBolt from "$tabler_icons/bolt.tsx";
+import type { VNode } from "preact";
 
-const Logo: FunctionalComponent = () => (
+export function Logo(): VNode {
   // <img
   //   class="my-6"
   //   src="/logo.svg"
@@ -9,10 +9,10 @@ const Logo: FunctionalComponent = () => (
   //   height="128"
   //   alt="the Fresh logo: a sliced lemon dripping with juice"
   // />
-  <IconBolt
-    class="size-52 text-yellow-200 dark:text-yellow-400"
-    aria-hidden="true"
-  />
-);
-
-export { Logo as default };
+  return (
+    <IconBolt
+      class="size-52 text-yellow-200 dark:text-yellow-400"
+      aria-hidden="true"
+    />
+  );
+}

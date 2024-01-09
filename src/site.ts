@@ -1,24 +1,13 @@
-const slogan = "The Truth About Going Green";
-const description =
+export const slogan = "The Truth About Going Green";
+export const description =
   "Why Switch is an informative website about clean and green energy.";
-const siteName = "Why Switch?";
+export const siteName = "Why Switch?";
 
-function makeTitle(pageTitle: string): string {
+export function makeTitle(pageTitle: string): string {
   return `${pageTitle} | ${siteName}`;
 }
 
-const faviconSvgUrl = "/favicon.svg";
-const faviconPngUrl = "/favicon.png";
-const logoSvgUrl = "/logo.svg";
-const logoAlt = `${siteName}'s logo`;
-
-export {
-  description,
-  faviconPngUrl,
-  faviconSvgUrl,
-  logoAlt,
-  logoSvgUrl,
-  makeTitle,
-  siteName,
-  slogan,
-};
+export const faviconSvgUrl = "/favicon.svg";
+export const faviconPngUrl = "/favicon.png";
+export const logoSvgUrl = "/logo.svg";
+export const logoAlt = `${siteName}'s logo`;
