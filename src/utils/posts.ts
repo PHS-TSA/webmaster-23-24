@@ -15,7 +15,7 @@ const dir = "src/content";
 export const solutions = await getPosts();
 
 /** Get all solutions. */
-export async function getPosts(): Promise<SolutionPage[]> {
+export async function getPosts(): Promise<readonly SolutionPage[]> {
   const files = Deno.readDir(dir);
   const promises = [];
   for await (const file of files) {
@@ -25,7 +25,7 @@ export async function getPosts(): Promise<SolutionPage[]> {
 
   const solutions = await Promise.all(promises);
 
-  return solutions as SolutionPage[];
+  return solutions.filter((val): val is SolutionPage => val !== null);
 }
 
 /** Get a solution. */

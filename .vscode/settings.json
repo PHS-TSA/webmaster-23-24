@@ -16,7 +16,9 @@
     "quickfix.biome": "always",
     "source.organizeImports.biome": "always"
   },
-  "css.customData": [
-    ".vscode/tailwind.json"
+  "css.customData": [".vscode/tailwind.json"],
+  "tailwindCSS.experimental.classRegex": [
+    "tw`([^`]*)",
+    ["tw\\(([^\\)]*)\\)", "`([^`]*)`"]
   ]
 }
