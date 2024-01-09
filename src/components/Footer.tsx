@@ -5,6 +5,7 @@ import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { VNode } from "preact";
 import { siteName, slogan } from "../site.ts";
+import { tw } from "../utils/tailwind.ts";
 
 export interface FooterProps {
   readonly class?: string;
@@ -27,7 +28,8 @@ const menus = [
       { name: "Pricing", href: "pricing/" },
     ],
   },
-];
+] as const;
+
 const icons = [
   {
     icon: IconLemon2,
@@ -49,9 +51,9 @@ const icons = [
     href: "https://tailwindcss.com/",
     name: "Tailwind",
   },
-];
+] as const;
 
-export function Footer({ class: classes = "" }: FooterProps): VNode {
+export function Footer({ class: classes = tw`` }: FooterProps): VNode {
   return (
     <footer
       class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black sm:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${classes}`}
