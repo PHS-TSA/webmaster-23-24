@@ -3,15 +3,15 @@ import { Popover } from "@headlessui/react";
 import type { VNode } from "preact";
 
 export interface HeaderMenuProps {
-  title: string;
-  active: boolean;
-  items: MenuItem[] | undefined;
-  href?: string;
+  readonly title: string;
+  readonly active: boolean;
+  readonly items?: MenuItem[];
+  readonly href?: string;
 }
 
 export interface MenuItem {
-  url: string;
-  name: string;
+  readonly url: string;
+  readonly name: string;
 }
 
 function makeTextStyle(active: boolean): string {

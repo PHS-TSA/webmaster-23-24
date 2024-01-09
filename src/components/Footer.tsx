@@ -7,7 +7,7 @@ import type { VNode } from "preact";
 import { siteName, slogan } from "../site.ts";
 
 export interface FooterProps {
-  class?: string | undefined;
+  readonly class?: string;
 }
 
 const menus = [

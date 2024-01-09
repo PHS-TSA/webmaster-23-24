@@ -8,7 +8,7 @@ import { Meta } from "../../components/Meta.tsx";
 import { type SolutionPage, solutions } from "../../utils/posts.ts";
 
 export interface SolutionProps {
-  page: SolutionPage;
+  readonly page: SolutionPage;
 }
 
 export const handler: Handlers<SolutionProps> = {

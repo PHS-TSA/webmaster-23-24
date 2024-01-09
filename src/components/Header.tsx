@@ -4,7 +4,7 @@ import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 
 export interface HeaderProps {
-  active: string; // TODO(lishaduck): https://deno.com/blog/fresh-1.5#easier-active-link-styling
+  readonly active: string; // TODO(lishaduck): https://deno.com/blog/fresh-1.5#easier-active-link-styling
 }
 
 const menus = [
@@ -16,7 +16,7 @@ const menus = [
     name: "Going Green!",
     href: "/green/",
     items: [
-      { name: "Getting Started", url: "getting-started" },
+      { name: "Getting Started", url: "getting-started/" },
       { name: "Programs", url: "programs/" },
     ],
   },
@@ -46,11 +46,11 @@ export function Header({ active }: HeaderProps): VNode {
             <HeaderMenu
               title={menu.name}
               active={
-                (active === "/" && menu.href === "/") ||
+                active === menu.href ||
                 (active.startsWith(menu.href) && menu.href !== "/")
               }
               href={menu.href}
-              items={menu.items}
+              {...(menu.items !== undefined ? { items: menu.items } : {})}
             />
           </li>
         ))}

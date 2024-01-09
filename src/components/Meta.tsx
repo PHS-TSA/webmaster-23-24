@@ -3,8 +3,8 @@ import { description, logoAlt, logoSvgUrl, siteName } from "../site.ts";
 import { Title } from "./Title.tsx";
 
 export interface MetaProps {
-  title?: string;
-  desc?: string;
+  readonly title?: string;
+  readonly desc?: string;
 }
 
 export function Meta({
