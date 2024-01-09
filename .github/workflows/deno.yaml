@@ -59,11 +59,8 @@ jobs:
       - name: 📦 Install dependencies
         run: deno cache src/main.ts
 
-      - name: 🕵️ Run linter, Verify formatting
+      - name: 🕵️ Run linter, verify formatting, typecheck
         run: deno task ci
-
-      - name: 🕵️ Typecheck
-        run: deno task typecheck
 
       - name: 🧪 Run tests
         run: deno task test

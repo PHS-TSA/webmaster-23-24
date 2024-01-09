@@ -12,7 +12,7 @@ export interface SolutionProps {
 }
 
 export const handler: Handlers<SolutionProps> = {
-  GET(_req, ctx) {
+  GET(_req, ctx): Response | Promise<Response> {
     const solution = solutions.find(({ slug }) => slug === ctx.params["slug"]);
 
     if (solution === undefined) {
