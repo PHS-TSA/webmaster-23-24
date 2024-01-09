@@ -14,7 +14,8 @@
       "all": true,
       "nursery": {
         "all": true,
-        "useImportRestrictions": "off"
+        "useImportRestrictions": "off",
+        "useFilenamingConvention": "off"
       },
       "style": {
         "noImplicitBoolean": "off",
