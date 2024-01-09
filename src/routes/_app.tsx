@@ -1,7 +1,7 @@
 import { Head, Partial, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { FunctionalComponent } from "preact";
-import { description as desc, faviconPngUrl, faviconSvgUrl } from "../site.ts";
+import { description, faviconPngUrl, faviconSvgUrl } from "../site.ts";
 
 const metas = (
   <>
@@ -49,7 +49,7 @@ const App: FunctionalComponent<PageProps> = ({ Component }) => (
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link href={asset("/styles.css")} rel="preload" as="style" />
-      <meta name="description" content={desc} key="desc" />
+      <meta name="description" content={description} key="desc" />
       <meta name="keywords" content="green, clean, renewable, tsa" />
       <link rel="manifest" href="/manifest.webmanifest" />
       {metas}
