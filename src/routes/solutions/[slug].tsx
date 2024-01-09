@@ -13,26 +13,22 @@ export interface SolutionProps {
 
 export const handler: Handlers<SolutionProps> = {
   GET(_req, ctx): Response | Promise<Response> {
-    const solution = solutions.find(({ slug }) => slug === ctx.params["slug"]);
+    const solution = solutions.find((page) => page.slug === ctx.params["slug"]);
 
-    if (solution === undefined) {
-      return ctx.renderNotFound();
-    }
-
-    return ctx.render({ page: solution });
+    return solution === undefined
+      ? ctx.renderNotFound()
+      : ctx.render({ page: solution });
   },
 };
 
-export default function Solution({ data }: PageProps): VNode {
-  const _pageTitle = data.page.data["title"];
-  const pageTitle = typeof _pageTitle === "string" ? _pageTitle : "";
-  const _description = data.page.data["description"];
-  const description = typeof _description === "string" ? _description : "";
+export default function Solution({ data }: PageProps<SolutionProps>): VNode {
+  const pageTitle = data.page.data.title;
+  const description = data.page.data.description;
 
   return (
     <>
       <Head>
-        <Meta title={pageTitle} />
+        <Meta title={pageTitle} description={description} />
       </Head>
       <main>
         <Cover

@@ -1,44 +1,61 @@
-import type { Extract } from "$std/front_matter/create_extractor.ts";
 import { extract } from "$std/front_matter/yaml.ts";
 import { join } from "$std/path/posix/join.ts";
+import { z } from "zod";
 
-export interface SolutionPage {
-  readonly slug: string;
-  readonly markdown: string;
-  readonly data: SolutionData;
-}
+export type SolutionPage = z.infer<typeof solutionPageSchema>;
+export type SolutionData = z.infer<typeof solutionDataSchema>;
+export type SolutionPages = z.infer<typeof solutionPagesFilteredSchema>;
 
-/**
- * @todo validate w/Zod.
- */
-export type SolutionData = Record<string, unknown>;
+const solutionDataSchema = z
+  .object({
+    title: z.string(),
+    description: z.string(),
+  })
+  .passthrough();
+
+const solutionPageSchema = z
+  .object({
+    slug: z.string(),
+    markdown: z.string(),
+    data: solutionDataSchema,
+  })
+  .strict()
+  .readonly();
+
+const solutionPagesSchema = z.array(solutionPageSchema.optional()).nonempty();
+
+const solutionPagesFilteredSchema = solutionPagesSchema.transform((val) =>
+  val.filter((val): val is SolutionPage => val !== null),
+);
+
+const solutionPagesPromiseSchema = z.promise(solutionPagesFilteredSchema);
 
 const dir = "src/content";
-
-export const solutions = await getPosts();
+export const solutions = await getSolutions();
 
 /** Get all solutions. */
-export async function getPosts(): Promise<readonly SolutionPage[]> {
+export async function getSolutions(): Promise<SolutionPages> {
   const files = Deno.readDir(dir);
   const promises = [];
   for await (const file of files) {
     const slug = file.name.replace(".md", "");
-    promises.push(getPost(slug));
+    promises.push(getSolution(slug));
   }
 
-  const solutions = await Promise.all(promises);
-
-  return solutions.filter((val): val is SolutionPage => val !== null);
+  return await solutionPagesPromiseSchema.parse(Promise.all(promises));
 }
 
 /** Get a solution. */
-export async function getPost(slug: string): Promise<SolutionPage | null> {
-  let extracted: Extract<Record<string, unknown>>;
+export async function getSolution(slug: string): Promise<SolutionPage | null> {
   try {
     const markdown = await Deno.readTextFile(join(dir, `${slug}.md`));
-    extracted = extract(markdown);
-  } catch (_) {
+    const extracted = extract(markdown);
+    const frontmatter = solutionDataSchema.parse(extracted.attrs);
+    const solution = { frontmatter, body: extracted.body };
+
+    return { markdown: solution.body, data: solution.frontmatter, slug };
+  } catch (error) {
+    console.error(error);
     return null;
   }
-  return { markdown: extracted.body, data: extracted.attrs, slug };
 }

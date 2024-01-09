@@ -1,6 +1,6 @@
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { VNode } from "preact";
-import { HeaderMenu, isMenuWithItems } from "../islands/HeaderMenu.tsx";
+import { HeaderMenu, menuWithItemsSchema } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 
 export interface HeaderProps {
@@ -35,16 +35,20 @@ export function Header({ active }: HeaderProps): VNode {
     <header class="max-w-screen-xlg flex h-20 w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
-        {menus.map((menu) => (
-          <li key={menu.name} class="flex h-8 items-end">
-            <HeaderMenu
-              title={menu.name}
-              active={active === menu.href || active.startsWith(menu.href)}
-              href={menu.href}
-              {...(isMenuWithItems(menu) ? { items: menu.items } : {})}
-            />
-          </li>
-        ))}
+        {menus.map((menu) => {
+          const data = menuWithItemsSchema.safeParse(menu);
+
+          return (
+            <li key={menu.name} class="flex h-8 items-end">
+              <HeaderMenu
+                title={menu.name}
+                active={active === menu.href || active.startsWith(menu.href)}
+                href={menu.href}
+                items={data.success ? data?.data.items : undefined}
+              />
+            </li>
+          );
+        })}
       </ul>
     </header>
   );
