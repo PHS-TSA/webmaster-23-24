@@ -3,10 +3,12 @@ import { extract } from "$std/front_matter/yaml.ts";
 import { join } from "$std/path/posix/join.ts";
 
 export interface SolutionPage {
-  slug: string;
-  markdown: string;
-  data: Record<string, unknown>;
+  readonly slug: string;
+  readonly markdown: string;
+  readonly data: SolutionData;
 }
+
+export type SolutionData = Record<string, unknown>; // TODO: validate w/Zod.
 
 const dir = "src/content";
 
@@ -21,7 +23,7 @@ export async function getPosts(): Promise<SolutionPage[]> {
     promises.push(getPost(slug));
   }
 
-  const solutions = await Promise.all(promises); // TODO: validate w/Zod.
+  const solutions = await Promise.all(promises);
 
   return solutions as SolutionPage[];
 }

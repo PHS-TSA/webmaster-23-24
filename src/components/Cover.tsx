@@ -2,9 +2,9 @@ import type { ComponentFactory, VNode } from "preact";
 import { Logo } from "./Logo.tsx";
 
 export interface CoverProps {
-  title: string;
-  children: VNode;
-  icon?: ComponentFactory;
+  readonly title: string;
+  readonly children: VNode;
+  readonly icon?: ComponentFactory;
 }
 
 export function Cover({

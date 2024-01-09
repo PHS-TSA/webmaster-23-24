@@ -2,7 +2,7 @@ import type { VNode } from "preact";
 import { makeTitle } from "../site.ts";
 
 export interface TitleProps {
-  children: string;
+  readonly children: string;
 }
 
 export function Title({ children }: TitleProps): VNode {
