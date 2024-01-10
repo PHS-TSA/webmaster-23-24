@@ -32,7 +32,7 @@ export function HeaderMenu(props: MenuProps): VNode {
     return (
       <Popover class="relative">
         <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
-          <span class={`${makeTextStyle(active)} flex flex-row`}>
+          <span class={`flex flex-row ${makeTextStyle(active)}`}>
             {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
           </span>
         </Popover.Button>
