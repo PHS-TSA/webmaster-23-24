@@ -38,9 +38,13 @@ export function HeaderMenu(props: MenuProps): VNode {
         </Popover.Button>
 
         <Popover.Panel>
-          <div class="absolute right-0 z-10 mt-2 grid w-56 origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+          <div class="absolute right-0 z-10 mt-2 grid w-36 origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
             {items.map((link) => (
-              <a href={`${url}${link.href}`} key={link}>
+              <a
+                href={`${url}${link.href}`}
+                key={link}
+                class={`mx-4 my-0.5 ${makeTextStyle(false)}`}
+              >
                 {link.name}
               </a>
             ))}
