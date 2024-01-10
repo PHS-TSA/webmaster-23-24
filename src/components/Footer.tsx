@@ -3,7 +3,7 @@ import IconBrandReact from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwind from "$tabler_icons/brand-tailwind.tsx";
 import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
-import type { RenderableProps, VNode } from "preact";
+import type { VNode } from "preact";
 import { siteName, slogan } from "../site.ts";
 import {
   type MenuProps,
@@ -57,7 +57,9 @@ export function Footer({ class: classes = tw`` }: FooterProps): VNode {
       </div>
 
       {menus.map((item) => (
-        <Menu {...item} active key={item.title} />
+        <div class={"row-start-2 mb-4 sm:row-start-auto"}>
+          <Menu {...item} active key={item.title} />
+        </div>
       ))}
 
       <div class="col-start-3 col-end-4 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto">
@@ -85,16 +87,16 @@ function Menu(props: MenuProps): VNode {
     const item = menuPropsSchemaRequired.parse(props);
 
     return (
-      <RenderMenu>
+      <>
         <RenderMenuHeader {...item} />
         <RenderMenuItems {...item} />
-      </RenderMenu>
+      </>
     );
   } catch (_) {
     return (
-      <RenderMenu>
+      <>
         <RenderMenuHeader {...props} />
-      </RenderMenu>
+      </>
     );
   }
 }
@@ -105,10 +107,6 @@ function RenderMenuHeader({ url, title }: MenuProps): VNode {
       {title}
     </a>
   );
-}
-
-function RenderMenu({ children }: RenderableProps<unknown>): VNode {
-  return <div class={"row-start-2 mb-4 sm:row-start-auto"}>{children}</div>;
 }
 
 function RenderMenuItems(item: MenuPropsRequired): VNode {

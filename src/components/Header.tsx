@@ -10,7 +10,7 @@ export interface HeaderProps {
 
 export function Header({ active }: HeaderProps): VNode {
   return (
-    <header class="max-w-screen-xlg flex h-20 w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
+    <header class="max-w-screen-xlg flex w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu) => {
