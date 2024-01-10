@@ -4,7 +4,7 @@ import type { VNode } from "preact";
 import { z } from "zod";
 import { tw } from "../utils/tailwind.ts";
 
-export type HeaderMenuProps = z.infer<typeof headerMenuPropsSchema>;
+export type HeaderMenuProps = z.infer<typeof headerMenuPropsTypeSchema>;
 export type MenuItem = z.infer<typeof menuItemSchema>;
 
 const menuItemSchema = z
@@ -17,10 +17,16 @@ const menuItemSchema = z
   .readonly();
 
 /**
- * `.readonly()` has to go last, and this allows customizing it before doing so.
+ * Checks if the menu has items.
+ *
+ * Always call `.readonly()`!
+ * It has to go last, and this allows customizing it before doing so.
+ *
+ * @param menu The menu to check.
+ * @returns True if the menu has items, false otherwise.
  */
-const headerMenuPropsSchemaInternal = z.object({
-  title: z.string(),
+export const headerMenuPropsSchema = z.object({
+  name: z.string(),
   active: z.boolean(),
   items: menuItemSchema.array().readonly().optional(),
   href: z.custom<`${string}/`>(
@@ -32,7 +38,8 @@ const headerMenuPropsSchemaInternal = z.object({
   ),
 });
 
-export const headerMenuPropsSchema = headerMenuPropsSchemaInternal.readonly();
+/** Types can't call functions, so this const has to be made. */
+const headerMenuPropsTypeSchema = headerMenuPropsSchema.readonly();
 
 function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
@@ -52,27 +59,18 @@ function makeBorderStyle(active: boolean): string {
 
 const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`;
 
-/**
- * Checks if the menu has items.
- *
- * @param menu The menu to check.
- * @returns True if the menu has items, false otherwise.
- *
- * @todo Replace with zod.
- */
-export const menuWithItemsSchema = headerMenuPropsSchemaInternal
-  .required()
-  .readonly();
-
 export function HeaderMenu(props: HeaderMenuProps): VNode {
   try {
-    const { items, title, active, href } = menuWithItemsSchema.parse(props);
+    const { items, name, active, href } = headerMenuPropsSchema
+      .required()
+      .readonly()
+      .parse(props);
 
     return (
       <Popover class="relative">
         <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
           <span class={`${makeTextStyle(active)} flex flex-row`}>
-            {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
+            {name} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
           </span>
         </Popover.Button>
 
@@ -86,14 +84,16 @@ export function HeaderMenu(props: HeaderMenuProps): VNode {
       </Popover>
     );
   } catch (_) {
-    const { title, active, href } = headerMenuPropsSchema.parse(props);
+    const { name, active, href } = headerMenuPropsSchema
+      .readonly()
+      .parse(props);
 
     return (
       <a
         href={href}
         class={`h-8 ${makeTextStyle(active)} ${makeBorderStyle(active)}`}
       >
-        {title}
+        {name}
       </a>
     );
   }
