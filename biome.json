@@ -35,10 +35,11 @@
   "files": {
     "include": ["src/**/*.{ts,tsx}"],
     "ignore": [
-      "**/.vscode/**/*.json",
       "**/*.gen.ts",
       "src/content/",
       "src/static/",
+      "deno.json",
+      "**/.vscode/**/*.json",
       "**/*.md",
       "**/*.svg",
       "**/*.ico",
