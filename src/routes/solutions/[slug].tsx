@@ -5,7 +5,7 @@ import IconSolarPanel from "$tabler_icons/solar-panel.tsx";
 import type { VNode } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
-import { type SolutionPage, solutions } from "../../utils/posts.ts";
+import { type SolutionPage, solutions } from "../../utils/solutions.ts";
 
 export interface SolutionProps {
   readonly page: SolutionPage;
