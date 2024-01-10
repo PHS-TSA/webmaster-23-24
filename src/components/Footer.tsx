@@ -56,11 +56,14 @@ export function Footer({ class: classes = tw`` }: FooterProps): VNode {
         <div class="text-gray-500 dark:text-gray-400">{slogan}</div>
       </div>
 
-      {menus.map((item) => (
-        <div class={"row-start-2 mb-4 sm:row-start-auto"}>
-          <Menu {...item} active key={item.title} />
-        </div>
-      ))}
+      <div class={"row-start-2 flex flex-row mb-4 sm:row-start-auto"}>
+        {menus.map((item) => (
+          // TODO(lishaduck): fix CSS
+          <section>
+            <Menu {...item} active key={item.title} />
+          </section>
+        ))}
+      </div>
 
       <div class="col-start-3 col-end-4 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto">
         <div class="m-1 text-xs">Made with</div>
@@ -95,12 +98,23 @@ function Menu(props: MenuProps): VNode {
   } catch (_) {
     return (
       <>
+        {/* TODO(lishaduck): Render these in one section. */}
         <RenderMenuHeader {...props} />
       </>
     );
   }
 }
 
+/**
+ * Renders the menu header.
+ *
+ * @param {Object} props - The configuration for this component.
+ * @param {string} props.url - The URL that should be linked.
+ * @param {string} props.title - The title of the link.
+ * @returns {VNode} The rendered menu header.
+ *
+ * @todo Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said color-switch.
+ */
 function RenderMenuHeader({ url, title }: MenuProps): VNode {
   return (
     <a class="py-4 pr-4 font-bold dark:text-white" href={url}>

@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// TODO(lishaduck): generate from  `solutions`.
 export const menus = [
   {
     title: "Going Green?",
