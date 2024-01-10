@@ -1,34 +1,12 @@
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { VNode } from "preact";
-import { HeaderMenu, headerMenuPropsSchema } from "../islands/HeaderMenu.tsx";
+import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
+import { menus } from "../utils/site-organization.ts";
 
 export interface HeaderProps {
   readonly active: string;
 }
-
-const menus = [
-  {
-    name: "Going Green!",
-    href: "/green/",
-    items: [
-      { name: "Getting Started", url: "getting-started/" },
-      { name: "Programs", url: "programs/" },
-    ],
-  },
-  {
-    name: "Monies",
-    href: "/monies/",
-    items: [
-      { name: "Taxes", url: "guarantees-in-life/" },
-      { name: "Pricing", url: "pricing/" },
-    ],
-  },
-  {
-    name: "About",
-    href: "/about/",
-  },
-] as const;
 
 export function Header({ active }: HeaderProps): VNode {
   return (
@@ -36,19 +14,11 @@ export function Header({ active }: HeaderProps): VNode {
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu) => {
-          const data = headerMenuPropsSchema
-            .required()
-            .pick({ items: true })
-            .readonly()
-            .safeParse(menu);
-
           return (
-            <li key={menu.name} class="flex h-8 items-end">
+            <li key={menu.title} class="flex h-8 items-end">
               <HeaderMenu
-                name={menu.name}
-                active={active === menu.href || active.startsWith(menu.href)}
-                href={menu.href}
-                items={data.success ? data?.data.items : undefined}
+                {...menu}
+                active={active === menu.url || active.startsWith(menu.url)}
               />
             </li>
           );

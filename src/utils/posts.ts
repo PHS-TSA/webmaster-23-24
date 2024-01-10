@@ -11,7 +11,8 @@ const solutionDataSchema = z
     title: z.string(),
     description: z.string(),
   })
-  .passthrough();
+  .passthrough()
+  .readonly();
 
 const solutionPageSchema = z
   .object({
@@ -22,7 +23,7 @@ const solutionPageSchema = z
   .strict()
   .readonly();
 
-const solutionPagesSchema = z.array(solutionPageSchema.optional()).nonempty();
+const solutionPagesSchema = solutionPageSchema.optional().array().readonly();
 
 const solutionPagesFilteredSchema = solutionPagesSchema.transform((val) =>
   val.filter((val): val is SolutionPage => val !== null),

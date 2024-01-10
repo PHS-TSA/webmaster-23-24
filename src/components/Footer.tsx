@@ -3,32 +3,19 @@ import IconBrandReact from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwind from "$tabler_icons/brand-tailwind.tsx";
 import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
-import type { VNode } from "preact";
+import type { RenderableProps, VNode } from "preact";
 import { siteName, slogan } from "../site.ts";
+import {
+  type MenuProps,
+  type MenuPropsRequired,
+  menuPropsSchemaRequired,
+  menus,
+} from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 export interface FooterProps {
   readonly class?: string;
 }
-
-const menus = [
-  {
-    title: "Going Green?",
-    url: "/green/",
-    children: [
-      { name: "Getting Started", href: "getting-started/" },
-      { name: "Programs", href: "programs/" },
-    ],
-  },
-  {
-    title: "Monies",
-    url: "/monies/",
-    children: [
-      { name: "Taxes", href: "guarantees-in-life/" },
-      { name: "Pricing", href: "pricing/" },
-    ],
-  },
-] as const;
 
 const icons = [
   {
@@ -70,21 +57,7 @@ export function Footer({ class: classes = tw`` }: FooterProps): VNode {
       </div>
 
       {menus.map((item) => (
-        <div class={"row-start-2 mb-4 sm:row-start-auto"} key={item.title}>
-          <span class="py-4 pr-4 font-bold dark:text-white">{item.title}</span>
-          <ul class="mt-2">
-            {item.children.map((child) => (
-              <li class="mt-2" key={child.name}>
-                <a
-                  class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-                  href={`${item.url}${child.href}`}
-                >
-                  {child.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Menu {...item} active key={item.title} />
       ))}
 
       <div class="col-start-3 col-end-4 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto">
@@ -104,5 +77,53 @@ export function Footer({ class: classes = tw`` }: FooterProps): VNode {
         ))}
       </div>
     </footer>
+  );
+}
+
+function Menu(props: MenuProps): VNode {
+  try {
+    const item = menuPropsSchemaRequired.parse(props);
+
+    return (
+      <RenderMenu>
+        <RenderMenuHeader {...item} />
+        <RenderMenuItems {...item} />
+      </RenderMenu>
+    );
+  } catch (_) {
+    return (
+      <RenderMenu>
+        <RenderMenuHeader {...props} />
+      </RenderMenu>
+    );
+  }
+}
+
+function RenderMenuHeader({ url, title }: MenuProps): VNode {
+  return (
+    <a class="py-4 pr-4 font-bold dark:text-white" href={url}>
+      {title}
+    </a>
+  );
+}
+
+function RenderMenu({ children }: RenderableProps<unknown>): VNode {
+  return <div class={"row-start-2 mb-4 sm:row-start-auto"}>{children}</div>;
+}
+
+function RenderMenuItems(item: MenuPropsRequired): VNode {
+  return (
+    <ul class="mt-2">
+      {item.items.map((child) => (
+        <li class="mt-2" key={child.name}>
+          <a
+            class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            href={`${item.url}${child.href}`}
+          >
+            {child.name}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }
