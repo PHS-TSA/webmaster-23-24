@@ -38,7 +38,7 @@ export function HeaderMenu(props: MenuProps): VNode {
         </Popover.Button>
 
         <Popover.Panel class="max-w-full">
-          <div class="absolute right-0 z-10 mt-2 grid w-36 origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none max-w-fit">
+          <div class="absolute left-0 right-auto z-10 mt-2 grid w-36 max-w-fit origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none sm:left-auto sm:right-0">
             {items.map((link) => (
               <a
                 href={`${url}${link.href}`}
