@@ -1,4 +1,4 @@
-import { Head, Partial, asset } from "$fresh/runtime.ts";
+import { Head, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { VNode } from "preact";
 import { description, faviconPngUrl, faviconSvgUrl } from "../site.ts";
@@ -58,9 +58,7 @@ export default function App({ Component }: PageProps): VNode {
       </Head>
 
       <body f-client-nav class="dark:bg-black">
-        <Partial name="body">
-          <Component />
-        </Partial>
+        <Component />
       </body>
     </html>
   );
