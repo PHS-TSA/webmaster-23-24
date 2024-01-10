@@ -22,7 +22,7 @@ function makeTextStyle(active: boolean): string {
 }
 
 function makeBorderStyle(active: boolean): string {
-  return tw`border-gray-500 hover:border-gray-700 dark:border-gray-400 dark:hover:border-gray-200 data-[current]:border-b-2${
+  return tw`border-gray-500 hover:border-gray-700 dark:border-gray-400 dark:hover:border-gray-200 data-[current]:border-b-2 ${
     active ? "border-b-2" : ""
   }`;
 }
