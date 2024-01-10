@@ -38,7 +38,8 @@
     "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.10",
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:tailwindcss@3.4.1/",
-    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js"
+    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
+    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

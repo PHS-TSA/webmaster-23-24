@@ -1,19 +1,38 @@
 import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
 import type { VNode } from "preact";
+import { z } from "zod";
 import { tw } from "../utils/tailwind.ts";
 
-export interface HeaderMenuProps {
-  readonly title: string;
-  readonly active: boolean;
-  readonly items?: readonly MenuItem[];
-  readonly href?: `/${string}/`;
-}
+export type HeaderMenuProps = z.infer<typeof headerMenuPropsSchema>;
+export type MenuItem = z.infer<typeof menuItemSchema>;
 
-export interface MenuItem {
-  readonly url: `${string}/`;
-  readonly name: string;
-}
+const menuItemSchema = z
+  .object({
+    url: z.custom<`${string}/`>(
+      (val) => z.string().regex(/.*\/$/).safeParse(val).success,
+    ),
+    name: z.string(),
+  })
+  .readonly();
+
+/**
+ * `.readonly()` has to go last, and this allows customizing it before doing so.
+ */
+const headerMenuPropsSchemaInternal = z.object({
+  title: z.string(),
+  active: z.boolean(),
+  items: menuItemSchema.array().readonly().optional(),
+  href: z.custom<`${string}/`>(
+    (val) =>
+      z
+        .string()
+        .regex(/^\/.*\/$/)
+        .safeParse(val).success,
+  ),
+});
+
+export const headerMenuPropsSchema = headerMenuPropsSchemaInternal.readonly();
 
 function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
@@ -41,50 +60,41 @@ const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-
  *
  * @todo Replace with zod.
  */
-export function isMenuWithItems(
-  menu: unknown,
-): menu is { readonly items: readonly MenuItem[] } {
-  return isMenuWithItemsHelper(menu) && Array.isArray(menu.items);
-}
+export const menuWithItemsSchema = headerMenuPropsSchemaInternal
+  .required()
+  .readonly();
 
-function isMenuWithItemsHelper(
-  menu: unknown,
-): menu is { readonly items: unknown } {
-  return isMenuWithItemsHelper2(menu) && Object.hasOwn(menu, "items");
-}
+export function HeaderMenu(props: HeaderMenuProps): VNode {
+  try {
+    const { items, title, active, href } = menuWithItemsSchema.parse(props);
 
-function isMenuWithItemsHelper2(menu: unknown): menu is object {
-  return typeof menu === "object" && menu !== null;
-}
+    return (
+      <Popover class="relative">
+        <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
+          <span class={`${makeTextStyle(active)} flex flex-row`}>
+            {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
+          </span>
+        </Popover.Button>
 
-export function HeaderMenu({
-  title,
-  items,
-  active,
-  href,
-}: HeaderMenuProps): VNode {
-  return items !== undefined ? (
-    <Popover class="relative">
-      <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
-        <span class={`${makeTextStyle(active)} flex flex-row`}>
-          {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
-        </span>
-      </Popover.Button>
+        <Popover.Panel>
+          <div class="absolute right-0 z-10 mt-2 grid w-56 origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
+            {items.map((link) => (
+              <a href={`${href}${link.url}`}>{link.name}</a>
+            ))}
+          </div>
+        </Popover.Panel>
+      </Popover>
+    );
+  } catch (_) {
+    const { title, active, href } = headerMenuPropsSchema.parse(props);
 
-      <Popover.Panel>
-        <div class="absolute right-0 z-10 mt-2 grid w-56 origin-top-right grid-flow-row divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-          {items.map((link) => (
-            <a href={`${href}${link.url}`}>{link.name}</a>
-          ))}
-        </div>
-      </Popover.Panel>
-    </Popover>
-  ) : (
-    <a
-      href={href}
-      class={`h-8 ${makeTextStyle(active)} ${makeBorderStyle(active)}`}
-    >
-      {title}
-    </a>
-  );
+    return (
+      <a
+        href={href}
+        class={`h-8 ${makeTextStyle(active)} ${makeBorderStyle(active)}`}
+      >
+        {title}
+      </a>
+    );
+  }
 }
