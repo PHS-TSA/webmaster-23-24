@@ -32,11 +32,8 @@ const menus = [
 
 export function Header({ active }: HeaderProps): VNode {
   return (
-    <header class="max-w-screen-xlg flex h-20 w-full flex-col gap-4 bg-white px-8 py-6 dark:bg-black sm:flex-row">
-      <a class="flex flex-1 items-center" href="/">
-        <IconSolarPanel2 aria-hidden="true" class="size-6 dark:text-white" />
-        <div class="ml-1 text-2xl font-bold dark:text-white">{siteName}</div>
-      </a>
+    <header class="max-w-screen-xlg flex h-20 w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
+      <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu) => (
           <li key={menu.name} class="flex h-8 items-end">
@@ -50,5 +47,17 @@ export function Header({ active }: HeaderProps): VNode {
         ))}
       </ul>
     </header>
+  );
+}
+
+function HomeLink(): VNode {
+  return (
+    <a
+      class="flex flex-1 items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+      href="/"
+    >
+      <IconSolarPanel2 aria-hidden="true" class="size-6" />
+      <div class="ml-1 text-2xl font-bold">{siteName}</div>
+    </a>
   );
 }

@@ -16,14 +16,18 @@ export interface MenuItem {
 }
 
 function makeTextStyle(active: boolean): string {
-  return tw`text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 py-1 whitespace-nowrap ${
-    active ? "font-bold" : ""
+  return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
+    active
+      ? "font-bold text-gray-700 dark:text-gray-200"
+      : "text-gray-500 dark:text-gray-400"
   }`;
 }
 
 function makeBorderStyle(active: boolean): string {
-  return tw`border-gray-500 hover:border-gray-700 dark:border-gray-400 dark:hover:border-gray-200 data-[current]:border-b-2 ${
-    active ? "border-b-2" : ""
+  return tw` hover:border-gray-700 data-[current]:border-b-2 dark:hover:border-gray-200 ${
+    active
+      ? "border-b-2 border-gray-700 dark:border-gray-200"
+      : "border-gray-500 dark:border-gray-400"
   }`;
 }
 
