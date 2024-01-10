@@ -1,7 +1,7 @@
 import { Head, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { VNode } from "preact";
-import { description, faviconPngUrl, faviconSvgUrl } from "../site.ts";
+import { description } from "../site.ts";
 
 const metas = (
   <>
@@ -18,7 +18,7 @@ const metas = (
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#005" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    {/* <link rel="apple-touch-icon" href="/favicon.png" /> */}
     <meta
       name="apple-mobile-web-app-status-bar-style"
       content="black-translucent"
@@ -33,13 +33,13 @@ const metas = (
     <meta name="ICBM" content="38.7413922,-90.456632" />
 
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link rel="icon" type="image/svg+xml" href={asset(faviconSvgUrl)} />
-    <link
+    {/* <link rel="icon" type="image/svg+xml" href={asset(faviconSvgUrl)} /> */}
+    {/* <link
       rel="icon"
       sizes="48x48"
       type="image/png"
       href={asset(faviconPngUrl)}
-    />
+    /> */}
   </>
 );
 
