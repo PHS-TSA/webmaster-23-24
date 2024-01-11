@@ -49,7 +49,9 @@ export async function getSolutions(): Promise<SolutionPages> {
 }
 
 /** Get a solution. */
-export async function getSolution(slug: string): Promise<SolutionPage | null> {
+export async function getSolution(
+  slug: string,
+): Promise<SolutionPage | undefined> {
   try {
     const markdown = await Deno.readTextFile(join(dir, `${slug}.md`));
     const extracted = extract(markdown);
@@ -59,6 +61,6 @@ export async function getSolution(slug: string): Promise<SolutionPage | null> {
     return { markdown: solution.body, data: solution.frontmatter, slug };
   } catch (error) {
     console.error(error);
-    return null;
+    return undefined;
   }
 }
