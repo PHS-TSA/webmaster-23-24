@@ -45,7 +45,7 @@ export default function Solution({
           <p class="my-4 dark:text-white">{description}</p>
         </Cover>
         <article
-          class="p-10 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200"
+          class="p-10 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: required for markdown w/out a custom renderer
           dangerouslySetInnerHTML={{
             __html: render(data?.page.markdown ?? ""),
