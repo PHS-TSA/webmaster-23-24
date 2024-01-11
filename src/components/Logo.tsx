@@ -1,7 +1,7 @@
 import IconBolt from "$tabler_icons/bolt.tsx";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 
-export function Logo(): VNode {
+export function Logo(): JSX.Element {
   // <img
   //   class="my-6"
   //   src="/logo.svg"

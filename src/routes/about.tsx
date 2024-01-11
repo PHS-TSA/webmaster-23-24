@@ -1,11 +1,11 @@
 import { Head } from "$fresh/runtime.ts";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 
 const pageTitle = "About";
 
-export default function About(): VNode {
+export default function About(): JSX.Element {
   return (
     <>
       <Head>

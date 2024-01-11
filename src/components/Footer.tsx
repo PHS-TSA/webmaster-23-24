@@ -3,7 +3,7 @@ import IconBrandReact from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwind from "$tabler_icons/brand-tailwind.tsx";
 import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
 import {
   type MenuProps,
@@ -40,7 +40,7 @@ const icons = [
   },
 ] as const;
 
-export function Footer({ class: classes = tw`` }: FooterProps): VNode {
+export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   return (
     <footer
       class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black md:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${classes}`}
@@ -67,7 +67,7 @@ export function Footer({ class: classes = tw`` }: FooterProps): VNode {
   );
 }
 
-function Menu(props: MenuProps): VNode {
+function Menu(props: MenuProps): JSX.Element {
   try {
     const item = menuPropsSchemaRequired.parse(props);
 
@@ -93,11 +93,11 @@ function Menu(props: MenuProps): VNode {
  * @param {Object} props - The configuration for this component.
  * @param {string} props.url - The URL that should be linked.
  * @param {string} props.title - The title of the link.
- * @returns {VNode} The rendered menu header.
+ * @returns {JSX.Element} The rendered menu header.
  *
  * @todo Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said color-switch.
  */
-function RenderMenuHeader({ url, title }: MenuProps): VNode {
+function RenderMenuHeader({ url, title }: MenuProps): JSX.Element {
   return (
     <a class="py-4 pr-4 font-bold dark:text-white" href={url}>
       {title}
@@ -105,7 +105,7 @@ function RenderMenuHeader({ url, title }: MenuProps): VNode {
   );
 }
 
-function RenderMenuItems(item: MenuPropsRequired): VNode {
+function RenderMenuItems(item: MenuPropsRequired): JSX.Element {
   return (
     <ul class="mt-2">
       {item.items.map((child) => (
@@ -122,7 +122,7 @@ function RenderMenuItems(item: MenuPropsRequired): VNode {
   );
 }
 
-function Who(): VNode {
+function Who(): JSX.Element {
   return (
     <>
       <div class="flex items-center gap-1">
@@ -139,7 +139,7 @@ function Who(): VNode {
   );
 }
 
-function With(): VNode {
+function With(): JSX.Element {
   return (
     <>
       <div class="text-xs max-w-fit text-end">Made with</div>

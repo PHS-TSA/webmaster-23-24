@@ -1,7 +1,7 @@
 import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
 import { Transition } from "@headlessui/react";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import {
   type MenuProps,
   menuPropsSchemaRequired,
@@ -26,7 +26,7 @@ function makeBorderStyle(active: boolean): string {
 
 const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`;
 
-export function HeaderMenu(props: MenuProps): VNode {
+export function HeaderMenu(props: MenuProps): JSX.Element {
   try {
     const { items, title, active, url } = menuPropsSchemaRequired.parse(props);
 

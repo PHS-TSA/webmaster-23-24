@@ -1,11 +1,11 @@
 import { Head } from "$fresh/runtime.ts";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 
 const pageTitle = "404 — Page not found";
 
-export default function Error404(): VNode {
+export default function Error404(): JSX.Element {
   return (
     <>
       <Head>

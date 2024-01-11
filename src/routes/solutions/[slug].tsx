@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { render } from "$gfm";
 import IconSolarPanel from "$tabler_icons/solar-panel.tsx";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
 import { type SolutionPage, solutions } from "../../utils/solutions.ts";
@@ -21,7 +21,9 @@ export const handler: Handlers<SolutionProps> = {
   },
 };
 
-export default function Solution({ data }: PageProps<SolutionProps>): VNode {
+export default function Solution({
+  data,
+}: PageProps<SolutionProps>): JSX.Element {
   const pageTitle = data.page.data.title;
   const description = data.page.data.description;
 

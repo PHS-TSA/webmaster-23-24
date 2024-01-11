@@ -1,4 +1,4 @@
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import {
   description as defaultDescription,
   siteName as defaultSiteName,
@@ -13,7 +13,7 @@ export interface MetaProps {
 export function Meta({
   title = defaultSiteName,
   description = defaultDescription,
-}: MetaProps): VNode {
+}: MetaProps): JSX.Element {
   return (
     <>
       <Title>{title}</Title>

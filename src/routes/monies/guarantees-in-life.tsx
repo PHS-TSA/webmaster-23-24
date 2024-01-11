@@ -1,11 +1,11 @@
 import { Head } from "$fresh/runtime.ts";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
 
 const pageTitle = "Death. And Taxes.";
 
-export default function Taxes(): VNode {
+export default function Taxes(): JSX.Element {
   return (
     <>
       <Head>

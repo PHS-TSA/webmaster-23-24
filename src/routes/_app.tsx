@@ -1,6 +1,6 @@
 import { Head, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { description } from "../site.ts";
 
 const metas = (
@@ -43,7 +43,7 @@ const metas = (
   </>
 );
 
-export default function App({ Component }: PageProps): VNode {
+export default function App({ Component }: PageProps): JSX.Element {
   return (
     <html lang="en-US">
       <Head>

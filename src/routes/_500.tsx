@@ -1,11 +1,11 @@
 import { Head } from "$fresh/runtime.ts";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 
 const pageTitle = "500 — Internal Server Error";
 
-export default function Error500(): VNode {
+export default function Error500(): JSX.Element {
   return (
     <>
       <Head>

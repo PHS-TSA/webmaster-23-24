@@ -1,5 +1,5 @@
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
-import type { VNode } from "preact";
+import type { JSX } from "preact";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import { menus } from "../utils/site-organization.ts";
@@ -8,7 +8,7 @@ export interface HeaderProps {
   readonly active: string;
 }
 
-export function Header({ active }: HeaderProps): VNode {
+export function Header({ active }: HeaderProps): JSX.Element {
   return (
     <header class="max-w-screen-xlg flex w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
       <HomeLink />
@@ -28,7 +28,7 @@ export function Header({ active }: HeaderProps): VNode {
   );
 }
 
-function HomeLink(): VNode {
+function HomeLink(): JSX.Element {
   return (
     <a
       class="flex flex-1 items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
