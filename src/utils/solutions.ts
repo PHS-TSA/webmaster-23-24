@@ -26,7 +26,9 @@ const solutionPageSchema = z
 const solutionPagesSchema = solutionPageSchema.optional().array().readonly();
 
 const solutionPagesFilteredSchema = solutionPagesSchema.transform((val) =>
-  val.filter((val): val is SolutionPage => val !== null),
+  val.filter(
+    (val: SolutionPage | undefined): val is SolutionPage => val !== undefined,
+  ),
 );
 
 const solutionPagesPromiseSchema = z.promise(solutionPagesFilteredSchema);
