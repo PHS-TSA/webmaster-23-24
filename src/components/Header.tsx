@@ -16,10 +16,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
         {menus.map((menu) => {
           return (
             <li key={menu.title} class="flex h-8 items-end">
-              <HeaderMenu
-                {...menu}
-                active={active === menu.url || active.startsWith(menu.url)}
-              />
+              <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
             </li>
           );
         })}
