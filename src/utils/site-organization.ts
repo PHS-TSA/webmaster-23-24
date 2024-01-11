@@ -25,14 +25,18 @@ export const menus = [
 export interface Menu {
   readonly title: string;
   readonly url: `${string}/`;
-  readonly items?:
-    | {
-        readonly href: `${string}/`;
-        readonly name: string;
-      }[]
-    | undefined;
+  readonly items?: readonly MenuItem[] | undefined;
 }
 
-export function hasItems(menu: Menu): menu is Required<Menu> {
-  return menu.items !== undefined;
+export interface MenuItem {
+  readonly href: `${string}/`;
+  readonly name: string;
+}
+
+export interface MenuWithItems extends Menu {
+  readonly items: readonly [MenuItem, ...(readonly MenuItem[])];
+}
+
+export function hasItems(menu: Menu): menu is MenuWithItems {
+  return (menu.items?.length ?? 0) > 0;
 }

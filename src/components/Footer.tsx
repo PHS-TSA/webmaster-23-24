@@ -5,12 +5,13 @@ import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
-import { type Menu, hasItems, menus } from "../utils/site-organization.ts";
+import {
+  type Menu,
+  type MenuWithItems,
+  hasItems,
+  menus,
+} from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
-
-export interface FooterProps {
-  readonly class?: string;
-}
 
 const icons = [
   {
@@ -34,6 +35,10 @@ const icons = [
     name: "Tailwind",
   },
 ] as const;
+
+export interface FooterProps {
+  readonly class?: string;
+}
 
 export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   return (
@@ -67,7 +72,7 @@ function RenderMenu(props: Menu): JSX.Element {
     <>
       {/* TODO(lishaduck): Render these in one section once we have multiple. */}
       <RenderMenuHeader {...props} />
-      {hasItems(props) && <RenderMenuItems {...props} items={props.items} />}
+      {hasItems(props) && <RenderMenuItems {...props} />}
     </>
   );
 }
@@ -90,16 +95,14 @@ function RenderMenuHeader({ url, title }: Menu): JSX.Element {
   );
 }
 
-function RenderMenuItems(
-  item: Required<Menu> & Pick<Menu, "items">,
-): JSX.Element {
+function RenderMenuItems({ items, url }: MenuWithItems): JSX.Element {
   return (
     <ul class="mt-2">
-      {item.items?.map((child) => (
+      {items.map((child) => (
         <li class="mt-2" key={child.name}>
           <a
             class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-            href={`${item.url}${child.href}`}
+            href={`${url}${child.href}`}
           >
             {child.name}
           </a>
