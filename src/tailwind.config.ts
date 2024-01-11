@@ -7,8 +7,10 @@ export default {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "footer-desktop": "1fr repeat(3, auto)",
-        "footer-mobile": "auto 1fr auto",
+        "footer-desktop": "1fr repeat(2, auto)",
+        "footer-mobile": "1fr auto",
+        "footer-links": "repeat(3, auto)",
+        "auto-2": "repeat(2,auto)",
       },
       gridTemplateRows: {
         "footer-mobile": "repeat(2, auto)",
