@@ -47,7 +47,7 @@ export function HeaderMenu(props: MenuProps): JSX.Element {
           leaveTo="opacity-0 translate-y-1"
         >
           <Popover.Panel class="max-w-full">
-            <div class="absolute left-0 right-auto z-10 grid min-w-12 max-w-fit origin-top-right grid-flow-row divide-y divide-gray-200 rounded-md bg-gray-50 shadow-lg ring-1 ring-black/5 focus:outline-none sm:left-auto sm:right-0">
+            <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row divide-y divide-gray-200 dark:divide-gray-800 rounded-md bg-gray-50 dark:bg-gray-950 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none sm:left-auto sm:right-0">
               {items.map((link) => (
                 <a
                   href={`${url}${link.href}`}
