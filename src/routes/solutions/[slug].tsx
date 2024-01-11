@@ -49,7 +49,7 @@ export default function Solution({
           // biome-ignore lint/security/noDangerouslySetInnerHtml: required for markdown w/out a custom renderer
           dangerouslySetInnerHTML={{
             // TODO(lishaduck): Write a custom Preact renderer to remove the need for dangerouslySetInnerHTML and allow fixing some CSS.
-            __html: render(data?.page.markdown ?? ""),
+            __html: render(data.page.markdown ?? ""),
           }}
         />
       </main>
