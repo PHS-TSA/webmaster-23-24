@@ -1,12 +1,12 @@
 import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import type { VNode } from "preact";
 import {
   type MenuProps,
   menuPropsSchemaRequired,
 } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
-import { Transitions } from "./Headless.tsx";
 
 function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
@@ -38,7 +38,7 @@ export function HeaderMenu(props: MenuProps): VNode {
           </span>
         </Popover.Button>
 
-        <Transitions
+        <Transition
           enter="transition ease-out duration-200"
           enterFrom="opacity-0 translate-y-1"
           enterTo="opacity-100 translate-y-0"
@@ -59,7 +59,7 @@ export function HeaderMenu(props: MenuProps): VNode {
               ))}
             </div>
           </Popover.Panel>
-        </Transitions>
+        </Transition>
       </Popover>
     );
   } catch (_) {

@@ -11,7 +11,6 @@ import * as $index from "./routes/index.tsx";
 import * as $monies_guarantees_in_life from "./routes/monies/guarantees-in-life.tsx";
 import * as $solutions_slug_ from "./routes/solutions/[slug].tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
-import * as $Headless from "./islands/Headless.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -27,7 +26,6 @@ const manifest = {
   },
   islands: {
     "./islands/HeaderMenu.tsx": $HeaderMenu,
-    "./islands/Headless.tsx": $Headless,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
