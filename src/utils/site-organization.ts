@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 // TODO(lishaduck): generate from  `solutions`.
 export const menus = [
   {
@@ -22,57 +20,19 @@ export const menus = [
     title: "About",
     url: "/about/",
   },
-] as const satisfies MenusList;
+] as const satisfies Menu[];
 
-export type MenuProps = z.infer<typeof menuPropsTypeSchema>;
-export type MenuPropsRequired = z.infer<typeof menuPropsSchemaRequired>;
-type MenusList = z.infer<typeof menuPropsListTypeSchema>;
-export type MenuItem = z.infer<typeof menuItemSchema>;
+export interface Menu {
+  readonly title: string;
+  readonly url: `${string}/`;
+  readonly items?:
+    | {
+        readonly href: `${string}/`;
+        readonly name: string;
+      }[]
+    | undefined;
+}
 
-const menuItemSchema = z
-  .object({
-    href: z.custom<`${string}/`>(
-      (val) => z.string().regex(/.*\/$/).safeParse(val).success,
-    ),
-    name: z.string(),
-  })
-  .readonly();
-
-/**
- * Checks if the menu has items.
- *
- * Always call `.readonly()`!
- * It has to go last, and this allows customizing it before doing so.
- *
- * @param menu The menu to check.
- * @returns True if the menu has items, false otherwise.
- */
-export const menuPropsSchema = z.object({
-  title: z.string(),
-  active: z.boolean(),
-  items: menuItemSchema.array().readonly().optional(),
-  url: z.custom<`${string}/`>(
-    (val) =>
-      z
-        .string()
-        .regex(/^\/.*\/$/)
-        .safeParse(val).success,
-  ),
-});
-
-/**
- * A variant with `.required().readonly()` appended.
- */
-export const menuPropsSchemaRequired = menuPropsSchema.required().readonly();
-
-/**
- * Types can't call functions, so this const has to be made.
- *
- * Unlike the `-required` variant, this only `.readonly()`s.
- */
-const menuPropsTypeSchema = menuPropsSchema.readonly();
-const menuPropsListTypeSchema = menuPropsSchema
-  .omit({ active: true })
-  .readonly()
-  .array()
-  .readonly();
+export function hasItems(menu: Menu): menu is Required<Menu> {
+  return menu.items !== undefined;
+}

@@ -5,12 +5,7 @@ import IconLemon2 from "$tabler_icons/lemon-2.tsx";
 import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
-import {
-  type MenuProps,
-  type MenuPropsRequired,
-  menuPropsSchemaRequired,
-  menus,
-} from "../utils/site-organization.ts";
+import { type Menu, hasItems, menus } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 export interface FooterProps {
@@ -53,7 +48,7 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
         {menus.map((item) => (
           // TODO(lishaduck): fix CSS
           <section class="col-span-1">
-            <Menu {...item} active={true} key={item.title} />
+            <RenderMenu {...item} key={item.title} />
           </section>
         ))}
       </div>
@@ -67,24 +62,14 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   );
 }
 
-function Menu(props: MenuProps): JSX.Element {
-  try {
-    const item = menuPropsSchemaRequired.parse(props);
-
-    return (
-      <>
-        <RenderMenuHeader {...item} />
-        <RenderMenuItems {...item} />
-      </>
-    );
-  } catch (_) {
-    return (
-      <>
-        {/* TODO(lishaduck): Render these in one section once we have multiple. */}
-        <RenderMenuHeader {...props} />
-      </>
-    );
-  }
+function RenderMenu(props: Menu): JSX.Element {
+  return (
+    <>
+      {/* TODO(lishaduck): Render these in one section once we have multiple. */}
+      <RenderMenuHeader {...props} />
+      {hasItems(props) && <RenderMenuItems {...props} items={props.items} />}
+    </>
+  );
 }
 
 /**
@@ -97,7 +82,7 @@ function Menu(props: MenuProps): JSX.Element {
  *
  * @todo Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said color-switch.
  */
-function RenderMenuHeader({ url, title }: MenuProps): JSX.Element {
+function RenderMenuHeader({ url, title }: Menu): JSX.Element {
   return (
     <a class="py-4 pr-4 font-bold dark:text-white" href={url}>
       {title}
@@ -105,10 +90,12 @@ function RenderMenuHeader({ url, title }: MenuProps): JSX.Element {
   );
 }
 
-function RenderMenuItems(item: MenuPropsRequired): JSX.Element {
+function RenderMenuItems(
+  item: Required<Menu> & Pick<Menu, "items">,
+): JSX.Element {
   return (
     <ul class="mt-2">
-      {item.items.map((child) => (
+      {item.items?.map((child) => (
         <li class="mt-2" key={child.name}>
           <a
             class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
