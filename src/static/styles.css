@@ -24,3 +24,12 @@
  * your stylesheet by default.
  */
 @tailwind variants;
+
+/*
+ * Add dark mode to the anchor links.
+ * Temporary, keep until a custom preact renderer.
+ */
+.prose
+  :where(a.anchor):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply fill-white;
+}
