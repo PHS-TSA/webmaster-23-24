@@ -22,10 +22,11 @@ export const menus = [
     title: "About",
     url: "/about/",
   },
-] as const;
+] as const satisfies MenusList;
 
 export type MenuProps = z.infer<typeof menuPropsTypeSchema>;
 export type MenuPropsRequired = z.infer<typeof menuPropsSchemaRequired>;
+type MenusList = z.infer<typeof menuPropsListTypeSchema>;
 export type MenuItem = z.infer<typeof menuItemSchema>;
 
 const menuItemSchema = z
@@ -70,3 +71,8 @@ export const menuPropsSchemaRequired = menuPropsSchema.required().readonly();
  * Unlike the `-required` variant, this only `.readonly()`s.
  */
 const menuPropsTypeSchema = menuPropsSchema.readonly();
+const menuPropsListTypeSchema = menuPropsSchema
+  .omit({ active: true })
+  .readonly()
+  .array()
+  .readonly();
