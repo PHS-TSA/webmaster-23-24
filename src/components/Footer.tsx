@@ -1,6 +1,7 @@
 import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
 import {
+  type Icon,
   IconBrandDeno,
   IconBrandReact,
   IconBrandTailwind,
@@ -36,7 +37,13 @@ const icons = [
     href: "https://tailwindcss.com/",
     name: "Tailwind",
   },
-] as const;
+] as const satisfies Tool[];
+
+interface Tool {
+  readonly href: string;
+  readonly name: string;
+  readonly icon: Icon;
+}
 
 export interface FooterProps {
   readonly class?: string;
