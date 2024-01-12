@@ -62,7 +62,6 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
       <div class="grid grid-cols-footer-links gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
         {menus.map(
           (item: Menu): JSX.Element => (
-            // TODO(lishaduck): fix CSS
             <section class="col-span-1">
               <RenderMenu {...item} key={item.title} />
             </section>
@@ -82,7 +81,6 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
 function RenderMenu(props: Menu): JSX.Element {
   return (
     <>
-      {/* TODO(lishaduck): Render these in one section once we have multiple. */}
       <RenderMenuHeader {...props} />
       {hasItems(props) && <RenderMenuItems {...props} />}
     </>
@@ -96,9 +94,9 @@ function RenderMenu(props: Menu): JSX.Element {
  * @param {string} props.url - The URL that should be linked.
  * @param {string} props.title - The title of the link.
  * @returns {JSX.Element} The rendered menu header.
- *
- * @todo Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said color-switch.
  */
+// TODO(lishaduck): Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said styling.
+// TODO(lishaduck): Render these all in one section once we have multiple.
 function RenderMenuHeader({ url, title }: Menu): JSX.Element {
   return (
     <a class="py-4 pr-4 font-bold dark:text-white" href={url}>
