@@ -4,9 +4,7 @@ import { z } from "zod";
 
 export type SolutionPage = z.infer<typeof solutionPageSchema>;
 export type SolutionData = z.infer<typeof solutionDataSchema>;
-export type SolutionPages = z.infer<typeof solutionPagesFilteredSchema>;
-type MaybeSolutionPages = z.infer<typeof solutionPagesSchema>;
-type MaybeSolutionPage = z.infer<typeof solutionPageNullableSchema>;
+export type SolutionPages = z.infer<typeof solutionPagesSchema>;
 
 const solutionDataSchema = z
   .object({
@@ -27,21 +25,23 @@ const solutionPageSchema = z
 
 const solutionPageNullableSchema = solutionPageSchema.optional();
 
-const solutionPagesSchema = solutionPageNullableSchema.array().readonly();
+const solutionPagesNullableSchema = solutionPageNullableSchema
+  .array()
+  .readonly();
 
-const solutionPagesFilteredSchema = solutionPagesSchema.transform(
-  (val: MaybeSolutionPages): readonly SolutionPage[] =>
+const solutionPagesSchema = solutionPagesNullableSchema.transform(
+  (val: z.infer<typeof solutionPagesNullableSchema>): readonly SolutionPage[] =>
     val.filter(
-      (val: MaybeSolutionPage): val is SolutionPage => val !== undefined,
+      (val: z.infer<typeof solutionPageNullableSchema>): val is SolutionPage =>
+        val !== undefined,
     ),
 );
-
-const solutionPagesPromiseSchema = z.promise(solutionPagesFilteredSchema);
 
 const dir = "src/content";
 export const solutions = await getSolutions();
 
 /** Get all solutions. */
+// biome-ignore lint/nursery/useAwait: <explanation>
 export async function getSolutions(): Promise<SolutionPages> {
   const files = Deno.readDir(dir);
   const promises = [];
@@ -50,7 +50,7 @@ export async function getSolutions(): Promise<SolutionPages> {
     promises.push(getSolution(slug));
   }
 
-  return await solutionPagesPromiseSchema.parse(Promise.all(promises));
+  return z.promise(solutionPagesSchema).parse(Promise.all(promises));
 }
 
 /** Get a solution. */
