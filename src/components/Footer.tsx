@@ -10,6 +10,7 @@ import {
 } from "../utils/icons.ts";
 import {
   type Menu,
+  type MenuItem,
   type MenuWithItems,
   hasItems,
   menus,
@@ -59,12 +60,14 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
       </div>
 
       <div class="grid grid-cols-footer-links gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
-        {menus.map((item) => (
-          // TODO(lishaduck): fix CSS
-          <section class="col-span-1">
-            <RenderMenu {...item} key={item.title} />
-          </section>
-        ))}
+        {menus.map(
+          (item: Menu): JSX.Element => (
+            // TODO(lishaduck): fix CSS
+            <section class="col-span-1">
+              <RenderMenu {...item} key={item.title} />
+            </section>
+          ),
+        )}
       </div>
 
       <div
@@ -107,16 +110,18 @@ function RenderMenuHeader({ url, title }: Menu): JSX.Element {
 function RenderMenuItems({ items, url }: MenuWithItems): JSX.Element {
   return (
     <ul class="mt-2">
-      {items.map((child) => (
-        <li class="mt-2" key={child.name}>
-          <a
-            class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-            href={`${url}${child.href}`}
-          >
-            {child.name}
-          </a>
-        </li>
-      ))}
+      {items.map(
+        (child: MenuItem): JSX.Element => (
+          <li class="mt-2" key={child.name}>
+            <a
+              class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              href={`${url}${child.href}`}
+            >
+              {child.name}
+            </a>
+          </li>
+        ),
+      )}
     </ul>
   );
 }
@@ -143,16 +148,18 @@ function With(): JSX.Element {
     <>
       <div class="text-xs max-w-fit text-end">Made with</div>
       <div class="grid grid-cols-auto-2 justify-end max-w-fit">
-        {icons.map((tool) => (
-          <a
-            href={tool.href}
-            class="m-1 size-6 inline-block hover:text-black dark:hover:text-white max-w-fit"
-            title={tool.name}
-            key={tool.name}
-          >
-            <tool.icon aria-hidden="true" class="size-6" />
-          </a>
-        ))}
+        {icons.map(
+          (tool: Tool): JSX.Element => (
+            <a
+              href={tool.href}
+              class="m-1 size-6 inline-block hover:text-black dark:hover:text-white max-w-fit"
+              title={tool.name}
+              key={tool.name}
+            >
+              <tool.icon aria-hidden="true" class="size-6" />
+            </a>
+          ),
+        )}
       </div>
     </>
   );

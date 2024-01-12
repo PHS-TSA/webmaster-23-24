@@ -5,6 +5,8 @@ import { z } from "zod";
 export type SolutionPage = z.infer<typeof solutionPageSchema>;
 export type SolutionData = z.infer<typeof solutionDataSchema>;
 export type SolutionPages = z.infer<typeof solutionPagesFilteredSchema>;
+type MaybeSolutionPages = z.infer<typeof solutionPagesSchema>;
+type MaybeSolutionPage = z.infer<typeof solutionPageNullableSchema>;
 
 const solutionDataSchema = z
   .object({
@@ -23,12 +25,15 @@ const solutionPageSchema = z
   .strict()
   .readonly();
 
-const solutionPagesSchema = solutionPageSchema.optional().array().readonly();
+const solutionPageNullableSchema = solutionPageSchema.optional();
 
-const solutionPagesFilteredSchema = solutionPagesSchema.transform((val) =>
-  val.filter(
-    (val: SolutionPage | undefined): val is SolutionPage => val !== undefined,
-  ),
+const solutionPagesSchema = solutionPageNullableSchema.array().readonly();
+
+const solutionPagesFilteredSchema = solutionPagesSchema.transform(
+  (val: MaybeSolutionPages): readonly SolutionPage[] =>
+    val.filter(
+      (val: MaybeSolutionPage): val is SolutionPage => val !== undefined,
+    ),
 );
 
 const solutionPagesPromiseSchema = z.promise(solutionPagesFilteredSchema);

@@ -2,6 +2,7 @@ import { Popover } from "@headlessui/react";
 import { Transition } from "@headlessui/react";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
+import type { Menu, MenuItem } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 function makeTextStyle(active: boolean): string {
@@ -57,15 +58,17 @@ export function HeaderMenu({
       >
         <Popover.Panel class="max-w-full">
           <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row divide-y divide-gray-200 dark:divide-gray-800 rounded-md bg-gray-50 dark:bg-gray-950 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none sm:left-auto sm:right-0">
-            {items.map((link) => (
-              <a
-                href={`${url}${link.href}`}
-                key={link}
-                class={`mx-4 my-0.5 ${makeTextStyle(false)}`}
-              >
-                {link.name}
-              </a>
-            ))}
+            {items.map(
+              (link: MenuItem): JSX.Element => (
+                <a
+                  href={`${url}${link.href}`}
+                  key={link}
+                  class={`mx-4 my-0.5 ${makeTextStyle(false)}`}
+                >
+                  {link.name}
+                </a>
+              ),
+            )}
           </div>
         </Popover.Panel>
       </Transition>

@@ -7,7 +7,7 @@ const CONN_INFO: ServeHandlerInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },
 };
 
-Deno.test("HTTP assert test.", async (t): Promise<void> => {
+Deno.test("HTTP assert test.", async (t: Deno.TestContext): Promise<void> => {
   const handler = await createHandler(manifest, config);
 
   await t.step("#1 GET /about/", async (): Promise<void> => {

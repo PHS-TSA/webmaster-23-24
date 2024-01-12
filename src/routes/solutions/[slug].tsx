@@ -4,6 +4,7 @@ import { render } from "$gfm";
 import type { JSX } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
+import type { FreshContextHelper } from "../../utils/handlers.ts";
 import { IconSolarPanel } from "../../utils/icons.ts";
 import { type SolutionPage, solutions } from "../../utils/solutions.ts";
 
@@ -12,8 +13,13 @@ export interface SolutionProps {
 }
 
 export const handler: Handlers<SolutionProps> = {
-  GET(_req, ctx): Response | Promise<Response> {
-    const solution = solutions.find((page) => page.slug === ctx.params["slug"]);
+  GET(
+    _req: Request,
+    ctx: FreshContextHelper<SolutionProps>,
+  ): Response | Promise<Response> {
+    const solution = solutions.find(
+      (page: SolutionPage): boolean => page?.slug === ctx.params["slug"],
+    );
 
     return solution === undefined
       ? ctx.renderNotFound()

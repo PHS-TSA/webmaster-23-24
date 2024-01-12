@@ -25,7 +25,7 @@ export const menus = [
 export interface Menu {
   readonly title: string;
   readonly url: `${string}/`;
-  readonly items?: readonly MenuItem[] | undefined;
+  readonly items?: readonly MenuItem[];
 }
 
 export interface MenuItem {

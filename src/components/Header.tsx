@@ -2,7 +2,7 @@ import type { JSX } from "preact";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import { IconSolarPanel2 } from "../utils/icons.ts";
-import { menus } from "../utils/site-organization.ts";
+import { type Menu, menus } from "../utils/site-organization.ts";
 
 export interface HeaderProps {
   readonly active: string;
@@ -13,7 +13,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
     <header class="max-w-screen-xlg flex w-full flex-col gap-4 bg-white px-8 py-6 sm:flex-row dark:bg-black">
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
-        {menus.map((menu) => {
+        {menus.map((menu: Menu) => {
           return (
             <li key={menu.title} class="flex h-8 items-end">
               <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
