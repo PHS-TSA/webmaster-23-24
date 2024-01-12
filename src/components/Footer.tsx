@@ -1,10 +1,12 @@
-import IconBrandDeno from "$tabler_icons/brand-deno.tsx";
-import IconBrandReact from "$tabler_icons/brand-react.tsx";
-import IconBrandTailwind from "$tabler_icons/brand-tailwind.tsx";
-import IconLemon2 from "$tabler_icons/lemon-2.tsx";
-import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
+import {
+  IconBrandDeno,
+  IconBrandReact,
+  IconBrandTailwind,
+  IconLemon2,
+  IconSolarPanel2,
+} from "../utils/icons.ts";
 import {
   type Menu,
   type MenuWithItems,

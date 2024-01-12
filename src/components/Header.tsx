@@ -1,7 +1,7 @@
-import IconSolarPanel2 from "$tabler_icons/solar-panel-2.tsx";
 import type { JSX } from "preact";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
+import { IconSolarPanel2 } from "../utils/icons.ts";
 import { menus } from "../utils/site-organization.ts";
 
 export interface HeaderProps {

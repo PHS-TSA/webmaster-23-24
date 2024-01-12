@@ -1,10 +1,10 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { render } from "$gfm";
-import IconSolarPanel from "$tabler_icons/solar-panel.tsx";
 import type { JSX } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
+import { IconSolarPanel } from "../../utils/icons.ts";
 import { type SolutionPage, solutions } from "../../utils/solutions.ts";
 
 export interface SolutionProps {
@@ -35,12 +35,12 @@ export default function Solution({
       <main>
         <Cover
           title={pageTitle}
-          icon={() => (
+          icon={
             <IconSolarPanel
               class="size-52 text-yellow-200 dark:text-yellow-400"
               aria-hidden="true"
             />
-          )}
+          }
         >
           <p class="my-4 dark:text-white">{description}</p>
         </Cover>

@@ -1,8 +1,7 @@
-import IconChevronDown from "$tabler_icons/chevron-down.tsx";
 import { Popover } from "@headlessui/react";
 import { Transition } from "@headlessui/react";
 import type { JSX } from "preact";
-import type { Menu } from "../utils/site-organization.ts";
+import { IconChevronDown } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 
 function makeTextStyle(active: boolean): string {

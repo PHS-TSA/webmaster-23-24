@@ -1,5 +1,5 @@
-import IconBolt from "$tabler_icons/bolt.tsx";
 import type { JSX } from "preact";
+import { IconBolt } from "../utils/icons.ts";
 
 export function Logo(): JSX.Element {
   // <img
