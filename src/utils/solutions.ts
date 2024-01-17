@@ -41,7 +41,6 @@ const dir = "src/content";
 export const solutions = await getSolutions();
 
 /** Get all solutions. */
-// biome-ignore lint/nursery/useAwait: <explanation>
 export async function getSolutions(): Promise<SolutionPages> {
   const files = Deno.readDir(dir);
   const promises = [];
@@ -49,8 +48,9 @@ export async function getSolutions(): Promise<SolutionPages> {
     const slug = file.name.replace(".md", "");
     promises.push(getSolution(slug));
   }
+  const solutions = await Promise.all(promises);
 
-  return z.promise(solutionPagesSchema).parse(Promise.all(promises));
+  return solutionPagesSchema.parse(solutions);
 }
 
 /** Get a solution. */
