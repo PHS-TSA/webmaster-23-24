@@ -36,7 +36,3 @@ export interface MenuItem {
 export interface MenuWithItems extends Menu {
   readonly items: readonly [MenuItem, ...(readonly MenuItem[])];
 }
-
-export function hasItems(menu: Menu): menu is MenuWithItems {
-  return (menu.items?.length ?? 0) > 0;
-}

@@ -1,9 +1,9 @@
-import { Popover } from "@headlessui/react";
-import { Transition } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
 import type { Menu, MenuItem } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
+import { hasItems } from "../utils/type-helpers.ts";
 
 function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
@@ -27,24 +27,14 @@ export interface HeaderMenuProps extends Menu {
   active: boolean;
 }
 
-export function HeaderMenu({
-  items,
-  title,
-  active,
-  url,
-}: HeaderMenuProps): JSX.Element {
-  return items === undefined ? (
-    <a
-      href={url}
-      class={`h-8 ${makeTextStyle(active)} ${makeBorderStyle(active)}`}
-    >
-      {title}
-    </a>
-  ) : (
+export function HeaderMenu(props: HeaderMenuProps): JSX.Element {
+  return hasItems(props) ? (
     <Popover class="relative">
-      <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
-        <span class={`flex flex-row ${makeTextStyle(active)}`}>
-          {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
+      <Popover.Button
+        class={`h-8 ${prettyFocus} ${makeBorderStyle(props.active)}`}
+      >
+        <span class={`flex flex-row ${makeTextStyle(props.active)}`}>
+          {props.title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
         </span>
       </Popover.Button>
 
@@ -58,10 +48,10 @@ export function HeaderMenu({
       >
         <Popover.Panel class="max-w-full">
           <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row divide-y divide-gray-200 dark:divide-gray-800 rounded-md bg-gray-50 dark:bg-gray-950 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none sm:left-auto sm:right-0">
-            {items.map(
+            {props.items.map(
               (link: MenuItem): JSX.Element => (
                 <a
-                  href={`${url}${link.href}`}
+                  href={`${props.url}${link.href}`}
                   key={link}
                   class={`mx-4 my-0.5 ${makeTextStyle(false)}`}
                 >
@@ -73,5 +63,14 @@ export function HeaderMenu({
         </Popover.Panel>
       </Transition>
     </Popover>
+  ) : (
+    <a
+      href={props.url}
+      class={`h-8 ${makeTextStyle(props.active)} ${makeBorderStyle(
+        props.active,
+      )}`}
+    >
+      {props.title}
+    </a>
   );
 }

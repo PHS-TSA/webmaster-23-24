@@ -12,10 +12,10 @@ import {
   type Menu,
   type MenuItem,
   type MenuWithItems,
-  hasItems,
   menus,
 } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
+import { hasItems } from "../utils/type-helpers.ts";
 
 const icons = [
   {
