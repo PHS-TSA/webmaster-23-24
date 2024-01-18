@@ -31,5 +31,5 @@
  */
 .prose
   :where(a.anchor):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  @apply fill-white;
+  @apply dark:fill-white;
 }
