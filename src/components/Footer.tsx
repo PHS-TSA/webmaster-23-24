@@ -59,7 +59,7 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
         <Who />
       </div>
 
-      <div class="grid grid-cols-footer-links gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
+      <div class="grid grid-flow-col grid-rows-1 gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
         {menus.map(
           (item: Menu): JSX.Element => (
             <section class="col-span-1">
