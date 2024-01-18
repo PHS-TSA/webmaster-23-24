@@ -1,30 +1,9 @@
-// TODO(lishaduck): generate from  `solutions`.
-export const menus = [
-  {
-    title: "Going Green?",
-    url: "/green/",
-    items: [
-      { name: "Getting Started", href: "getting-started/" },
-      { name: "Programs", href: "programs/" },
-    ],
-  },
-  {
-    title: "Monies",
-    url: "/monies/",
-    items: [
-      { name: "Taxes", href: "guarantees-in-life/" },
-      { name: "Pricing", href: "pricing/" },
-    ],
-  },
-  {
-    title: "About",
-    url: "/about/",
-  },
-] as const satisfies Menu[];
+import { solutions } from "./solutions.ts";
+import { isKey } from "./type-helpers.ts";
 
 export interface Menu {
   readonly title: string;
-  readonly url: `${string}/`;
+  readonly url: `/${string}/`;
   readonly items?: readonly MenuItem[];
 }
 
@@ -34,5 +13,66 @@ export interface MenuItem {
 }
 
 export interface MenuWithItems extends Menu {
-  readonly items: readonly [MenuItem, ...(readonly MenuItem[])];
+  readonly items: readonly [MenuItem, ...MenuItem[]];
 }
+
+const extraMenus = [
+  {
+    title: "About",
+    url: "/about/",
+  },
+] as const satisfies Menu[];
+
+/**
+ * Convert the `solutions` into to `Menu`s based on the .category.
+ * Should also append the `extraMenus` to the end to add the about page and such.
+ *
+ * @returns The generated menus.
+ */
+
+function generateMenus(): Menu[] {
+  const categories = new Map<string, Menu>();
+
+  for (const solution of solutions) {
+    // If the category doesn't exist yet, create it
+    if (!categories.has(solution.data.category)) {
+      categories.set(solution.data.category, {
+        title: isKey(categoryMap, solution.data.category)
+          ? categoryMap[solution.data.category]
+          : solution.data.category,
+        url: "/solutions/",
+        items: [],
+      });
+    }
+
+    // Add the solution to the category's items
+    const category = categories.get(solution.data.category);
+    if (category !== undefined) {
+      categories.set(solution.data.category, {
+        ...category,
+        items: [
+          ...(category.items ?? []),
+          {
+            name: solution.data.title,
+            href: `${solution.slug}/`,
+          },
+        ],
+      });
+    }
+  }
+
+  for (const menu of extraMenus) {
+    categories.set(menu.title, menu);
+  }
+
+  return Array.from(categories.values());
+}
+
+const categoryMap = {
+  green: "Going Green?",
+  monies: "Monies",
+  about: "About",
+  solar: "Solar",
+} as const;
+
+export const menus = generateMenus();

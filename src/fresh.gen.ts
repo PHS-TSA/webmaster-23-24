@@ -8,7 +8,6 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $index from "./routes/index.tsx";
-import * as $monies_guarantees_in_life from "./routes/monies/guarantees-in-life.tsx";
 import * as $solutions_slug_ from "./routes/solutions/[slug].tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -21,7 +20,6 @@ const manifest = {
     "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
     "./routes/index.tsx": $index,
-    "./routes/monies/guarantees-in-life.tsx": $monies_guarantees_in_life,
     "./routes/solutions/[slug].tsx": $solutions_slug_,
   },
   islands: {

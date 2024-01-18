@@ -10,13 +10,14 @@ const solutionDataSchema = z
   .object({
     title: z.string(),
     description: z.string(),
+    category: z.string(),
   })
   .passthrough()
   .readonly();
 
 const solutionPageSchema = z
   .object({
-    slug: z.string(),
+    slug: z.string(), // The slug of the solution without a trailing slash.
     markdown: z.string(),
     data: solutionDataSchema,
   })
@@ -38,6 +39,8 @@ const solutionPagesSchema = solutionPagesNullableSchema.transform(
 );
 
 const dir = "src/content";
+const categorySort = ["green", "monies", "solar"];
+
 export const solutions = await getSolutions();
 
 /** Get all solutions. */
@@ -48,11 +51,15 @@ export async function getSolutions(): Promise<SolutionPages> {
     const slug = file.name.replace(".md", "");
     promises.push(getSolution(slug));
   }
-  const solutions = await Promise.all(promises);
+  const unparsedSolutions = await Promise.all(promises);
+  const solutions = solutionPagesSchema.parse(unparsedSolutions);
 
-  return solutionPagesSchema.parse(solutions);
+  return solutions.toSorted(
+    (a, b) =>
+      categorySort.indexOf(a.data.category) -
+      categorySort.indexOf(b.data.category),
+  );
 }
-
 /** Get a solution. */
 export async function getSolution(
   slug: string,
