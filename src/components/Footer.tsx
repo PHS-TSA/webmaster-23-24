@@ -95,11 +95,14 @@ function RenderMenu(props: Menu): JSX.Element {
  * @param {string} props.title - The title of the link.
  * @returns {JSX.Element} The rendered menu header.
  */
-// TODO(lishaduck): Fix css to have a subtle color-switch on hover and add a <Link> component to centralize said styling.
+// TODO(lishaduck): Add a <Link> component to centralize said styling.
 // TODO(lishaduck): Render these all in one section once we have multiple.
 function RenderMenuHeader({ url, title }: Menu): JSX.Element {
   return (
-    <a class="py-4 pr-4 font-bold dark:text-white" href={url}>
+    <a
+      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
+      href={url}
+    >
       {title}
     </a>
   );
