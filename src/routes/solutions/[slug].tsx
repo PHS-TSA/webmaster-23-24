@@ -54,7 +54,7 @@ export default function Solution({
           class="p-10 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: required for markdown w/out a custom renderer
           dangerouslySetInnerHTML={{
-            // TODO(lishaduck): Write a custom Preact renderer to remove the need for dangerouslySetInnerHTML and allow fixing some CSS.
+            // TODO(lishaduck): AOT compile this using MDX.
             __html: render(data.page.markdown ?? ""),
           }}
         />
