@@ -1,5 +1,4 @@
-import { extract } from "$std/front_matter/yaml.ts";
-import { join } from "$std/path/posix/join.ts";
+import type { ComponentType } from "preact";
 import { z } from "zod";
 
 export type SolutionPage = z.infer<typeof solutionPageSchema>;
@@ -18,7 +17,6 @@ const solutionDataSchema = z
 const solutionPageSchema = z
   .object({
     slug: z.string(), // The slug of the solution without a trailing slash.
-    markdown: z.string(),
     data: solutionDataSchema,
   })
   .strict()
@@ -38,6 +36,10 @@ const solutionPagesSchema = solutionPagesNullableSchema.transform(
     ),
 );
 
+export interface MDXFile extends SolutionData {
+  readonly default: ComponentType<{ readonly [x: string]: unknown }>;
+}
+
 const dir = "src/content";
 const categorySort = ["green", "monies", "solar"];
 
@@ -45,12 +47,13 @@ export const solutions = await getSolutions();
 
 /** Get all solutions. */
 export async function getSolutions(): Promise<SolutionPages> {
-  const files = Deno.readDir(dir);
   const promises = [];
-  for await (const file of files) {
-    const slug = file.name.replace(".md", "");
-    promises.push(getSolution(slug));
+  for await (const entry of Deno.readDir(dir)) {
+    if (entry.isFile && entry.name.match(/mdx?/)) {
+      promises.push(getSolution(entry.name.replace(/\.[^\.]*$/, "")));
+    }
   }
+
   const unparsedSolutions = await Promise.all(promises);
   const solutions = solutionPagesSchema.parse(unparsedSolutions);
 
@@ -60,17 +63,15 @@ export async function getSolutions(): Promise<SolutionPages> {
       categorySort.indexOf(b.data.category),
   );
 }
+
 /** Get a solution. */
 export async function getSolution(
   slug: string,
 ): Promise<SolutionPage | undefined> {
   try {
-    const markdown = await Deno.readTextFile(join(dir, `${slug}.md`));
-    const extracted = extract(markdown);
-    const frontmatter = solutionDataSchema.parse(extracted.attrs);
-    const solution = { frontmatter, body: extracted.body };
+    const file: MDXFile = await import(`../content/${slug}.js`);
 
-    return { markdown: solution.body, data: solution.frontmatter, slug };
+    return { data: file, slug };
   } catch (error) {
     console.error(error);
     return undefined;

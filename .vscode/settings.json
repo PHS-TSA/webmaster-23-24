@@ -17,5 +17,8 @@
   "tailwindCSS.experimental.classRegex": [
     "tw`([^`]*)",
     ["tw\\(([^\\)]*)\\)", "`([^`]*)`"]
-  ]
+  ],
+  "explorer.fileNesting.patterns": {
+    "*.mdx": "${capture}.js"
+  }
 }

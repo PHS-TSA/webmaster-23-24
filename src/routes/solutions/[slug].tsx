@@ -1,37 +1,38 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
-import { render } from "$gfm";
 import type { JSX } from "preact";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
 import type { FreshContextHelper } from "../../utils/handlers.ts";
 import { IconSolarPanel } from "../../utils/icons.ts";
-import { type SolutionPage, solutions } from "../../utils/solutions.ts";
+import type { MDXFile } from "../../utils/solutions.ts";
 
 export interface SolutionProps {
-  readonly page: SolutionPage;
+  readonly page: MDXFile;
 }
 
 export const handler: Handlers<SolutionProps> = {
-  GET(
+  async GET(
     _req: Request,
     ctx: FreshContextHelper<SolutionProps>,
-  ): Response | Promise<Response> {
-    const solution = solutions.find(
-      (page: SolutionPage): boolean => page?.slug === ctx.params["slug"],
-    );
+  ): Promise<Response> {
+    try {
+      const file: MDXFile = await import(
+        `../../content/${ctx.params["slug"]}.js`
+      );
 
-    return solution === undefined
-      ? ctx.renderNotFound()
-      : ctx.render({ page: solution });
+      return ctx.render({ page: file });
+    } catch {
+      return ctx.renderNotFound();
+    }
   },
 };
 
 export default function Solution({
   data,
 }: PageProps<SolutionProps>): JSX.Element {
-  const pageTitle = data.page.data.title;
-  const description = data.page.data.description;
+  const pageTitle = data.page.title;
+  const description = data.page.description;
 
   return (
     <>
@@ -50,14 +51,9 @@ export default function Solution({
         >
           <p class="my-4 dark:text-white">{description}</p>
         </Cover>
-        <article
-          class="p-10 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: required for markdown w/out a custom renderer
-          dangerouslySetInnerHTML={{
-            // TODO(lishaduck): AOT compile this using MDX.
-            __html: render(data.page.markdown ?? ""),
-          }}
-        />
+        <article class="p-10 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800">
+          <data.page.default />
+        </article>
       </main>
     </>
   );
