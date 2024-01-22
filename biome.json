@@ -34,7 +34,7 @@
   },
   "files": {
     "include": ["src/**/*.{ts,tsx}"],
-    "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json"]
+    "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json", "deno.json"]
   },
   "javascript": {
     "globals": ["Deno"]

@@ -21,22 +21,32 @@
     "biome:ci": "deno task biome ci . --error-on-warnings",
     "biome:check": "deno task biome check . --error-on-warnings"
   },
-  "exclude": ["**/_fresh/*", "src/fresh.gen.ts"],
+  "exclude": [
+    "**/_fresh/*",
+    "src/fresh.gen.ts"
+  ],
   "imports": {
-    "$std/": "https://deno.land/std@0.211.0/",
-    "$fresh/": "https://deno.land/x/fresh@1.6.1/",
+    "$std/": "https://deno.land/std@0.212.0/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "$tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
+    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts",
     "@headlessui/react": "https://esm.sh/v135/*@headlessui/react@1.7.17",
-    "@mdx-js/mdx": "npm:@mdx-js/mdx",
     "@preact/signals-core": "https://esm.sh/v135/@preact/signals-core@1.5.1",
     "@preact/signals": "https://esm.sh/v135/*@preact/signals@1.2.2",
     "preact": "https://esm.sh/v135/preact@10.19.3",
     "preact/": "https://esm.sh/v135/preact@10.19.3/",
+    "@mdx-js/mdx": "npm:@mdx-js/mdx@3.0.0",
     "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.10",
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:tailwindcss@3.4.1/",
-    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
-    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts"
+    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js"
+  },
+  "scopes": {
+    "https://esm.sh/v135/": {
+      "client-only": "https://esm.sh/v135/client-only@0.0.1",
+      "react-dom": "https://esm.sh/v135/preact@10.19.3/compat",
+      "react": "https://esm.sh/v135/preact@10.19.3/compat"
+    }
   },
   "compilerOptions": {
     "jsx": "react-jsx",
@@ -78,12 +88,5 @@
       "**/*.gen.ts",
       "src/content/"
     ]
-  },
-  "scopes": {
-    "https://esm.sh/v135/": {
-      "client-only": "https://esm.sh/v135/client-only@0.0.1",
-      "react-dom": "https://esm.sh/v135/preact@10.19.3/compat",
-      "react": "https://esm.sh/v135/preact@10.19.3/compat"
-    }
   }
 }
