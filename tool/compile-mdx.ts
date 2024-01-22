@@ -1,6 +1,10 @@
 import { dirname, fromFileUrl } from "$std/path/mod.ts";
 import { resolve } from "$std/path/resolve.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import { VFile } from "vfile";
+import { matter } from "vfile-matter";
 
 // Change the directory so that relative paths are based on the file, not the CWD.
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
@@ -32,11 +36,21 @@ async function getSolutions(): Promise<string[]> {
 
 async function getSolution(entry: Deno.DirEntry): Promise<string> {
   // Get the file.
-  const mdx: string = await Deno.readTextFile(resolve(contentDir, entry.name));
+  const mdx: VFile = new VFile(
+    await Deno.readTextFile(resolve(contentDir, entry.name)),
+  );
+
+  // Extract the frontmatter into `data.matter`.
+  matter(mdx);
 
   // Set MDX compilation options.
   const compileOptions: CompileOptions = {
     jsxImportSource: "preact",
+    remarkPlugins: [
+      remarkFrontmatter,
+      // @ts-expect-error: remarkMdxFrontmatter's types are off.
+      remarkMdxFrontmatter,
+    ],
   };
 
   // Compile the MDX into Preact JSX.

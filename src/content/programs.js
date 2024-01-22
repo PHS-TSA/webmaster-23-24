@@ -1,7 +1,9 @@
 import {Fragment as _Fragment, jsx as _jsx} from "preact/jsx-runtime";
-export const title = "Programs";
-export const description = "Green energy programs";
-export const category = "green";
+export const frontmatter = {
+  "title": "Programs",
+  "description": "Green energy programs",
+  "category": "green"
+};
 function _createMdxContent(props) {
   return _jsx(_Fragment, {});
 }

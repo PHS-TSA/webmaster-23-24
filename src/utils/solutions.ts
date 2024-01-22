@@ -36,8 +36,9 @@ const solutionPagesSchema = solutionPagesNullableSchema.transform(
     ),
 );
 
-export interface MDXFile extends SolutionData {
+export interface MDXFile {
   readonly default: ComponentType<{ readonly [x: string]: unknown }>;
+  readonly frontmatter: SolutionData;
 }
 
 const dir = "src/content";
@@ -71,7 +72,7 @@ export async function getSolution(
   try {
     const file: MDXFile = await import(`../content/${slug}.js`);
 
-    return { data: file, slug };
+    return { data: file.frontmatter, slug };
   } catch (error) {
     console.error(error);
     return undefined;

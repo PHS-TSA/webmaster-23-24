@@ -1,7 +1,9 @@
 import {Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs} from "preact/jsx-runtime";
-export const title = "Taxes";
-export const description = "\"There are only two guarantees in life: death and taxes.\"";
-export const category = "monies";
+export const frontmatter = {
+  "title": "Taxes",
+  "description": "\"There are only two guarantees in life: death and taxes.\"",
+  "category": "monies"
+};
 function _createMdxContent(props) {
   const _components = {
     h2: "h2",

@@ -1,7 +1,9 @@
 import {Fragment as _Fragment, jsx as _jsx, jsxs as _jsxs} from "preact/jsx-runtime";
-export const title = "Solar Energy Solutions";
-export const description = "Solar Energy is an undertapped energy resource.";
-export const category = "solar";
+export const frontmatter = {
+  "title": "Solar Energy Solutions",
+  "description": "Solar Energy is an undertapped energy resource.",
+  "category": "solar"
+};
 function _createMdxContent(props) {
   const _components = {
     a: "a",

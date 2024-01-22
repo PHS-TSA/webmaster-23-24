@@ -34,10 +34,14 @@
     "preact": "https://esm.sh/v135/preact@10.19.3",
     "preact/": "https://esm.sh/v135/preact@10.19.3/",
     "@mdx-js/mdx": "npm:@mdx-js/mdx@3.0.0",
+    "remark-frontmatter": "npm:remark-frontmatter@5.0.0",
+    "remark-mdx-frontmatter": "npm:remark-mdx-frontmatter@4.0.0",
     "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.10",
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:tailwindcss@3.4.1/",
-    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js"
+    "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
+    "vfile": "npm:vfile@6.0.1",
+    "vfile-matter": "npm:vfile-matter@5.0.0"
   },
   "scopes": {
     "https://esm.sh/v135/": {
