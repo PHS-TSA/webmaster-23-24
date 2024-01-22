@@ -3,8 +3,11 @@ import { resolve } from "$std/path/resolve.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import remarkPresetLintConsistent from "remark-preset-lint-consistent";
+import remarkPresetLintRecommended from "remark-preset-lint-recommended";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
+import { reporter } from "vfile-reporter";
 
 // Change the directory so that relative paths are based on the file, not the CWD.
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
@@ -23,22 +26,40 @@ async function run(): Promise<void> {
 await run();
 
 async function getSolutions(): Promise<string[]> {
-  const promises: Promise<string>[] = [];
+  const promises: Promise<{ fileName: string; file: VFile }>[] = [];
 
   for await (const entry of Deno.readDir(contentDir)) {
     if (entry.isFile && entry.name.match(/mdx?/)) {
       promises.push(getSolution(entry));
     }
   }
+  const files = await Promise.all(promises);
 
-  return await Promise.all(promises);
+  const lintReportOptions = {
+    quiet: true,
+  };
+  const lints = reporter(
+    files.map((file) => file.file),
+    lintReportOptions,
+  );
+  if (lints !== "") {
+    console.error(lints);
+  }
+
+  return files.map((file) => file.fileName);
 }
 
-async function getSolution(entry: Deno.DirEntry): Promise<string> {
+async function getSolution(
+  entry: Deno.DirEntry,
+): Promise<{ fileName: string; file: VFile }> {
   // Get the file.
-  const mdx: VFile = new VFile(
-    await Deno.readTextFile(resolve(contentDir, entry.name)),
-  );
+  const fileContent = await Deno.readTextFile(resolve(contentDir, entry.name));
+
+  // Convert the file to Unified format.
+  const mdx: VFile = new VFile({
+    value: fileContent,
+    basename: entry.name,
+  });
 
   // Extract the frontmatter into `data.matter`.
   matter(mdx);
@@ -50,6 +71,10 @@ async function getSolution(entry: Deno.DirEntry): Promise<string> {
       remarkFrontmatter,
       // @ts-expect-error: remarkMdxFrontmatter's types are off.
       remarkMdxFrontmatter,
+      // @ts-expect-error: remarkPresetLintConsistent's types are off.
+      remarkPresetLintConsistent,
+      // @ts-expect-error: remarkPresetLintConsistent's types are off.
+      remarkPresetLintRecommended,
     ],
   };
 
@@ -62,7 +87,7 @@ async function getSolution(entry: Deno.DirEntry): Promise<string> {
   // Write the file to the disk.
   await Deno.writeTextFile(resolve(contentDir, fileName), compiled.toString());
 
-  return fileName;
+  return { fileName, file: compiled };
 }
 
 async function staticImports(files: string[]): Promise<void> {
