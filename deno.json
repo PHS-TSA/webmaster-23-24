@@ -73,7 +73,11 @@
         "no-sync-fn-in-async-fn",
         "no-throw-literal"
       ]
-    }
+    },
+    "exclude": [
+      "**/*.gen.ts",
+      "src/content/"
+    ]
   },
   "scopes": {
     "https://esm.sh/v135/": {

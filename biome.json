@@ -34,20 +34,7 @@
   },
   "files": {
     "include": ["src/**/*.{ts,tsx}"],
-    "ignore": [
-      "**/*.gen.ts",
-      "src/content/",
-      "src/static/",
-      "deno.json",
-      "**/.vscode/**/*.json",
-      "**/*.md",
-      "**/*.svg",
-      "**/*.ico",
-      "**/*.xml",
-      "**/*.yaml",
-      "**/*.webmanifest",
-      "**/.github/**"
-    ]
+    "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json"]
   },
   "javascript": {
     "globals": ["Deno"]
