@@ -66,9 +66,13 @@ async function getSolution(entry: Deno.DirEntry): Promise<string> {
 }
 
 async function staticImports(files: string[]): Promise<void> {
-  const iifeFile = files
-    .map((file) => `async () => await import("../content/${file}");`)
-    .join("\n");
+  // An FE is an IIFE that isn't immediately invoked.
+  // Possibly, an IIFE is actually an FE that's immediately invoked.
+  // The mysteries of life...
+  const feFile = files
+    .map((file) => `(async () => await import("../content/${file}"));`)
+    .join("\n")
+    .concat("\n");
 
-  await Deno.writeTextFile(resolve(utilsDir, "imports.gen.ts"), iifeFile);
+  await Deno.writeTextFile(resolve(utilsDir, "imports.gen.ts"), feFile);
 }
