@@ -10,7 +10,7 @@
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
     "manifest": "deno task cli manifest $(pwd)",
     "start": "deno run -A --watch=src/ src/dev.ts",
-    "build": "deno run -A tool/compile-mdx.ts && deno run -A src/dev.ts build",
+    "build": "deno task compile:mdx && deno run -A src/dev.ts build",
     "preview": "deno run -A src/main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
     "esm": "deno run -A https://esm.sh/v135",
@@ -19,12 +19,9 @@
     "esm:remove": "deno task esm remove",
     "biome": "deno run -A npm:@biomejs/biome@1.5.2",
     "biome:ci": "deno task biome ci . --error-on-warnings",
-    "biome:check": "deno task biome check . --error-on-warnings"
+    "biome:check": "deno task biome check . --error-on-warnings",
+    "compile:mdx": "deno run -A tool/compile-mdx.ts"
   },
-  "exclude": [
-    "**/_fresh/*",
-    "src/fresh.gen.ts"
-  ],
   "imports": {
     "$std/": "https://deno.land/std@0.212.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.3/",
@@ -83,10 +80,11 @@
         "no-sync-fn-in-async-fn",
         "no-throw-literal"
       ]
-    },
-    "exclude": [
-      "**/*.gen.ts",
-      "src/content/"
-    ]
-  }
+    }
+  },
+  "exclude": [
+    "**/_fresh/*",
+    "**/*.gen.ts",
+    "src/content/"
+  ]
 }
