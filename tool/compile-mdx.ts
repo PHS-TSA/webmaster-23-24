@@ -56,5 +56,5 @@ async function staticImports(files: string[]): Promise<void> {
     .map((file) => `async () => await import("../content/${file}");`)
     .join("\n");
 
-  await Deno.writeTextFile(resolve(utilsDir, "imports.ts"), iifeFile);
+  await Deno.writeTextFile(resolve(utilsDir, "imports.gen.ts"), iifeFile);
 }
