@@ -8,6 +8,7 @@ import remarkPresetLintRecommended from "remark-preset-lint-recommended";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 import { reporter } from "vfile-reporter";
+import { map } from "./promises.ts";
 
 // Change the directory so that relative paths are based on the file, not the CWD.
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
@@ -18,29 +19,20 @@ const contentDir = `${srcDir}/content`;
 const utilsDir = `${srcDir}/utils`;
 
 async function run(): Promise<void> {
-  const initialFiles = await getSolutions();
-  const files = await compileSolutions(initialFiles);
+  const initialFiles = await map(
+    Deno.readDir(contentDir),
+    (entry) => getSolution(entry.name),
+    (entry) => entry.isFile && entry.name.match(/mdx?/) !== null,
+  );
+  const files = await map(initialFiles, compileSolution);
 
   await Promise.all([
     new Promise<void>((): void => lint(files)),
-    writeSolutions(files),
+    map(files, writeSolution),
     staticImports(files),
   ]);
 
   console.info(`Compiled ${files.length} MDX files into JS.`);
-}
-
-// biome-ignore lint/nursery/useAwait: false-positive
-async function getSolutions(): Promise<VFile[]> {
-  const promises = [];
-  for await (const entry of Deno.readDir(contentDir)) {
-    if (entry.isFile && entry.name.match(/mdx?/)) {
-      const promise = getSolution(entry.name);
-      promises.push(promise);
-    }
-  }
-
-  return Promise.all(promises);
 }
 
 async function getSolution(fileName: string): Promise<VFile> {
@@ -90,16 +82,6 @@ const compileOptions: CompileOptions = {
   remarkPlugins,
 };
 
-function compileSolutions(files: VFile[]): Promise<VFile[]> {
-  const promises = [];
-  for (const file of files) {
-    const promise = compileSolution(file);
-    promises.push(promise);
-  }
-
-  return Promise.all(promises);
-}
-
 async function compileSolution(file: VFile): Promise<VFile> {
   // Extract the frontmatter into `data.matter`.
   matter(file);
@@ -109,16 +91,6 @@ async function compileSolution(file: VFile): Promise<VFile> {
   compiled.extname = ".js";
 
   return compiled;
-}
-
-async function writeSolutions(solutions: VFile[]): Promise<void> {
-  const promises = [];
-  for (const solution of solutions) {
-    const promise = writeSolution(solution);
-    promises.push(promise);
-  }
-
-  await Promise.all(promises);
 }
 
 // Write the file to the disk.
