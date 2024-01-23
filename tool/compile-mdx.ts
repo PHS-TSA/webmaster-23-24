@@ -56,12 +56,7 @@ const lintReportOptions = {
  * @param files Markdown files.
  */
 function lint(files: VFile[]): void {
-  const filesList: VFile[] = [];
-  for (const file of files) {
-    filesList.push(file);
-  }
-
-  const lints = reporter(filesList, lintReportOptions);
+  const lints = reporter(files, lintReportOptions);
   if (lints !== "") {
     console.error(lints);
   }
