@@ -18,86 +18,140 @@ const contentDir = `${srcDir}/content`;
 const utilsDir = `${srcDir}/utils`;
 
 async function run(): Promise<void> {
-  const fileNames = await getSolutions();
-  await staticImports(fileNames);
-  console.info(`Compiled ${fileNames.length} MDX files into JS.`);
+  const initialFiles = await getSolutions();
+  const files = await compileSolutions(initialFiles);
+
+  await Promise.all([
+    new Promise<void>((): void => lint(files)),
+    writeSolutions(files),
+    staticImports(files),
+  ]);
+
+  console.info(`Compiled ${files.length} MDX files into JS.`);
 }
 
-await run();
-
-async function getSolutions(): Promise<string[]> {
-  const promises: Promise<{ fileName: string; file: VFile }>[] = [];
-
+// biome-ignore lint/nursery/useAwait: false-positive
+async function getSolutions(): Promise<VFile[]> {
+  const promises = [];
   for await (const entry of Deno.readDir(contentDir)) {
     if (entry.isFile && entry.name.match(/mdx?/)) {
-      promises.push(getSolution(entry));
+      const promise = getSolution(entry.name);
+      promises.push(promise);
     }
   }
-  const files = await Promise.all(promises);
 
-  const lintReportOptions = {
-    quiet: true,
-  };
-  const lints = reporter(
-    files.map((file) => file.file),
-    lintReportOptions,
-  );
+  return Promise.all(promises);
+}
+
+async function getSolution(fileName: string): Promise<VFile> {
+  // Get the file.
+  const fileContent = await Deno.readTextFile(resolve(contentDir, fileName));
+
+  // Convert the file to Unified format.
+  return new VFile({
+    value: fileContent,
+    basename: fileName,
+  });
+}
+
+/** Options for the lint reporter. */
+const lintReportOptions = {
+  quiet: true,
+};
+
+/**
+ * Lint files.
+ *
+ * @param files Markdown files.
+ */
+function lint(files: VFile[]): void {
+  const filesList: VFile[] = [];
+  for (const file of files) {
+    filesList.push(file);
+  }
+
+  const lints = reporter(filesList, lintReportOptions);
   if (lints !== "") {
     console.error(lints);
   }
-
-  return files.map((file) => file.fileName);
 }
 
-async function getSolution(
-  entry: Deno.DirEntry,
-): Promise<{ fileName: string; file: VFile }> {
-  // Get the file.
-  const fileContent = await Deno.readTextFile(resolve(contentDir, entry.name));
+const remarkPlugins = [
+  remarkFrontmatter,
+  remarkMdxFrontmatter,
+  remarkPresetLintConsistent,
+  remarkPresetLintRecommended,
+];
 
-  // Convert the file to Unified format.
-  const mdx: VFile = new VFile({
-    value: fileContent,
-    basename: entry.name,
-  });
+/** MDX compilation options. */
+const compileOptions: CompileOptions = {
+  jsxImportSource: "preact",
+  // @ts-expect-error: Unified's types dislike current Deno deduping.
+  remarkPlugins,
+};
 
+function compileSolutions(files: VFile[]): Promise<VFile[]> {
+  const promises = [];
+  for (const file of files) {
+    const promise = compileSolution(file);
+    promises.push(promise);
+  }
+
+  return Promise.all(promises);
+}
+
+async function compileSolution(file: VFile): Promise<VFile> {
   // Extract the frontmatter into `data.matter`.
-  matter(mdx);
-
-  // Set MDX compilation options.
-  const compileOptions: CompileOptions = {
-    jsxImportSource: "preact",
-    remarkPlugins: [
-      remarkFrontmatter,
-      // @ts-expect-error: remarkMdxFrontmatter's types are off.
-      remarkMdxFrontmatter,
-      // @ts-expect-error: remarkPresetLintConsistent's types are off.
-      remarkPresetLintConsistent,
-      // @ts-expect-error: remarkPresetLintConsistent's types are off.
-      remarkPresetLintRecommended,
-    ],
-  };
+  matter(file);
 
   // Compile the MDX into Preact JSX.
-  const compiled = await compile(mdx, compileOptions);
+  const compiled = await compile(file, compileOptions);
+  compiled.extname = ".js";
 
-  const slug = entry.name.replace(/\.[^\.]*$/, "");
-  const fileName = `${slug}.js`;
-
-  // Write the file to the disk.
-  await Deno.writeTextFile(resolve(contentDir, fileName), compiled.toString());
-
-  return { fileName, file: compiled };
+  return compiled;
 }
 
-async function staticImports(files: string[]): Promise<void> {
-  // An FE is an IIFE that isn't immediately invoked.
-  // Possibly, an IIFE is actually an FE that's immediately invoked.
-  // The mysteries of life...
-  const feFile = files
+async function writeSolutions(solutions: VFile[]): Promise<void> {
+  const promises = [];
+  for (const solution of solutions) {
+    const promise = writeSolution(solution);
+    promises.push(promise);
+  }
+
+  await Promise.all(promises);
+}
+
+// Write the file to the disk.
+function writeSolution(solution: VFile): Promise<void> {
+  return Deno.writeTextFile(
+    resolve(contentDir, solution.basename ?? ""),
+    solution.toString(),
+  );
+}
+
+async function staticImports(files: VFile[]): Promise<void> {
+  const fileNames = files.map((file): string => file.basename ?? "");
+  const fileContent = staticImportsFile(fileNames);
+  await writeStaticImports(fileContent);
+}
+
+/**
+ * An FE is an IIFE that isn't immediately invoked.
+ * More likely, an IIFE is actually an FE that's immediately invoked.
+ * The mysteries of life...
+ *
+ * @param files The names of files.
+ * @returns The contents of a Javascript file containing a bunch of FEs.
+ */
+function staticImportsFile(files: string[]): string {
+  return files
     .map((file) => `(async () => await import("../content/${file}"));`)
     .join("\n")
     .concat("\n");
+}
 
+async function writeStaticImports(feFile: string): Promise<void> {
   await Deno.writeTextFile(resolve(utilsDir, "imports.gen.ts"), feFile);
 }
+
+await run();
