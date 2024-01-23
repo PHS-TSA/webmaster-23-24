@@ -26,7 +26,7 @@ async function run(): Promise<void> {
   const files = await map(initialFiles, compileSolution);
 
   await Promise.all([
-    new Promise<void>((): void => lint(files)),
+    new Promise<void>((resolve) => resolve(lint(files))),
     map(files, writeSolution),
     staticImports(files),
   ]);
