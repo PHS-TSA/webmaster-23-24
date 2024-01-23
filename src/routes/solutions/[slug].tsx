@@ -31,8 +31,8 @@ export const handler: Handlers<SolutionProps> = {
 export default function Solution({
   data,
 }: PageProps<SolutionProps>): JSX.Element {
-  const pageTitle = data.page.title;
-  const description = data.page.description;
+  const pageTitle = data.page.frontmatter.title;
+  const description = data.page.frontmatter.description;
 
   return (
     <>
