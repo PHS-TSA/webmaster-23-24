@@ -1,5 +1,4 @@
-import { dirname, fromFileUrl } from "$std/path/mod.ts";
-import { resolve } from "$std/path/resolve.ts";
+import { dirname, fromFileUrl, resolve } from "$std/path/mod.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
@@ -82,18 +81,27 @@ const compileOptions: CompileOptions = {
   remarkPlugins,
 };
 
+/**
+ * Compile the MDX into Preact JSX.
+ *
+ * @param file MDX.
+ * @returns Preact.
+ */
 async function compileSolution(file: VFile): Promise<VFile> {
-  // Extract the frontmatter into `data.matter`.
-  matter(file);
+  matter(file); // Extract the frontmatter into `data.matter`.
 
-  // Compile the MDX into Preact JSX.
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
   return compiled;
 }
 
-// Write the file to the disk.
+/**
+ * Write the file to the disk.
+ *
+ * @param solution A file to write.
+ * @returns A promise resolving when the file's written.
+ */
 function writeSolution(solution: VFile): Promise<void> {
   return Deno.writeTextFile(
     resolve(contentDir, solution.basename ?? ""),
