@@ -6,7 +6,7 @@ import remarkPresetLintConsistent from "remark-preset-lint-consistent";
 import remarkPresetLintRecommended from "remark-preset-lint-recommended";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
-import { reporter } from "vfile-reporter";
+import { type Options as LintOptions, reporter } from "vfile-reporter";
 import {
   type SolutionData,
   solutionPagesSchema,
@@ -51,7 +51,7 @@ async function getSolution(fileName: string): Promise<VFile> {
 /** Options for the lint reporter. */
 const lintReportOptions = {
   quiet: true,
-};
+} as const satisfies LintOptions;
 
 /**
  * Lint files.
@@ -73,11 +73,11 @@ const remarkPlugins = [
 ];
 
 /** MDX compilation options. */
-const compileOptions: CompileOptions = {
+const compileOptions = {
   jsxImportSource: "preact",
   // @ts-expect-error: Unified's types dislike current Deno deduping.
   remarkPlugins,
-};
+} as const satisfies CompileOptions;
 
 /**
  * Compile the MDX into Preact JSX.
@@ -88,6 +88,7 @@ const compileOptions: CompileOptions = {
 async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
 
+  // @ts-expect-error: Unified's types dislike current Deno deduping.
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
