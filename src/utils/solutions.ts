@@ -27,6 +27,14 @@ const solutionPagesNullableSchema = solutionPageNullableSchema
   .array()
   .readonly();
 
+/**
+ * Represents the schema for the data for the solution pages.
+ *
+ * ONLY FOR USE IN CODEGEN!!!
+ *
+ * This is used to verify that the MDX frontmatter is correct when the category code is generated.
+ * This also generates types so that TypeScript can typecheck solutions at compile time.
+ */
 export const solutionPagesSchema = solutionPagesNullableSchema.transform(
   (
     val: z.infer<typeof solutionPagesNullableSchema>,

@@ -24,8 +24,8 @@ const extraMenus = [
 ] as const satisfies Menu[];
 
 /**
- * Convert the `solutions` into to `Menu`s based on the .category.
- * Should also append the `extraMenus` to the end to add the about page and such.
+ * Convert the {@link solutions} into to {@link Menu | menus} based on the category.
+ * Should also append the {@link extraMenus} to the end to add the `/about/` page and such.
  *
  * @returns The generated menus.
  */

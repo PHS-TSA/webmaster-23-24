@@ -90,10 +90,10 @@ function RenderMenu(props: Menu): JSX.Element {
 /**
  * Renders the menu header.
  *
- * @param {Object} props - The configuration for this component.
- * @param {string} props.url - The URL that should be linked.
- * @param {string} props.title - The title of the link.
- * @returns {JSX.Element} The rendered menu header.
+ * @param props - The configuration for this component.
+ * @param props.url - The URL that should be linked.
+ * @param props.title - The title of the link.
+ * @returns The rendered menu header.
  */
 // TODO(lishaduck): Add a <Link> component to centralize said styling.
 // TODO(lishaduck): Render these all in one section once we have multiple.
