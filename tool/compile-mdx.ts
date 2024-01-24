@@ -7,6 +7,10 @@ import remarkPresetLintRecommended from "remark-preset-lint-recommended";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 import { reporter } from "vfile-reporter";
+import {
+  type SolutionData,
+  solutionPagesSchema,
+} from "../src/utils/solutions.ts";
 import { map } from "./promises.ts";
 
 // Change the directory so that relative paths are based on the file, not the CWD.
@@ -25,11 +29,10 @@ async function run(): Promise<void> {
   );
   const files = await map(initialFiles, compileSolution);
 
-  await Promise.all([
-    new Promise<void>((resolve) => resolve(lint(files))),
-    map(files, writeSolution),
-    staticImports(files),
-  ]);
+  lint(files);
+  await map(files, writeSolution);
+  await staticImports(files);
+  await categories(files);
 
   console.info(`Compiled ${files.length} MDX files into JS.`);
 }
@@ -107,7 +110,7 @@ function writeSolution(solution: VFile): Promise<void> {
 async function staticImports(files: VFile[]): Promise<void> {
   const fileNames = files.map((file): string => file.basename ?? "");
   const fileContent = staticImportsFile(fileNames);
-  await writeStaticImports(fileContent);
+  await writeGenFile(fileContent, "imports");
 }
 
 /**
@@ -125,8 +128,48 @@ function staticImportsFile(files: string[]): string {
     .concat("\n");
 }
 
-async function writeStaticImports(feFile: string): Promise<void> {
-  await Deno.writeTextFile(resolve(utilsDir, "imports.gen.ts"), feFile);
+declare module "vfile" {
+  export interface DataMap {
+    matter: SolutionData;
+  }
+}
+
+async function categories(files: VFile[]): Promise<void> {
+  const fileContent = categoriesFile(files);
+  await writeGenFile(fileContent, "categories");
+}
+
+const categorySort = ["green", "monies", "solar"];
+
+function categoriesFile(files: VFile[]): string {
+  return `import type { SolutionPages } from "./solutions.ts";
+
+export const solutions = ${JSON.stringify(
+    solutionPagesSchema.parse(
+      files
+        .toSorted(
+          (a, b) =>
+            categorySort.indexOf(a.data["matter"]?.category ?? "") -
+            categorySort.indexOf(b.data["matter"]?.category ?? ""),
+        )
+        .map((file) => {
+          return { slug: file.stem ?? "", data: file.data["matter"] };
+        }),
+    ),
+    undefined,
+    2,
+  )} as const satisfies SolutionPages;
+`;
+}
+
+async function writeGenFile(
+  fileContent: string,
+  fileName: string,
+): Promise<void> {
+  await Deno.writeTextFile(
+    resolve(utilsDir, `${fileName}.gen.ts`),
+    fileContent,
+  );
 }
 
 await run();

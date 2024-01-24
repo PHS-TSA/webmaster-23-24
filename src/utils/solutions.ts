@@ -1,7 +1,6 @@
 import type { ComponentType } from "preact";
 import { z } from "zod";
 
-export type SolutionPage = z.infer<typeof solutionPageSchema>;
 export type SolutionData = z.infer<typeof solutionDataSchema>;
 export type SolutionPages = z.infer<typeof solutionPagesSchema>;
 
@@ -28,53 +27,18 @@ const solutionPagesNullableSchema = solutionPageNullableSchema
   .array()
   .readonly();
 
-const solutionPagesSchema = solutionPagesNullableSchema.transform(
-  (val: z.infer<typeof solutionPagesNullableSchema>): readonly SolutionPage[] =>
+export const solutionPagesSchema = solutionPagesNullableSchema.transform(
+  (
+    val: z.infer<typeof solutionPagesNullableSchema>,
+  ): readonly z.infer<typeof solutionPageSchema>[] =>
     val.filter(
-      (val: z.infer<typeof solutionPageNullableSchema>): val is SolutionPage =>
-        val !== undefined,
+      (
+        val: z.infer<typeof solutionPageNullableSchema>,
+      ): val is z.infer<typeof solutionPageSchema> => val !== undefined,
     ),
 );
 
 export interface MDXFile {
   readonly default: ComponentType<{ readonly [x: string]: unknown }>;
   readonly frontmatter: SolutionData;
-}
-
-const dir = "src/content";
-const categorySort = ["green", "monies", "solar"];
-
-export const solutions = await getSolutions();
-
-/** Get all solutions. */
-export async function getSolutions(): Promise<SolutionPages> {
-  const promises = [];
-  for await (const entry of Deno.readDir(dir)) {
-    if (entry.isFile && entry.name.match(/mdx?/)) {
-      promises.push(getSolution(entry.name.replace(/\.[^\.]*$/, "")));
-    }
-  }
-
-  const unparsedSolutions = await Promise.all(promises);
-  const solutions = solutionPagesSchema.parse(unparsedSolutions);
-
-  return solutions.toSorted(
-    (a, b) =>
-      categorySort.indexOf(a.data.category) -
-      categorySort.indexOf(b.data.category),
-  );
-}
-
-/** Get a solution. */
-export async function getSolution(
-  slug: string,
-): Promise<SolutionPage | undefined> {
-  try {
-    const file: MDXFile = await import(`../content/${slug}.js`);
-
-    return { data: file.frontmatter, slug };
-  } catch (error) {
-    console.error(error);
-    return undefined;
-  }
 }

@@ -1,4 +1,4 @@
-import { solutions } from "./solutions.ts";
+import { solutions } from "./categories.gen.ts";
 import { isKey } from "./type-helpers.ts";
 
 export interface Menu {
