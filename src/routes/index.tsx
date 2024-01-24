@@ -4,8 +4,16 @@ import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { siteName } from "../site.ts";
 
+/**
+ * The page title.
+ */
 const pageTitle = "Home";
 
+/**
+ * Render the home page.
+ *
+ * @returns The rendered home page.
+ */
 export default function Home(): JSX.Element {
   return (
     <>

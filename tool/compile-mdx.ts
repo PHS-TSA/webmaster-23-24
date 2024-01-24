@@ -21,6 +21,9 @@ const srcDir = "../src";
 const contentDir = `${srcDir}/content`;
 const utilsDir = `${srcDir}/utils`;
 
+/**
+ * Compile the MDX files into JS.
+ */
 async function run(): Promise<void> {
   const initialFiles = await map(
     Deno.readDir(contentDir),
@@ -37,6 +40,9 @@ async function run(): Promise<void> {
   console.info(`Compiled ${files.length} MDX files into JS.`);
 }
 
+/**
+ * Get a file from the `content` directory.
+ */
 async function getSolution(fileName: string): Promise<VFile> {
   // Get the file.
   const fileContent = await Deno.readTextFile(resolve(contentDir, fileName));
@@ -65,6 +71,9 @@ function lint(files: VFile[]): void {
   }
 }
 
+/**
+ * Plugins for the MDX compilation.
+ */
 const remarkPlugins = [
   remarkFrontmatter,
   remarkMdxFrontmatter,
@@ -108,6 +117,9 @@ function writeSolution(solution: VFile): Promise<void> {
   );
 }
 
+/**
+ * Write a file containing static imports for all the files.
+ */
 async function staticImports(files: VFile[]): Promise<void> {
   const fileNames = files.map((file): string => file.basename ?? "");
   const fileContent = staticImportsFile(fileNames);
@@ -115,6 +127,7 @@ async function staticImports(files: VFile[]): Promise<void> {
 }
 
 /**
+ * Create a file containing static imports for all the files.
  * An FE is an IIFE that isn't immediately invoked.
  * More likely, an IIFE is actually an FE that's immediately invoked.
  * The mysteries of life...
@@ -131,17 +144,29 @@ function staticImportsFile(files: string[]): string {
 
 declare module "vfile" {
   export interface DataMap {
-    matter: SolutionData;
+    /**
+     * The frontmatter of the file.
+     */
+    readonly matter: SolutionData;
   }
 }
 
+/**
+ * Write a file containing the categories of all the files.
+ */
 async function categories(files: VFile[]): Promise<void> {
   const fileContent = categoriesFile(files);
   await writeGenFile(fileContent, "categories");
 }
 
+/**
+ * A list of categories, in order.
+ */
 const categorySort = ["green", "monies", "solar"];
 
+/**
+ * Create a file containing the categories of all the files.
+ */
 function categoriesFile(files: VFile[]): string {
   return `import type { SolutionPages } from "./solutions.ts";
 
@@ -163,6 +188,9 @@ export const solutions = ${JSON.stringify(
 `;
 }
 
+/**
+ * Write a file to the `utils` directory.
+ */
 async function writeGenFile(
   fileContent: string,
   fileName: string,

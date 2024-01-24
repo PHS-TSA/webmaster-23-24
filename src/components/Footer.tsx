@@ -17,6 +17,9 @@ import {
 import { tw } from "../utils/tailwind.ts";
 import { hasItems } from "../utils/type-helpers.ts";
 
+/**
+ * The icons of some of the tools that were used to build the site.
+ */
 const icons = [
   {
     icon: IconLemon2,
@@ -40,16 +43,47 @@ const icons = [
   },
 ] as const satisfies Tool[];
 
+/**
+ * A tool that was used to build the site.
+ */
 interface Tool {
+  /**
+   * The URL to the tool's website.
+   */
   readonly href: string;
+
+  /**
+   * The name of the tool.
+   */
   readonly name: string;
+
+  /**
+   * The icon of the tool.
+   */
   readonly icon: Icon;
 }
 
+/**
+ * Properties for the {@link Footer} component.
+ */
 export interface FooterProps {
+  /**
+   * The CSS classes to apply to this component.
+   */
   readonly class?: string;
 }
 
+/**
+ * Render a footer component, which is used as a footer for pages.
+ * It contains an about section, a menu section, and a "made with" section.
+ * The about section contains the site name and slogan.
+ * The menu section contains links to the various pages of the site.
+ * The "made with" section contains links to the tools that were used to build the site.
+ *
+ * @param props - The component's properties.
+ * @param props.class - The CSS classes to apply to this component.
+ * @returns The rendered footer component.
+ */
 export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   return (
     <footer
@@ -78,6 +112,17 @@ export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   );
 }
 
+/**
+ * Render a category component.
+ * It contains a header and an optional list of items.
+ * The header is a link to the menu's URL and the items are links to the menu items' URLs.
+ *
+ * @param props - The component's properties.
+ * @param props.title - The title of the menu.
+ * @param props.url - The URL of the menu.
+ * @param props.items - The items to render.
+ * @returns The rendered menu component.
+ */
 function RenderMenu(props: Menu): JSX.Element {
   return (
     <>
@@ -88,7 +133,7 @@ function RenderMenu(props: Menu): JSX.Element {
 }
 
 /**
- * Renders the menu header.
+ * Render a category header.
  *
  * @param props - The configuration for this component.
  * @param props.url - The URL that should be linked.
@@ -108,6 +153,15 @@ function RenderMenuHeader({ url, title }: Menu): JSX.Element {
   );
 }
 
+/**
+ * Render the menu items.
+ * The items are links to the menu items' URLs.
+ *
+ * @param props - The component's properties.
+ * @param props.items - The items to render.
+ * @param props.url - The URL to prepend to the items' URLs.
+ * @returns The rendered menu items.
+ */
 function RenderMenuItems({ items, url }: MenuWithItems): JSX.Element {
   return (
     <ul class="mt-2">
@@ -127,6 +181,12 @@ function RenderMenuItems({ items, url }: MenuWithItems): JSX.Element {
   );
 }
 
+/**
+ * Render the "who" section of the footer.
+ * It contains the site name and slogan.
+ *
+ * @returns The rendered "who" section of the footer.
+ */
 function Who(): JSX.Element {
   return (
     <>
@@ -144,6 +204,12 @@ function Who(): JSX.Element {
   );
 }
 
+/**
+ * Render the "with" section of the footer.
+ * It contains linked icons of the tools that were used to build the site.
+ *
+ * @returns The rendered "with" section of the footer.
+ */
 function With(): JSX.Element {
   return (
     <>

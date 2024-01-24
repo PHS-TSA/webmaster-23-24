@@ -1,8 +1,8 @@
 /**
  * Maps each element of an iterable or async iterable to a new value using the provided function.
  *
- * @template T The type of the elements in the iterable.
- * @template U The type of the resulting values after mapping.
+ * @typeParam T - The type of the elements in the iterable.
+ * @typeParam U - The type of the resulting values after mapping.
  * @param iterable The iterable or async iterable to map.
  * @param func The mapping function to apply to each element.
  * @param run The optional predicate function to determine if an element should be mapped.

@@ -1,11 +1,32 @@
 import type { JSX, RenderableProps } from "preact";
 import { Logo } from "./Logo.tsx";
 
+/**
+ * Properties for the {@link Cover} component.
+ */
 export interface CoverProps {
+  /**
+   * The title of the page.
+   */
   readonly title: string;
+
+  /**
+   * The icon to render as the attention grabber.
+   */
   readonly icon?: JSX.Element;
 }
 
+/**
+ * Render a cover component, which is used as a header for pages.
+ * It contains a title and an optional icon.
+ * It can optionally also contain additional content, in the form which are rendered below the title; it is typically used to render a description.
+ *
+ * @param props - The component's properties.
+ * @param props.title - The title of the page.
+ * @param props.children - The additional content to render.
+ * @param props.icon - The icon to render as the attention grabber.
+ * @returns The rendered cover component.
+ */
 export function Cover({
   title,
   children,

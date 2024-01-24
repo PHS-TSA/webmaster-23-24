@@ -1,6 +1,13 @@
 import type { JSX } from "preact";
 import { IconBolt } from "../utils/icons.ts";
 
+/**
+ * Render the logo.
+ * Currently, this is just a lightning bolt.
+ * Eventually, it will be our logo.
+ *
+ * @returns The rendered logo component.
+ */
 export function Logo(): JSX.Element {
   // <img
   //   class="my-6"

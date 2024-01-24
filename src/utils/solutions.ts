@@ -1,34 +1,67 @@
 import type { ComponentType } from "preact";
 import { z } from "zod";
 
+/**
+ * The metadata for a solution.
+ */
 export type SolutionData = z.infer<typeof solutionDataSchema>;
+
+/**
+ * The set of solution pages with their metadata.
+ */
 export type SolutionPages = z.infer<typeof solutionPagesSchema>;
 
+const solutionDataSchemaDescription = "Metadata for the solution.";
+
+/**
+ * Represent the data for the solution pages.
+ */
 const solutionDataSchema = z
   .object({
-    title: z.string(),
-    description: z.string(),
-    category: z.string(),
+    title: z.string().describe("The title of the solution."),
+    description: z.string().describe("The description of the solution."),
+    category: z.string().describe("The category of the solution."),
   })
   .passthrough()
-  .readonly();
+  .readonly()
+  .describe(solutionDataSchemaDescription);
 
+/**
+ * Represent a set of solution pages.
+ */
 const solutionPageSchema = z
   .object({
-    slug: z.string(), // The slug of the solution without a trailing slash.
-    data: solutionDataSchema,
+    slug: z
+      .string()
+      .describe("The slug of the solution without a trailing slash."),
+    data: solutionDataSchema.describe(solutionDataSchemaDescription),
   })
   .strict()
-  .readonly();
+  .readonly()
+  .describe("A solution page.");
 
+/**
+ * Represent a set of possible solution pages.
+ * @internal
+ *
+ * @remarks
+ *
+ * Just for typechecking.
+ */
 const solutionPageNullableSchema = solutionPageSchema.optional();
 
+/**
+ * Represent a set of possible solution pages.
+ */
 const solutionPagesNullableSchema = solutionPageNullableSchema
   .array()
   .readonly();
 
 /**
- * Represents the schema for the data for the solution pages.
+ * Represent the data for the solution pages.
+ * @internal
+ *
+ * @remarks
  *
  * ONLY FOR USE IN CODEGEN!!!
  *
@@ -46,7 +79,17 @@ export const solutionPagesSchema = solutionPagesNullableSchema.transform(
     ),
 );
 
+/**
+ * A compiled file of Markdown XML which contains metadata in the form of frontmatter.
+ */
 export interface MDXFile {
+  /**
+   * The default export of the MDX file, which is a preact component.
+   */
   readonly default: ComponentType<{ readonly [x: string]: unknown }>;
+
+  /**
+   * The frontmatter of the MDX file.
+   */
   readonly frontmatter: SolutionData;
 }

@@ -1,8 +1,11 @@
 import { Head, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
-import { description } from "../site.ts";
+import { description, keywords } from "../site.ts";
 
+/**
+ * The global meta tags.
+ */
 const metas = (
   <>
     <meta
@@ -43,6 +46,17 @@ const metas = (
   </>
 );
 
+/**
+ * Render the application.
+ * This is the entry point for the application.
+ * It renders the application's layout and the current page.
+ * It also renders the global meta tags and styles.
+ * In addition, it enables client-side navigation.
+ *
+ * @param props - The component's properties.
+ * @param props.Component - The page component.
+ * @returns The rendered application.
+ */
 export default function App({ Component }: PageProps): JSX.Element {
   return (
     <html lang="en-US">
@@ -51,7 +65,7 @@ export default function App({ Component }: PageProps): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href={asset("/styles.css")} rel="preload" as="style" />
         <meta name="description" content={description} key="desc" />
-        <meta name="keywords" content="green, clean, renewable, tsa" />
+        <meta name="keywords" content={keywords} key="keys" />
         <link rel="manifest" href="/manifest.webmanifest" />
         {metas}
         <link rel="stylesheet" href={asset("/styles.css")} />

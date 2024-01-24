@@ -7,10 +7,19 @@ import type { FreshContextHelper } from "../../utils/handlers.ts";
 import { IconSolarPanel } from "../../utils/icons.ts";
 import type { MDXFile } from "../../utils/solutions.ts";
 
+/**
+ * Properties for the {@link Solution} component.
+ */
 export interface SolutionProps {
+  /**
+   * The page to render.
+   */
   readonly page: MDXFile;
 }
 
+/**
+ * The server handler for the solution page.
+ */
 export const handler: Handlers<SolutionProps> = {
   async GET(
     _req: Request,
@@ -28,6 +37,13 @@ export const handler: Handlers<SolutionProps> = {
   },
 };
 
+/**
+ * Render a page for a green/clean energy solution.
+ *
+ * @param props - The component's properties.
+ * @param props.data - The page data from the server handler.
+ * @returns The rendered solution page.
+ */
 export default function Solution({
   data,
 }: PageProps<SolutionProps>): JSX.Element {

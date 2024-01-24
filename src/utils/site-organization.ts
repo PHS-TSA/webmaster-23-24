@@ -1,21 +1,54 @@
 import { solutions } from "./categories.gen.ts";
 import { isKey } from "./type-helpers.ts";
 
+/**
+ * A menu.
+ */
 export interface Menu {
+  /**
+   * The title of the menu.
+   */
   readonly title: string;
+
+  /**
+   * The URL that the menu links to.
+   */
   readonly url: `/${string}/`;
+
+  /**
+   * The sub-items of the menu.
+   */
   readonly items?: readonly MenuItem[];
 }
 
+/**
+ * A menu item.
+ */
 export interface MenuItem {
+  /**
+   * The URL that the menu item links to.
+   */
   readonly href: `${string}/`;
+
+  /**
+   * The name of the menu item.
+   */
   readonly name: string;
 }
 
+/**
+ * A menu with items.
+ */
 export interface MenuWithItems extends Menu {
+  /**
+   * The items of the menu are destined to be non-empty.
+   */
   readonly items: readonly [MenuItem, ...MenuItem[]];
 }
 
+/**
+ * The additional menus that are not generated with the {@link solutions}.
+ */
 const extraMenus = [
   {
     title: "About",
@@ -68,6 +101,9 @@ function generateMenus(): Menu[] {
   return Array.from(categories.values());
 }
 
+/**
+ * A mapping of categories to their titles.
+ */
 const categoryMap = {
   green: "Going Green?",
   monies: "Monies",
@@ -75,4 +111,7 @@ const categoryMap = {
   solar: "Solar",
 } as const;
 
+/**
+ * The generated menus.
+ */
 export const menus = generateMenus();
