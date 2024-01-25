@@ -18,8 +18,8 @@ import { hasItems } from "../utils/type-helpers.ts";
 function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
     active
-      ? "font-bold text-gray-700 dark:text-gray-200"
-      : "text-gray-500 dark:text-gray-400"
+      ? tw`font-bold text-gray-700 dark:text-gray-200`
+      : tw`text-gray-500 dark:text-gray-400`
   }`;
 }
 
@@ -32,8 +32,8 @@ function makeTextStyle(active: boolean): string {
 function makeBorderStyle(active: boolean): string {
   return tw` hover:border-gray-700 data-[current]:border-b-2 dark:hover:border-gray-200 ${
     active
-      ? "border-b-2 border-gray-700 dark:border-gray-200"
-      : "border-gray-500 dark:border-gray-400"
+      ? tw`border-b-2 border-gray-700 dark:border-gray-200`
+      : tw`border-gray-500 dark:border-gray-400`
   }`;
 }
 

@@ -1,7 +1,6 @@
 /**
  * Interpolates a string with values.
- * Theoretically, this should perfectly match a normal template literal, but it isn't particularly well-tested.
- * It's used for Tailwind CSS class formatting.
+ * It's used for Tailwind CSS class formatting and autocompletion.
  *
  * @param strings - The strings to interpolate.
  * @param values - The values to interpolate.
@@ -11,7 +10,5 @@ export function tw(
   strings: TemplateStringsArray,
   ...values: readonly unknown[]
 ): string {
-  return strings
-    .map((string: string, i: number): string => string + (values[i] || ""))
-    .join("");
+  return String.raw({ raw: strings }, ...values);
 }
