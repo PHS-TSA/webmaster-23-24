@@ -34,8 +34,7 @@ async function run(): Promise<void> {
 
   lint(files);
   await map(files, writeSolution);
-  await staticImports(files);
-  await categories(files);
+  Promise.all([staticImports(files), categories(files)]);
 
   console.info(`Compiled ${files.length} MDX files into JS.`);
 }
