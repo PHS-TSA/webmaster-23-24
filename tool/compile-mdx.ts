@@ -1,4 +1,10 @@
-import { dirname, fromFileUrl, resolve } from "$std/path/mod.ts";
+import {
+  dirname,
+  fromFileUrl,
+  join,
+  relative,
+  resolve,
+} from "$std/path/mod.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
@@ -11,7 +17,6 @@ import {
   type SolutionData,
   solutionPagesSchema,
 } from "../src/utils/solutions.ts";
-import { map } from "./promises.ts";
 
 // Change the directory so that relative paths are based on the file, not the CWD.
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
@@ -25,30 +30,68 @@ const utilsDir = `${srcDir}/utils`;
  * Compile the MDX files into JS.
  */
 async function run(): Promise<void> {
-  const initialFiles = await map(
-    Deno.readDir(contentDir),
-    (entry) => getSolution(entry.name),
-    (entry) => entry.isFile && entry.name.match(/mdx?/) !== null,
-  );
-  const files = await map(initialFiles, compileSolution);
+  const initialFiles = getSolutions(contentDir);
+  const compiledFiles = compileSolutions(initialFiles);
+
+  const promises = [];
+  for await (const file of compiledFiles) {
+    promises.push(file);
+  }
+  const files = await Promise.all(promises);
 
   lint(files);
-  await map(files, writeSolution);
-  Promise.all([staticImports(files), categories(files)]);
+  await Promise.all([
+    ...files.map(writeSolution),
+    staticImports(files),
+    categories(files),
+  ]);
 
   console.info(`Compiled ${files.length} MDX files into JS.`);
 }
 
 /**
- * Get a file from the `content` directory.
+ * Get all of the MDX files in a directory.
+ *
+ * @param basePath - The path to hunt for MDX files to fetch.
+ * @param currentPath - The current path to search for MDX files.
+ *
+ * @remarks
+ * This is an async generator because it's recursive.
  */
-async function getSolution(fileName: string): Promise<VFile> {
-  // Get the file.
-  const fileContent = await Deno.readTextFile(resolve(contentDir, fileName));
+// biome-ignore lint/nursery/useAwait: for-await isn't caught correctly.
+async function* getSolutions(
+  basePath: string,
+  currentPath: string = basePath,
+): AsyncGenerator<VFile, void, unknown> {
+  for await (const entry of Deno.readDir(currentPath)) {
+    const fullPath = join(currentPath, entry.name);
+    const relPath = relative(basePath, currentPath);
+    if (entry.isFile && entry.name.match(/mdx?/) !== null) {
+      yield getSolution(fullPath, entry.name, relPath);
+    } else if (entry.isDirectory) {
+      yield* getSolutions(basePath, fullPath);
+    }
+  }
+}
 
-  // Convert the file to Unified format.
+/**
+ * Get the contents of a file.
+ *
+ * @param fullPath - The full path to the file.
+ * @param fileName - The name of the file.
+ * @param relPath - The relative path to the file.
+ * @returns The file's contents.
+ */
+async function getSolution(
+  fullPath: string,
+  fileName: string,
+  relPath = ".",
+): Promise<VFile> {
+  const fileContent = await Deno.readTextFile(fullPath);
+
   return new VFile({
     value: fileContent,
+    dirname: relPath,
     basename: fileName,
   });
 }
@@ -71,6 +114,21 @@ function lint(files: VFile[]): void {
 }
 
 /**
+ * Compile MDX files into Preact JSX files.
+ *
+ * @param initialFiles A list of virtual MDX files for compilation.
+ * @returns A list of virtual JS files.
+ */
+// biome-ignore lint/nursery/useAwait: for-await isn't caught correctly.
+async function* compileSolutions(
+  initialFiles: AsyncIterable<VFile>,
+): AsyncGenerator<VFile, void, unknown> {
+  for await (const entry of initialFiles) {
+    yield compileSolution(entry);
+  }
+}
+
+/**
  * Plugins for the MDX compilation.
  */
 const remarkPlugins = [
@@ -88,10 +146,10 @@ const compileOptions = {
 } as const satisfies CompileOptions;
 
 /**
- * Compile the MDX into Preact JSX.
+ * Compile an MDX file into a Preact file.
  *
- * @param file MDX.
- * @returns Preact.
+ * @param file A virtual MDX file.
+ * @returns A virtual JS file.
  */
 async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
@@ -111,7 +169,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
  */
 function writeSolution(solution: VFile): Promise<void> {
   return Deno.writeTextFile(
-    resolve(contentDir, solution.basename ?? ""),
+    join(contentDir, solution.path),
     solution.toString(),
   );
 }
@@ -120,7 +178,7 @@ function writeSolution(solution: VFile): Promise<void> {
  * Write a file containing static imports for all the files.
  */
 async function staticImports(files: VFile[]): Promise<void> {
-  const fileNames = files.map((file): string => file.basename ?? "");
+  const fileNames = files.map((file): string => file.path);
   const fileContent = staticImportsFile(fileNames);
   await writeGenFile(fileContent, "imports");
 }
@@ -167,23 +225,21 @@ const categorySort = ["green", "monies", "solar"];
  * Create a file containing the categories of all the files.
  */
 function categoriesFile(files: VFile[]): string {
+  const sortedFiles = files
+    .toSorted(
+      (a, b) =>
+        categorySort.indexOf(a.data["matter"]?.category ?? "") -
+        categorySort.indexOf(b.data["matter"]?.category ?? ""),
+    )
+    .map((file) => {
+      return { slug: file.stem ?? "", data: file.data["matter"] };
+    });
+  const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
+  const json = JSON.stringify(parsedProfiles, undefined, 2);
+
   return `import type { SolutionPages } from "./solutions.ts";
 
-export const solutions = ${JSON.stringify(
-    solutionPagesSchema.parse(
-      files
-        .toSorted(
-          (a, b) =>
-            categorySort.indexOf(a.data["matter"]?.category ?? "") -
-            categorySort.indexOf(b.data["matter"]?.category ?? ""),
-        )
-        .map((file) => {
-          return { slug: file.stem ?? "", data: file.data["matter"] };
-        }),
-    ),
-    undefined,
-    2,
-  )} as const satisfies SolutionPages;
+export const solutions = ${json} as const satisfies SolutionPages;
 `;
 }
 
