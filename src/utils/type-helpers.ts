@@ -10,6 +10,7 @@ export function hasItems(menu: Menu): menu is MenuWithItems {
 /**
  * Check if an object has a key.
  *
+ * @typeParam T - The type of the object.
  * @param obj - The object to check.
  * @param key - The key to check for.
  * @returns Whether the object has the key.
