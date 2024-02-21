@@ -62,11 +62,11 @@ jobs:
       - name: 🕵️ Run linter, verify formatting, typecheck
         run: deno task ci
 
-      - name: 🧪 Run tests
-        run: deno task test
-
       - name: 🔨 Build
         run: deno task build
+
+      - name: 🧪 Run tests
+        run: deno task test
 
       - name: 📊 Collect coverage
         run: deno task test:coverage

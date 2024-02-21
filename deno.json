@@ -48,8 +48,8 @@
   "scopes": {
     "https://esm.sh/v135/": {
       "client-only": "https://esm.sh/v135/client-only@0.0.1",
-      "react-dom": "https://esm.sh/v135/preact@10.19.3/compat",
-      "react": "https://esm.sh/v135/preact@10.19.3/compat"
+      "react-dom": "https://esm.sh/v135/preact@10.19.5/compat",
+      "react": "https://esm.sh/v135/preact@10.19.5/compat"
     }
   },
   "compilerOptions": {
