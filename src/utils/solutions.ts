@@ -20,7 +20,7 @@ const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
     description: z.string().describe("The description of the solution."),
-    category: z.string().describe("The category of the solution."),
+    category: z.string().optional().describe("The category of the solution."),
   })
   .passthrough()
   .readonly()
