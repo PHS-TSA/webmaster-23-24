@@ -1,5 +1,5 @@
+import { capitalize } from "./capitalize.ts";
 import { solutions } from "./categories.gen.ts";
-import { isKey } from "./type-helpers.ts";
 
 /**
  * A menu.
@@ -72,9 +72,7 @@ function generateMenus(): Menu[] {
     // If the category doesn't exist yet, create it
     if (!categories.has(solutionCategory)) {
       categories.set(solutionCategory, {
-        title: isKey(categoryMap, solutionCategory)
-          ? categoryMap[solutionCategory]
-          : solutionCategory,
+        title: capitalize(solutionCategory),
         url: `/solutions/${solutionCategory}/`,
         items: [],
       });
@@ -102,16 +100,6 @@ function generateMenus(): Menu[] {
 
   return Array.from(categories.values());
 }
-
-/**
- * A mapping of categories to their titles.
- */
-const categoryMap = {
-  solar: "Solar",
-  geothermal: "Geothermal",
-  recycling: "Recycling",
-  about: "About",
-} as const;
 
 /**
  * The generated menus.
