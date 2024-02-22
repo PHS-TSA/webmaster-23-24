@@ -67,21 +67,23 @@ function generateMenus(): Menu[] {
   const categories = new Map<string, Menu>();
 
   for (const solution of solutions) {
+    const solutionCategory = solution.data.category;
+
     // If the category doesn't exist yet, create it
-    if (!categories.has(solution.data.category)) {
-      categories.set(solution.data.category, {
-        title: isKey(categoryMap, solution.data.category)
-          ? categoryMap[solution.data.category]
-          : solution.data.category,
-        url: "/solutions/",
+    if (!categories.has(solutionCategory)) {
+      categories.set(solutionCategory, {
+        title: isKey(categoryMap, solutionCategory)
+          ? categoryMap[solutionCategory]
+          : solutionCategory,
+        url: `/solutions/${solutionCategory}/`,
         items: [],
       });
     }
 
     // Add the solution to the category's items
-    const category = categories.get(solution.data.category);
+    const category = categories.get(solutionCategory);
     if (category !== undefined) {
-      categories.set(solution.data.category, {
+      categories.set(solutionCategory, {
         ...category,
         items: [
           ...(category.items ?? []),
@@ -105,10 +107,10 @@ function generateMenus(): Menu[] {
  * A mapping of categories to their titles.
  */
 const categoryMap = {
-  green: "Going Green?",
-  monies: "Monies",
-  about: "About",
   solar: "Solar",
+  geothermal: "Geothermal",
+  recycling: "Recycling",
+  about: "About",
 } as const;
 
 /**

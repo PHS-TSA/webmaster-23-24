@@ -1,11 +1,12 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
-import { Cover } from "../../components/Cover.tsx";
-import { Meta } from "../../components/Meta.tsx";
-import type { FreshContextHelper } from "../../utils/handlers.ts";
-import { IconSolarPanel } from "../../utils/icons.ts";
-import type { MDXFile } from "../../utils/solutions.ts";
+import { Cover } from "../../../components/Cover.tsx";
+import { Meta } from "../../../components/Meta.tsx";
+import type { FreshContextHelper } from "../../../utils/handlers.ts";
+import { IconSolarPanel } from "../../../utils/icons.ts";
+import type { MDXFile } from "../../../utils/solutions.ts";
+import { isKey } from "../../../utils/type-helpers.ts";
 
 /**
  * Properties for the {@link Solution} component.
@@ -17,6 +18,8 @@ export interface SolutionProps {
   readonly page: MDXFile;
 }
 
+const contentDir = "../../../content";
+
 /**
  * The server handler for the solution page.
  */
@@ -26,9 +29,12 @@ export const handler: Handlers<SolutionProps> = {
     ctx: FreshContextHelper<SolutionProps>,
   ): Promise<Response> {
     try {
-      const file: MDXFile = await import(
-        `../../content/${ctx.params["slug"]}.js`
-      );
+      const isCategoryIndex = isKey(ctx.params, "slug");
+      const filepath = !isCategoryIndex
+        ? `${contentDir}/${ctx.params["category"]}.js`
+        : `${contentDir}/${ctx.params["category"]}/${ctx.params["slug"]}.js`;
+
+      const file: MDXFile = await import(filepath);
 
       return ctx.render({ page: file });
     } catch {
