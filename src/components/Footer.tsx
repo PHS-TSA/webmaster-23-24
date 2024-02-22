@@ -66,12 +66,7 @@ interface Tool {
 /**
  * Properties for the {@link Footer} component.
  */
-export interface FooterProps {
-  /**
-   * The CSS classes to apply to this component.
-   */
-  readonly class?: string;
-}
+export type FooterProps = JSX.HTMLAttributes<HTMLElement>;
 
 /**
  * Render a footer component, which is used as a footer for pages.
@@ -84,10 +79,11 @@ export interface FooterProps {
  * @param props.class - The CSS classes to apply to this component.
  * @returns The rendered footer component.
  */
-export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
+export function Footer(props: FooterProps): JSX.Element {
   return (
     <footer
-      class={tw`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black md:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${classes}`}
+      {...props}
+      class={tw`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black md:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${props.class}`}
     >
       <div class="col-start-1 col-end-3 row-start-1 row-end-2 sm:col-end-2">
         <Who />
