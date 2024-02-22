@@ -1,12 +1,12 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
+import { join } from "$std/path/mod.ts";
 import type { JSX } from "preact";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
 import type { MDXFile } from "../../../utils/solutions.ts";
-import { isKey } from "../../../utils/type-helpers.ts";
 
 /**
  * Properties for the {@link Solution} component.
@@ -29,10 +29,14 @@ export const handler: Handlers<SolutionProps> = {
     ctx: FreshContextHelper<SolutionProps>,
   ): Promise<Response> {
     try {
-      const isCategoryIndex = isKey(ctx.params, "slug");
-      const filepath = !isCategoryIndex
-        ? `${contentDir}/${ctx.params["category"]}.js`
-        : `${contentDir}/${ctx.params["category"]}/${ctx.params["slug"]}.js`;
+      const { category, slug } = ctx.params;
+      if (category === undefined) {
+        return ctx.renderNotFound();
+      }
+
+      const base = join(contentDir, category);
+      const extensionless = slug ? join(base, slug) : base;
+      const filepath = `${extensionless}.js`;
 
       const file: MDXFile = await import(filepath);
 
