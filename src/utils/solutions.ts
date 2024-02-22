@@ -82,7 +82,7 @@ export const solutionPagesSchema = solutionPagesNullableSchema.transform(
 /**
  * A compiled file of Markdown XML which contains metadata in the form of frontmatter.
  */
-export interface MDXFile {
+export interface MdxFile {
   /**
    * The default export of the MDX file, which is a preact component.
    */

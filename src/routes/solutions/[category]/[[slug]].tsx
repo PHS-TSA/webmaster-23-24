@@ -6,7 +6,7 @@ import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
-import type { MDXFile } from "../../../utils/solutions.ts";
+import type { MdxFile } from "../../../utils/solutions.ts";
 
 /**
  * Properties for the {@link Solution} component.
@@ -15,7 +15,7 @@ export interface SolutionProps {
   /**
    * The page to render.
    */
-  readonly page: MDXFile;
+  readonly page: MdxFile;
 }
 
 const contentDir = "../../../content";
@@ -38,7 +38,7 @@ export const handler: Handlers<SolutionProps> = {
       const extensionless = slug ? join(base, slug) : base;
       const filepath = `${extensionless}.js`;
 
-      const file: MDXFile = await import(filepath);
+      const file: MdxFile = await import(filepath);
 
       return ctx.render({ page: file });
     } catch {

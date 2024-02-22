@@ -6,7 +6,7 @@ import manifest from "../fresh.gen.ts";
 /**
  * Connection info for the request.
  */
-const CONN_INFO: ServeHandlerInfo = {
+const connInfo: ServeHandlerInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },
 };
 
@@ -19,7 +19,7 @@ Deno.test("HTTP assert test.", async (t: Deno.TestContext): Promise<void> => {
   await t.step("#1 GET /about/", async (): Promise<void> => {
     const resp: Response = await handler(
       new Request("http://127.0.0.1/about/"),
-      CONN_INFO,
+      connInfo,
     );
     const text: string = await resp.text();
     assertStringIncludes(text, "It's us, man!");
