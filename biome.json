@@ -33,7 +33,7 @@
     "defaultBranch": "main"
   },
   "files": {
-    "include": ["src/**/*.{ts,tsx}"],
+    "include": ["./src/**/*.ts", "./src/**/*.tsx", "tool/*.ts"],
     "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json", "deno.json"]
   },
   "javascript": {
