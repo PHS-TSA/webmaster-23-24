@@ -1,7 +1,9 @@
+const punctuationlessSiteName = "Why Switch";
+
 /**
  * The name of the website.
  */
-export const siteName = "Why Switch?";
+export const siteName = `${punctuationlessSiteName}?`;
 
 /**
  * The slogan of the website.
@@ -11,10 +13,7 @@ export const slogan = "The Truth About Going Green";
 /**
  * A basic description of the website's content.
  */
-export const description = `${siteName.replace(
-  "?",
-  "",
-)} is an informative website about clean and green energy.`;
+export const description = `${punctuationlessSiteName} is an informative website about clean and green energy.`;
 
 /**
  * The keywords for the website.
