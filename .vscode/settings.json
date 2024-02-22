@@ -20,5 +20,6 @@
   ],
   "explorer.fileNesting.patterns": {
     "*.mdx": "${capture}.js"
-  }
+  },
+  "cSpell.enableFiletypes": ["mdx"]
 }
