@@ -18,7 +18,7 @@ export interface SolutionProps {
   readonly page: MdxFile;
 }
 
-const contentDir = "../../../content";
+const contentDir = "../../../content" as const;
 
 /**
  * The server handler for the solution page.

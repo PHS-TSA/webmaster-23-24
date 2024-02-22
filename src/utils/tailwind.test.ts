@@ -7,38 +7,38 @@ import { tw } from "./tailwind.ts";
 Deno.test("Tailwind utility.", async (t: Deno.TestContext): Promise<void> => {
   await t.step("Actual Tailwind", (): void => {
     const actual = tw`text-center`;
-    const expected = "text-center";
+    const expected = "text-center" as const;
     assertEquals(actual, expected);
   });
 
   await t.step("Embedded inside a template string", (): void => {
     const actual = `a ${tw`string`}!`;
-    const expected = "a string!";
+    const expected = "a string!" as const;
     assertEquals(actual, expected);
   });
 
   await t.step("Dully embedded inside a template string", (): void => {
     const actual = `a ${tw`string${tw`bean`}`}!`;
-    const expected = "a stringbean!";
+    const expected = "a stringbean!" as const;
     assertEquals(actual, expected);
   });
 
   await t.step("Embedded string", (): void => {
     const actual = tw`a ${"string"}.`;
-    const expected = "a string.";
+    const expected = "a string." as const;
     assertEquals(actual, expected);
   });
 
   await t.step("Embedded tag", (): void => {
     const actual = tw`a ${tw`string`}.`;
-    const expected = "a string.";
+    const expected = "a string." as const;
     assertEquals(actual, expected);
   });
 
-  // WHY!?
+  // WHY do we care!?
   await t.step("Special characters", (): void => {
     const actual = tw`\n`;
-    const expected = "\n";
+    const expected = "\n" as const;
     assertEquals(actual, expected);
   });
 });

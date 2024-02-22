@@ -6,7 +6,7 @@ import { Meta } from "../components/Meta.tsx";
 /**
  * The page title.
  */
-const pageTitle = "500 — Internal Server Error";
+const pageTitle = "500 — Internal Server Error" as const;
 
 /**
  * Render a 500 page.

@@ -6,7 +6,7 @@ import { Meta } from "../components/Meta.tsx";
 /**
  * The page title.
  */
-const pageTitle = "404 — Page not found";
+const pageTitle = "404 — Page not found" as const;
 
 /**
  * Render a 404 page.

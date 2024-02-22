@@ -1,24 +1,25 @@
-const punctuationlessSiteName = "Why Switch";
+const punctuationlessSiteName = "Why Switch" as const;
 
 /**
  * The name of the website.
  */
-export const siteName = `${punctuationlessSiteName}?`;
+export const siteName = `${punctuationlessSiteName}?` as const;
 
 /**
  * The slogan of the website.
  */
-export const slogan = "The Truth About Going Green";
+export const slogan = "The Truth About Going Green" as const;
 
 /**
  * A basic description of the website's content.
  */
-export const description = `${punctuationlessSiteName} is an informative website about clean and green energy.`;
+export const description =
+  `${punctuationlessSiteName} is an informative website about clean and green energy.` as const;
 
 /**
  * The keywords for the website.
  */
-export const keywords = "green, clean, renewable, tsa";
+export const keywords = "green, clean, renewable, tsa" as const;
 
 export type Title<T extends string> = `${T} | ${typeof siteName}`;
 
@@ -26,10 +27,10 @@ export type Title<T extends string> = `${T} | ${typeof siteName}`;
  * Create a title for a page.
  */
 export function makeTitle<const T extends string>(pageTitle: T): Title<T> {
-  return `${pageTitle} | ${siteName}`;
+  return `${pageTitle} | ${siteName}` as const;
 }
 
-// export const faviconSvgUrl = "/favicon.svg";
-// export const faviconPngUrl = "/favicon.png";
-// export const logoSvgUrl = "/logo.svg";
-// export const logoAlt = `${siteName}'s logo`;
+// export const faviconSvgUrl = "/favicon.svg" as const;
+// export const faviconPngUrl = "/favicon.png" as const;
+// export const logoSvgUrl = "/logo.svg" as const;
+// export const logoAlt = `${siteName}'s logo` as const;

@@ -7,7 +7,7 @@ import { siteName } from "../site.ts";
 /**
  * The page title.
  */
-const pageTitle = "Home";
+const pageTitle = "Home" as const;
 
 /**
  * Render the home page.

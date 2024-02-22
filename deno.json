@@ -43,7 +43,8 @@
     "tailwindcss/plugin": "npm:tailwindcss@3.4.1/plugin.js",
     "vfile": "npm:vfile@6.0.1",
     "vfile-matter": "npm:vfile-matter@5.0.0",
-    "vfile-reporter": "npm:vfile-reporter@8.1.0"
+    "vfile-reporter": "npm:vfile-reporter@8.1.0",
+    "unified": "npm:unified@11.0.4"
   },
   "scopes": {
     "https://esm.sh/v135/": {
@@ -71,10 +72,7 @@
   "nodeModulesDir": true,
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ],
+      "tags": ["fresh", "recommended"],
       "include": [
         "ban-untagged-todo",
         "explicit-function-return-type",
@@ -89,9 +87,5 @@
       ]
     }
   },
-  "exclude": [
-    "**/_fresh/*",
-    "**/*.gen.ts",
-    "src/content/"
-  ]
+  "exclude": ["**/_fresh/*", "**/*.gen.ts", "src/content/"]
 }

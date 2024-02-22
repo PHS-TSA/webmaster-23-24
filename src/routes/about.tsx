@@ -6,7 +6,7 @@ import { Meta } from "../components/Meta.tsx";
 /**
  * The page title.
  */
-const pageTitle = "About";
+const pageTitle = "About" as const;
 
 /**
  * Render an about page.

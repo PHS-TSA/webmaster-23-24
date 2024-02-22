@@ -11,7 +11,12 @@ export type SolutionData = z.infer<typeof solutionDataSchema>;
  */
 export type SolutionPages = z.infer<typeof solutionPagesSchema>;
 
-const solutionDataSchemaDescription = "Metadata for the solution.";
+const solutionDataSchemaDescription = "Metadata for the solution." as const;
+
+/**
+ * A list of categories, in order.
+ */
+export const categoryList = ["solar", "geothermal", "recycling"] as const;
 
 /**
  * Represent the data for the solution pages.
@@ -20,7 +25,14 @@ const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
     description: z.string().describe("The description of the solution."),
-    category: z.string().optional().describe("The category of the solution."),
+    category: z
+      .union([
+        z.literal("solar"),
+        z.literal("geothermal"),
+        z.literal("recycling"),
+      ])
+      .optional()
+      .describe("The category of the solution."),
   })
   .passthrough()
   .readonly()

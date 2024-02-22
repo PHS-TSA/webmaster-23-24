@@ -10,11 +10,13 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkPresetLintConsistent from "remark-preset-lint-consistent";
 import remarkPresetLintRecommended from "remark-preset-lint-recommended";
+import type { PluggableList } from "unified";
 import { VFile } from "vfile";
 import { matter } from "vfile-matter";
 import { type Options as LintOptions, reporter } from "vfile-reporter";
 import {
   type SolutionData,
+  categoryList,
   solutionPagesSchema,
 } from "../src/utils/solutions.ts";
 
@@ -22,9 +24,9 @@ import {
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
 
 // Directories for resolve.
-const srcDir = "../src";
-const contentDir = `${srcDir}/content`;
-const utilsDir = `${srcDir}/utils`;
+const srcDir = "../src" as const;
+const contentDir = `${srcDir}/content` as const;
+const utilsDir = `${srcDir}/utils` as const;
 
 /**
  * Compile the MDX files into JS.
@@ -133,15 +135,18 @@ async function* compileSolutions(
  */
 const remarkPlugins = [
   remarkFrontmatter,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkMdxFrontmatter,
+  // @ts-expect-error: remark-lint it still on Unified 10, but it works fine with Unified 11.
   remarkPresetLintConsistent,
+  // @ts-expect-error: remark-lint it still on Unified 10, but it works fine with Unified 11.
   remarkPresetLintRecommended,
-];
+] as const satisfies PluggableList;
 
 /** MDX compilation options. */
 const compileOptions = {
   jsxImportSource: "preact",
-  // @ts-expect-error: Unified's types dislike current Deno deduping.
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPlugins,
 } as const satisfies CompileOptions;
 
@@ -154,7 +159,7 @@ const compileOptions = {
 async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
 
-  // @ts-expect-error: Unified's types dislike current Deno deduping.
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
@@ -217,19 +222,14 @@ async function categories(files: VFile[]): Promise<void> {
 }
 
 /**
- * A list of categories, in order.
- */
-const categorySort = ["green", "monies", "solar"];
-
-/**
  * Create a file containing the categories of all the files.
  */
 function categoriesFile(files: VFile[]): string {
   const sortedFiles = files
     .toSorted(
       (a, b) =>
-        categorySort.indexOf(a.data["matter"]?.category ?? "") -
-        categorySort.indexOf(b.data["matter"]?.category ?? ""),
+        categoryList.indexOf(a.data["matter"]?.category ?? categoryList[0]) -
+        categoryList.indexOf(b.data["matter"]?.category ?? categoryList[0]),
     )
     .map((file) => {
       return { slug: file.stem ?? "", data: file.data["matter"] };

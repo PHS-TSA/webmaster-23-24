@@ -6,9 +6,9 @@ import manifest from "../fresh.gen.ts";
 /**
  * Connection info for the request.
  */
-const connInfo: ServeHandlerInfo = {
+const connInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },
-};
+} as const satisfies ServeHandlerInfo;
 
 /**
  * Tests for the about page.

@@ -17,7 +17,7 @@ Deno.test(
             category: "category",
           },
         },
-      ];
+      ] as const;
 
       const actual = solutionPagesSchema.parse(value);
       assertEquals(actual, value);
