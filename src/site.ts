@@ -21,10 +21,12 @@ export const description = `${siteName.replace(
  */
 export const keywords = "green, clean, renewable, tsa";
 
+export type Title<T extends string> = `${T} | ${typeof siteName}`;
+
 /**
  * Create a title for a page.
  */
-export function makeTitle(pageTitle: string): string {
+export function makeTitle<const T extends string>(pageTitle: T): Title<T> {
   return `${pageTitle} | ${siteName}`;
 }
 
