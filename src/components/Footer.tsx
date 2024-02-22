@@ -87,7 +87,7 @@ export interface FooterProps {
 export function Footer({ class: classes = tw`` }: FooterProps): JSX.Element {
   return (
     <footer
-      class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black md:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${classes}`}
+      class={tw`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm dark:bg-black md:grid-cols-footer-desktop sm:grid-rows-footer-desktop sm:gap-x-8 md:gap-16 ${classes}`}
     >
       <div class="col-start-1 col-end-3 row-start-1 row-end-2 sm:col-end-2">
         <Who />
