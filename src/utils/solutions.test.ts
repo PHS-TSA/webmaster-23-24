@@ -14,10 +14,10 @@ Deno.test(
           data: {
             title: "title",
             description: "description",
-            category: "category",
+            category: undefined,
           },
         },
-      ] as const;
+      ];
 
       const actual = solutionPagesSchema.parse(value);
       assertEquals(actual, value);
