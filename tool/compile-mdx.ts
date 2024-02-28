@@ -20,6 +20,15 @@ import {
   solutionPagesSchema,
 } from "../src/utils/solutions.ts";
 
+declare module "vfile" {
+  export interface DataMap {
+    /**
+     * The frontmatter of the file.
+     */
+    readonly matter: SolutionData;
+  }
+}
+
 // Change the directory so that relative paths are based on the file, not the CWD.
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
 
@@ -163,6 +172,9 @@ async function compileSolution(file: VFile): Promise<VFile> {
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  compiled.data["matter"].category = compiled.dirname;
+
   return compiled;
 }
 
@@ -204,15 +216,6 @@ function staticImportsFile(files: string[]): string {
     .concat("\n");
 }
 
-declare module "vfile" {
-  export interface DataMap {
-    /**
-     * The frontmatter of the file.
-     */
-    readonly matter: SolutionData;
-  }
-}
-
 /**
  * Write a file containing the categories of all the files.
  */
@@ -232,7 +235,10 @@ function categoriesFile(files: VFile[]): string {
         categoryList.indexOf(b.data["matter"]?.category ?? categoryList[0]),
     )
     .map((file) => {
-      return { slug: file.stem ?? "", data: file.data["matter"] };
+      return {
+        slug: file.stem ?? "",
+        data: file.data["matter"],
+      };
     });
   const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
   const json = JSON.stringify(parsedProfiles, undefined, 2);
