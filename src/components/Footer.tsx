@@ -92,7 +92,7 @@ export function Footer(props: FooterProps): JSX.Element {
       <div class="grid grid-flow-col grid-rows-1 gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
         {menus.map(
           (item: Menu): JSX.Element => (
-            <section class="col-span-1">
+            <section class="col-span-1 max-w-52 text-pretty">
               <RenderCategory {...item} key={item.title} />
             </section>
           ),
