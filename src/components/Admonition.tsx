@@ -1,27 +1,95 @@
 import type { JSX, RenderableProps } from "preact";
+import {
+  IconAlertTriangle,
+  IconFlame,
+  IconInfoCircle,
+} from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 
+type AdmonitionType =
+  | "note"
+  | "warning"
+  | "tip"
+  | "important"
+  | "fun-fact"
+  | "caution";
+
 export interface AdmonitionProps {
-  type?: "note" | "warning" | "tip" | "important";
-  title: string;
+  type?: AdmonitionType;
 }
 
-const noteStyles = tw`bg-blue-300 border-blue-400 divide-blue-500`;
-const warningStyles = tw`bg-red-300 border-red-400 divide-red-500`;
+const noteStyles = tw`bg-blue-300 divide-blue-500 border-blue-400 dark:divide-blue-400 dark:border-blue-500 dark:bg-blue-600`;
+const warningStyles = tw`bg-red-300 divide-red-500 border-red-400 dark:divide-red-500 dark:border-red-500 dark:bg-red-600`;
+
+function getAdmonitionStyles(type: AdmonitionType): string {
+  switch (type) {
+    case "note":
+      return noteStyles;
+    case "warning":
+      return warningStyles;
+    case "tip":
+      return noteStyles;
+    case "important":
+      return noteStyles;
+    case "fun-fact":
+      return noteStyles;
+    case "caution":
+      return warningStyles;
+  }
+}
+
+function getTitle(type: AdmonitionType): string {
+  switch (type) {
+    case "note":
+      return "Note:";
+    case "warning":
+      return "Warning:";
+    case "tip":
+      return "Tip:";
+    case "important":
+      return "Important!";
+    case "fun-fact":
+      return "Did You Know?";
+    case "caution":
+      return "Caution:";
+  }
+}
+
+interface AdmonitionIconProps {
+  type: AdmonitionType;
+}
+
+function AdmonitionIcon({ type }: AdmonitionIconProps): JSX.Element {
+  switch (type) {
+    case "note":
+      return <IconInfoCircle />;
+    case "warning":
+      return <IconAlertTriangle />;
+    case "tip":
+      return <IconInfoCircle />;
+    case "important":
+      return <IconFlame />;
+    case "fun-fact":
+      return <IconInfoCircle />;
+    case "caution":
+      return <IconAlertTriangle />;
+  }
+}
 
 export function Admonition({
   type = "note",
-  title,
   children,
 }: RenderableProps<AdmonitionProps>): JSX.Element {
   return (
     <div
-      class={`rounded-lg border-2 flex-col divide-y *:px-4 ${
-        type === "note" ? noteStyles : warningStyles
-      }`}
+      class={`w-2/3 flex-col divide-y rounded-lg border-2 *:px-4 ${getAdmonitionStyles(
+        type,
+      )}`}
     >
-      <div class="admonition-title">{title}</div>
-      <div class="admonition-content">{children}</div>
+      <div class="flex items-center *:mr-4">
+        <AdmonitionIcon type={type} /> {getTitle(type)}
+      </div>
+      <div>{children}</div>
     </div>
   );
 }

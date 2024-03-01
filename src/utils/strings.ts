@@ -17,6 +17,17 @@ export function capitalize<const T extends string>(str: T): ToCaps<T> {
   return str.replace(/\b\w/g, (char) => char.toUpperCase()) as ToCaps<T>;
 }
 
-type ToCaps<S extends string> = S extends `${infer Head} ${infer Tail}`
+export type ToCaps<S extends string> = S extends `${infer Head} ${infer Tail}`
   ? `${Capitalize<Head>} ${ToCaps<Tail>}`
   : Capitalize<S>;
+
+export function kebabToCamel<const T extends string>(string: T): ToCamel<T> {
+  return string.replace(
+    /-([a-z])/g,
+    (g) => g[1]?.toUpperCase() ?? "",
+  ) as ToCamel<T>;
+}
+
+export type ToCamel<S extends string> = S extends `${infer Head}-${infer Tail}`
+  ? `${Head}${Capitalize<ToCamel<Tail>>}`
+  : S;

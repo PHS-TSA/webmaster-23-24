@@ -9,6 +9,7 @@ import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
+import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
@@ -21,6 +22,7 @@ const manifest = {
     "./routes/about.tsx": $about,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,
+    "./routes/solutions/[category]/index.tsx": $solutions_category_index,
   },
   islands: {
     "./islands/HeaderMenu.tsx": $HeaderMenu,

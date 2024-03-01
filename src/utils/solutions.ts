@@ -11,12 +11,25 @@ export type SolutionData = z.infer<typeof solutionDataSchema>;
  */
 export type SolutionPages = z.infer<typeof solutionPagesSchema>;
 
+export type SolutionPage = z.infer<typeof solutionPageSchema>;
+
 const solutionDataSchemaDescription = "Metadata for the solution." as const;
 
 /**
  * A list of categories, in order.
  */
-export const categoryList = ["solar", "geothermal", "recycling"] as const;
+export const categoryList: [string, string, string] = [
+  "solar",
+  "geothermal",
+  "recycling",
+];
+
+export const titleList: [string, string, string, string] = [
+  "what",
+  "environment",
+  "cost",
+  "worth-it",
+];
 
 /**
  * Represent the data for the solution pages.
@@ -25,14 +38,7 @@ const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
     description: z.string().describe("The description of the solution."),
-    category: z
-      .union([
-        z.literal("solar"),
-        z.literal("geothermal"),
-        z.literal("recycling"),
-      ])
-      .optional()
-      .describe("The category of the solution."),
+    category: z.string().describe("The category of the solution."),
   })
   .passthrough()
   .readonly()
@@ -45,6 +51,7 @@ const solutionPageSchema = z
   .object({
     slug: z
       .string()
+      .optional()
       .describe("The slug of the solution without a trailing slash."),
     data: solutionDataSchema.describe(solutionDataSchemaDescription),
   })

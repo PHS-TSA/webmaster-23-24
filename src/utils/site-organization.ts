@@ -1,5 +1,6 @@
-import { capitalize } from "./capitalize.ts";
 import { solutions } from "./categories.gen.ts";
+import { capitalize } from "./strings.ts";
+import { hasSlug } from "./type-helpers.ts";
 
 /**
  * A menu.
@@ -62,12 +63,11 @@ const extraMenus = [
  *
  * @returns The generated menus.
  */
-
 function generateMenus(): Menu[] {
   const categories = new Map<string, Menu>();
 
   for (const solution of solutions) {
-    const solutionCategory = solution.data.category;
+    const { category: solutionCategory } = solution.data;
 
     // If the category doesn't exist yet, create it
     if (!categories.has(solutionCategory)) {
@@ -80,7 +80,7 @@ function generateMenus(): Menu[] {
 
     // Add the solution to the category's items
     const category = categories.get(solutionCategory);
-    if (category !== undefined) {
+    if (category !== undefined && hasSlug(solution)) {
       categories.set(solutionCategory, {
         ...category,
         items: [

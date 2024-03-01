@@ -1,4 +1,5 @@
 import { assertEquals, assertThrows } from "$std/assert/mod.ts";
+import { ZodError } from "zod";
 import { solutionPagesSchema } from "./solutions.ts";
 
 /**
@@ -14,7 +15,7 @@ Deno.test(
           data: {
             title: "title",
             description: "description",
-            category: undefined,
+            category: "",
           },
         },
       ];
@@ -30,19 +31,18 @@ Deno.test(
         };
         assertThrows(actual, Error, "Required");
       });
-      await t.step("Missing slug", (): void => {
+      await t.step("Missing category", (): void => {
         const actual = (): void => {
           solutionPagesSchema.parse([
             {
               data: {
                 title: "title",
                 description: "description",
-                category: "category",
               },
             },
           ]);
         };
-        assertThrows(actual, Error, "Required");
+        assertThrows(actual, ZodError, "Required");
       });
     });
   },

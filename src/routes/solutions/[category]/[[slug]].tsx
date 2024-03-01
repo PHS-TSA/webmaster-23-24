@@ -35,13 +35,14 @@ export const handler: Handlers<SolutionProps> = {
       }
 
       const base = join(contentDir, category);
-      const extensionless = slug ? join(base, slug) : base;
+      const extensionless = join(base, slug || "index");
       const filepath = `${extensionless}.js`;
 
       const file: MdxFile = await import(filepath);
 
       return ctx.render({ page: file });
-    } catch {
+    } catch (e) {
+      console.error(e);
       return ctx.renderNotFound();
     }
   },
@@ -57,8 +58,7 @@ export const handler: Handlers<SolutionProps> = {
 export default function Solution({
   data,
 }: PageProps<SolutionProps>): JSX.Element {
-  const pageTitle = data.page.frontmatter.title;
-  const description = data.page.frontmatter.description;
+  const { title: pageTitle, description } = data.page.frontmatter;
 
   return (
     <>

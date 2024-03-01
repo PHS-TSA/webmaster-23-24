@@ -18,6 +18,7 @@ import {
   type SolutionData,
   categoryList,
   solutionPagesSchema,
+  titleList,
 } from "../src/utils/solutions.ts";
 
 declare module "vfile" {
@@ -173,7 +174,8 @@ async function compileSolution(file: VFile): Promise<VFile> {
   compiled.extname = ".js";
 
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
-  compiled.data["matter"].category = compiled.dirname;
+  compiled.data["matter"].category =
+    compiled.dirname !== "." ? compiled.dirname : compiled.stem;
 
   return compiled;
 }
@@ -229,14 +231,26 @@ async function categories(files: VFile[]): Promise<void> {
  */
 function categoriesFile(files: VFile[]): string {
   const sortedFiles = files
-    .toSorted(
-      (a, b) =>
-        categoryList.indexOf(a.data["matter"]?.category ?? categoryList[0]) -
-        categoryList.indexOf(b.data["matter"]?.category ?? categoryList[0]),
-    )
+    .toSorted((a, b) => {
+      const aCategory = a.data["matter"]?.category ?? "";
+      const bCategory = b.data["matter"]?.category ?? "";
+      const aSlug = a.stem ?? "";
+      const bSlug = b.stem ?? "";
+
+      const categoryComparison =
+        categoryList.indexOf(aCategory) - categoryList.indexOf(bCategory);
+
+      // If the categories are different, sort by category, otherwise, sort by title.
+      return categoryComparison !== 0
+        ? titleList.indexOf(aSlug) - titleList.indexOf(bSlug)
+        : categoryComparison;
+    })
     .map((file) => {
+      const stem = file.stem ?? "";
+      const category = file.data["matter"]?.category ?? "";
+
       return {
-        slug: file.stem ?? "",
+        slug: stem === category ? undefined : stem,
         data: file.data["matter"],
       };
     });
