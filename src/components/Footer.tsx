@@ -70,9 +70,9 @@ export type FooterProps = JSX.HTMLAttributes<HTMLElement>;
 
 /**
  * Render a footer component, which is used as a footer for pages.
- * It contains an about section, a menu section, and a "made with" section.
+ * It contains an about section, a categories section, and a "made with" section.
  * The about section contains the site name and slogan.
- * The menu section contains links to the various pages of the site.
+ * The categories section contains links to the various pages of the site.
  * The "made with" section contains links to the tools that were used to build the site.
  *
  * @param props - The component's properties.
@@ -93,7 +93,7 @@ export function Footer(props: FooterProps): JSX.Element {
         {menus.map(
           (item: Menu): JSX.Element => (
             <section class="col-span-1">
-              <RenderMenu {...item} key={item.title} />
+              <RenderCategory {...item} key={item.title} />
             </section>
           ),
         )}
@@ -111,19 +111,19 @@ export function Footer(props: FooterProps): JSX.Element {
 /**
  * Render a category component.
  * It contains a header and an optional list of items.
- * The header is a link to the menu's URL and the items are links to the menu items' URLs.
+ * The header is a link to the category's URL and the items are links to the category items' URLs.
  *
  * @param props - The component's properties.
- * @param props.title - The title of the menu.
- * @param props.url - The URL of the menu.
+ * @param props.title - The title of the category.
+ * @param props.url - The URL to the category's index page.
  * @param props.items - The items to render.
- * @returns The rendered menu component.
+ * @returns The rendered category component.
  */
-function RenderMenu(props: Menu): JSX.Element {
+function RenderCategory(props: Menu): JSX.Element {
   return (
     <>
-      <RenderMenuHeader {...props} />
-      {hasItems(props) && <RenderMenuItems {...props} />}
+      <RenderCategoryHeader {...props} />
+      {hasItems(props) && <RenderCategoryItems {...props} />}
     </>
   );
 }
@@ -134,11 +134,11 @@ function RenderMenu(props: Menu): JSX.Element {
  * @param props - The configuration for this component.
  * @param props.url - The URL that should be linked.
  * @param props.title - The title of the link.
- * @returns The rendered menu header.
+ * @returns The rendered category header.
  */
 // TODO(lishaduck): Add a <Link> component to centralize said styling.
 // TODO(lishaduck): Render these all in one section once we have multiple.
-function RenderMenuHeader({ url, title }: Menu): JSX.Element {
+function RenderCategoryHeader({ url, title }: Menu): JSX.Element {
   return (
     <a
       class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
@@ -150,15 +150,15 @@ function RenderMenuHeader({ url, title }: Menu): JSX.Element {
 }
 
 /**
- * Render the menu items.
- * The items are links to the menu items' URLs.
+ * Render the items in te category.
+ * The items are links to the category items' URLs.
  *
  * @param props - The component's properties.
  * @param props.items - The items to render.
  * @param props.url - The URL to prepend to the items' URLs.
- * @returns The rendered menu items.
+ * @returns The rendered category's items.
  */
-function RenderMenuItems({ items, url }: MenuWithItems): JSX.Element {
+function RenderCategoryItems({ items, url }: MenuWithItems): JSX.Element {
   return (
     <ul class="mt-2">
       {items.map(
