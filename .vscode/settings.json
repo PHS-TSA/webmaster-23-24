@@ -21,5 +21,16 @@
   "explorer.fileNesting.patterns": {
     "*.mdx": "${capture}.js"
   },
-  "cSpell.enableFiletypes": ["mdx"]
+  "cSpell.enableFiletypes": ["mdx"],
+  "[mdx][markdown]": {
+    "editor.unicodeHighlight.allowedCharacters": {
+      "‘": true,
+      "’": true,
+      "“": true,
+      "”": true,
+      "…": true,
+      "–": true,
+      "—": true
+    }
+  }
 }
