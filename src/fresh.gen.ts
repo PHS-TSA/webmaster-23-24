@@ -7,10 +7,12 @@ import * as $_500 from "./routes/_500.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
+import * as $calculator from "./routes/calculator.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
+import * as $StateSelector from "./islands/StateSelector.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -20,12 +22,14 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
+    "./routes/calculator.tsx": $calculator,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,
     "./routes/solutions/[category]/index.tsx": $solutions_category_index,
   },
   islands: {
     "./islands/HeaderMenu.tsx": $HeaderMenu,
+    "./islands/StateSelector.tsx": $StateSelector,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
