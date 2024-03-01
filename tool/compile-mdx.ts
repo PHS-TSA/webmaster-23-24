@@ -6,7 +6,9 @@ import {
   resolve,
 } from "$std/path/mod.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
+import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkMath, { type Options as MathOptions } from "remark-math";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkPresetLintConsistent from "remark-preset-lint-consistent";
 import remarkPresetLintRecommended from "remark-preset-lint-recommended";
@@ -151,11 +153,15 @@ const remarkPlugins = [
   remarkPresetLintConsistent,
   // @ts-expect-error: remark-lint it still on Unified 10, but it works fine with Unified 11.
   remarkPresetLintRecommended,
+  [remarkMath, { singleDollarTextMath: false } satisfies MathOptions],
 ] as const satisfies PluggableList;
+
+const rehypePlugins = [rehypeMathjax] as const satisfies PluggableList;
 
 /** MDX compilation options. */
 const compileOptions = {
   jsxImportSource: "preact",
+  rehypePlugins,
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPlugins,
 } as const satisfies CompileOptions;

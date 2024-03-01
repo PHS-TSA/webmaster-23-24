@@ -78,7 +78,7 @@ export default function Solution({
         >
           <p class="my-4 dark:text-white">{description}</p>
         </Cover>
-        <article class="py-10 px-40 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800">
+        <article class="py-10 px-40 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800 [&_mjx-container>svg]:inline">
           <data.page.default />
         </article>
       </main>
