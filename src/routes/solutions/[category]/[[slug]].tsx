@@ -43,6 +43,7 @@ export const handler: Handlers<SolutionProps> = {
       return ctx.render({ page: file });
     } catch (e) {
       console.error(e);
+
       return ctx.renderNotFound();
     }
   },

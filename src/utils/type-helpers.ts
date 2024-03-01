@@ -10,7 +10,7 @@ export function hasItems(menu: Menu): menu is MenuWithItems {
 
 export function hasSlug(
   data: SolutionPage,
-): data is SolutionPage & { slug: string } {
+): data is SolutionPage & { slug: string | undefined } {
   return isKey(data, "slug");
 }
 
@@ -27,10 +27,4 @@ export function isKey<const T extends object>(
   key: PropertyKey,
 ): key is keyof T {
   return Object.hasOwn(obj, key);
-}
-
-export function isSlug(
-  slug: string,
-): slug is "what" | "environment" | "cost" | "worthIt" {
-  return ["what", "environment", "cost", "worthIt"].includes(slug);
 }

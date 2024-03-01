@@ -8,7 +8,7 @@ import { solutions } from "../../../utils/categories.gen.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
 import { kebabToCamel } from "../../../utils/strings.ts";
-import { hasSlug, isKey, isSlug } from "../../../utils/type-helpers.ts";
+import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export type CategoryProps = z.infer<typeof categoryProps>;
 export type CategoryPages = z.infer<typeof categoryPropsPages>;
@@ -29,7 +29,7 @@ const categoryPropsPages = z.object({
 const categoryProps = z.object({
   page: categoryPropsPages,
   title: z.string(),
-  description: z.string(),
+  description: z.string().refine((value) => !value.endsWith(",")),
 });
 
 /**
@@ -52,7 +52,7 @@ export const handler: Handlers<CategoryProps> = {
           const { slug, data: solutionData } = solution;
           const camelSlug = kebabToCamel(slug);
 
-          if (solutionData.category === category && isSlug(camelSlug)) {
+          if (solutionData.category === category) {
             data = {
               ...data,
               [camelSlug]: {
@@ -65,20 +65,14 @@ export const handler: Handlers<CategoryProps> = {
         }
       }
 
-      const parsedData = categoryPropsPages.safeParse(data);
-
-      if (parsedData.success) {
-        return ctx.render({
-          page: parsedData.data,
-          title: categoryMetadata[category].title,
-          description: categoryMetadata[category].description,
-        });
-      }
-
-      console.error(parsedData.error);
-      return ctx.renderNotFound();
+      return ctx.render({
+        page: categoryPropsPages.parse(data),
+        title: categoryMetadata[category].title,
+        description: categoryMetadata[category].description,
+      });
     } catch (e) {
       console.error(e);
+
       return ctx.renderNotFound();
     }
   },
@@ -88,6 +82,14 @@ const categoryMetadata = {
   solar: {
     title: "Solar Energy",
     description: "Solar Energy is an undertapped energy resource",
+  },
+  geothermal: {
+    title: "Geothermal Energy",
+    description: "Geothermal Energy is an undertapped energy resource",
+  },
+  recycling: {
+    title: "Recycling",
+    description: "Recycling saves energy and reduces pollution",
   },
 };
 
