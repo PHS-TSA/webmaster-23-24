@@ -34,7 +34,7 @@ export function Cover({
 }: RenderableProps<CoverProps>): JSX.Element {
   return (
     <div class="flex justify-center bg-green-500 px-4 py-8 dark:bg-green-700">
-      <div class="flex max-w-screen-sm lg:max-w-screen-md flex-col items-center justify-center text-center text-balance gap-y-4">
+      <div class="flex max-w-screen-sm flex-col items-center justify-center gap-y-4 text-balance text-center lg:max-w-screen-md">
         {icon}
         <h1 class="text-4xl font-bold">{title}</h1>
         {children}

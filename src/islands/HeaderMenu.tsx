@@ -97,7 +97,7 @@ function PopoverMenu({
         leaveTo="opacity-0 translate-y-1"
       >
         <Popover.Panel class="max-w-full">
-          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row divide-y divide-gray-200 dark:divide-gray-800 rounded-md bg-gray-50 dark:bg-gray-950 shadow-lg ring-1 ring-black/5 dark:ring-white/5 focus:outline-none sm:left-auto sm:right-0 gap-x-4 gap-y-0.5 px-4 py-1">
+          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-gray-200 rounded-md bg-gray-50 px-4 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-gray-800 dark:bg-gray-950 dark:ring-white/5">
             <a href={`${url}`} class={makeTextStyle(false)}>
               About {title}
             </a>
