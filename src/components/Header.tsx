@@ -2,7 +2,12 @@ import type { JSX } from "preact";
 import { HeaderMenu, LinkMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import { IconSolarPanel2 } from "../utils/icons.ts";
-import { type Menu, menus } from "../utils/site-organization.ts";
+import {
+  type BasicMenu,
+  type Menu,
+  extraMenus,
+  menus,
+} from "../utils/site-organization.ts";
 
 /**
  * Properties for the {@link Header} component.
@@ -30,9 +35,13 @@ export function Header({ active }: HeaderProps): JSX.Element {
             <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
           </li>
         ))}
-        <li class="flex h-8 items-end">
-          <LinkMenu active={active === "/about/"} title="About" url="/about/" />
-        </li>
+        {extraMenus.map(
+          ({ title, url }: BasicMenu): JSX.Element => (
+            <li class="flex h-8 items-end">
+              <LinkMenu active={active === url} title={title} url={url} />
+            </li>
+          ),
+        )}
       </ul>
     </header>
   );

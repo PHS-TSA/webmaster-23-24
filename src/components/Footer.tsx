@@ -14,6 +14,7 @@ import {
   type MenuItem,
   menus,
 } from "../utils/site-organization.ts";
+import { extraMenus } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 /**
@@ -180,7 +181,11 @@ function RenderCategoryItems({ items, url }: Menu): JSX.Element {
 function RenderAbouts(): JSX.Element {
   return (
     <>
-      <RenderCategoryHeader title="About" url="/about/" />
+      {extraMenus.map(
+        (menu: BasicMenu): JSX.Element => (
+          <RenderCategoryHeader {...menu} />
+        ),
+      )}
     </>
   );
 }

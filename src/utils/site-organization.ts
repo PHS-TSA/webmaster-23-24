@@ -82,3 +82,13 @@ function generateMenus(): Menu[] {
  * The generated menus.
  */
 export const menus = generateMenus();
+
+/**
+ * The additional menus that are not generated with the {@link solutions}.
+ */
+export const extraMenus = [
+  {
+    title: "About",
+    url: "/about/",
+  },
+] as const satisfies BasicMenu[];
