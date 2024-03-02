@@ -33,8 +33,8 @@ export function Cover({
   icon = <Logo />,
 }: RenderableProps<CoverProps>): JSX.Element {
   return (
-    <div class="mx-0 bg-green-500 px-4 py-8 dark:bg-green-700">
-      <div class="mx-auto flex max-w-screen-md flex-col items-center justify-center text-center text-balance">
+    <div class="flex justify-center bg-green-500 px-4 py-8 dark:bg-green-700">
+      <div class="flex max-w-screen-sm lg:max-w-screen-md flex-col items-center justify-center text-center text-balance gap-y-4">
         {icon}
         <h1 class="text-4xl font-bold dark:text-white">{title}</h1>
         {children}

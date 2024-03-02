@@ -20,7 +20,7 @@ export default function About(): JSX.Element {
         <Meta title={pageTitle} />
       </Head>
       <Cover title={pageTitle}>
-        <p class="my-4 dark:text-white">It's us, man!</p>
+        <p class="dark:text-white">It's us, man!</p>
         {/* Add link to the portfolio PDF. */}
       </Cover>
     </>

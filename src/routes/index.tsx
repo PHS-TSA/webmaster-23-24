@@ -68,13 +68,13 @@ export default function Home(): JSX.Element {
         <Meta title={pageTitle} />
       </Head>
       <Cover title={siteName}>
-        <p class="my-4 dark:text-white">
+        <p class="dark:text-white">
           Looking for information about solar power? You've come to the right
           place!
         </p>
       </Cover>
 
-      <div class="*:my-10 px-40 bg-slate-200 dark:bg-slate-800 *:bg-slate-400 *:rounded-xl *:p-8 md:grid md:grid-cols-4 *:inline-grid">
+      <div class="gap-y-10 py-10 px-40 bg-slate-200 dark:bg-slate-800 *:bg-slate-400 *:rounded-xl *:p-8 md:grid md:grid-cols-4 *:inline-grid">
         <Card
           image={testImg}
           alt="test"

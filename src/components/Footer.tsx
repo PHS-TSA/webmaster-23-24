@@ -223,12 +223,12 @@ function With(): JSX.Element {
   return (
     <>
       <div class="text-xs max-w-fit text-end">Made with</div>
-      <div class="grid grid-cols-auto-2 justify-end max-w-fit">
+      <div class="grid grid-cols-auto-2 justify-end max-w-fit gap-1">
         {icons.map(
           (tool: Tool): JSX.Element => (
             <a
               href={tool.href}
-              class="m-1 size-6 inline-block hover:text-black dark:hover:text-white max-w-fit"
+              class="size-6 inline-block hover:text-black dark:hover:text-white max-w-fit"
               title={tool.name}
               key={tool.name}
             >

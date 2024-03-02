@@ -22,7 +22,7 @@ export default function Error404(): JSX.Element {
       </Head>
       <Cover title={pageTitle}>
         <>
-          <p class="my-4 dark:text-white">
+          <p class="dark:text-white">
             The page you were looking for doesn't exist.
           </p>
           <a href="/" class="underline">
