@@ -142,7 +142,7 @@ function RenderCategory(props: Menu): JSX.Element {
 function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a
-      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
+      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:hover:text-gray-200"
       href={url}
     >
       {title}
@@ -201,12 +201,10 @@ function Who(): JSX.Element {
     <>
       <div class="flex items-center gap-1">
         <IconSolarPanel2
-          class="inline-block min-w-6 size-6 dark:text-white"
+          class="inline-block min-w-6 size-6"
           aria-hidden="true"
         />
-        <div class="text-xl sm:text-2xl font-bold dark:text-white">
-          {siteName}
-        </div>
+        <div class="text-xl sm:text-2xl font-bold">{siteName}</div>
       </div>
       <div class="text-gray-500 dark:text-gray-400 text-balance">{slogan}</div>
     </>

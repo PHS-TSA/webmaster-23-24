@@ -22,7 +22,7 @@ export default function Error500(): JSX.Element {
       </Head>
       <Cover title={pageTitle}>
         <>
-          <p class="dark:text-white">An internal server error occurred.</p>
+          <p>An internal server error occurred.</p>
           <a href="/" class="underline">
             Go back home
           </a>

@@ -71,7 +71,7 @@ export default function App({ Component }: PageProps): JSX.Element {
         <link rel="stylesheet" href={asset("/styles.css")} />
       </Head>
 
-      <body f-client-nav class="dark:bg-black">
+      <body f-client-nav class="dark:bg-black dark:text-white">
         <Component />
       </body>
     </html>

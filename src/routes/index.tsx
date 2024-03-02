@@ -68,7 +68,7 @@ export default function Home(): JSX.Element {
         <Meta title={pageTitle} />
       </Head>
       <Cover title={siteName}>
-        <p class="dark:text-white">
+        <p>
           Looking for information about solar power? You've come to the right
           place!
         </p>
