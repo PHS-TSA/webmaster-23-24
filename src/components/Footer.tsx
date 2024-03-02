@@ -89,15 +89,15 @@ export function Footer(props: FooterProps): JSX.Element {
         <Who />
       </div>
 
-      <div class="grid grid-flow-col grid-rows-1 gap-x-2 gap-y-16 sm:gap-x-8 md:gap-16">
+      <div class="grid grid-flow-col grid-rows-1 gap-x-2 gap-y-16 text-pretty sm:gap-x-8 md:gap-16">
         {menus.map(
           (item: Menu): JSX.Element => (
-            <section class="col-span-1 max-w-52 text-pretty">
+            <section class="col-span-1 max-w-52">
               <RenderCategory {...item} key={item.title} />
             </section>
           ),
         )}
-        <section class="col-span-1 max-w-52 text-pretty">
+        <section class="col-span-1 max-w-52">
           <RenderAbouts />
         </section>
       </div>
