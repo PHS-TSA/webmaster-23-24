@@ -149,9 +149,9 @@ const remarkPlugins = [
   remarkFrontmatter,
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkMdxFrontmatter,
-  // @ts-expect-error: remark-lint it still on Unified 10, but it works fine with Unified 11.
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintConsistent,
-  // @ts-expect-error: remark-lint it still on Unified 10, but it works fine with Unified 11.
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintRecommended,
   [remarkMath, { singleDollarTextMath: false } satisfies MathOptions],
 ] as const satisfies PluggableList;
@@ -180,7 +180,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
   compiled.extname = ".js";
 
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
-  compiled.data["matter"].category =
+  compiled.data.matter.category =
     compiled.dirname !== "." ? compiled.dirname : compiled.stem;
 
   return compiled;
@@ -238,26 +238,26 @@ async function categories(files: VFile[]): Promise<void> {
 function categoriesFile(files: VFile[]): string {
   const sortedFiles = files
     .toSorted((a, b) => {
-      const aCategory = a.data["matter"]?.category ?? "";
-      const bCategory = b.data["matter"]?.category ?? "";
+      const aCategory = a.data.matter?.category ?? "";
+      const bCategory = b.data.matter?.category ?? "";
       const aSlug = a.stem ?? "";
       const bSlug = b.stem ?? "";
 
       const categoryComparison =
         categoryList.indexOf(aCategory) - categoryList.indexOf(bCategory);
 
-      // If the categories are different, sort by category, otherwise, sort by title.
-      return categoryComparison !== 0
+      // If the categories are the same, sort by title, otherwise, sort by category.
+      return categoryComparison === 0
         ? titleList.indexOf(aSlug) - titleList.indexOf(bSlug)
         : categoryComparison;
     })
     .map((file) => {
       const stem = file.stem ?? "";
-      const category = file.data["matter"]?.category ?? "";
+      const category = file.data.matter?.category ?? "";
 
       return {
         slug: stem === category ? undefined : stem,
-        data: file.data["matter"],
+        data: file.data.matter,
       };
     });
   const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
