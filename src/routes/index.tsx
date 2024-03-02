@@ -24,32 +24,27 @@ function Card({
   imgSide,
 }: RenderableProps<CardProps>): JSX.Element {
   return (
-    <div class={`${cols} md:grid md:grid-cols-4 items-center`}>
-      {imgSide === "left" && (
-        <img
-          src={image}
-          alt={alt}
-          class="md:col-start-1 md:col-end-2"
-          loading="lazy"
-        />
-      )}
+    <div class={`${cols} items-center md:grid md:grid-cols-4`}>
+      <img
+        src={image}
+        alt={alt}
+        class={`md:row-start-1 md:row-end-2 ${
+          imgSide === "left"
+            ? "md:col-start-1 md:col-end-2"
+            : "md:col-start-4 md:col-end-5"
+        }`}
+        loading="lazy"
+      />
+
       <p
-        class={`prose prose-xl p-4 ${
-          imgSide === "right"
-            ? "md:col-start-1 md:col-end-4"
-            : "md:col-start-2 md:col-end-5"
+        class={`prose prose-xl p-4 md:row-start-1 md:row-end-2 ${
+          imgSide === "left"
+            ? "md:col-start-2 md:col-end-5"
+            : "md:col-start-1 md:col-end-4"
         }`}
       >
         {children}
       </p>
-      {imgSide === "right" && (
-        <img
-          src={image}
-          alt={alt}
-          class="md:col-start-4 md:col-end-5"
-          loading="lazy"
-        />
-      )}
     </div>
   );
 }
@@ -74,7 +69,7 @@ export default function Home(): JSX.Element {
         </p>
       </Cover>
 
-      <div class="gap-y-10 py-10 px-40 bg-slate-200 dark:bg-slate-800 *:bg-slate-400 *:rounded-xl *:p-8 md:grid md:grid-cols-4 *:inline-grid">
+      <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-40 lg:py-10 *:inline-grid *:rounded-xl *:bg-slate-400 *:p-8 grid sm:grid-cols-4 dark:bg-slate-800">
         <Card
           image={testImg}
           alt="test"
