@@ -37,7 +37,10 @@ export const titleList: [string, string, string, string] = [
 const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
-    description: z.string().describe("The description of the solution."),
+    description: z
+      .string()
+      .refine((value) => !value.endsWith("."))
+      .describe("The description of the solution."),
     category: z.string().describe("The category of the solution."),
   })
   .passthrough()

@@ -29,7 +29,7 @@ const categoryPropsPages = z.object({
 const categoryProps = z.object({
   page: categoryPropsPages,
   title: z.string(),
-  description: z.string().refine((value) => !value.endsWith(",")),
+  description: z.string().refine((value) => !value.endsWith(".")),
 });
 
 /**
