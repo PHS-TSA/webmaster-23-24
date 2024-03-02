@@ -71,6 +71,9 @@ jobs:
       - name: 📊 Collect coverage
         run: deno task test:coverage
 
+      - name: 🌲 No uncommited changes
+        uses: infotroph/tree-is-clean@e99ff204c7e1f74fd4de0822e86adb01f2ca2138 # v1.0.4
+
       - name: 🔧 Upload to Deno Deploy
         uses: denoland/deployctl@6dce4affe85fbcd9d8917e56c4a49b066b8cc306 # 1.10.5
         with:
