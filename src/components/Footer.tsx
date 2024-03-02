@@ -99,9 +99,7 @@ export function Footer(props: FooterProps): JSX.Element {
         )}
       </div>
 
-      <div
-        class="col-start-2 col-end-3 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto flex flex-col justify-center" /* justify-end */
-      >
+      <div class="col-start-2 col-end-3 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto flex flex-col justify-start">
         <With />
       </div>
     </footer>
