@@ -2,6 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { z } from "zod";
+import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
@@ -118,7 +119,7 @@ export default function Category({
         >
           <p>{description}</p>
         </Cover>
-        <article class="prose prose-lg max-w-none bg-slate-200 px-40 py-10 dark:prose-invert prose-headings:flex prose-headings:flex-row prose-headings:items-center dark:bg-slate-800">
+        <Content>
           {pages.map(
             ({ linkText, short, title, linkTo }: CategoryData): JSX.Element => (
               <>
@@ -131,7 +132,7 @@ export default function Category({
               </>
             ),
           )}
-        </article>
+        </Content>
       </main>
     </>
   );

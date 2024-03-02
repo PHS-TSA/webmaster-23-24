@@ -2,6 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import { join } from "$std/path/mod.ts";
 import type { JSX } from "preact";
+import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
@@ -78,9 +79,9 @@ export default function Solution({
         >
           <p>{description}</p>
         </Cover>
-        <article class="prose prose-lg max-w-none bg-slate-200 px-40 py-10 dark:prose-invert prose-headings:flex prose-headings:flex-row prose-headings:items-center dark:bg-slate-800 [&_mjx-container>svg]:inline">
+        <Content>
           <data.page.default />
-        </article>
+        </Content>
       </main>
     </>
   );
