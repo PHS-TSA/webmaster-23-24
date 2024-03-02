@@ -13,9 +13,10 @@ Deno.test(
         {
           slug: "slug",
           data: {
-            title: "title",
-            description: "description",
+            title: "",
+            description: "",
             category: "",
+            sectionHeader: "",
           },
         },
       ];

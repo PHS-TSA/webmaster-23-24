@@ -7,7 +7,6 @@ import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
-import { kebabToCamel } from "../../../utils/strings.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export type CategoryProps = z.infer<typeof categoryProps>;
@@ -17,17 +16,14 @@ export type CategoryData = z.infer<typeof categoryPropsPageData>;
 const categoryPropsPageData = z.object({
   short: z.string(),
   linkText: z.string(),
+  title: z.string(),
+  linkTo: z.string(),
 });
 
-const categoryPropsPages = z.object({
-  what: categoryPropsPageData,
-  environment: categoryPropsPageData,
-  cost: categoryPropsPageData,
-  worthIt: categoryPropsPageData,
-});
+const categoryPropsPages = categoryPropsPageData.array();
 
 const categoryProps = z.object({
-  page: categoryPropsPages,
+  pages: categoryPropsPages,
   title: z.string(),
   description: z.string().refine((value) => !value.endsWith(".")),
 });
@@ -46,27 +42,27 @@ export const handler: Handlers<CategoryProps> = {
         return ctx.renderNotFound();
       }
 
-      let data: Partial<CategoryPages> = {};
+      let data: CategoryData[] = [];
       for (const solution of solutions) {
         if (hasSlug(solution)) {
-          const { slug, data: solutionData } = solution;
-          const camelSlug = kebabToCamel(slug);
+          const { data: solutionData } = solution;
 
           if (solutionData.category === category) {
-            data = {
+            data = [
               ...data,
-              [camelSlug]: {
-                ...data[camelSlug],
+              {
                 short: solutionData.description,
                 linkText: solutionData.title,
+                title: solutionData.sectionHeader,
+                linkTo: solution.slug,
               },
-            };
+            ];
           }
         }
       }
 
       return ctx.render({
-        page: categoryPropsPages.parse(data),
+        pages: categoryPropsPages.parse(data),
         title: categoryMetadata[category].title,
         description: categoryMetadata[category].description,
       });
@@ -103,16 +99,7 @@ const categoryMetadata = {
 export default function Category({
   data,
 }: PageProps<CategoryProps>): JSX.Element {
-  const {
-    title: pageTitle,
-    description,
-    page: {
-      what: { short: whatShort, linkText: whatLinkText },
-      environment: { short: environmentShort, linkText: environmentLinkText },
-      cost: { short: costShort, linkText: costLinkText },
-      worthIt: { short: worthItShort, linkText: worthItLinkText },
-    },
-  } = data;
+  const { title: pageTitle, description, pages } = data;
 
   return (
     <>
@@ -132,33 +119,18 @@ export default function Category({
           <p class="my-4 dark:text-white">{description}</p>
         </Cover>
         <article class="py-10 px-40 prose prose-lg dark:prose-invert max-w-none prose-headings:flex prose-headings:flex-row prose-headings:items-center bg-slate-200 dark:bg-slate-800 [&_mjx-container>svg]:inline">
-          <h2>What is it?</h2>
-          <p>
-            {whatShort}.
-            <br />
-            For more information, see <a href="./what/">{whatLinkText}</a>.
-          </p>
-          <h2>How does it impact the environment?</h2>
-          <p>
-            {environmentShort}.
-            <br />
-            For more information, see{" "}
-            <a href="./environment/">{environmentLinkText}</a>.
-          </p>
-          <h2>Cost</h2>
-          <p>
-            {costShort}.
-            <br />
-            For more information, see <a href="./cost/">{costLinkText}</a>.
-          </p>
-
-          <h2>Is it worth it?</h2>
-          <p>
-            {worthItShort}.
-            <br />
-            For more information, see{" "}
-            <a href="./worth-it/">{worthItLinkText}</a>.
-          </p>
+          {pages.map(
+            ({ linkText, short, title, linkTo }: CategoryData): JSX.Element => (
+              <>
+                <h2>{title}</h2>
+                <p>
+                  {short}.
+                  <br />
+                  For more information, see <a href={linkTo}>{linkText}</a>.
+                </p>
+              </>
+            ),
+          )}
         </article>
       </main>
     </>

@@ -42,6 +42,9 @@ const solutionDataSchema = z
       .refine((value) => !value.endsWith("."))
       .describe("The description of the solution."),
     category: z.string().describe("The category of the solution."),
+    sectionHeader: z
+      .string()
+      .describe("The section header for the category index page."),
   })
   .passthrough()
   .readonly()
