@@ -43,37 +43,28 @@ jobs:
           clean: true
           persist-credentials: false
           set-safe-directory: true
-
       - name: 🦕 Install Deno
         uses: denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba # v1.1.4
         with:
           deno-version: ${{ env.DENO_VERSION }}
-
       - name: ⚙️ Cache Deno dependencies
         uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         with:
           path: node_modules/
           key: deno_cache-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('deno.json') }}
           restore-keys: deno_cache-${{ runner.arch }}-${{ runner.os }}
-
       - name: 📦 Install dependencies
         run: deno cache src/main.ts
-
       - name: 🕵️ Run linter, verify formatting, typecheck
         run: deno task ci
-
       - name: 🔨 Build
         run: deno task build
-
       - name: 🧪 Run tests
         run: deno task test
-
       - name: 📊 Collect coverage
         run: deno task test:coverage
-
       - name: 🌲 No uncommited changes
         uses: infotroph/tree-is-clean@e99ff204c7e1f74fd4de0822e86adb01f2ca2138 # v1.0.4
-
       - name: 🔧 Upload to Deno Deploy
         uses: denoland/deployctl@6dce4affe85fbcd9d8917e56c4a49b066b8cc306 # 1.10.5
         with:
