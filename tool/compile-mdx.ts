@@ -52,10 +52,11 @@ async function run(): Promise<void> {
     promises.push(file);
   }
   const files = await Promise.all(promises);
+  files.sort(sortFiles);
 
-  lint(files);
   await Promise.all([
-    ...files.map(writeSolution),
+    Promise.resolve(lint(files)),
+    writeSolutions(files),
     staticImports(files),
     categories(files),
   ]);
@@ -186,6 +187,15 @@ async function compileSolution(file: VFile): Promise<VFile> {
   return compiled;
 }
 
+async function writeSolutions(solutions: VFile[]): Promise<void> {
+  const promises = [];
+  for (const solution of solutions) {
+    promises.push(writeSolution(solution));
+  }
+
+  await Promise.all(promises);
+}
+
 /**
  * Write the file to the disk.
  *
@@ -197,6 +207,21 @@ function writeSolution(solution: VFile): Promise<void> {
     join(contentDir, solution.path),
     solution.toString(),
   );
+}
+
+function sortFiles(a: VFile, b: VFile): number {
+  const aCategory = a.data.matter?.category ?? "";
+  const bCategory = b.data.matter?.category ?? "";
+  const aSlug = a.stem ?? "";
+  const bSlug = b.stem ?? "";
+
+  const categoryComparison =
+    categoryList.indexOf(aCategory) - categoryList.indexOf(bCategory);
+
+  // If the categories are the same, sort by title, otherwise, sort by category.
+  return categoryComparison === 0
+    ? titleList.indexOf(aSlug) - titleList.indexOf(bSlug)
+    : categoryComparison;
 }
 
 /**
@@ -236,30 +261,15 @@ async function categories(files: VFile[]): Promise<void> {
  * Create a file containing the categories of all the files.
  */
 function categoriesFile(files: VFile[]): string {
-  const sortedFiles = files
-    .toSorted((a, b) => {
-      const aCategory = a.data.matter?.category ?? "";
-      const bCategory = b.data.matter?.category ?? "";
-      const aSlug = a.stem ?? "";
-      const bSlug = b.stem ?? "";
+  const sortedFiles = files.map((file) => {
+    const stem = file.stem ?? "";
+    const category = file.data.matter?.category ?? "";
 
-      const categoryComparison =
-        categoryList.indexOf(aCategory) - categoryList.indexOf(bCategory);
-
-      // If the categories are the same, sort by title, otherwise, sort by category.
-      return categoryComparison === 0
-        ? titleList.indexOf(aSlug) - titleList.indexOf(bSlug)
-        : categoryComparison;
-    })
-    .map((file) => {
-      const stem = file.stem ?? "";
-      const category = file.data.matter?.category ?? "";
-
-      return {
-        slug: stem === category ? undefined : stem,
-        data: file.data.matter,
-      };
-    });
+    return {
+      slug: stem === category ? undefined : stem,
+      data: file.data.matter,
+    };
+  });
   const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
   const json = JSON.stringify(parsedProfiles, undefined, 2);
 
