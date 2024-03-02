@@ -5,7 +5,14 @@ import { hasSlug } from "./type-helpers.ts";
 /**
  * A menu.
  */
-export interface Menu {
+export interface Menu extends BasicMenu {
+  /**
+   * The sub-items of the menu.
+   */
+  readonly items: readonly MenuItem[];
+}
+
+export interface BasicMenu {
   /**
    * The title of the menu.
    */
@@ -15,11 +22,6 @@ export interface Menu {
    * The URL that the menu links to.
    */
   readonly url: `/${string}/`;
-
-  /**
-   * The sub-items of the menu.
-   */
-  readonly items?: readonly MenuItem[];
 }
 
 /**
@@ -38,28 +40,7 @@ export interface MenuItem {
 }
 
 /**
- * A menu with items.
- */
-export interface MenuWithItems extends Menu {
-  /**
-   * The items of the menu are destined to be non-empty.
-   */
-  readonly items: readonly [MenuItem, ...MenuItem[]];
-}
-
-/**
- * The additional menus that are not generated with the {@link solutions}.
- */
-const extraMenus = [
-  {
-    title: "About",
-    url: "/about/",
-  },
-] as const satisfies Menu[];
-
-/**
  * Convert the {@link solutions} into to {@link Menu | menus} based on the category.
- * Should also append the {@link extraMenus} to the end to add the `/about/` page and such.
  *
  * @returns The generated menus.
  */
@@ -92,10 +73,6 @@ function generateMenus(): Menu[] {
         ],
       });
     }
-  }
-
-  for (const menu of extraMenus) {
-    categories.set(menu.title, menu);
   }
 
   return Array.from(categories.values());

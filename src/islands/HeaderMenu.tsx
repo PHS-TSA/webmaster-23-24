@@ -1,13 +1,8 @@
 import { Popover, Transition } from "@headlessui/react";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
-import type {
-  Menu,
-  MenuItem,
-  MenuWithItems,
-} from "../utils/site-organization.ts";
+import type { BasicMenu, Menu, MenuItem } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
-import { hasItems } from "../utils/type-helpers.ts";
 
 /**
  * Make the text style for the menu.
@@ -45,7 +40,7 @@ const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-
 /**
  * Properties for the {@link HeaderMenu} component.
  */
-export interface HeaderMenuProps extends Menu {
+export interface WithActive {
   /**
    * If the menu is for the current page.
    */
@@ -63,8 +58,8 @@ export interface HeaderMenuProps extends Menu {
  * @param props.active - If the menu is for the current page.
  * @returns The rendered menu component.
  */
-export function HeaderMenu(props: HeaderMenuProps): JSX.Element {
-  return hasItems(props) ? <PopoverMenu {...props} /> : <LinkMenu {...props} />;
+export function HeaderMenu(props: Menu & WithActive): JSX.Element {
+  return <PopoverMenu {...props} />;
 }
 
 /**
@@ -84,7 +79,7 @@ function PopoverMenu({
   url,
   items,
   active,
-}: HeaderMenuProps & MenuWithItems): JSX.Element {
+}: Menu & WithActive): JSX.Element {
   return (
     <Popover class="relative">
       <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
@@ -134,7 +129,11 @@ function PopoverMenu({
  * @param props.active - If the menu is for the current page.
  * @returns The rendered menu component.
  */
-function LinkMenu({ url, active, title }: HeaderMenuProps): JSX.Element {
+export function LinkMenu({
+  url,
+  active,
+  title,
+}: BasicMenu & WithActive): JSX.Element {
   return (
     <a
       href={url}

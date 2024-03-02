@@ -1,5 +1,5 @@
 import type { JSX } from "preact";
-import { HeaderMenu } from "../islands/HeaderMenu.tsx";
+import { HeaderMenu, LinkMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import { IconSolarPanel2 } from "../utils/icons.ts";
 import { type Menu, menus } from "../utils/site-organization.ts";
@@ -26,41 +26,15 @@ export function Header({ active }: HeaderProps): JSX.Element {
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu: Menu) => (
-          <HeaderLinkMenu menu={menu} active={active} />
+          <li key={menu.title} class="flex h-8 items-end">
+            <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
+          </li>
         ))}
+        <li class="flex h-8 items-end">
+          <LinkMenu active={active === "/about/"} title="About" url="/about/" />
+        </li>
       </ul>
     </header>
-  );
-}
-
-/**
- * Properties for the {@link HeaderLinkMenu} component.
- */
-interface HeaderLinkMenuProps {
-  /**
-   * The menu to render.
-   */
-  readonly menu: Menu;
-  /**
-   * The URL of the page that is currently active.
-   */
-  readonly active: string;
-}
-
-/**
- * Render a menu component.
- * This is just a thin wrapper around {@link HeaderMenu} which adds a key for the VDOM.
- *
- * @param props - The component's properties.
- * @param props.menu - The menu to render.
- * @param props.active - The URL of the page that is currently active.
- * @returns The rendered menu component.
- */
-function HeaderLinkMenu({ menu, active }: HeaderLinkMenuProps): JSX.Element {
-  return (
-    <li key={menu.title} class="flex h-8 items-end">
-      <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
-    </li>
   );
 }
 

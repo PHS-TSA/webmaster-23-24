@@ -9,13 +9,12 @@ import {
   IconSolarPanel2,
 } from "../utils/icons.ts";
 import {
+  type BasicMenu,
   type Menu,
   type MenuItem,
-  type MenuWithItems,
   menus,
 } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
-import { hasItems } from "../utils/type-helpers.ts";
 
 /**
  * The icons of some of the tools that were used to build the site.
@@ -97,6 +96,9 @@ export function Footer(props: FooterProps): JSX.Element {
             </section>
           ),
         )}
+        <section class="col-span-1 max-w-52 text-pretty">
+          <RenderAbouts />
+        </section>
       </div>
 
       <div class="col-start-2 col-end-3 row-start-1 row-end-3 space-y-2 align-middle text-gray-500 dark:text-gray-400 sm:col-start-auto sm:col-end-auto sm:row-end-auto flex flex-col justify-start">
@@ -121,7 +123,7 @@ function RenderCategory(props: Menu): JSX.Element {
   return (
     <>
       <RenderCategoryHeader {...props} />
-      {hasItems(props) && <RenderCategoryItems {...props} />}
+      <RenderCategoryItems {...props} />
     </>
   );
 }
@@ -136,7 +138,7 @@ function RenderCategory(props: Menu): JSX.Element {
  */
 // TODO(lishaduck): Add a <Link> component to centralize said styling.
 // TODO(lishaduck): Render these all in one section once we have multiple.
-function RenderCategoryHeader({ url, title }: Menu): JSX.Element {
+function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a
       class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
@@ -156,7 +158,7 @@ function RenderCategoryHeader({ url, title }: Menu): JSX.Element {
  * @param props.url - The URL to prepend to the items' URLs.
  * @returns The rendered category's items.
  */
-function RenderCategoryItems({ items, url }: MenuWithItems): JSX.Element {
+function RenderCategoryItems({ items, url }: Menu): JSX.Element {
   return (
     <ul class="mt-2">
       {items.map(
@@ -172,6 +174,14 @@ function RenderCategoryItems({ items, url }: MenuWithItems): JSX.Element {
         ),
       )}
     </ul>
+  );
+}
+
+function RenderAbouts(): JSX.Element {
+  return (
+    <>
+      <RenderCategoryHeader title="About" url="/about/" />
+    </>
   );
 }
 
