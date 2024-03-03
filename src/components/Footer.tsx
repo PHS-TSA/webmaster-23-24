@@ -142,7 +142,7 @@ function RenderCategory(props: Menu): JSX.Element {
 function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a
-      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:hover:text-gray-200"
+      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
       href={url}
     >
       {title}
@@ -221,7 +221,7 @@ function With(): JSX.Element {
   return (
     <>
       <span class="max-w-fit text-end text-xs">Made with</span>
-      <div class="grid max-w-fit grid-cols-auto-2 justify-end gap-1">
+      <div class="grid max-w-fit grid-cols-auto-2 justify-end gap-2">
         {icons.map(
           (tool: Tool): JSX.Element => (
             <a
