@@ -40,7 +40,7 @@ export const solutions = [
   {
     "slug": "what",
     "data": {
-      "title": "Geothermal Energy Solutions",
+      "title": "What Are Geothermal Energy Solutions?",
       "description": "Geothermal Energy is an undertapped energy resource",
       "category": "geothermal",
       "sectionHeader": "What is It?"
@@ -76,7 +76,7 @@ export const solutions = [
   {
     "slug": "what",
     "data": {
-      "title": "Recycling",
+      "title": "What is Recycling?",
       "description": "Recycling is the process of taking inorganic waste materials and turning them into new products",
       "category": "recycling",
       "sectionHeader": "What Is it?"
@@ -107,6 +107,87 @@ export const solutions = [
       "description": "The process of recycling prevents waste materials from ending up in landfills",
       "category": "recycling",
       "sectionHeader": "Is It Worth It?"
+    }
+  },
+  {
+    "slug": "appliances",
+    "data": {
+      "title": "Appliances",
+      "description": "Don’t waste natural gas",
+      "category": "other",
+      "sectionHeader": "Electric Appliances"
+    }
+  },
+  {
+    "slug": "atomics",
+    "data": {
+      "title": "Nuclear Power",
+      "description": "Fission, fusion—what’s up with nuclear power",
+      "category": "other",
+      "sectionHeader": "The Splitting of the Atom"
+    }
+  },
+  {
+    "slug": "billing",
+    "data": {
+      "title": "Online Billing",
+      "description": "Online billing saves paper",
+      "category": "other",
+      "sectionHeader": "Save the World Through Online Billing"
+    }
+  },
+  {
+    "slug": "electric-cars",
+    "data": {
+      "title": "Electric Cars",
+      "description": "Transportation is one of the largest sources of carbon emissions in the US",
+      "category": "other",
+      "sectionHeader": "Cars, Trucks, and Things That Go"
+    }
+  },
+  {
+    "slug": "hydroelectric",
+    "data": {
+      "title": "Hydroelectric Power",
+      "description": "The power of water",
+      "category": "other",
+      "sectionHeader": "Hypostatic? Nope, Just Hydroelectric"
+    }
+  },
+  {
+    "slug": "led-lights",
+    "data": {
+      "title": "LED Lights Are Efficient",
+      "description": "LED lights use 90% less energy than traditional light bulbs",
+      "category": "other",
+      "sectionHeader": "LED Lights Use Up Less Energy to Produce More Light"
+    }
+  },
+  {
+    "slug": "solar-lawn-lights",
+    "data": {
+      "title": "Lawn Lights",
+      "description": "Saving both money and effort, solar-powered lawn lights are a great investment",
+      "category": "other",
+      "sectionHeader": "Solar Powered Lights–Stylish and Green"
+    }
+  },
+  {
+    "slug": "utilities",
+    "data": {
+      "title": "Utility Companies",
+      "description": "Many electric companies now offer programs to exclusively buy solar",
+      "category": "other",
+      "sectionHeader": "Minimal-Hassle Green Energy Straight From Your Electric Company"
+    }
+  },
+  {
+    "slug": "wind",
+    "data": {
+      "title": "Wind Power",
+      "description": "While America is lagging in wind power, we can opine to our elected officials",
+      "category": "other",
+      "sectionHeader": "Wind Turbines—Capturing Both Our Imaginations and Energy!"
     }
   }
 ] as const satisfies SolutionPages;

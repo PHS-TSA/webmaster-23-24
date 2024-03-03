@@ -215,13 +215,24 @@ function sortFiles(a: VFile, b: VFile): number {
   const aSlug = a.stem ?? "";
   const bSlug = b.stem ?? "";
 
+  const aCategoryIndex = categoryList.indexOf(aCategory);
+  const bCategoryIndex = categoryList.indexOf(bCategory);
+  const aSlugIndex = titleList.indexOf(aSlug);
+  const bSlugIndex = titleList.indexOf(bSlug);
+
+  // If the category is not found in the list, set the index to Infinity.
   const categoryComparison =
-    categoryList.indexOf(aCategory) - categoryList.indexOf(bCategory);
+    (aCategoryIndex === -1 ? Number.POSITIVE_INFINITY : aCategoryIndex) -
+    (bCategoryIndex === -1 ? Number.POSITIVE_INFINITY : bCategoryIndex);
+
+  // If the slug is not found in the list, sort alphabetically.
+  const slugComparison =
+    aSlugIndex === -1 || bSlugIndex === -1
+      ? aSlug.localeCompare(bSlug)
+      : aSlugIndex - bSlugIndex;
 
   // If the categories are the same, sort by title, otherwise, sort by category.
-  return categoryComparison === 0
-    ? titleList.indexOf(aSlug) - titleList.indexOf(bSlug)
-    : categoryComparison;
+  return categoryComparison === 0 ? slugComparison : categoryComparison;
 }
 
 /**

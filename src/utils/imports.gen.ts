@@ -10,3 +10,12 @@
 (async () => await import("../content/recycling/environment.js"));
 (async () => await import("../content/recycling/cost.js"));
 (async () => await import("../content/recycling/worth-it.js"));
+(async () => await import("../content/other/appliances.js"));
+(async () => await import("../content/other/atomics.js"));
+(async () => await import("../content/other/billing.js"));
+(async () => await import("../content/other/electric-cars.js"));
+(async () => await import("../content/other/hydroelectric.js"));
+(async () => await import("../content/other/led-lights.js"));
+(async () => await import("../content/other/solar-lawn-lights.js"));
+(async () => await import("../content/other/utilities.js"));
+(async () => await import("../content/other/wind.js"));

@@ -18,7 +18,7 @@ const solutionDataSchemaDescription = "Metadata for the solution." as const;
 /**
  * A list of categories, in order.
  */
-export const categoryList = ["solar", "geothermal", "recycling"];
+export const categoryList = ["solar", "geothermal", "recycling", "other"];
 
 export const titleList = ["what", "environment", "cost", "worth-it"];
 

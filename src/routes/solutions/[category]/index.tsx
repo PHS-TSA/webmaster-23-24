@@ -88,6 +88,11 @@ const categoryMetadata = {
     title: "Recycling",
     description: "Recycling saves energy and reduces pollution",
   },
+  other: {
+    title: "Other Initiatives",
+    description:
+      "There are many other best practices and ongoing clean and green energy initiatives",
+  },
 };
 
 /**
