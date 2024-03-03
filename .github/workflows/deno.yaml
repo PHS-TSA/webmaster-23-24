@@ -67,7 +67,7 @@ jobs:
         uses: infotroph/tree-is-clean@e99ff204c7e1f74fd4de0822e86adb01f2ca2138 # v1.0.4
       - name: 🔧 Upload to Deno Deploy
         id: deno-deploy
-        uses: denoland/deployctl@6dce4affe85fbcd9d8917e56c4a49b066b8cc306 # 1.10.5
+        uses: denoland/deployctl@1e1637600646cbc6826a4bacd359713fc24d25b3 # 1.11.0
         with:
           project: "why-switch"
           entrypoint: src/main.ts
