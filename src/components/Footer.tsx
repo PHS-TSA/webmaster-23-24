@@ -89,7 +89,7 @@ export function Footer(props: FooterProps): JSX.Element {
         <Who />
       </div>
 
-      <div class="grid col-start-1 col-end-3 grid-flow-row gap-x-8 gap-y-16 text-pretty sm:gap-x-8 md:gap-16 grid-cols-2 lg:grid-cols-4 md:col-start-2 md:col-end-3">
+      <div class="grid col-start-1 col-end-3 grid-flow-row gap-x-8 gap-y-16 text-pretty sm:gap-x-8 md:gap-16 grid-cols-2 lg:grid-cols-5 md:col-start-2 md:col-end-3">
         {menus.map(
           (item: Menu): JSX.Element => (
             <section class="col-span-1 max-w-52">
