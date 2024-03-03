@@ -85,11 +85,11 @@ export function Footer(props: FooterProps): JSX.Element {
       {...props}
       class={tw`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm sm:grid-rows-footer-desktop sm:gap-x-8 md:grid-cols-footer-desktop md:gap-16 dark:bg-black ${props.class}`}
     >
-      <div class="col-start-1 col-end-3 row-start-1 row-end-2 sm:col-end-2">
+      <div class="col-start-1 col-end-2 row-start-1 row-end-2">
         <Who />
       </div>
 
-      <div class="grid grid-flow-col grid-rows-1 gap-x-2 gap-y-16 text-pretty sm:gap-x-8 md:gap-16">
+      <div class="grid col-start-1 col-end-3 grid-flow-row gap-x-8 gap-y-16 text-pretty sm:gap-x-8 md:gap-16 grid-cols-2 lg:grid-cols-4 md:col-start-2 md:col-end-3">
         {menus.map(
           (item: Menu): JSX.Element => (
             <section class="col-span-1 max-w-52">
@@ -102,7 +102,7 @@ export function Footer(props: FooterProps): JSX.Element {
         </section>
       </div>
 
-      <div class="col-start-2 col-end-3 row-start-1 row-end-3 flex flex-col justify-start space-y-2 align-middle text-gray-500 sm:col-start-auto sm:col-end-auto sm:row-end-auto dark:text-gray-400">
+      <div class="col-start-2 col-end-3 row-start-1 row-end-2 flex flex-col justify-start space-y-2 align-middle text-gray-500 sm:col-start-auto sm:col-end-auto sm:row-end-auto dark:text-gray-400 md:col-start-3 md:col-end-4">
         <With />
       </div>
     </footer>
