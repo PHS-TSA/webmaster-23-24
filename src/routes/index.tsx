@@ -69,7 +69,7 @@ export default function Home(): JSX.Element {
         </p>
       </Cover>
 
-      <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-40 lg:py-10 *:inline-grid *:rounded-xl *:bg-slate-400 *:p-8 grid sm:grid-cols-4 dark:bg-slate-800">
+      <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 *:inline-grid *:rounded-xl *:bg-slate-400 *:p-8 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
           image={testImg}
           alt="test"
