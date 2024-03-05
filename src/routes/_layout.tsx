@@ -14,7 +14,7 @@ import { Header } from "../components/Header.tsx";
  */
 export default function Layout({ Component, url }: PageProps): JSX.Element {
   return (
-    <div class="flex min-h-screen flex-col">
+    <div class="flex min-h-screen flex-col place-content-center">
       <Partial name="body">
         <Header active={url.pathname} />
         <Component />

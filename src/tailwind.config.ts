@@ -2,7 +2,7 @@ import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 // import headless from "@headlessui/tailwindcss";
-import headless from "./utils/headless.ts";
+import headless from "./utils/headless-tailwind.ts";
 
 export default {
   content: ["{routes,islands,components}/**/*.{ts,tsx}"],
