@@ -56,6 +56,9 @@ export function StateSelector({
           </div>
           <Transition
             as={Fragment}
+            enter={tw`transition ease-out duration-100`}
+            enterFrom={tw`opacity-0`}
+            enterTo={tw`opacity-100`}
             leave={tw`transition ease-in duration-100`}
             leaveFrom={tw`opacity-100`}
             leaveTo={tw`opacity-0`}
