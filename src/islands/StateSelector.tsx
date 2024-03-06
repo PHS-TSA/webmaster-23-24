@@ -16,15 +16,12 @@ export function StateSelector({
   const state = useSignal(currentState);
   const query = useSignal("");
 
-  const filteredStates =
-    query.value === ""
-      ? states
-      : states.filter((state) =>
-          state
-            .toLowerCase()
-            .replace(/\s+/g, "")
-            .includes(query.value.toLowerCase().replace(/\s+/g, "")),
-        );
+  const filteredStates = states.filter((state) =>
+    state
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .includes(query.value.toLowerCase().replace(/\s+/g, "")),
+  );
 
   return (
     <div class="top-16 flex w-72 flex-col items-center gap-4">
