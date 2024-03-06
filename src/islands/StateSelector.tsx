@@ -69,7 +69,7 @@ export function StateSelector({
             <Combobox.Options class="absolute mt-1 max-h-60 w-full max-w-full overflow-auto rounded-md bg-slate-200 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:bg-slate-800">
               {filteredStates.length === 0 && query.value !== "" ? (
                 <div class="relative cursor-default select-none px-4 py-2 text-gray-700">
-                  Nothing found.
+                  No results found
                 </div>
               ) : (
                 filteredStates.map((state) => (
