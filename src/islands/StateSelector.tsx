@@ -7,7 +7,7 @@ import { IconCheck, IconChevronDown } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 
 export interface StateSelectorProps {
-  currentState: State;
+  currentState?: State | undefined;
 }
 
 export function StateSelector({

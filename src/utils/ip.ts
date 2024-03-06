@@ -21,18 +21,22 @@ let serverIp: string | undefined;
 /**
  * Get details about an IP from the <https://ipapi.co> API.
  */
-export async function getIPLocation(ip?: string): Promise<Geo> {
-  let currentIP: string | undefined;
-  if (["127.0.0.1", undefined].includes(ip)) {
-    if (serverIp === undefined) {
-      serverIp = (await getIp()).ip;
+export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
+  try {
+    let currentIP: string | undefined;
+    if (["127.0.0.1", undefined].includes(ip)) {
+      if (serverIp === undefined) {
+        serverIp = (await getIp()).ip;
+      }
+      currentIP = serverIp;
+    } else {
+      currentIP = ip;
     }
-    currentIP = serverIp;
-  } else {
-    currentIP = ip;
-  }
 
-  return await makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
+    return makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
+  } catch {
+    return undefined;
+  }
 }
 
 /**

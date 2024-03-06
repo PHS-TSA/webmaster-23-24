@@ -6,14 +6,14 @@ import { Meta } from "../components/Meta.tsx";
 import { StateSelector } from "../islands/StateSelector.tsx";
 import { type State, type StateData, stateData } from "../utils/calc.ts";
 import type { FreshContextHelper } from "../utils/handlers.ts";
-import { getIPLocation } from "../utils/ip.ts";
+import { getIpLocation } from "../utils/ip.ts";
 import { isKey } from "../utils/type-helpers.ts";
 
 export type CalculatorProps = CalculatorSearchProps | CalculatorShowProps;
 
 export interface CalculatorSearchProps {
   state: "search";
-  region: State;
+  region: State | undefined;
 }
 
 export interface CalculatorShowProps {
@@ -31,14 +31,14 @@ export const handler: Handlers = {
     req: Request,
     ctx: FreshContextHelper<CalculatorProps>,
   ): Promise<Response> {
-    const visitor = await getIPLocation(ctx.remoteAddr.hostname);
+    const visitor = await getIpLocation(ctx.remoteAddr.hostname);
 
     const url = new URL(req.url);
     const state = url.searchParams.get("region");
     if (state === null) {
       return ctx.render({
         state: "search",
-        region: visitor.region,
+        region: visitor?.region,
       });
     }
 
