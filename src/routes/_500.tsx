@@ -21,12 +21,10 @@ export default function Error500(): JSX.Element {
         <Meta title={pageTitle} />
       </Head>
       <Cover title={pageTitle}>
-        <>
-          <p>An internal server error occurred.</p>
-          <a href="/" class="underline">
-            Go back home
-          </a>
-        </>
+        <p>An internal server error occurred.</p>
+        <a href="/" class="underline">
+          Go back home
+        </a>
       </Cover>
     </>
   );
