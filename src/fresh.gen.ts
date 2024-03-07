@@ -7,10 +7,12 @@ import * as $_500 from "./routes/_500.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
+import * as $api_chat_index from "./routes/api/chat/index.ts";
 import * as $calculator from "./routes/calculator.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
+import * as $Chatbot from "./islands/Chatbot.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
 import * as $Selector from "./islands/Selector.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -22,12 +24,14 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
+    "./routes/api/chat/index.ts": $api_chat_index,
     "./routes/calculator.tsx": $calculator,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,
     "./routes/solutions/[category]/index.tsx": $solutions_category_index,
   },
   islands: {
+    "./islands/Chatbot.tsx": $Chatbot,
     "./islands/HeaderMenu.tsx": $HeaderMenu,
     "./islands/Selector.tsx": $Selector,
   },
