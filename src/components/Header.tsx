@@ -1,5 +1,5 @@
 import type { JSX } from "preact";
-import { HeaderMenu, LinkMenu } from "../islands/HeaderMenu.tsx";
+import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import { IconSolarPanel2 } from "../utils/icons.ts";
 import {
@@ -8,6 +8,7 @@ import {
   extraMenus,
   menus,
 } from "../utils/site-organization.ts";
+import { LinkMenu } from "./HeaderMenu.server.tsx";
 
 /**
  * Properties for the {@link Header} component.

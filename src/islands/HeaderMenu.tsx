@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
-import type { BasicMenu, Menu, MenuItem } from "../utils/site-organization.ts";
+import type { Menu, MenuItem } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 /**
@@ -10,7 +10,7 @@ import { tw } from "../utils/tailwind.ts";
  * @param active - If the menu is for the current page.
  * @returns The text style for the menu.
  */
-function makeTextStyle(active: boolean): string {
+export function makeTextStyle(active: boolean): string {
   return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
     active
       ? tw`font-bold text-gray-700 dark:text-gray-200`
@@ -24,7 +24,7 @@ function makeTextStyle(active: boolean): string {
  * @param active - If the menu is for the current page.
  * @returns The border style for the menu.
  */
-function makeBorderStyle(active: boolean): string {
+export function makeBorderStyle(active: boolean): string {
   return tw` hover:border-gray-700 data-[current]:border-b-2 dark:hover:border-gray-200 ${
     active
       ? tw`border-b-2 border-gray-700 dark:border-gray-200`
@@ -35,7 +35,7 @@ function makeBorderStyle(active: boolean): string {
 /**
  * The style for the menu when it is focused.
  */
-const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`;
+export const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`;
 
 /**
  * Properties for the {@link HeaderMenu} component.
@@ -116,30 +116,5 @@ function PopoverMenu({
         </Popover.Panel>
       </Transition>
     </Popover>
-  );
-}
-
-/**
- * Render a link menu component.
- * It contains a link to a page.
- *
- * @param props - The component's properties.
- * @param props.title - The title of the menu.
- * @param props.url - The URL of the menu.
- * @param props.active - If the menu is for the current page.
- * @returns The rendered menu component.
- */
-export function LinkMenu({
-  url,
-  active,
-  title,
-}: BasicMenu & WithActive): JSX.Element {
-  return (
-    <a
-      href={url}
-      class={`h-8 ${makeTextStyle(active)} ${makeBorderStyle(active)}`}
-    >
-      {title}
-    </a>
   );
 }
