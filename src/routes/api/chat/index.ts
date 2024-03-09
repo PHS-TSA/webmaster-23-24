@@ -16,7 +16,7 @@ export const handler: Handlers<MessageContentText | null> = {
 
     const response = await ask(message, thread_id);
 
-    return new Response(JSON.stringify({ response }), {
+    return new Response(JSON.stringify({ response, thread_id }), {
       headers: new Headers([["Content-Type", "application/json"]]),
     });
   },

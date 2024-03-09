@@ -1,13 +1,12 @@
 import { Transition } from "@headlessui/react";
-import { signal, useSignal } from "@preact/signals";
-import type { MessageContentText } from "openai/resources/beta/threads/messages/messages.ts";
+import { useSignal } from "@preact/signals";
 import type { JSX, RenderableProps } from "preact";
-import { useCallback } from "preact/hooks";
+import { Suspense } from "preact/compat";
+import { useEffect, useId, useMemo } from "preact/hooks";
+import { Loading } from "../components/Loading.tsx";
+import { useChat } from "../sdk/chat/index.ts";
 import { IconMessageChatbot } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
-
-const thread = signal<string | undefined>(undefined);
-const messages = signal<MessageContentText[]>([]);
 
 export function Chatbot(
   props: RenderableProps<JSX.HTMLAttributes<HTMLButtonElement>>,
@@ -34,46 +33,67 @@ export function Chatbot(
         leaveFrom={tw`opacity-100`}
         leaveTo={tw`opacity-0`}
       >
-        {isOpen.value && (
-          <div>
-            <ChatbotBox class="absolute bottom-20 right-0" />
-          </div>
-        )}
+        {isOpen.value && <ChatbotBox class="absolute bottom-20 right-0" />}
       </Transition>
     </button>
   );
 }
 
 function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
-  const nextComment = useCallback(
-    async (message: string) => {
-      const response = await fetch(
-        `/api/chat/?thread=${thread.value ?? ""}&q=${message}`,
-      );
-      const json = await response.json();
-      thread.value ??= json;
-      messages.value = [...messages.value, json.response];
-    },
-    [thread],
-  );
+  const messageValue = useSignal("");
+  const inputId = useId();
+  const messages = useSignal<string[]>([]);
 
   return (
     <div
       {...props}
-      class={`dark:bg-blue-800 bg-blue-400 w-72 h-96 rounded-lg p-5 overflow-y-scroll ${props.class}`}
-      onClick={async (e) => {
+      class={`dark:bg-blue-800 bg-blue-400 w-72 h-96 rounded-lg p-5 overflow-y-scroll grid place-items-center ${props.class}`}
+      onClick={(e) => {
         e.stopPropagation();
-
-        await nextComment("What is solar power?");
       }}
     >
-      {messages.value.map((message) => {
-        return (
-          <div class="bg-slate-300 rounded dark:bg-slate-800 p-4 text-sm text-left">
-            {message.text.value}
-          </div>
-        );
-      })}
+      {messages.value.map((message) => (
+        <div key={message}>
+          <Suspense fallback={<Loading />}>
+            <div>
+              <ChatResponse key={message} message={message} />
+            </div>
+          </Suspense>
+        </div>
+      ))}
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          messages.value = [...messages.value, messageValue.value];
+        }}
+      >
+        <label for={inputId}>Ask A Question, Any Question!</label>
+        <input
+          id={inputId}
+          value={messageValue.value}
+          autoComplete="off"
+          onInput={(e) => {
+            messageValue.value = (e.target as HTMLInputElement).value;
+          }}
+        />
+      </form>
+    </div>
+  );
+}
+
+function ChatResponse({ message }: { message: string }): JSX.Element {
+  const thread = useSignal<string | undefined>(undefined);
+  const json = useChat(message, thread.value);
+  const data = useMemo(() => json?.response.text.value, [json]);
+
+  useEffect(() => {
+    thread.value ??= json?.thread_id;
+  }, [json]);
+
+  return (
+    <div class="bg-slate-300 rounded dark:bg-slate-800 p-4 text-sm text-left">
+      {data}
     </div>
   );
 }
