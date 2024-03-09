@@ -14,7 +14,10 @@
       "all": true,
       "nursery": {
         "all": true,
-        "useImportRestrictions": "off"
+        "useImportRestrictions": "off",
+        "useJsxKeyInIterable": "off",
+        "useSortedClasses": "off",
+        "noConsole": "off"
       },
       "style": {
         "noImplicitBoolean": "off",
