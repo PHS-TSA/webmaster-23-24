@@ -73,7 +73,6 @@ async function run(): Promise<void> {
  * @remarks
  * This is an async generator because it's recursive.
  */
-// biome-ignore lint/nursery/useAwait: for-await isn't caught correctly.
 async function* getSolutions(
   basePath: string,
   currentPath: string = basePath,
@@ -134,7 +133,6 @@ function lint(files: VFile[]): void {
  * @param initialFiles A list of virtual MDX files for compilation.
  * @returns A list of virtual JS files.
  */
-// biome-ignore lint/nursery/useAwait: for-await isn't caught correctly.
 async function* compileSolutions(
   initialFiles: AsyncIterable<VFile>,
 ): AsyncGenerator<VFile, void, unknown> {
@@ -202,8 +200,8 @@ async function writeSolutions(solutions: VFile[]): Promise<void> {
  * @param solution A file to write.
  * @returns A promise resolving when the file's written.
  */
-function writeSolution(solution: VFile): Promise<void> {
-  return Deno.writeTextFile(
+async function writeSolution(solution: VFile): Promise<void> {
+  return await Deno.writeTextFile(
     join(contentDir, solution.path),
     solution.toString(),
   );

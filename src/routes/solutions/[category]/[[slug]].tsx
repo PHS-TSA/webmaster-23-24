@@ -32,7 +32,7 @@ export const handler: Handlers<SolutionProps> = {
     try {
       const { category, slug } = ctx.params;
       if (category === undefined) {
-        return ctx.renderNotFound();
+        return await ctx.renderNotFound();
       }
 
       const base = join(contentDir, category);
@@ -41,7 +41,7 @@ export const handler: Handlers<SolutionProps> = {
 
       const file: MdxFile = await import(filepath);
 
-      return ctx.render({ page: file });
+      return await ctx.render({ page: file });
     } catch (e) {
       console.error(e);
 
