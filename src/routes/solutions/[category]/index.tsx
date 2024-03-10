@@ -33,14 +33,14 @@ const categoryProps = z.object({
  * The server handler for the solution page.
  */
 export const handler: Handlers<CategoryProps> = {
-  GET(
+  async GET(
     _req: Request,
     ctx: FreshContextHelper<CategoryProps>,
-  ): Response | Promise<Response> {
+  ): Promise<Response> {
     try {
       const { category } = ctx.params;
       if (category === undefined || !isKey(categoryMetadata, category)) {
-        return ctx.renderNotFound();
+        return await ctx.renderNotFound();
       }
 
       let data: CategoryData[] = [];
@@ -62,7 +62,7 @@ export const handler: Handlers<CategoryProps> = {
         }
       }
 
-      return ctx.render({
+      return await ctx.render({
         pages: categoryPropsPages.parse(data),
         title: categoryMetadata[category].title,
         description: categoryMetadata[category].description,
@@ -70,7 +70,7 @@ export const handler: Handlers<CategoryProps> = {
     } catch (e) {
       console.error(e);
 
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
   },
 };

@@ -200,8 +200,8 @@ async function writeSolutions(solutions: VFile[]): Promise<void> {
  * @param solution A file to write.
  * @returns A promise resolving when the file's written.
  */
-function writeSolution(solution: VFile): Promise<void> {
-  return Deno.writeTextFile(
+async function writeSolution(solution: VFile): Promise<void> {
+  return await Deno.writeTextFile(
     join(contentDir, solution.path),
     solution.toString(),
   );
