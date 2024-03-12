@@ -17,7 +17,7 @@
     "esm:add": "deno task esm add",
     "esm:update": "deno task esm update",
     "esm:remove": "deno task esm remove",
-    "biome": "deno run -A npm:@biomejs/biome@1.6.0",
+    "biome": "deno run -A npm:@biomejs/biome@1.6.1",
     "biome:ci": "deno task biome ci . --error-on-warnings",
     "biome:check": "deno task biome check . --error-on-warnings",
     "compile:mdx": "deno run -A tool/compile-mdx.ts",

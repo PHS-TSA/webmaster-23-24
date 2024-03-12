@@ -91,7 +91,7 @@ export function Footer(props: FooterProps): JSX.Element {
       <div class="grid col-start-1 col-end-3 grid-flow-row gap-x-8 gap-y-16 text-pretty sm:gap-x-8 md:gap-16 grid-cols-2 lg:grid-cols-5 md:col-start-2 md:col-end-3">
         {menus.map(
           (item: Menu): JSX.Element => (
-            <section class="col-span-1 max-w-52">
+            <section key={item.url} class="col-span-1 max-w-52">
               <RenderCategory {...item} key={item.title} />
             </section>
           ),
@@ -182,7 +182,7 @@ function RenderAbouts(): JSX.Element {
     <>
       {extraMenus.map(
         (menu: BasicMenu): JSX.Element => (
-          <RenderCategoryHeader {...menu} />
+          <RenderCategoryHeader key={menu.url} {...menu} />
         ),
       )}
     </>

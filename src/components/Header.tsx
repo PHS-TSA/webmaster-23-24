@@ -38,7 +38,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
         ))}
         {extraMenus.map(
           ({ title, url }: BasicMenu): JSX.Element => (
-            <li class="flex h-8 items-end">
+            <li key={url} class="flex h-8 items-end">
               <LinkMenu active={active === url} title={title} url={url} />
             </li>
           ),

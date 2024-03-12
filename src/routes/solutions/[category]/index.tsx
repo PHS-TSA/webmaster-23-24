@@ -1,6 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
+import { Fragment } from "preact";
 import { z } from "zod";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
@@ -127,14 +128,14 @@ export default function Category({
         <Content>
           {pages.map(
             ({ linkText, short, title, linkTo }: CategoryData): JSX.Element => (
-              <>
+              <Fragment key={linkTo}>
                 <h2>{title}</h2>
                 <p>
                   {short}.
                   <br />
                   For more information, see <a href={linkTo}>{linkText}</a>.
                 </p>
-              </>
+              </Fragment>
             ),
           )}
         </Content>
