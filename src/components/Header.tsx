@@ -1,7 +1,6 @@
 import type { JSX } from "preact";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
-import { IconSolarPanel2 } from "../utils/icons.ts";
 import {
   type BasicMenu,
   type Menu,
@@ -9,6 +8,7 @@ import {
   menus,
 } from "../utils/site-organization.ts";
 import { LinkMenu } from "./HeaderMenu.server.tsx";
+import { Logo } from "./Logo.tsx";
 
 /**
  * Properties for the {@link Header} component.
@@ -59,7 +59,7 @@ function HomeLink(): JSX.Element {
       class="flex flex-1 items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
       href="/"
     >
-      <IconSolarPanel2 aria-hidden="true" class="size-6" />
+      <Logo aria-hidden="true" class="size-6" />
       <div class="ml-1 text-2xl font-bold">{siteName}</div>
     </a>
   );
