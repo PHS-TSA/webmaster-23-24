@@ -15,7 +15,6 @@ import {
   menus,
 } from "../utils/site-organization.ts";
 import { extraMenus } from "../utils/site-organization.ts";
-import { tw } from "../utils/tailwind.ts";
 
 /**
  * The icons of some of the tools that were used to build the site.
@@ -83,7 +82,7 @@ export function Footer(props: FooterProps): JSX.Element {
   return (
     <footer
       {...props}
-      class={tw`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm sm:grid-rows-footer-desktop sm:gap-x-8 md:grid-cols-footer-desktop md:gap-16 dark:bg-black ${props.class}`}
+      class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm sm:grid-rows-footer-desktop sm:gap-x-8 md:grid-cols-footer-desktop md:gap-16 dark:bg-black ${props.class}`}
     >
       <div class="col-start-1 col-end-2 row-start-1 row-end-2">
         <Who />
