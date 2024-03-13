@@ -51,7 +51,6 @@ function Card({
   );
 }
 
-
 /**
  * Render the home page.
  *
