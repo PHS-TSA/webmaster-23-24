@@ -166,7 +166,7 @@ export const solutions = [
   {
     "slug": "solar-lawn-lights",
     "data": {
-      "title": "Solar Power Lawn Lights",
+      "title": "Solar Powered Lawn Lights",
       "description": "Saving both money and effort, solar-powered lawn lights are a great investment for your green lawn!",
       "category": "other",
       "sectionHeader": "Solar Powered Lights"
@@ -178,14 +178,14 @@ export const solutions = [
       "title": "Utility Companies Green Programs",
       "description": "Many electric companies now offer programs to exclusively buy solar",
       "category": "other",
-      "sectionHeader": "Utility Companies Green Programs"
+      "sectionHeader": "Utility Companies’ Green Programs"
     }
   },
   {
     "slug": "wind",
     "data": {
       "title": "Wind Power",
-      "description": "While America is lagging in wind power, we can opine to our elected officials",
+      "description": "Wind is good for more than just cooling you off on a hot summer day",
       "category": "other",
       "sectionHeader": "Wind Power"
     }
