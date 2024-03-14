@@ -9,7 +9,7 @@
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
     "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run -A --watch=src/ src/dev.ts & deno task compile:mdx:watch",
+    "start": "deno run -A --watch src/dev.ts",
     "build": "deno task compile:mdx && deno run -A src/dev.ts build",
     "preview": "deno run -A src/main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
@@ -20,8 +20,7 @@
     "biome": "deno run -A npm:@biomejs/biome@1.6.1",
     "biome:ci": "deno task biome ci . --error-on-warnings",
     "biome:check": "deno task biome check . --error-on-warnings",
-    "compile:mdx": "deno run -A tool/compile-mdx.ts",
-    "compile:mdx:watch": "deno run -A --watch=src/content/ tool/compile-mdx.ts"
+    "compile:mdx": "deno run -A tool/compile-mdx.ts"
   },
   "imports": {
     "$std/": "https://deno.land/std@0.216.0/",
