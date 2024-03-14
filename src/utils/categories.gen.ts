@@ -119,15 +119,6 @@ export const solutions = [
     }
   },
   {
-    "slug": "atomics",
-    "data": {
-      "title": "Nuclear Power",
-      "description": "Fission, fusion—what’s up with nuclear power",
-      "category": "other",
-      "sectionHeader": "Nuclear Power"
-    }
-  },
-  {
     "slug": "billing",
     "data": {
       "title": "Online Billing",
@@ -161,6 +152,15 @@ export const solutions = [
       "description": "LED lights use 90% less energy than traditional light bulbs",
       "category": "other",
       "sectionHeader": "LED Lights"
+    }
+  },
+  {
+    "slug": "nuclear-power",
+    "data": {
+      "title": "Nuclear Power",
+      "description": "Fission, fusion—what’s up with nuclear power",
+      "category": "other",
+      "sectionHeader": "Nuclear Power"
     }
   },
   {
