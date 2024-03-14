@@ -175,7 +175,7 @@ export const solutions = [
   {
     "slug": "utilities",
     "data": {
-      "title": "Utility Companies Green Programs",
+      "title": "Utility Companies’ Green Programs",
       "description": "Many electric companies now offer programs to exclusively buy solar",
       "category": "other",
       "sectionHeader": "Utility Companies’ Green Programs"
