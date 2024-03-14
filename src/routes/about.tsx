@@ -21,7 +21,7 @@ export default function About(): JSX.Element {
       </Head>
       <Cover title={pageTitle}>
         <p>It's us, man!</p>
-        {/* Add link to the portfolio PDF. */}
+        {/* Add link to the copy right check list and work log. */}
       </Cover>
     </>
   );

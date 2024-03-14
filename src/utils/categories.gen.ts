@@ -119,21 +119,12 @@ export const solutions = [
     }
   },
   {
-    "slug": "atomics",
-    "data": {
-      "title": "Nuclear Power",
-      "description": "Fission, fusion—what’s up with nuclear power",
-      "category": "other",
-      "sectionHeader": "The Splitting of the Atom"
-    }
-  },
-  {
     "slug": "billing",
     "data": {
       "title": "Online Billing",
-      "description": "Online billing saves paper",
+      "description": "Online billing saves paper and time",
       "category": "other",
-      "sectionHeader": "Save the World Through Online Billing"
+      "sectionHeader": "Online Billing"
     }
   },
   {
@@ -142,7 +133,7 @@ export const solutions = [
       "title": "Electric Cars",
       "description": "Transportation is one of the largest sources of carbon emissions in the US",
       "category": "other",
-      "sectionHeader": "Cars, Trucks, and Things That Go"
+      "sectionHeader": "Electric Cars"
     }
   },
   {
@@ -151,43 +142,52 @@ export const solutions = [
       "title": "Hydroelectric Power",
       "description": "The power of water",
       "category": "other",
-      "sectionHeader": "Hypostatic? Nope, Just Hydroelectric"
+      "sectionHeader": "Hydroelectric Power"
     }
   },
   {
     "slug": "led-lights",
     "data": {
-      "title": "LED Lights Are Efficient",
+      "title": "LED Lights",
       "description": "LED lights use 90% less energy than traditional light bulbs",
       "category": "other",
-      "sectionHeader": "LED Lights Use Up Less Energy to Produce More Light"
+      "sectionHeader": "LED Lights"
+    }
+  },
+  {
+    "slug": "nuclear-power",
+    "data": {
+      "title": "Nuclear Power",
+      "description": "Fission, fusion—what’s up with nuclear power",
+      "category": "other",
+      "sectionHeader": "Nuclear Power"
     }
   },
   {
     "slug": "solar-lawn-lights",
     "data": {
-      "title": "Lawn Lights",
-      "description": "Saving both money and effort, solar-powered lawn lights are a great investment",
+      "title": "Solar Powered Lawn Lights",
+      "description": "Saving both money and effort, solar-powered lawn lights are a great investment for your green lawn!",
       "category": "other",
-      "sectionHeader": "Solar Powered Lights–Stylish and Green"
+      "sectionHeader": "Solar Powered Lights"
     }
   },
   {
     "slug": "utilities",
     "data": {
-      "title": "Utility Companies",
+      "title": "Utility Companies’ Green Programs",
       "description": "Many electric companies now offer programs to exclusively buy solar",
       "category": "other",
-      "sectionHeader": "Minimal-Hassle Green Energy Straight From Your Electric Company"
+      "sectionHeader": "Utility Companies’ Green Programs"
     }
   },
   {
     "slug": "wind",
     "data": {
       "title": "Wind Power",
-      "description": "While America is lagging in wind power, we can opine to our elected officials",
+      "description": "Wind is good for more than just cooling you off on a hot summer day",
       "category": "other",
-      "sectionHeader": "Wind Turbines—Capturing Both Our Imaginations and Energy!"
+      "sectionHeader": "Wind Power"
     }
   }
 ] as const satisfies SolutionPages;
