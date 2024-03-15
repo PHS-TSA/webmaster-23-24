@@ -102,7 +102,7 @@ export default function Home(): JSX.Element {
           resources and technologies that provide the greatest environmental
           benefit." Many people don't realize that this "environmental benefit"
           doesn't just impact far-off tropics, it also impacts your local
-          environment. Conventional power sources, such as oil, often ravage
+          environment. Conventional power sources such as oil often ravage
           environments when events like oil spills happen. In contrast, green
           energy doesn't have this risk.
         </Card>
