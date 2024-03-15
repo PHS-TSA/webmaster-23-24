@@ -1,8 +1,14 @@
 import { Head } from "$fresh/runtime.ts";
+import type { RouteConfig } from "$fresh/server.ts";
 import type { JSX, RenderableProps } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { siteName } from "../site.ts";
+import { useCsp } from "../utils/csp.ts";
+
+export const config = {
+  csp: true,
+} as const satisfies RouteConfig;
 
 /**
  * The page title.
@@ -57,6 +63,8 @@ function Card({
  * @returns The rendered home page.
  */
 export default function Home(): JSX.Element {
+  useCsp();
+
   return (
     <>
       <Head>
@@ -71,7 +79,7 @@ export default function Home(): JSX.Element {
 
       <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
-          image="https://i2.pickpik.com/photos/557/825/311/solarpark-wind-park-renewable-energy-solar-modules-thumb.jpg"
+          image="/images/intro.jpg"
           alt="test"
           cols="md:col-start-1 md:col-end-4"
           imgSide="right"
@@ -84,7 +92,7 @@ export default function Home(): JSX.Element {
           First though, what exactly is green energy?
         </Card>
         <Card
-          image={"/images/impact.svg"}
+          image="/images/impact.svg"
           alt="test"
           cols="md:col-start-1 md:col-end-5"
           imgSide="left"
@@ -99,7 +107,7 @@ export default function Home(): JSX.Element {
           energy doesn't have this risk.
         </Card>
         <Card
-          image={"/images/emissions.gif"}
+          image="/images/emissions.gif"
           alt="test"
           cols="md:col-start-2 md:col-end-5"
           imgSide="right"

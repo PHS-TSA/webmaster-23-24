@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { Fragment } from "preact";
 import { z } from "zod";
@@ -7,9 +7,14 @@ import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
+import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
+
+export const config = {
+  csp: true,
+} as const satisfies RouteConfig;
 
 export type CategoryProps = z.infer<typeof categoryProps>;
 export type CategoryPages = z.infer<typeof categoryPropsPages>;
@@ -106,6 +111,8 @@ const categoryMetadata = {
 export default function Category({
   data,
 }: PageProps<CategoryProps>): JSX.Element {
+  useCsp();
+
   const { title: pageTitle, description, pages } = data;
 
   return (

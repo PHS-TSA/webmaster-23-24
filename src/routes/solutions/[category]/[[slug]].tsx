@@ -1,13 +1,18 @@
 import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "$std/path/mod.ts";
 import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
+import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
 import type { MdxFile } from "../../../utils/solutions.ts";
+
+export const config = {
+  csp: true,
+} as const satisfies RouteConfig;
 
 /**
  * Properties for the {@link Solution} component.
@@ -60,6 +65,8 @@ export const handler: Handlers<SolutionProps> = {
 export default function Solution({
   data,
 }: PageProps<SolutionProps>): JSX.Element {
+  useCsp();
+
   const { title: pageTitle, description } = data.page.frontmatter;
 
   return (

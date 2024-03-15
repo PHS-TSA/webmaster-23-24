@@ -1,5 +1,5 @@
 import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { useId } from "preact/compat";
 import { Checkbox } from "../components/Checkbox.tsx";
@@ -11,21 +11,27 @@ import {
   calculatePricingIfHardInstallation,
   geothermalLoopType,
 } from "../utils/calc/geo.ts";
-import { calculatePricingFromType } from "../utils/calc/geo.ts";
-import { calculatePricing } from "../utils/calc/geo.ts";
-import { calculatePricingIfRequiresPermit } from "../utils/calc/geo.ts";
-import { calculatePricingMultiplierFromArea } from "../utils/calc/geo.ts";
+import {
+  calculatePricing,
+  calculatePricingFromType,
+  calculatePricingIfRequiresPermit,
+  calculatePricingMultiplierFromArea,
+} from "../utils/calc/geo.ts";
 import {
   type State,
   type StateData,
   stateData,
   states,
 } from "../utils/calc/solar.ts";
+import { useCsp } from "../utils/csp.ts";
 import type { FreshContextHelper } from "../utils/handlers.ts";
-import { usdFormat } from "../utils/intl.ts";
-import { yearFormat } from "../utils/intl.ts";
+import { usdFormat, yearFormat } from "../utils/intl.ts";
 import { getIpLocation } from "../utils/ip.ts";
 import { isKey } from "../utils/type-helpers.ts";
+
+export const config = {
+  csp: true,
+} as const satisfies RouteConfig;
 
 export type CalculatorProps = CalculatorSearchProps | CalculatorShowProps;
 
@@ -99,6 +105,8 @@ export const handler: Handlers = {
 export default function Calculator({
   data,
 }: PageProps<CalculatorProps>): JSX.Element {
+  useCsp();
+
   return (
     <>
       <Head>

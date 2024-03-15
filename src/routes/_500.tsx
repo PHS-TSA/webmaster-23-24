@@ -1,7 +1,13 @@
 import { Head } from "$fresh/runtime.ts";
+import type { RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
+import { useCsp } from "../utils/csp.ts";
+
+export const config = {
+  csp: true,
+} as const satisfies RouteConfig;
 
 /**
  * The page title.
@@ -15,6 +21,8 @@ const pageTitle = "500 — Internal Server Error" as const;
  * @returns The rendered 500 page.
  */
 export default function Error500(): JSX.Element {
+  useCsp();
+
   return (
     <>
       <Head>
