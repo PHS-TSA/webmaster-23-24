@@ -12,7 +12,7 @@ import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
-import * as $StateSelector from "./islands/StateSelector.tsx";
+import * as $Selector from "./islands/Selector.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -29,7 +29,7 @@ const manifest = {
   },
   islands: {
     "./islands/HeaderMenu.tsx": $HeaderMenu,
-    "./islands/StateSelector.tsx": $StateSelector,
+    "./islands/Selector.tsx": $Selector,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

@@ -4,7 +4,7 @@
  */
 
 import { z } from "zod";
-import { regionSchema } from "./calc.ts";
+import { regionSchema } from "./calc/solar.ts";
 import type { ZodTypeUnknown } from "./zod.ts";
 
 type Geo = z.infer<typeof geoSchema>;

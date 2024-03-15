@@ -424,12 +424,14 @@ export const stateData = {
   },
 } as const satisfies Record<string, StateData>;
 
-export const states = Object.keys(stateData);
+// @ts-expect-error: Typescript types the core JS libs awfully ;).
+export const states: (keyof typeof stateData)[] = Object.keys(stateData);
 
 export const regionSchema = z.custom<keyof typeof stateData>(
   (region) =>
     z
       .string()
+      // @ts-expect-error: And, of course, the stricter states typing breaks this ;).
       .refine((region2) => states.includes(region2))
       .safeParse(region).success,
 );
