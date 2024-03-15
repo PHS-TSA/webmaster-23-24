@@ -8,6 +8,13 @@ import {
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
+import remarkLintCheckboxContentIndent from "remark-lint-checkbox-content-indent";
+import remarkLintDefinitionSpacing from "remark-lint-definition-spacing";
+import remarkLintHeadingIncrement from "remark-lint-heading-increment";
+import remarkLintLinebreakStyle from "remark-lint-linebreak-style";
+import remarkLintNoConsecutiveBlankLines from "remark-lint-no-consecutive-blank-lines";
+import remarkLintNoMissingBlankLines from "remark-lint-no-missing-blank-lines";
+import remarkLintNoTabs from "remark-lint-no-tabs";
 import remarkMath, { type Options as MathOptions } from "remark-math";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkPresetLintConsistent from "remark-preset-lint-consistent";
@@ -54,8 +61,9 @@ async function run(): Promise<void> {
   const files = await Promise.all(promises);
   files.sort(sortFiles);
 
+  lint(files);
+
   await Promise.all([
-    Promise.resolve(lint(files)),
     writeSolutions(files),
     staticImports(files),
     categories(files),
@@ -124,6 +132,7 @@ function lint(files: VFile[]): void {
   const lints = reporter(files, lintReportOptions);
   if (lints !== "") {
     console.error(lints);
+    Deno.exit(1);
   }
 }
 
@@ -152,6 +161,20 @@ const remarkPlugins = [
   remarkPresetLintConsistent,
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintRecommended,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintCheckboxContentIndent,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintDefinitionSpacing,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintHeadingIncrement,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintLinebreakStyle,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintNoTabs,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintNoConsecutiveBlankLines,
+  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  remarkLintNoMissingBlankLines,
   [remarkMath, { singleDollarTextMath: false } satisfies MathOptions],
 ] as const satisfies PluggableList;
 
