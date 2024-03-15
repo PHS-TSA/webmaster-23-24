@@ -3,6 +3,8 @@ import {
   description as defaultDescription,
   keywords as defaultKeywords,
   siteName as defaultSiteName,
+  logoAlt,
+  logoSvgUrl,
 } from "../site.ts";
 import { Title } from "./Title.tsx";
 
@@ -47,9 +49,9 @@ export function Meta({
       <Title>{title}</Title>
       <meta name="description" content={description} key="desc" />
       <meta name="keywords" content={keywords} key="keys" />
-      {/* <meta property="og:image" content={logoSvgUrl} key="og:i" /> */}
-      {/* <meta property="og:image:secure_url" content={logoSvgUrl} key="og:si" /> */}
-      {/* <meta property="og:image:alt" content={logoAlt} key="og:ai" /> */}
+      <meta property="og:image" content={logoSvgUrl} key="og:i" />
+      <meta property="og:image:secure_url" content={logoSvgUrl} key="og:si" />
+      <meta property="og:image:alt" content={logoAlt} key="og:ai" />
       <meta property="og:title" content="Home" key="og:title" />
       <meta property="og:url" content="/" key="og:url" />
       <meta property="og:description" content={description} key="og:desc" />

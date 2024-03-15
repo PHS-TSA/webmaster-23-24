@@ -30,7 +30,9 @@ export function makeTitle<const T extends string>(pageTitle: T): Title<T> {
   return `${pageTitle} | ${siteName}` as const;
 }
 
-// export const faviconSvgUrl = "/favicon.svg" as const;
-// export const faviconPngUrl = "/favicon.png" as const;
-// export const logoSvgUrl = "/logo.svg" as const;
-// export const logoAlt = `${siteName}'s logo` as const;
+export const faviconIcoUrl = "/favicon.ico" as const;
+export const faviconSvgUrl = "/favicon.svg" as const;
+export const appleTouchIconPngUrl = "/apple-touch-icon.png" as const;
+export const logoSvgUrl = "/logo.svg" as const;
+export const logoAlt =
+  `The ${siteName} logo: a question mark overlaying a light switch` as const;

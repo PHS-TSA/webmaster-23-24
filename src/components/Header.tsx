@@ -59,7 +59,7 @@ function HomeLink(): JSX.Element {
       class="flex flex-1 flex-row items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
       href="/"
     >
-      <Logo aria-hidden="true" class="size-6" />
+      <Logo aria-hidden="true" class="size-10" />
       <div class="ml-1 text-2xl font-bold">{siteName}</div>
     </a>
   );

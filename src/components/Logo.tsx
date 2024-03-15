@@ -1,4 +1,5 @@
 import type { JSX } from "preact";
+import { logoAlt } from "../site.ts";
 
 /**
  * Render the logo.
@@ -14,7 +15,7 @@ export function Logo(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
       src="/logo.svg"
       width="128"
       height="128"
-      alt="the Why Switch logo: a question mark overlaying a light switch"
+      alt={logoAlt}
     />
   );
 }

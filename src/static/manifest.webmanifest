@@ -1,21 +1,61 @@
 {
   "name": "Why Switch?",
+  "short_name": "Why Switch?",
+  "description": "Why Switch is an informative website about green/green energy.",
+  "id": "/",
+  "scope": "/",
+  "start_url": "/",
+  "lang": "en-US",
+  "dir": "ltr",
   "background_color": "#22C55E",
   "theme_color": "#22C55E",
-  "description": "Why Switch is an informative website about green/green energy.",
   "display": "standalone",
-  "start_url": "/",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "landscape",
   "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/logo-sm.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-xs.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any"
+    },
     {
       "src": "/logo.svg",
       "type": "svg",
-      "sizes": "40x40"
+      "sizes": "any"
     }
   ],
-  "id": "/",
-  "short_name": "Why Switch?",
-  "orientation": "landscape",
-  "lang": "en-US",
-  "scope": "/",
-  "dir": "ltr"
+  "shortcuts": [
+    {
+      "name": "About",
+      "url": "/about/"
+    },
+    {
+      "name": "Calculate Pricing",
+      "short_name": "calculator",
+      "url": "/calculator/",
+      "description": "Calculate and compare the pricing of solar and geothermal energy solutions."
+    }
+  ],
+  "categories": ["education"],
+  "related_applications": [],
+  "prefer_related_applications": false
 }
