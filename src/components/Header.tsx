@@ -32,13 +32,13 @@ export function Header({ active }: HeaderProps): JSX.Element {
       <HomeLink />
       <ul class="flex flex-row flex-wrap items-center gap-6">
         {menus.map((menu: Menu) => (
-          <li key={menu.title} class="flex h-8 items-end">
+          <li key={menu.title} class="flex h-8 flex-row items-end">
             <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
           </li>
         ))}
         {extraMenus.map(
           ({ title, url }: BasicMenu): JSX.Element => (
-            <li key={url} class="flex h-8 items-end">
+            <li key={url} class="flex h-8 flex-row items-end">
               <LinkMenu active={active === url} title={title} url={url} />
             </li>
           ),
@@ -56,7 +56,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
 function HomeLink(): JSX.Element {
   return (
     <a
-      class="flex flex-1 items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+      class="flex flex-1 flex-row items-center text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
       href="/"
     >
       <Logo aria-hidden="true" class="size-6" />

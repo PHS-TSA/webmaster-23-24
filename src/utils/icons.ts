@@ -5,6 +5,7 @@ import IconBoltComponent from "$tabler_icons/bolt.tsx";
 import IconBrandDenoComponent from "$tabler_icons/brand-deno.tsx";
 import IconBrandReactComponent from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwindComponent from "$tabler_icons/brand-tailwind.tsx";
+import IconCheckComponent from "$tabler_icons/check.tsx";
 import IconChevronDownComponent from "$tabler_icons/chevron-down.tsx";
 import IconFlameComponent from "$tabler_icons/flame.tsx";
 import IconInfoCircleComponent from "$tabler_icons/info-circle.tsx";
@@ -82,3 +83,8 @@ export const IconAlertTriangle: Icon = IconAlertTriangleComponent;
  * An info flame icon.
  */
 export const IconFlame: Icon = IconFlameComponent;
+
+/**
+ * An icon of a checkmark.
+ */
+export const IconCheck: Icon = IconCheckComponent;

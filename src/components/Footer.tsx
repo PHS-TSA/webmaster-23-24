@@ -198,7 +198,7 @@ function RenderAbouts(): JSX.Element {
 function Who(): JSX.Element {
   return (
     <>
-      <div class="flex items-center gap-1">
+      <div class="flex flex-row items-center gap-1">
         <IconSolarPanel2
           class="inline-block size-6 min-w-6"
           aria-hidden="true"

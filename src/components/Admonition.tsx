@@ -82,11 +82,11 @@ export function Admonition({
 }: RenderableProps<AdmonitionProps>): JSX.Element {
   return (
     <div
-      class={`w-2/3 flex-col divide-y rounded-lg border-2 *:px-4 ${getAdmonitionStyles(
+      class={`flex w-2/3 flex-col divide-y rounded-lg border-2 *:px-4 ${getAdmonitionStyles(
         type,
       )}`}
     >
-      <div class="flex items-center *:mr-4">
+      <div class="flex flex-row items-center *:mr-4">
         <AdmonitionIcon type={type} /> {getTitle(type)}
       </div>
       <div>{children}</div>

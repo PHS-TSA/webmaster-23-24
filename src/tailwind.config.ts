@@ -1,9 +1,12 @@
+import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
+// import headless from "@headlessui/tailwindcss";
+import headless from "./utils/headless-tailwind.ts";
 
 export default {
   content: ["{routes,islands,components}/**/*.{ts,tsx}"],
-  plugins: [typography],
+  plugins: [typography, forms, headless],
   theme: {
     extend: {
       gridTemplateColumns: {
@@ -15,6 +18,11 @@ export default {
         "footer-mobile": "repeat(2, auto)",
         "footer-desktop": "1fr",
       },
+    },
+  },
+  variants: {
+    extend: {
+      borderWidth: ["first"],
     },
   },
 } satisfies Config;

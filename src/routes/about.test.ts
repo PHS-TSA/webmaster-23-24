@@ -10,9 +10,16 @@ const connInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },
 } as const satisfies ServeHandlerInfo;
 
-/**
- * Tests for the about page.
- */
+/*
+  TODO(lishaduck): write a testing library for Fresh
+  Plan:
+  - fork `fresh_marionette`,
+  - make it use Astral instead of Puppeteer, and
+  - add in the useful functions from `fresh_testing_library`
+    - Not including the parts from `testing-library`, of course.
+    - Use Astral or Storybook for integration and unit tests, respectively.
+      - Note that Storybook doesn't yet support Deno well.
+*/
 Deno.test("HTTP assert test.", async (t: Deno.TestContext): Promise<void> => {
   const handler = await createHandler(manifest, config);
 
