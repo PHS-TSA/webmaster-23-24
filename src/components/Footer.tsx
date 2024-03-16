@@ -179,13 +179,15 @@ function RenderCategoryItems({ items, url }: Menu): JSX.Element {
 
 function RenderAbouts(): JSX.Element {
   return (
-    <>
+    <ul class="mt-2">
       {extraMenus.map(
         (menu: BasicMenu): JSX.Element => (
-          <RenderCategoryHeader key={menu.url} {...menu} />
+          <li class="mt-2" key={menu.url}>
+            <RenderCategoryHeader {...menu} />
+          </li>
         ),
       )}
-    </>
+    </ul>
   );
 }
 
