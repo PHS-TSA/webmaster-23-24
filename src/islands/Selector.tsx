@@ -38,6 +38,7 @@ export function Selector<T extends string, U extends T>({
   return (
     <div class="top-16 flex w-72 flex-col items-center gap-4">
       <Combobox
+        name={name}
         disabled={!IS_BROWSER}
         value={current.value}
         onChange={(newValue) => {
@@ -48,7 +49,6 @@ export function Selector<T extends string, U extends T>({
         <div class="relative mt-1 w-min">
           <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-black/75 dark:focus-visible:ring-offset-teal-700">
             <Combobox.Input
-              name={name}
               class="rounded border-2 border-gray-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
               autoComplete="off"
               required={required}
