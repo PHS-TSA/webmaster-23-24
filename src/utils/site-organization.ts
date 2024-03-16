@@ -88,6 +88,10 @@ export const menus = generateMenus();
  */
 export const extraMenus = [
   {
+    title: "Calculator",
+    url: "/calculator/",
+  },
+  {
     title: "About",
     url: "/about/",
   },
