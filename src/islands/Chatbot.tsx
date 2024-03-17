@@ -9,20 +9,22 @@ import { IconMessageChatbot } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 
 export function Chatbot(
-  props: RenderableProps<JSX.HTMLAttributes<HTMLButtonElement>>,
+  props: RenderableProps<JSX.HTMLAttributes<HTMLDivElement>>,
 ): JSX.Element {
   const isOpen = useSignal(false);
 
   return (
-    <button
-      {...props}
-      class={`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 ${props.class}`}
-      type="button"
-      onClick={() => {
-        isOpen.value = !isOpen.value;
-      }}
-    >
-      <IconMessageChatbot class="size-8" />
+    <div {...props} class={props.class}>
+      <button
+        class="flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800"
+        onClick={() => {
+          isOpen.value = !isOpen.value;
+        }}
+        type="button"
+        aria-label="Meet our Chatbot!"
+      >
+        <IconMessageChatbot class="size-8" />
+      </button>
       <Transition
         appear={true}
         show={isOpen.value}
@@ -35,7 +37,7 @@ export function Chatbot(
       >
         {isOpen.value && <ChatbotBox class="absolute bottom-20 right-0" />}
       </Transition>
-    </button>
+    </div>
   );
 }
 
