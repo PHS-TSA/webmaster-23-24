@@ -1,4 +1,3 @@
-import type { ComponentType } from "preact";
 import { z } from "zod";
 
 /**
@@ -94,18 +93,3 @@ export const solutionPagesSchema = solutionPagesNullableSchema.transform(
       ): val is z.infer<typeof solutionPageSchema> => val !== undefined,
     ),
 );
-
-/**
- * A compiled file of Markdown XML which contains metadata in the form of frontmatter.
- */
-export interface MdxFile {
-  /**
-   * The default export of the MDX file, which is a preact component.
-   */
-  readonly default: ComponentType<{ readonly [x: string]: unknown }>;
-
-  /**
-   * The frontmatter of the MDX file.
-   */
-  readonly frontmatter: SolutionData;
-}

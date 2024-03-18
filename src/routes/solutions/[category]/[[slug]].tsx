@@ -8,7 +8,7 @@ import { Meta } from "../../../components/Meta.tsx";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
-import type { MdxFile } from "../../../utils/solutions.ts";
+import type { MDXModule } from "../../../utils/mdx/types.ts";
 
 export const config = {
   csp: true,
@@ -21,7 +21,7 @@ export interface SolutionProps {
   /**
    * The page to render.
    */
-  readonly page: MdxFile;
+  readonly page: MDXModule;
 }
 
 const contentDir = "../../../content" as const;
@@ -44,7 +44,7 @@ export const handler: Handlers<SolutionProps> = {
       const extensionless = join(base, slug || "index");
       const filepath = `${extensionless}.js`;
 
-      const file: MdxFile = await import(filepath);
+      const file: MDXModule = await import(filepath);
 
       return await ctx.render({ page: file });
     } catch (e) {
@@ -87,9 +87,15 @@ export default function Solution({
           <p>{description}</p>
         </Cover>
         <Content>
-          <data.page.default />
+          {/* `components` for `img`s are broken :( */}
+          <data.page.default components={{ img: ContentImg }} />
         </Content>
       </main>
     </>
   );
+}
+
+function ContentImg(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
+  // biome-ignore lint/a11y/useAltText: It doesn't know that alt comes through the props spread.
+  return <img {...props} loading="lazy" class={`rounded-sm ${props.class}`} />;
 }
