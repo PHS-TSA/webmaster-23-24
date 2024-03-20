@@ -8,6 +8,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_layout from "./routes/_layout.tsx";
 import * as $about from "./routes/about.tsx";
 import * as $api_chat_index from "./routes/api/chat/index.ts";
+import * as $api_chat_thread from "./routes/api/chat/thread.ts";
 import * as $calculator from "./routes/calculator.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
@@ -25,6 +26,7 @@ const manifest = {
     "./routes/_layout.tsx": $_layout,
     "./routes/about.tsx": $about,
     "./routes/api/chat/index.ts": $api_chat_index,
+    "./routes/api/chat/thread.ts": $api_chat_thread,
     "./routes/calculator.tsx": $calculator,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,

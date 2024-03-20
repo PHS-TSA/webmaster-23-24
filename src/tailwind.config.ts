@@ -17,6 +17,7 @@ export default {
       gridTemplateRows: {
         "footer-mobile": "repeat(2, auto)",
         "footer-desktop": "1fr",
+        "message-box": "1fr auto",
       },
     },
   },

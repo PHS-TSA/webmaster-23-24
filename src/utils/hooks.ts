@@ -5,19 +5,25 @@ import { useCallback, useMemo, useState } from "preact/hooks";
  * A suspense-enabled hook.
  */
 
-export function useFetchData<T>(url: string): T | undefined {
-  const fetchJson = useCallback(async () => {
+export function useFetchData<T>(url: string | undefined): T | undefined {
+  const fetchJson = useCallback(async (): Promise<T | undefined> => {
+    if (url === undefined) {
+      return undefined;
+    }
+
     const res = await fetch(url);
     if (!res.ok) {
       throw new Error(`Error: ${res.statusText}`);
     }
-    return await res.json();
+    const json = await res.json();
+
+    return json as T;
   }, [url]);
 
-  return use(fetchJson());
+  return usePromise(fetchJson());
 }
 
-export function use<T>(promise: Promise<T>): T | undefined {
+export function usePromise<T>(promise: Promise<T>): T | undefined {
   const status = useSignal<"pending" | "fulfilled" | "rejected">("pending");
   const result = useSignal<T | undefined>(undefined);
   const error = useSignal<unknown>(undefined);

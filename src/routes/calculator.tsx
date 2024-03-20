@@ -1,21 +1,19 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
-import { useId } from "preact/compat";
+import { useId } from "preact/hooks";
 import { Checkbox } from "../components/Checkbox.tsx";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { Selector, type SelectorListObject } from "../islands/Selector.tsx";
 import {
   type GeoCostBreakdown,
-  calculatePricingIfHardInstallation,
-  geothermalLoopType,
-} from "../utils/calc/geo.ts";
-import {
   calculatePricing,
   calculatePricingFromType,
+  calculatePricingIfHardInstallation,
   calculatePricingIfRequiresPermit,
   calculatePricingMultiplierFromArea,
+  geothermalLoopType,
 } from "../utils/calc/geo.ts";
 import {
   type State,

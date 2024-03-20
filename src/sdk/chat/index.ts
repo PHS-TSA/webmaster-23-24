@@ -1,21 +1,17 @@
-import { z } from "zod";
-import { useFetchData } from "../../utils/hooks.ts";
-import { messageContentTextSchema } from "../../utils/openai-schemas.ts";
+import type { z } from "zod";
+import { messageSchema } from "../../utils/openai-schemas.ts";
 
-export type UseChat = z.infer<typeof useChatSchema>;
+export type ChatThread = z.infer<typeof chatThreadSchema>;
 
-export const useChatSchema = z.object({
-  response: messageContentTextSchema,
-  thread_id: z.string(),
-});
+export const chatThreadSchema = messageSchema.array();
 
-export function useChat(
+export async function chat(
+  thread: string,
   message: string,
-  thread: string | undefined,
-): UseChat | undefined {
-  return useFetchData<UseChat>(
-    `/api/chat/?${thread ? `thread=${thread}&` : ""}q=${encodeURIComponent(
-      message,
-    )}`,
+): Promise<ChatThread | undefined> {
+  const res = await fetch(
+    `/api/chat/?thread=${thread}&q=${encodeURIComponent(message)}`,
   );
+
+  return await res.json();
 }

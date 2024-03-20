@@ -1,8 +1,8 @@
 import { OpenAI } from "openai";
-import type { MessageContentText } from "openai/resources/beta/threads/messages/messages.ts";
+import type { Message } from "openai/resources/beta/threads/messages/messages.ts";
 import type { Thread } from "openai/resources/beta/threads/threads.ts";
 
-let client: OpenAI;
+export let client: OpenAI;
 let ASSISTANT_ID: string;
 
 // Try to connect to the real OpenAI API, if it fails, use the mock API.
@@ -30,11 +30,11 @@ export async function newThread(): Promise<Thread> {
   return await client.beta.threads.create();
 }
 
-export async function ask(
+export async function* ask(
   q: string,
   thread_id: string,
   assistant_id: string = ASSISTANT_ID,
-): Promise<MessageContentText> {
+): AsyncGenerator<Message, void, unknown> {
   await client.beta.threads.messages.create(thread_id, {
     role: "user",
     content: q,
@@ -43,6 +43,7 @@ export async function ask(
     assistant_id,
   });
 
+  // TODO: Poll on the client
   while (
     run.status === "in_progress" ||
     run.status === "queued" ||
@@ -57,11 +58,7 @@ export async function ask(
     run = await client.beta.threads.runs.retrieve(thread_id, run.id);
   }
 
-  const messages = await client.beta.threads.messages.list(thread_id);
-  const lastMessage = messages.data[0]?.content[0];
-
-  if (lastMessage?.type !== "text") {
-    throw new Error("We don't support images.");
+  for await (const message of client.beta.threads.messages.list(thread_id)) {
+    yield message;
   }
-  return lastMessage;
 }

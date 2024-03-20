@@ -12,6 +12,7 @@ import IconInfoCircleComponent from "$tabler_icons/info-circle.tsx";
 import IconLemon2Component from "$tabler_icons/lemon-2.tsx";
 import IconLinkComponent from "$tabler_icons/link.tsx";
 import IconMessageChatbotComponent from "$tabler_icons/message-chatbot.tsx";
+import IconSendComponent from "$tabler_icons/send.tsx";
 import IconSolarPanel2Component from "$tabler_icons/solar-panel-2.tsx";
 import IconSolarPanelComponent from "$tabler_icons/solar-panel.tsx";
 
@@ -99,3 +100,10 @@ export const IconLink: Icon = IconLinkComponent;
  * It's a smiling robot!
  */
 export const IconMessageChatbot: Icon = IconMessageChatbotComponent;
+
+/**
+ * A send icon.
+ *
+ * It's a paper airplaneQ
+ */
+export const IconSend: Icon = IconSendComponent;
