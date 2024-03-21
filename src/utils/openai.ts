@@ -43,7 +43,7 @@ export async function* ask(
     assistant_id,
   });
 
-  // TODO: Poll on the client
+  // TODO(lishaduck): Poll on the client
   while (
     run.status === "in_progress" ||
     run.status === "queued" ||
