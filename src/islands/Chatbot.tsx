@@ -51,15 +51,15 @@ export function Chatbot(
   );
 }
 
-const replyStyles = tw`bg-slate-300 rounded-lg dark:bg-slate-800 p-4 prose prose-slate prose-sm dark:prose-invert max-w-80 sm:max-w-40`;
+const replyStyles = tw`prose prose-sm prose-slate max-w-40 rounded-lg bg-slate-300 p-4 dark:prose-invert sm:max-w-60 dark:bg-slate-800`;
 
 function getReplySide(role: "assistant" | "user"): string {
   switch (role) {
     case "assistant":
-      return tw`text-start mr-auto`;
+      return tw`mr-auto text-start`;
 
     case "user":
-      return tw`text-end ml-auto`;
+      return tw`ml-auto text-end`;
   }
 }
 
@@ -89,7 +89,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   return (
     <div
       {...props}
-      class={`dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-72 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box ${props.class}`}
+      class={`dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box ${props.class}`}
       onClick={(e) => {
         e.stopPropagation();
       }}
@@ -156,7 +156,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
             id={inputId}
             value={messageValue.value}
             autoComplete="off"
-            class="pr-10 w-full rounded-sm dark:text-slate-950 whitespace-normal"
+            class="pr-10 w-full rounded-lg dark:text-slate-950 whitespace-normal"
             onInput={(e) => {
               messageValue.value = (e.target as HTMLInputElement).value;
             }}
