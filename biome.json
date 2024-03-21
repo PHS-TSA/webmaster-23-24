@@ -16,7 +16,8 @@
         "all": true,
         "useImportRestrictions": "off",
         "useSortedClasses": "off",
-        "noConsole": "off"
+        "noConsole": "off",
+        "useJsxKeyInIterable": "off"
       },
       "style": {
         "noImplicitBoolean": "off",

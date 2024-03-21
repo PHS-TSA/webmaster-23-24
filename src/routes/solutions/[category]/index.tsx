@@ -9,7 +9,7 @@ import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { IconSolarPanel } from "../../../utils/icons.ts";
+import { IconLink, IconSolarPanel } from "../../../utils/icons.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export const config = {
@@ -134,16 +134,34 @@ export default function Category({
         </Cover>
         <Content>
           {pages.map(
-            ({ linkText, short, title, linkTo }: CategoryData): JSX.Element => (
-              <Fragment key={linkTo}>
-                <h2>{title}</h2>
-                <p>
-                  {short}.
-                  <br />
-                  For more information, see <a href={linkTo}>{linkText}</a>.
-                </p>
-              </Fragment>
-            ),
+            ({ linkText, short, title, linkTo }: CategoryData): JSX.Element => {
+              const slug = title.toLowerCase().replace(/[^\w]+/g, "-");
+
+              return (
+                <Fragment key={linkTo}>
+                  <h2 class="relative" id={slug}>
+                    {/* biome-ignore lint/a11y/useAnchorContent: Biome doesn't
+            support aria-label. */}
+                    <a
+                      class="absolute -left-8"
+                      key="anchorLink"
+                      href={`#${slug}`}
+                      aria-hidden
+                      aria-label="Anchor Link"
+                      tabindex={-1}
+                    >
+                      <IconLink />
+                    </a>
+                    {title}
+                  </h2>
+                  <p>
+                    {short}.
+                    <br />
+                    For more information, see <a href={linkTo}>{linkText}</a>.
+                  </p>
+                </Fragment>
+              );
+            },
           )}
         </Content>
       </main>

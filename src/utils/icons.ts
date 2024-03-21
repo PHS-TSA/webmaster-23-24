@@ -10,6 +10,7 @@ import IconChevronDownComponent from "$tabler_icons/chevron-down.tsx";
 import IconFlameComponent from "$tabler_icons/flame.tsx";
 import IconInfoCircleComponent from "$tabler_icons/info-circle.tsx";
 import IconLemon2Component from "$tabler_icons/lemon-2.tsx";
+import IconLinkComponent from "$tabler_icons/link.tsx";
 import IconSolarPanel2Component from "$tabler_icons/solar-panel-2.tsx";
 import IconSolarPanelComponent from "$tabler_icons/solar-panel.tsx";
 
@@ -88,3 +89,5 @@ export const IconFlame: Icon = IconFlameComponent;
  * An icon of a checkmark.
  */
 export const IconCheck: Icon = IconCheckComponent;
+
+export const IconLink: Icon = IconLinkComponent;
