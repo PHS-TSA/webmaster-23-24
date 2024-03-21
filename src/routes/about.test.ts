@@ -23,12 +23,17 @@ const connInfo = {
 Deno.test("HTTP assert test.", async (t: Deno.TestContext): Promise<void> => {
   const handler = await createHandler(manifest, config);
 
-  await t.step("#1 GET /about/", async (): Promise<void> => {
+  await t.step("#1 GET /about/", async (t: Deno.TestContext): Promise<void> => {
     const resp: Response = await handler(
       new Request("http://127.0.0.1/about/"),
       connInfo,
     );
     const text: string = await resp.text();
-    assertStringIncludes(text, "It's us, man!");
+    await t.step("Has copyright checklist", (): void =>
+      assertStringIncludes(text, "Copyright Checklist"),
+    );
+    await t.step("Has work log", (): void =>
+      assertStringIncludes(text, "Work Log"),
+    );
   });
 });
