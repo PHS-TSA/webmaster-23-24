@@ -15,8 +15,8 @@ on:
       - synchronize
       - reopened
   merge_group:
-  schedule:
-    - cron: "0 14 * * 1" # every monday at 9 in the morning CST
+  # schedule:
+  #   - cron: "0 14 * * 1" # every monday at 9 in the morning CST
   workflow_dispatch:
 
 permissions:
