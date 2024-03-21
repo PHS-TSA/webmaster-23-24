@@ -126,8 +126,8 @@ export default function Home(): JSX.Element {
           Recently, the government passed the Public Land Renewable Energy
           Development Act of 2023, which gives land grants to companies creating
           green energy. This is similar to what happened with railroad grants in
-          19th century, which caused an economic boom. Make sure not to miss out
-          on the great opportunities that this offers consumers!
+          the 19th century, which caused an economic boom. Make sure not to miss
+          out on the great opportunities that this offers consumers!
         </Card>
       </div>
     </>
