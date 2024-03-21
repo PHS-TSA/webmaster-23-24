@@ -89,12 +89,12 @@ function PopoverMenu({
       </Popover.Button>
 
       <Transition
-        enter="transition ease-out duration-200"
-        enterFrom="opacity-0 translate-y-1"
-        enterTo="opacity-100 translate-y-0"
-        leave="transition ease-in duration-150"
-        leaveFrom="opacity-100 translate-y-0"
-        leaveTo="opacity-0 translate-y-1"
+        enter={tw`transition ease-out duration-200`}
+        enterFrom={tw`opacity-0 translate-y-1`}
+        enterTo={tw`opacity-100 translate-y-0`}
+        leave={tw`transition ease-in duration-150`}
+        leaveFrom={tw`opacity-100 translate-y-0`}
+        leaveTo={tw`opacity-0 translate-y-1`}
       >
         <Popover.Panel class="max-w-full">
           <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-gray-200 rounded-md bg-gray-50 px-4 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-gray-800 dark:bg-gray-950 dark:ring-white/5">

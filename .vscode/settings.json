@@ -32,5 +32,6 @@
       "–": true,
       "—": true
     }
-  }
+  },
+  "cSpell.words": ["Preact"]
 }

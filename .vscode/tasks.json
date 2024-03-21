@@ -3,11 +3,11 @@
   "tasks": [
     {
       "type": "deno",
-      "command": "run",
+      "command": "task",
       "problemMatcher": ["$deno"],
       "label": "deno task: start",
-      "detail": "deno run -A --watch=src/static/,src/routes/ src/dev.ts",
-      "args": ["-A", "--watch=src/static/,src/routes/", "src/dev.ts"],
+      "detail": "Run the server",
+      "args": ["start"],
       "group": {
         "kind": "build",
         "isDefault": true

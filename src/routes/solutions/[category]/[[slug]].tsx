@@ -36,7 +36,7 @@ export const handler: Handlers<SolutionProps> = {
   ): Promise<Response> {
     try {
       const { category, slug } = ctx.params;
-      if (category === undefined) {
+      if (category === undefined || category === "") {
         return await ctx.renderNotFound();
       }
 

@@ -137,7 +137,6 @@ function RenderCategory(props: Menu): JSX.Element {
  * @returns The rendered category header.
  */
 // TODO(lishaduck): Add a <Link> component to centralize said styling.
-// TODO(lishaduck): Render these all in one section once we have multiple.
 function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a

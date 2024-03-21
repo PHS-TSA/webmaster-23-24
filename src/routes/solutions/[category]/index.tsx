@@ -45,7 +45,11 @@ export const handler: Handlers<CategoryProps> = {
   ): Promise<Response> {
     try {
       const { category } = ctx.params;
-      if (category === undefined || !isKey(categoryMetadata, category)) {
+      if (
+        category === undefined ||
+        category === "" ||
+        !isKey(categoryMetadata, category)
+      ) {
         return await ctx.renderNotFound();
       }
 

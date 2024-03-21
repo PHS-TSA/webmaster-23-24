@@ -3,6 +3,7 @@ import type { PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
+import { Chatbot } from "../islands/Chatbot.tsx";
 
 /**
  * Render the layout for all pages.
@@ -19,6 +20,7 @@ export default function Layout({ Component, url }: PageProps): JSX.Element {
         <Header active={url.pathname} />
         <Component />
       </Partial>
+      <Chatbot class="fixed right-10 bottom-10" />
       <Footer class="mt-auto" />
     </div>
   );
