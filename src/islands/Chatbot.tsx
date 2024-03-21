@@ -51,7 +51,7 @@ export function Chatbot(
   );
 }
 
-const replyStyles = tw`bg-slate-300 rounded-lg dark:bg-slate-800 p-4 prose prose-sm dark:prose-invert max-w-80 sm:max-w-40`;
+const replyStyles = tw`bg-slate-300 rounded-lg dark:bg-slate-800 p-4 prose prose-slate prose-sm dark:prose-invert max-w-80 sm:max-w-40`;
 
 function getReplySide(role: "assistant" | "user"): string {
   switch (role) {
@@ -156,7 +156,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
             id={inputId}
             value={messageValue.value}
             autoComplete="off"
-            class="pr-10 w-full rounded-sm dark:text-black whitespace-normal"
+            class="pr-10 w-full rounded-sm dark:text-slate-950 whitespace-normal"
             onInput={(e) => {
               messageValue.value = (e.target as HTMLInputElement).value;
             }}
@@ -166,7 +166,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
             type="submit"
             aria-label="Send"
           >
-            <IconSend class="dark:text-black" />
+            <IconSend class="dark:text-slate-950" />
           </button>
         </div>
       </form>

@@ -45,7 +45,7 @@ function Card({
       />
 
       <p
-        class={`prose prose-xl p-4 md:row-start-1 md:row-end-2 ${
+        class={`prose prose-slate prose-xl p-4 md:row-start-1 md:row-end-2 ${
           imgSide === "left"
             ? "md:col-start-2 md:col-end-5"
             : "md:col-start-1 md:col-end-4"

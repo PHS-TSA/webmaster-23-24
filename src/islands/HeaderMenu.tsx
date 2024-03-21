@@ -11,10 +11,10 @@ import { tw } from "../utils/tailwind.ts";
  * @returns The text style for the menu.
  */
 export function makeTextStyle(active: boolean): string {
-  return tw`whitespace-nowrap py-1 hover:text-gray-700 data-[current]:font-bold dark:hover:text-gray-200 ${
+  return tw`whitespace-nowrap py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
     active
-      ? tw`font-bold text-gray-700 dark:text-gray-200`
-      : tw`text-gray-500 dark:text-gray-400`
+      ? tw`font-bold text-slate-700 dark:text-slate-200`
+      : tw`text-slate-500 dark:text-slate-400`
   }`;
 }
 
@@ -25,17 +25,17 @@ export function makeTextStyle(active: boolean): string {
  * @returns The border style for the menu.
  */
 export function makeBorderStyle(active: boolean): string {
-  return tw` hover:border-gray-700 data-[current]:border-b-2 dark:hover:border-gray-200 ${
+  return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
     active
-      ? tw`border-b-2 border-gray-700 dark:border-gray-200`
-      : tw`border-gray-500 dark:border-gray-400`
+      ? tw`border-b-2 border-slate-700 dark:border-slate-200`
+      : tw`border-slate-500 dark:border-slate-400`
   }`;
 }
 
 /**
  * The style for the menu when it is focused.
  */
-export const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`;
+export const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
 
 /**
  * Properties for the {@link HeaderMenu} component.
@@ -97,7 +97,7 @@ function PopoverMenu({
         leaveTo={tw`opacity-0 translate-y-1`}
       >
         <Popover.Panel class="max-w-full">
-          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-gray-200 rounded-md bg-gray-50 px-4 py-1 shadow-lg ring-1 ring-black/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-gray-800 dark:bg-gray-950 dark:ring-white/5">
+          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200 rounded-md bg-slate-50 px-4 py-1 shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
             <a href={`${url}`} class={makeTextStyle(false)}>
               About {title}
             </a>

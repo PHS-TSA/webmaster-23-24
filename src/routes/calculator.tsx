@@ -247,7 +247,7 @@ function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
         </label>
         <input
           name="area"
-          class="relative w-min cursor-default rounded border-2 border-gray-500 bg-slate-200 text-left shadow-md focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
+          class="relative w-min cursor-default rounded border-2 border-slate-500 bg-slate-200 text-left shadow-md focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
           id={labelForArea}
           required
         />
@@ -259,7 +259,7 @@ function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
       />
 
       <button
-        class="bg-slate-200 dark:bg-slate-800 text-lg border-gray-500 border-2 rounded px-3 py-2"
+        class="bg-slate-200 dark:bg-slate-800 text-lg border-slate-500 border-2 rounded px-3 py-2"
         type="submit"
       >
         Submit

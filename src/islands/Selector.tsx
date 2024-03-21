@@ -47,9 +47,9 @@ export function Selector<T extends string, U extends T>({
       >
         <Combobox.Label class="text-lg">{question}</Combobox.Label>
         <div class="relative mt-1 w-min">
-          <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-black/75 dark:focus-visible:ring-offset-teal-700">
+          <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75 dark:focus-visible:ring-offset-teal-700">
             <Combobox.Input
-              class="rounded border-2 border-gray-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
+              class="rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
               autoComplete="off"
               required={required}
               displayValue={(state: SelectorListObject<T>) => `${state.name}`}
@@ -61,7 +61,7 @@ export function Selector<T extends string, U extends T>({
             />
             <Combobox.Button class="absolute inset-y-0 right-0 flex items-center pr-2">
               <IconChevronDown
-                class="h-5 w-5 text-gray-400"
+                class="h-5 w-5 text-slate-400"
                 aria-hidden="true"
               />
             </Combobox.Button>
@@ -78,16 +78,16 @@ export function Selector<T extends string, U extends T>({
               query.value = "";
             }}
           >
-            <Combobox.Options class="absolute z-10 mt-1 max-h-60 w-full max-w-full overflow-auto rounded-md bg-slate-200 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:bg-slate-800">
+            <Combobox.Options class="absolute z-10 mt-1 max-h-60 w-full max-w-full overflow-auto rounded-md bg-slate-200 text-base shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:text-sm dark:bg-slate-800">
               {filtered.length === 0 && query.value !== "" ? (
-                <div class="relative cursor-default select-none px-4 py-2 text-gray-700">
+                <div class="relative cursor-default select-none px-4 py-2 text-slate-700">
                   No results found
                 </div>
               ) : (
                 filtered.map((item) => (
                   <Combobox.Option
                     key={item.name}
-                    class="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-white ui-not-active:text-gray-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-gray-100"
+                    class="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-slate-50 ui-not-active:text-slate-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-slate-100"
                     value={item}
                   >
                     {({ selected, active }) => (
@@ -102,7 +102,7 @@ export function Selector<T extends string, U extends T>({
                         {selected && (
                           <span
                             class={tw`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active ? tw`text-white` : tw`text-green-700`
+                              active ? tw`text-slate-50` : tw`text-green-700`
                             }`}
                           >
                             <IconCheck class="h-5 w-5" aria-hidden="true" />

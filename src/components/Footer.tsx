@@ -82,7 +82,7 @@ export function Footer(props: FooterProps): JSX.Element {
   return (
     <footer
       {...props}
-      class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-white p-8 text-sm sm:grid-rows-footer-desktop sm:gap-x-8 md:grid-cols-footer-desktop md:gap-16 dark:bg-black ${props.class}`}
+      class={`max-w-screen-xlg grid w-full grid-flow-col grid-cols-footer-mobile grid-rows-footer-mobile gap-x-2 gap-y-16 bg-slate-50 p-8 text-sm sm:grid-rows-footer-desktop sm:gap-x-8 md:grid-cols-footer-desktop md:gap-16 dark:bg-slate-950 ${props.class}`}
     >
       <div class="col-start-1 col-end-2 row-start-1 row-end-2">
         <Who />
@@ -101,7 +101,7 @@ export function Footer(props: FooterProps): JSX.Element {
         </section>
       </div>
 
-      <div class="col-start-2 col-end-3 row-start-1 row-end-2 flex flex-col justify-start space-y-2 align-middle text-gray-500 sm:col-start-auto sm:col-end-auto sm:row-end-auto dark:text-gray-400 md:col-start-3 md:col-end-4">
+      <div class="col-start-2 col-end-3 row-start-1 row-end-2 flex flex-col justify-start space-y-2 align-middle text-slate-500 sm:col-start-auto sm:col-end-auto sm:row-end-auto dark:text-slate-400 md:col-start-3 md:col-end-4">
         <With />
       </div>
     </footer>
@@ -140,7 +140,7 @@ function RenderCategory(props: Menu): JSX.Element {
 function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a
-      class="py-4 pr-4 font-bold text-black hover:text-gray-800 dark:text-white dark:hover:text-gray-200"
+      class="py-4 pr-4 font-bold text-slate-950 hover:text-slate-800 dark:text-slate-50 dark:hover:text-slate-200"
       href={url}
     >
       {title}
@@ -164,7 +164,7 @@ function RenderCategoryItems({ items, url }: Menu): JSX.Element {
         (child: MenuItem): JSX.Element => (
           <li class="mt-2" key={child.name}>
             <a
-              class="py-4 pr-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              class="py-4 pr-4 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
               href={`${url}${child.href}`}
             >
               {child.name}
@@ -206,7 +206,9 @@ function Who(): JSX.Element {
         />
         <div class="text-xl font-bold sm:text-2xl">{siteName}</div>
       </div>
-      <div class="text-balance text-gray-500 dark:text-gray-400">{slogan}</div>
+      <div class="text-balance text-slate-500 dark:text-slate-400">
+        {slogan}
+      </div>
     </>
   );
 }
@@ -226,7 +228,7 @@ function With(): JSX.Element {
           (tool: Tool): JSX.Element => (
             <a
               href={tool.href}
-              class="inline-block size-6 max-w-fit hover:text-black dark:hover:text-white"
+              class="inline-block size-6 max-w-fit hover:text-slate-950 dark:hover:text-slate-50"
               title={tool.name}
               key={tool.name}
             >
