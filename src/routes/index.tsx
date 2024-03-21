@@ -80,7 +80,7 @@ export default function Home(): JSX.Element {
       <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
           image="/images/intro.jpg"
-          alt="test"
+          alt="A wind farm"
           cols="md:col-start-1 md:col-end-4"
           imgSide="right"
         >
@@ -93,7 +93,7 @@ export default function Home(): JSX.Element {
         </Card>
         <Card
           image="/images/impact.svg"
-          alt="test"
+          alt="A categorization of non-renewable, renewable and green energy sources"
           cols="md:col-start-1 md:col-end-5"
           imgSide="left"
         >
@@ -108,14 +108,26 @@ export default function Home(): JSX.Element {
         </Card>
         <Card
           image="/images/emissions.gif"
-          alt="test"
+          alt="A comparison of carbon emissions between various renewable and non-renewable energy sources"
           cols="md:col-start-2 md:col-end-5"
-          imgSide="right"
+          imgSide="left"
         >
           How can you help invest in green energy and reduce carbon emissions?
           It's actually pretty simple. You can buy solar panels for your house,
           purchase a geothermal heating system, or even just recycle. There are
           so many ways to save money and save the environment at the same time!
+        </Card>
+        <Card
+          image="/images/utility_companies.avif"
+          alt="Man putting up solar panels"
+          cols="md:col-start-1 md:col-end-4"
+          imgSide="right"
+        >
+          Recently, the government passed the Public Land Renewable Energy
+          Development Act of 2023, which gives land grants to companies creating
+          green energy. This is similar to what happened with railroad grants in
+          19th century, which caused an economic boom. Make sure not to miss out
+          on the great opportunities that this offers consumers!
         </Card>
       </div>
     </>
