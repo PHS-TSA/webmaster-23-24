@@ -53,7 +53,7 @@ export function Chatbot(
   );
 }
 
-const replyStyles = tw`prose prose-sm prose-slate max-w-40 rounded-lg bg-slate-300 p-4 dark:prose-invert sm:max-w-60 dark:bg-slate-800`;
+const replyStyles = tw`prose prose-sm prose-slate rounded-lg max-w-60 bg-slate-300 p-4 dark:prose-invert dark:bg-slate-800`;
 
 function getReplySide(role: "assistant" | "user"): string {
   switch (role) {

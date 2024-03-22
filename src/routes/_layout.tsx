@@ -20,7 +20,7 @@ export default function Layout({ Component, url }: PageProps): JSX.Element {
         <Header active={url.pathname} />
         <Component />
       </Partial>
-      <Chatbot class="fixed right-10 bottom-10" />
+      <Chatbot class="fixed right-3 bottom-10 sm:right-10" />
       <Footer class="mt-auto" />
     </div>
   );
