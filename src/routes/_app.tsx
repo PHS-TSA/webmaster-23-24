@@ -5,8 +5,8 @@ import {
   appleTouchIconPngUrl,
   description,
   faviconIcoUrl,
-  faviconSvgUrl,
   keywords,
+  logoSvgUrl,
 } from "../site.ts";
 
 /**
@@ -15,7 +15,7 @@ import {
 const metas = (
   <>
     <link rel="icon" href={faviconIcoUrl} sizes="48x48" />
-    <link rel="icon" href={faviconSvgUrl} sizes="any" type="image/svg+xml" />
+    <link rel="icon" href={logoSvgUrl} sizes="any" type="image/svg+xml" />
     <link rel="apple-touch-icon" href={appleTouchIconPngUrl} />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#005" />
