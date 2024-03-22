@@ -1,30 +1,10 @@
 import { OpenAI } from "openai";
-import type { Message } from "openai/resources/beta/threads/messages/messages.ts";
-import type { Thread } from "openai/resources/beta/threads/threads.ts";
+import type { FileObject, Message, Thread } from "./schemas.ts";
 
-export let client: OpenAI;
-let ASSISTANT_ID: string;
-
-// Try to connect to the real OpenAI API, if it fails, use the mock API.
-try {
-  client = new OpenAI();
-  ASSISTANT_ID = getAssistantId();
-} catch {
-  client = new OpenAI({
-    baseURL: "https://mockgpt.wiremockapi.cloud/v1",
-    apiKey: "sk-3eo4svsr4bah2qc9h70sdbvrf12du8o4",
-  });
-  ASSISTANT_ID = "";
-}
-
-function getAssistantId(): string {
-  const id = Deno.env.get("ASSISTANT_ID");
-  if (id === undefined) {
-    throw new Error("ASSISTANT_ID is not set");
-  }
-
-  return id;
-}
+export const client: OpenAI = new OpenAI({
+  baseURL: Deno.env.get("OPENAI_BASE_URL"),
+});
+const ASSISTANT_ID = Deno.env.get("ASSISTANT_ID") ?? "";
 
 export async function newThread(): Promise<Thread> {
   return await client.beta.threads.create();
@@ -61,4 +41,8 @@ export async function* ask(
   for await (const message of client.beta.threads.messages.list(thread_id)) {
     yield message;
   }
+}
+
+export async function retrieve(fileId: string): Promise<FileObject> {
+  return await client.files.retrieve(fileId);
 }

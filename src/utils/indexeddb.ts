@@ -12,12 +12,12 @@ import { usePromise } from "./hooks.ts";
  * Use with caution!
  *
  * @param key - The key of the item to fetch.
- * @param def - A function returning a promise that'll resolve to the default.
+ * @param def - A function returning a promise that might resolve to the default.
  */
 export function useIndexedDB<T>(
   key: string,
   inputs: Inputs,
-  def?: () => Promise<T>,
+  def?: () => Promise<T | undefined>,
 ): T | undefined {
   if (!IS_BROWSER) {
     throw new Error("This is browser-only!");
@@ -28,8 +28,10 @@ export function useIndexedDB<T>(
 
     if (val === undefined && def !== undefined) {
       const defaultValue = await def();
-      await set(key, defaultValue);
-      return defaultValue;
+      if (defaultValue !== undefined) {
+        await set(key, defaultValue);
+        return defaultValue;
+      }
     }
 
     return val;

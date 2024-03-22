@@ -2,15 +2,17 @@ import { render } from "$gfm";
 import { Transition } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { set } from "idb-keyval";
-import type { TextContentBlock } from "openai/resources/beta/threads/messages/messages.ts";
 import type { JSX, RenderableProps } from "preact";
 import { Suspense } from "preact/compat";
 import { useId } from "preact/hooks";
 import { Loading } from "../components/Loading.tsx";
 import { chat } from "../sdk/chat/index.ts";
+import { getThread } from "../sdk/chat/thread.ts";
 import { IconMessageChatbot } from "../utils/icons.ts";
 import { IconSend } from "../utils/icons.ts";
 import { useIndexedDB } from "../utils/indexeddb.ts";
+import { formatRefs } from "../utils/openai/references.ts";
+import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
 
 export function Chatbot(
@@ -63,19 +65,20 @@ function getReplySide(role: "assistant" | "user"): string {
   }
 }
 
+type DbItem = { role: "assistant" | "user"; message: string };
+type Db = DbItem[];
+
 function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const messageValue = useSignal("");
   const inputId = useId();
   const isAsking = useSignal(false);
-  const thread = useIndexedDB<string | undefined>(
+  const thread = useIndexedDB<string>(
     "thread",
     [],
-    async () => (await (await fetch("/api/chat/thread/")).json()).thread_id,
+    async () => (await getThread())?.id,
   );
 
-  const messages_ = useIndexedDB<
-    { role: "assistant" | "user"; message: string }[]
-  >(
+  const messages_ = useIndexedDB<Db>(
     "messages",
     [],
     // deno-lint-ignore require-await
@@ -113,6 +116,8 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
       <form
         class="py-2 place-items-center"
         onSubmit={async (e) => {
+          // TODO(lishaduck): enable moderation
+
           e.preventDefault();
 
           if (thread === undefined) {
@@ -135,17 +140,14 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
             return;
           }
 
-          messages.value = reply.map((val) => {
-            return {
-              role: val.role,
-              message: val.content
-                .filter(
-                  (val2): val2 is TextContentBlock => val2.type === "text",
-                )
-                .map((val2) => val2.text.value)
-                .join(" "),
-            };
-          });
+          messages.value = await Promise.all(
+            reply.map(async (val: Message): Promise<DbItem> => {
+              return {
+                role: val.role,
+                message: await formatRefs(val),
+              };
+            }),
+          );
 
           isAsking.value = false;
         }}

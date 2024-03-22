@@ -1,5 +1,3 @@
-import type { ComponentType } from "preact";
-
 import IconAlertTriangleComponent from "$tabler_icons/alert-triangle.tsx";
 import IconBoltComponent from "$tabler_icons/bolt.tsx";
 import IconBrandDenoComponent from "$tabler_icons/brand-deno.tsx";
@@ -15,6 +13,7 @@ import IconMessageChatbotComponent from "$tabler_icons/message-chatbot.tsx";
 import IconSendComponent from "$tabler_icons/send.tsx";
 import IconSolarPanel2Component from "$tabler_icons/solar-panel-2.tsx";
 import IconSolarPanelComponent from "$tabler_icons/solar-panel.tsx";
+import type { ComponentType } from "preact";
 
 /**
  * An icon component, which is a function that returns a preact component.
