@@ -35,6 +35,10 @@ jobs:
       id-token: write # Needed for auth with Deno Deploy
       pull-requests: write # Needed for biome comments
 
+    env:
+      OPENAI_BASE_URL: https://mockgpt.wiremockapi.cloud/v1
+      OPENAI_API_KEY: sk-3eo4svsr4bah2qc9h70sdbvrf12du8o4
+
     steps:
       - name: 📚 Git checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -61,9 +65,6 @@ jobs:
         run: deno task build
       - name: 🧪 Run tests
         run: deno task test
-        env:
-          OPENAI_BASE_URL: https://mockgpt.wiremockapi.cloud/v1
-          OPENAI_API_KEY: sk-3eo4svsr4bah2qc9h70sdbvrf12du8o4
       - name: 📊 Collect coverage
         run: deno task test:coverage
       - name: 🌲 No uncommited changes
