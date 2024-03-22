@@ -31,7 +31,7 @@ function Card({
 }: RenderableProps<CardProps>): JSX.Element {
   return (
     <div
-      class={`inline-grid items-center rounded-xl bg-slate-400 dark:bg-slate-300 p-8 md:grid md:grid-cols-4 ${cols}`}
+      class={`inline-grid items-center rounded-xl bg-slate-300 dark:bg-slate-200 p-8 md:grid md:grid-cols-4 ${cols}`}
     >
       <img
         src={image}
