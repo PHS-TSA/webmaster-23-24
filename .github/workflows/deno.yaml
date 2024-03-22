@@ -69,21 +69,21 @@ jobs:
         run: deno task test:coverage
       - name: 🌲 No uncommited changes
         uses: infotroph/tree-is-clean@e99ff204c7e1f74fd4de0822e86adb01f2ca2138 # v1.0.4
-      - name: 🔧 Upload to Deno Deploy
-        id: deno-deploy
-        uses: denoland/deployctl@612f83df2b874c6908d68de5cf3f36a6538fa8f7 # 1.12.0
-        with:
-          project: "why-switch"
-          entrypoint: src/main.ts
-          include: |
-            src
-            deno.json
-      - name: 🔦 Lighthouse
-        uses: treosh/lighthouse-ci-action@1b0e7c33270fbba31a18a0fbb1de7cc5256b6d39 # 11.4.0
-        with:
-          urls: |
-            ${{ steps.deno-deploy.outputs.url }}
-            ${{ steps.deno-deploy.outputs.url }}about/
-            ${{ steps.deno-deploy.outputs.url }}solutions/solar/
-            ${{ steps.deno-deploy.outputs.url }}solutions/geothermal/environment/
-          uploadArtifacts: true
+      # - name: 🔧 Upload to Deno Deploy
+      #   id: deno-deploy
+      #   uses: denoland/deployctl@612f83df2b874c6908d68de5cf3f36a6538fa8f7 # 1.12.0
+      #   with:
+      #     project: "why-switch"
+      #     entrypoint: src/main.ts
+      #     include: |
+      #       src
+      #       deno.json
+      # - name: 🔦 Lighthouse
+      #   uses: treosh/lighthouse-ci-action@1b0e7c33270fbba31a18a0fbb1de7cc5256b6d39 # 11.4.0
+      #   with:
+      #     urls: |
+      #       ${{ steps.deno-deploy.outputs.url }}
+      #       ${{ steps.deno-deploy.outputs.url }}about/
+      #       ${{ steps.deno-deploy.outputs.url }}solutions/solar/
+      #       ${{ steps.deno-deploy.outputs.url }}solutions/geothermal/environment/
+      #     uploadArtifacts: true
