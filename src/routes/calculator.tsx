@@ -133,7 +133,7 @@ function CalculatorPages(data: CalculatorProps): JSX.Element {
 
 function CalculatorSolarDisplay(data: CalculatorShowProps): JSX.Element {
   return (
-    <div class="w-11/12 flex text-balance bg-slate-100 dark:bg-slate-900 justify-center gap-8 py-8 px-20">
+    <div class="w-11/12 flex flex-col sm:flex-row text-balance bg-slate-100 dark:bg-slate-900 justify-center gap-8 py-8 px-5 sm:px-10 md:px-20">
       <div class="flex flex-col gap-4 basis-1/4">
         <h2 class="font-bold text-xl">Solar Power</h2>
         <section>
