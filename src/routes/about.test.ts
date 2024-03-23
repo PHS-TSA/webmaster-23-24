@@ -1,5 +1,5 @@
 import { type ServeHandlerInfo, createHandler } from "$fresh/server.ts";
-import { assertStringIncludes } from "$std/assert/mod.ts";
+import { assertStringIncludes } from "@std/assert";
 import config from "../fresh.config.ts";
 import manifest from "../fresh.gen.ts";
 

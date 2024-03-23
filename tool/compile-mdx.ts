@@ -1,11 +1,5 @@
-import {
-  dirname,
-  fromFileUrl,
-  join,
-  relative,
-  resolve,
-} from "$std/path/mod.ts";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
+import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkLintCheckboxContentIndent from "remark-lint-checkbox-content-indent";

@@ -1,4 +1,4 @@
-import { render } from "$gfm";
+import { render } from "@deno/gfm";
 import { Transition } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { set } from "idb-keyval";
