@@ -1,4 +1,4 @@
-import { assertEquals, assertThrows } from "$std/assert/mod.ts";
+import { assertEquals, assertThrows } from "@std/assert";
 import { ZodError } from "zod";
 import { solutionPagesSchema } from "./solutions.ts";
 
