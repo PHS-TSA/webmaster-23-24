@@ -8,8 +8,6 @@ on:
     branches:
       - main
   pull_request:
-    branches:
-      - main
     types:
       - opened
       - synchronize
@@ -51,14 +49,6 @@ jobs:
         uses: denoland/setup-deno@041b854f97b325bd60e53e9dc2de9cb9f9ac0cba # v1.1.4
         with:
           deno-version: ${{ env.DENO_VERSION }}
-      - name: ⚙️ Cache Deno dependencies
-        uses: actions/cache@ab5e6d0c87105b4c9c2047343972218f562e4319 # v4.0.1
-        with:
-          path: node_modules/
-          key: deno_cache-${{ runner.arch }}-${{ runner.os }}-${{ hashFiles('deno.json') }}
-          restore-keys: deno_cache-${{ runner.arch }}-${{ runner.os }}
-      - name: 📦 Install dependencies
-        run: deno cache src/main.ts
       - name: 🕵️ Run linter, verify formatting, typecheck
         run: deno task ci
       - name: 🔨 Build
