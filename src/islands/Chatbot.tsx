@@ -108,7 +108,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
             key={msg.message}
             class={`${getReplySide(msg.role)} ${replyStyles}`}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
-            dangerouslySetInnerHTML={{ __html: render(msg.message, {}) }}
+            dangerouslySetInnerHTML={{ __html: render(msg.message) }}
           />
         ))}
       </div>
