@@ -12,7 +12,7 @@ export function useCsp(): void {
     csp.directives.scriptSrcElem.push(SELF, UNSAFE_INLINE);
     csp.directives.styleSrc.push(SELF);
     csp.directives.styleSrcElem.push(SELF, UNSAFE_INLINE);
-    csp.directives.imgSrc.push(SELF);
+    csp.directives.imgSrc.push(SELF, "data:");
     csp.directives.connectSrc.push(SELF);
     csp.directives.manifestSrc.push(SELF);
   });
