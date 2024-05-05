@@ -1,6 +1,6 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { get, set } from "idb-keyval";
-import { type Inputs, useCallback } from "preact/hooks";
+import { useCallback } from "preact/hooks";
 import { usePromise } from "./hooks.ts";
 
 /**
@@ -16,7 +16,6 @@ import { usePromise } from "./hooks.ts";
  */
 export function useIndexedDB<T>(
   key: string,
-  inputs: Inputs,
   def?: () => Promise<T | undefined>,
 ): T | undefined {
   if (!IS_BROWSER) {
@@ -35,7 +34,7 @@ export function useIndexedDB<T>(
     }
 
     return val;
-  }, [key, def, inputs]);
+  }, [key, def]);
 
   return usePromise(callback());
 }

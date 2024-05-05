@@ -48,11 +48,10 @@ async function run(): Promise<void> {
   const initialFiles = getSolutions(contentDir);
   const compiledFiles = compileSolutions(initialFiles);
 
-  const promises = [];
+  const files: VFile[] = [];
   for await (const file of compiledFiles) {
-    promises.push(file);
+    files.push(file);
   }
-  const files = await Promise.all(promises);
   files.sort(sortFiles);
 
   lint(files);
@@ -149,7 +148,6 @@ async function* compileSolutions(
  */
 const remarkPlugins = [
   remarkFrontmatter,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkMdxFrontmatter,
   // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintConsistent,
@@ -203,7 +201,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
 }
 
 async function writeSolutions(solutions: VFile[]): Promise<void> {
-  const promises = [];
+  const promises: Promise<void>[] = [];
   for (const solution of solutions) {
     promises.push(writeSolution(solution));
   }

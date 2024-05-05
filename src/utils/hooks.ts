@@ -14,7 +14,7 @@ export function usePromise<T>(promise: Promise<T>): T | undefined {
       error.value = e;
       status.value = "rejected";
     }
-  }, [promise]);
+  }, [promise, status, result, error]);
 
   // Preact Signals dislike promises.
   const [dataPromise] = useState(fetchData);
