@@ -59,7 +59,7 @@
     "vfile": "npm:vfile@6.0.1",
     "vfile-matter": "npm:vfile-matter@5.0.0",
     "vfile-reporter": "npm:vfile-reporter@8.1.1",
-    "zod": "https://deno.land/x/zod@v3.22.4/mod.ts"
+    "zod": "https://deno.land/x/zod@v3.23.7/mod.ts"
   },
   "scopes": {
     "https://esm.sh/v135/": {
