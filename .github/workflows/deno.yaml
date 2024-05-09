@@ -79,3 +79,4 @@ jobs:
             ${{ steps.deno-deploy.outputs.url }}solutions/geothermal/environment/
             ${{ steps.deno-deploy.outputs.url }}calculator/
           uploadArtifacts: true
+          configPath: lighthouserc.json
