@@ -48,11 +48,10 @@ async function run(): Promise<void> {
   const initialFiles = getSolutions(contentDir);
   const compiledFiles = compileSolutions(initialFiles);
 
-  const promises = [];
+  const files: VFile[] = [];
   for await (const file of compiledFiles) {
-    promises.push(file);
+    files.push(file);
   }
-  const files = await Promise.all(promises);
   files.sort(sortFiles);
 
   lint(files);
@@ -149,25 +148,15 @@ async function* compileSolutions(
  */
 const remarkPlugins = [
   remarkFrontmatter,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkMdxFrontmatter,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintConsistent,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPresetLintRecommended,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintCheckboxContentIndent,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintDefinitionSpacing,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintHeadingIncrement,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintLinebreakStyle,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintNoTabs,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintNoConsecutiveBlankLines,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkLintNoMissingBlankLines,
   [remarkMath, { singleDollarTextMath: false } satisfies MathOptions],
 ] as const satisfies PluggableList;
@@ -178,7 +167,6 @@ const rehypePlugins = [rehypeMathjax] as const satisfies PluggableList;
 const compileOptions = {
   jsxImportSource: "preact",
   rehypePlugins,
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   remarkPlugins,
 } as const satisfies CompileOptions;
 
@@ -191,7 +179,6 @@ const compileOptions = {
 async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
 
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
@@ -203,7 +190,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
 }
 
 async function writeSolutions(solutions: VFile[]): Promise<void> {
-  const promises = [];
+  const promises: Promise<void>[] = [];
   for (const solution of solutions) {
     promises.push(writeSolution(solution));
   }

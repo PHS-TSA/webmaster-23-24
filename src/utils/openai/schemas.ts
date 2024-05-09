@@ -1,4 +1,4 @@
-import type { Message } from "openai/resources/beta/threads/messages/messages.ts";
+import type { Message } from "openai/resources/beta/threads/messages.ts";
 import type { Thread as OThread } from "openai/resources/beta/threads/threads.ts";
 import type { FileObject as OFileObject } from "openai/resources/mod.ts";
 import { z } from "zod";
@@ -35,5 +35,8 @@ export const chatThreadSchema = z.custom<Message[]>(
   (val) => z.object({}).array().safeParse(val).success,
 );
 
-export type { Message } from "openai/resources/beta/threads/messages/messages.ts";
-export type { TextContentBlock } from "openai/resources/beta/threads/messages/messages.ts";
+export type {
+  Message,
+  Annotation,
+  TextContentBlock,
+} from "openai/resources/beta/threads/messages.ts";

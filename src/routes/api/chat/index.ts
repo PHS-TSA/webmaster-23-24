@@ -1,6 +1,9 @@
 import type { Handlers } from "$fresh/server.ts";
 import { ask } from "../../../utils/openai/assistant.ts";
-import type { TextContentBlock } from "../../../utils/openai/schemas.ts";
+import type {
+  Message,
+  TextContentBlock,
+} from "../../../utils/openai/schemas.ts";
 
 export const handler: Handlers<TextContentBlock | null> = {
   async GET(req, ctx): Promise<Response> {
@@ -12,7 +15,7 @@ export const handler: Handlers<TextContentBlock | null> = {
     }
 
     const response = ask(message, thread_id);
-    const responses = [];
+    const responses: Message[] = [];
     for await (const res of response) {
       responses.push(res);
     }

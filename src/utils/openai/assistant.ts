@@ -19,24 +19,9 @@ export async function* ask(
     role: "user",
     content: q,
   });
-  let run = await client.beta.threads.runs.create(thread_id, {
+  await client.beta.threads.runs.createAndPoll(thread_id, {
     assistant_id,
   });
-
-  // TODO(lishaduck): Poll on the client
-  while (
-    run.status === "in_progress" ||
-    run.status === "queued" ||
-    run.status === "requires_action"
-  ) {
-    // Make sure we don't poll too frequently.
-    // deno-lint-ignore no-await-in-loop
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Polling is required, as streaming is not yet supported.
-    // deno-lint-ignore no-await-in-loop
-    run = await client.beta.threads.runs.retrieve(thread_id, run.id);
-  }
 
   for await (const message of client.beta.threads.messages.list(thread_id)) {
     yield message;
