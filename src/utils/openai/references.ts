@@ -1,9 +1,5 @@
-import type {
-  Annotation,
-  Message,
-  TextContentBlock,
-} from "openai/resources/beta/threads/messages/messages.ts";
 import { getFileData } from "../../sdk/chat/references.ts";
+import type { Annotation, Message, TextContentBlock } from "./schemas.ts";
 
 type AnnotationReplacement = { regex: RegExp; citation: string };
 
