@@ -1,4 +1,4 @@
-import { Head, asset } from "$fresh/runtime.ts";
+import { Head, Partial, asset } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import {
@@ -71,7 +71,9 @@ export default function App({ Component }: PageProps): JSX.Element {
       </Head>
 
       <body f-client-nav class="dark:bg-slate-950 dark:text-slate-50">
-        <Component />
+        <Partial name="body">
+          <Component />
+        </Partial>
       </body>
     </html>
   );
