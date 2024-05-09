@@ -31,7 +31,7 @@ function Card({
 }: RenderableProps<CardProps>): JSX.Element {
   return (
     <div
-      class={`inline-grid items-center rounded-xl bg-slate-300 dark:bg-slate-200 p-8 md:grid md:grid-cols-4 ${cols}`}
+      class={`inline-grid items-center rounded-xl bg-slate-300 dark:bg-slate-700 p-8 md:grid md:grid-cols-4 ${cols}`}
     >
       <img
         src={image}
@@ -45,7 +45,7 @@ function Card({
       />
 
       <p
-        class={`prose prose-slate prose-xl p-4 md:row-start-1 md:row-end-2 ${
+        class={`prose prose-slate prose-xl dark:prose-invert p-4 md:row-start-1 md:row-end-2 ${
           imgSide === "left"
             ? "md:col-start-2 md:col-end-5"
             : "md:col-start-1 md:col-end-4"

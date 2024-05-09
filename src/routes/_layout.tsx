@@ -1,4 +1,3 @@
-import { Partial } from "$fresh/runtime.ts";
 import type { PageProps } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { Footer } from "../components/Footer.tsx";
@@ -16,10 +15,8 @@ import { Chatbot } from "../islands/Chatbot.tsx";
 export default function Layout({ Component, url }: PageProps): JSX.Element {
   return (
     <div class="flex min-h-screen flex-col place-content-center">
-      <Partial name="body">
-        <Header active={url.pathname} />
-        <Component />
-      </Partial>
+      <Header active={url.pathname} />
+      <Component />
       <Chatbot class="fixed right-3 bottom-10 sm:right-10" />
       <Footer class="mt-auto" />
     </div>

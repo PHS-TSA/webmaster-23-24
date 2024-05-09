@@ -73,7 +73,7 @@ export const handler: Handlers = {
       });
     }
 
-    if (!geoType.success || !squareFootage) {
+    if (!(geoType.success && squareFootage)) {
       return ctx.renderNotFound();
     }
 

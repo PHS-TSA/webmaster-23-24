@@ -1,4 +1,4 @@
-import { render } from "$gfm";
+import { render } from "@deno/gfm";
 import { Transition } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { set } from "idb-keyval";
@@ -74,13 +74,11 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const isAsking = useSignal(false);
   const thread = useIndexedDB<string>(
     "thread",
-    [],
     async () => (await getThread())?.id,
   );
 
   const messages_ = useIndexedDB<Db>(
     "messages",
-    [],
     // deno-lint-ignore require-await
     async () => [],
   );
@@ -105,10 +103,10 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         )}
         {messages.value.map((msg) => (
           <div
-            key={msg.message}
+            key={`${msg.role}${msg.message}`}
             class={`${getReplySide(msg.role)} ${replyStyles}`}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
-            dangerouslySetInnerHTML={{ __html: render(msg.message, {}) }}
+            dangerouslySetInnerHTML={{ __html: render(msg.message) }}
           />
         ))}
       </div>

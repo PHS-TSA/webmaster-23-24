@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { join } from "$std/path/mod.ts";
+import { join } from "@std/path";
 import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
