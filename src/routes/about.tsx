@@ -1,4 +1,4 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head, asset } from "$fresh/runtime.ts";
 import type { RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
 import { Content } from "../components/Content.tsx";
@@ -150,7 +150,7 @@ export default function About(): JSX.Element {
             <a
               class="rounded-md bg-slate-900 p-2 text-slate-100 no-underline hover:bg-slate-800 hover:text-slate-200 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 dark:hover:text-slate-800"
               role="button"
-              href="/documentation/copyright-checklist.pdf"
+              href={asset("/documentation/copyright-checklist.pdf")}
               download="copyright-checklist.pdf"
             >
               Copyright Checklist
@@ -158,7 +158,7 @@ export default function About(): JSX.Element {
             <a
               class="rounded-md bg-slate-900 p-2 text-slate-100 no-underline hover:bg-slate-800 hover:text-slate-200 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 dark:hover:text-slate-800"
               role="button"
-              href="/documentation/work-log.pdf"
+              href={asset("/documentation/work-log.pdf")}
               download="work-log.pdf"
             >
               Work Log

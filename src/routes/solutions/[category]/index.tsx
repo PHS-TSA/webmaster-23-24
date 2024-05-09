@@ -144,8 +144,7 @@ export default function Category({
               return (
                 <Fragment key={linkTo}>
                   <h2 class="relative" id={slug}>
-                    {/* biome-ignore lint/a11y/useAnchorContent: Biome doesn't
-            support aria-label. */}
+                    {/* biome-ignore lint/a11y/useAnchorContent: Biome doesn't support aria-label. */}
                     <a
                       class="absolute -left-8"
                       key="anchorLink"
