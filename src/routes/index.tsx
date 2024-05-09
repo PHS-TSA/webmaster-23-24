@@ -41,7 +41,6 @@ function Card({
             ? "md:col-start-1 md:col-end-2"
             : "md:col-start-4 md:col-end-5"
         }`}
-        loading="lazy"
       />
 
       <p
@@ -79,7 +78,7 @@ export default function Home(): JSX.Element {
 
       <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
-          image="/images/intro.jpg"
+          image="/images/intro.avif"
           alt="A wind farm"
           cols="md:col-start-1 md:col-end-4"
           imgSide="right"
@@ -118,7 +117,7 @@ export default function Home(): JSX.Element {
           so many ways to save money and save the environment at the same time!
         </Card>
         <Card
-          image="/images/utility_companies.avif"
+          image="/images/utility-companies.avif"
           alt="Man putting up solar panels"
           cols="md:col-start-1 md:col-end-4"
           imgSide="right"
