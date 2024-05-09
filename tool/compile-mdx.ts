@@ -1,5 +1,5 @@
 import { type CompileOptions, compile } from "@mdx-js/mdx";
-import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
+import { dirname, fromFileUrl, join, resolve } from "@std/path";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkLintCheckboxContentIndent from "remark-lint-checkbox-content-indent";
@@ -37,9 +37,9 @@ declare module "vfile" {
 Deno.chdir(dirname(fromFileUrl(Deno.mainModule)));
 
 // Directories for resolve.
-const srcDir = "../src" as const;
-const contentDir = `${srcDir}/content` as const;
-const utilsDir = `${srcDir}/utils` as const;
+const srcDir = resolve("..", "src");
+const contentDir = join(srcDir, "content");
+const utilsDir = join(srcDir, "utils");
 
 /**
  * Compile the MDX files into JS.
@@ -76,15 +76,14 @@ async function run(): Promise<void> {
  */
 async function* getSolutions(
   basePath: string,
-  currentPath: string = basePath,
+  currentPath = "",
 ): AsyncGenerator<VFile, void, unknown> {
-  for await (const entry of Deno.readDir(currentPath)) {
-    const fullPath = join(currentPath, entry.name);
-    const relPath = relative(basePath, currentPath);
-    if (entry.isFile && entry.name.match(/mdx?/) !== null) {
-      yield getSolution(fullPath, entry.name, relPath);
+  for await (const entry of Deno.readDir(resolve(basePath, currentPath))) {
+    const fullPath = resolve(basePath, currentPath, entry.name);
+    if (entry.isFile && entry.name.match(/\.mdx?$/) !== null) {
+      yield getSolution(fullPath, currentPath, entry.name);
     } else if (entry.isDirectory) {
-      yield* getSolutions(basePath, fullPath);
+      yield* getSolutions(basePath, join(currentPath, entry.name));
     }
   }
 }
@@ -93,14 +92,14 @@ async function* getSolutions(
  * Get the contents of a file.
  *
  * @param fullPath - The full path to the file.
- * @param fileName - The name of the file.
  * @param relPath - The relative path to the file.
+ * @param fileName - The name of the file.
  * @returns The file's contents.
  */
 async function getSolution(
   fullPath: string,
+  relPath: string,
   fileName: string,
-  relPath = ".",
 ): Promise<VFile> {
   const fileContent = await Deno.readTextFile(fullPath);
 
@@ -108,6 +107,7 @@ async function getSolution(
     value: fileContent,
     dirname: relPath,
     basename: fileName,
+    cwd: fullPath,
   });
 }
 
