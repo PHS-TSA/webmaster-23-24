@@ -1,7 +1,13 @@
-import { Popover, Transition } from "@headlessui/react";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
-import type { Menu, MenuItem } from "../utils/site-organization.ts";
+import type { Menu } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 /**
@@ -11,7 +17,7 @@ import { tw } from "../utils/tailwind.ts";
  * @returns The text style for the menu.
  */
 export function makeTextStyle(active: boolean): string {
-  return tw`whitespace-nowrap py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
+  return tw`whitespace-nowrap py-1 hover:text-slate-700 aria-[current]:font-bold dark:hover:text-slate-200 ${
     active
       ? tw`font-bold text-slate-700 dark:text-slate-200`
       : tw`text-slate-500 dark:text-slate-400`
@@ -25,7 +31,7 @@ export function makeTextStyle(active: boolean): string {
  * @returns The border style for the menu.
  */
 export function makeBorderStyle(active: boolean): string {
-  return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
+  return tw` hover:border-slate-700 aria-[current]:border-b-2 dark:hover:border-slate-200 ${
     active
       ? tw`border-b-2 border-slate-700 dark:border-slate-200`
       : tw`border-slate-500 dark:border-slate-400`
@@ -35,7 +41,7 @@ export function makeBorderStyle(active: boolean): string {
 /**
  * The style for the menu when it is focused.
  */
-export const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
+export const prettyFocus = tw`rounded-sm data-[focus]:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
 
 /**
  * Properties for the {@link HeaderMenu} component.
@@ -81,13 +87,18 @@ function PopoverMenu({
   active,
 }: Menu & WithActive): JSX.Element {
   return (
-    <Popover class="relative">
-      <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
-        <span class={`flex flex-row ${makeTextStyle(active)}`}>
-          {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
-        </span>
-      </Popover.Button>
-
+    <Popover>
+      <PopoverButton
+        className={clsx(
+          tw`flex h-8 flex-row`,
+          prettyFocus,
+          makeBorderStyle(active),
+          makeTextStyle(active),
+        )}
+      >
+        {title}
+        <IconChevronDown class="w-6 h-6" aria-hidden="true" />
+      </PopoverButton>
       <Transition
         enter={tw`transition ease-out duration-200`}
         enterFrom={tw`opacity-0 translate-y-1`}
@@ -96,24 +107,27 @@ function PopoverMenu({
         leaveFrom={tw`opacity-100 translate-y-0`}
         leaveTo={tw`opacity-0 translate-y-1`}
       >
-        <Popover.Panel class="max-w-full">
-          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200 rounded-md bg-slate-50 px-4 py-1 shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
-            <a href={`${url}`} class={makeTextStyle(false)}>
-              About {title}
-            </a>
-            {items.map(
-              (link: MenuItem): JSX.Element => (
-                <a
-                  href={`${url}${link.href}`}
-                  key={link}
-                  class={makeTextStyle(false)}
-                >
-                  {link.name}
-                </a>
+        <PopoverPanel
+          className="origin-top-right [--anchor-gap:var(--spacing-5)]"
+          anchor="bottom end"
+        >
+          <div class="grid max-w-64  grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/5 rounded-lg drop-shadow-lg bg-slate-50 px-4 py-1 text-slate-500 ring-1 ring-slate-950/5 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
+            {[{ href: "", name: `About ${title}` } as const, ...items].map(
+              (link): JSX.Element => (
+                <div key={link} class="py-2 transition">
+                  <a
+                    href={`${url}${link.href}`}
+                    class={`px-3 block whitespace-break-spaces text-balance rounded overflow-y-hidden hover:bg-slate-50/5  ${makeTextStyle(
+                      false,
+                    )}`}
+                  >
+                    {link.name}
+                  </a>
+                </div>
               ),
             )}
           </div>
-        </Popover.Panel>
+        </PopoverPanel>
       </Transition>
     </Popover>
   );

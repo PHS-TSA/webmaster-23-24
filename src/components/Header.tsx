@@ -29,7 +29,9 @@ export interface HeaderProps {
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
     <header class="max-w-screen-xlg flex w-full flex-col flex-wrap gap-4 bg-slate-50 px-8 py-6 sm:flex-row dark:bg-slate-950">
-      <HomeLink />
+      <div class="flex-shrink-0 flex-grow">
+        <HomeLink />
+      </div>
       <ul class="flex flex-shrink flex-row flex-wrap items-center gap-6">
         {menus.map((menu: Menu) => (
           <li key={menu.title} class="flex h-8 flex-row items-end">
@@ -56,7 +58,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
 function HomeLink(): JSX.Element {
   return (
     <a
-      class="flex flex-shrink-0 flex-grow flex-row items-center text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+      class="flex max-w-fit flex-row items-center text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
       href="/"
     >
       <Logo aria-hidden="true" class="size-10" />

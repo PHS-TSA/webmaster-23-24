@@ -1,7 +1,15 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Combobox, Transition } from "@headlessui/react";
+import {
+  Combobox,
+  ComboboxButton,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
+  Label,
+  Transition,
+} from "@headlessui/react";
 import { useSignal } from "@preact/signals";
-import { Fragment, type JSX } from "preact";
+import type { JSX } from "preact";
 import { IconCheck, IconChevronDown } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 
@@ -42,14 +50,16 @@ export function Selector<T extends string, U extends T>({
         disabled={!IS_BROWSER}
         value={current.value}
         onChange={(newValue) => {
-          current.value = newValue;
+          if (newValue) {
+            current.value = newValue;
+          }
         }}
       >
-        <Combobox.Label class="text-lg">{question}</Combobox.Label>
+        <Label className="text-lg">{question}</Label>
         <div class="relative mt-1 w-min">
           <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75 dark:focus-visible:ring-offset-teal-700">
-            <Combobox.Input
-              class="rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
+            <ComboboxInput
+              className="rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
               autoComplete="off"
               required={required}
               displayValue={(state: SelectorListObject<T>) => `${state.name}`}
@@ -59,15 +69,14 @@ export function Selector<T extends string, U extends T>({
                 }
               }}
             />
-            <Combobox.Button class="absolute inset-y-0 right-0 flex items-center pr-2">
+            <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
               <IconChevronDown
                 class="h-5 w-5 text-slate-400"
                 aria-hidden="true"
               />
-            </Combobox.Button>
+            </ComboboxButton>
           </div>
           <Transition
-            as={Fragment}
             enter={tw`transition ease-out duration-100`}
             enterFrom={tw`opacity-0`}
             enterTo={tw`opacity-100`}
@@ -78,16 +87,16 @@ export function Selector<T extends string, U extends T>({
               query.value = "";
             }}
           >
-            <Combobox.Options class="absolute z-10 mt-1 max-h-60 w-full max-w-full overflow-auto rounded-md bg-slate-200 text-base shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:text-sm dark:bg-slate-800">
+            <ComboboxOptions className="absolute z-10 mt-1 max-h-60 w-full max-w-full overflow-auto rounded-md bg-slate-200 text-base shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:text-sm dark:bg-slate-800">
               {filtered.length === 0 && query.value !== "" ? (
                 <div class="relative cursor-default select-none px-4 py-2 text-slate-700">
                   No results found
                 </div>
               ) : (
                 filtered.map((item) => (
-                  <Combobox.Option
+                  <ComboboxOption
                     key={item.name}
-                    class="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-slate-50 ui-not-active:text-slate-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-slate-100"
+                    className="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-slate-50 ui-not-active:text-slate-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-slate-100"
                     value={item}
                   >
                     {({ selected, active }) => (
@@ -110,10 +119,10 @@ export function Selector<T extends string, U extends T>({
                         )}
                       </>
                     )}
-                  </Combobox.Option>
+                  </ComboboxOption>
                 ))
               )}
-            </Combobox.Options>
+            </ComboboxOptions>
           </Transition>
         </div>
       </Combobox>

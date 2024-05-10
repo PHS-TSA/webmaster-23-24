@@ -17,7 +17,8 @@
         "useImportRestrictions": "off",
         "useSortedClasses": "off",
         "noConsole": "off",
-        "useDefaultSwitchClause": "off"
+        "useDefaultSwitchClause": "off",
+        "noReactSpecificProps": "off"
       },
       "style": {
         "noImplicitBoolean": "off",
