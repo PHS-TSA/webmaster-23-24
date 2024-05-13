@@ -1,14 +1,14 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { get, set } from "idb-keyval";
 import { useCallback } from "preact/hooks";
-import { usePromise } from "./hooks.ts";
+import { usePromise } from "./suspense.ts";
 
 /**
  * Use a value from the IndexedDB.
  * If the value doesn't exist, set it to the default.
  *
  * @remarks
- * Unfortunately, this can't distinguish between nonexistent values and existent undefined values!
+ * Unfortunately, this can't distinguish between nonexistent values and existing undefined values!
  * Use with caution!
  *
  * @param key - The key of the item to fetch.
