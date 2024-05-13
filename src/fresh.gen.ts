@@ -14,6 +14,7 @@ import * as $calculator from "./routes/calculator.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
+import * as $CalculatorSearch from "./islands/CalculatorSearch.tsx";
 import * as $Chatbot from "./islands/Chatbot.tsx";
 import * as $Checkbox from "./islands/Checkbox.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
@@ -36,6 +37,7 @@ const manifest = {
     "./routes/solutions/[category]/index.tsx": $solutions_category_index,
   },
   islands: {
+    "./islands/CalculatorSearch.tsx": $CalculatorSearch,
     "./islands/Chatbot.tsx": $Chatbot,
     "./islands/Checkbox.tsx": $Checkbox,
     "./islands/HeaderMenu.tsx": $HeaderMenu,
