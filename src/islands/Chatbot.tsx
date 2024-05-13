@@ -29,7 +29,7 @@ interface ChatbotProps {
   class: string;
 }
 
-const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl`;
+const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 shadow-md dark:bg-blue-800`;
 
 export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
