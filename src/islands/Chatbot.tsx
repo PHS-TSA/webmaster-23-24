@@ -30,15 +30,23 @@ interface ChatbotProps {
   class: string;
 }
 
+const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl`;
+
 export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
-    return <></>;
+    return (
+      <div class={props.class}>
+        <div className={chatbotButtonStyles}>
+          <IconMessageChatbot class="size-8" />
+        </div>
+      </div>
+    );
   }
 
   return (
     <Popover className={props.class}>
       <PopoverButton
-        className="flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl"
+        className={chatbotButtonStyles}
         aria-label="Meet our Chatbot!"
       >
         <IconMessageChatbot class="size-8" />
@@ -122,7 +130,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
       <form
         class="py-2 place-items-center"
         onSubmit={async (e) => {
-          // TODO(lishaduck): enable moderation
+          // TODO(lishaduck): Enable moderation.
 
           e.preventDefault();
 

@@ -1,9 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import type { JSX } from "preact";
+import { CalculatorSearch } from "../components/CalculatorSearch.tsx";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
-import { CalculatorSearch } from "../islands/CalculatorSearch.tsx";
 import {
   calculatePricing,
   calculatePricingFromType,

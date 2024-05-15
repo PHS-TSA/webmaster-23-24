@@ -26,6 +26,17 @@ export interface SelectorListObject<T extends string> {
   value: T;
 }
 
+const wrapperStyles = tw`top-16 flex w-72 flex-col items-center gap-4`;
+const labelStyles = tw`text-lg`;
+const detach1Styles = tw`relative mt-1 w-min`;
+const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75 dark:focus-visible:ring-offset-teal-700`;
+const inputStyles = tw`rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
+const buttonStyles = tw`absolute inset-y-0 right-0 flex items-center pr-2`;
+function ButtonIcon(): JSX.Element {
+  return <IconChevronDown class="h-5 w-5 text-slate-400" aria-hidden="true" />;
+}
+const buttonTitle = "Options";
+
 export function Selector<T extends string, U extends T>({
   name,
   question,
@@ -37,7 +48,25 @@ export function Selector<T extends string, U extends T>({
   const query = useSignal("");
 
   if (!IS_BROWSER) {
-    return <></>;
+    return (
+      <div class={wrapperStyles}>
+        <label class={labelStyles}>{question}</label>
+        <div class={detach1Styles}>
+          <div class={detach2Styles}>
+            <input
+              class={inputStyles}
+              autoComplete="off"
+              required={required}
+              value={current.value?.name}
+              aria-label={question}
+            />
+            <button title={buttonTitle} type="button" class={buttonStyles}>
+              <ButtonIcon />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const filtered = list.filter((item) =>
@@ -48,7 +77,7 @@ export function Selector<T extends string, U extends T>({
   );
 
   return (
-    <div class="top-16 flex w-72 flex-col items-center gap-4">
+    <div class={wrapperStyles}>
       <Combobox
         name={name}
         disabled={!IS_BROWSER}
@@ -59,11 +88,11 @@ export function Selector<T extends string, U extends T>({
           }
         }}
       >
-        <Label className="text-lg">{question}</Label>
-        <div class="relative mt-1 w-min">
-          <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75 dark:focus-visible:ring-offset-teal-700">
+        <Label className={labelStyles}>{question}</Label>
+        <div class={detach1Styles}>
+          <div class={detach2Styles}>
             <ComboboxInput
-              className="rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
+              className={inputStyles}
               autoComplete="off"
               required={required}
               displayValue={(state: SelectorListObject<T>) => `${state.name}`}
@@ -73,11 +102,8 @@ export function Selector<T extends string, U extends T>({
                 }
               }}
             />
-            <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
-              <IconChevronDown
-                class="h-5 w-5 text-slate-400"
-                aria-hidden="true"
-              />
+            <ComboboxButton title={buttonTitle} className={buttonStyles}>
+              <ButtonIcon />
             </ComboboxButton>
           </div>
           <Transition
@@ -103,7 +129,7 @@ export function Selector<T extends string, U extends T>({
                     className="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-slate-50 ui-not-active:text-slate-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-slate-100"
                     value={item}
                   >
-                    {({ selected, active }) => (
+                    {({ selected, focus }) => (
                       <>
                         <span
                           class={tw`block truncate text-left ${
@@ -115,7 +141,7 @@ export function Selector<T extends string, U extends T>({
                         {selected && (
                           <span
                             class={tw`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                              active ? tw`text-slate-50` : tw`text-green-700`
+                              focus ? tw`text-slate-50` : tw`text-green-700`
                             }`}
                           >
                             <IconCheck class="h-5 w-5" aria-hidden="true" />
