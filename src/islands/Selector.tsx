@@ -36,6 +36,10 @@ export function Selector<T extends string, U extends T>({
   const current = useSignal(list.find((val) => val.name === currentValue));
   const query = useSignal("");
 
+  if (!IS_BROWSER) {
+    return <></>;
+  }
+
   const filtered = list.filter((item) =>
     item.name
       .toLowerCase()

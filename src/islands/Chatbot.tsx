@@ -22,6 +22,10 @@ export function Chatbot(
 ): JSX.Element {
   const isOpen = useSignal(false);
 
+  if (!IS_BROWSER) {
+    return <></>;
+  }
+
   return (
     <div {...props} class={props.class}>
       <Button

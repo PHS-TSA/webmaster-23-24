@@ -1,3 +1,4 @@
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import {
   Popover,
   PopoverButton,
@@ -86,6 +87,10 @@ function PopoverMenu({
   items,
   active,
 }: Menu & WithActive): JSX.Element {
+  if (!IS_BROWSER) {
+    return <></>;
+  }
+
   return (
     <Popover>
       <PopoverButton

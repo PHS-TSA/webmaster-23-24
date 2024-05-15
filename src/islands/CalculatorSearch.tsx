@@ -7,6 +7,10 @@ import type { CalculatorSearchProps } from "../utils/calc/search-props.ts";
 import { type State, states } from "../utils/calc/solar.ts";
 
 export function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
+  if (!IS_BROWSER) {
+    return <></>;
+  }
+
   return (
     <form class="flex w-11/12 flex-col items-center gap-8 rounded-md bg-slate-100 p-8 text-center dark:bg-slate-900">
       <Selector
