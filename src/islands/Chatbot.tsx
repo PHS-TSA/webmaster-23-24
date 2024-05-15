@@ -1,10 +1,19 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { render } from "@deno/gfm";
-import { Button, Fieldset, Input } from "@headlessui/react";
+import {
+  Button,
+  Fieldset,
+  Input,
+  Label,
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
 import { set } from "idb-keyval";
-import type { JSX, RenderableProps } from "preact";
+import type { JSX } from "preact";
 import { Fragment } from "preact";
 import { Suspense } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
@@ -17,45 +26,39 @@ import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
 
-export function Chatbot(
-  props: RenderableProps<JSX.HTMLAttributes<HTMLDivElement>>,
-): JSX.Element {
-  const isOpen = useSignal(false);
+interface ChatbotProps {
+  class: string;
+}
 
+export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
     return <></>;
   }
 
   return (
-    <div {...props} class={props.class}>
-      <Button
+    <Popover className={props.class}>
+      <PopoverButton
         className="flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl"
-        onClick={() => {
-          isOpen.value = !isOpen.value;
-        }}
-        type="button"
         aria-label="Meet our Chatbot!"
       >
         <IconMessageChatbot class="size-8" />
-      </Button>
-
-      {isOpen.value && (
-        <Suspense fallback={<Fragment />}>
-          {/* <Transition
-            appear={true}
-            show={isOpen.value}
-            enter={tw`transition-opacity duration-75`}
-            enterFrom={tw`opacity-0`}
-            enterTo={tw`opacity-100`}
-            leave={tw`transition-opacity duration-150`}
-            leaveFrom={tw`opacity-100`}
-            leaveTo={tw`opacity-0`}
-          > */}
-          <ChatbotBox class="absolute bottom-20 right-0 shadow-2xl" />
-          {/* </Transition> */}
-        </Suspense>
-      )}
-    </div>
+      </PopoverButton>
+      <Transition
+        appear={true}
+        enter={tw`transition-opacity duration-75`}
+        enterFrom={tw`opacity-0`}
+        enterTo={tw`opacity-100`}
+        leave={tw`transition-opacity duration-150`}
+        leaveFrom={tw`opacity-100`}
+        leaveTo={tw`opacity-0`}
+      >
+        <PopoverPanel>
+          <Suspense fallback={<Fragment />}>
+            <ChatbotBox class="absolute bottom-20 right-0 shadow-2xl" />
+          </Suspense>
+        </PopoverPanel>
+      </Transition>
+    </Popover>
   );
 }
 
@@ -156,7 +159,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         }}
       >
         <Fieldset disabled={!IS_BROWSER} class="relative">
-          <label>Ask A Question, Any Question!</label>
+          <Label>Ask A Question, Any Question!</Label>
           <Input
             value={messageValue.value}
             autoComplete="off"
