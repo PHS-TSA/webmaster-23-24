@@ -17,7 +17,7 @@ export function HeaderGroup({ children }: HeaderGroupProps): JSX.Element {
 
   return (
     // @ts-expect-error: `PopoverGroup`'s types are wacky.
-    <PopoverGroup as={HTMLUListElement} className={listStyles}>
+    <PopoverGroup as={"ul"} className={listStyles}>
       {children}
     </PopoverGroup>
   );
