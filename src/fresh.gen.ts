@@ -15,8 +15,11 @@ import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $Chatbot from "./islands/Chatbot.tsx";
+import * as $Checkbox from "./islands/Checkbox.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
+import * as $InputField from "./islands/InputField.tsx";
 import * as $Selector from "./islands/Selector.tsx";
+import * as $Submit from "./islands/Submit.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -36,8 +39,11 @@ const manifest = {
   },
   islands: {
     "./islands/Chatbot.tsx": $Chatbot,
+    "./islands/Checkbox.tsx": $Checkbox,
     "./islands/HeaderMenu.tsx": $HeaderMenu,
+    "./islands/InputField.tsx": $InputField,
     "./islands/Selector.tsx": $Selector,
+    "./islands/Submit.tsx": $Submit,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

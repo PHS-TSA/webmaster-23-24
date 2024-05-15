@@ -1,10 +1,21 @@
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { render } from "@deno/gfm";
-import { Transition } from "@headlessui/react";
+import {
+  Button,
+  Fieldset,
+  Input,
+  Label,
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
+import { clsx } from "clsx";
 import { set } from "idb-keyval";
-import type { JSX, RenderableProps } from "preact";
+import type { JSX } from "preact";
+import { Fragment } from "preact";
 import { Suspense } from "preact/compat";
-import { useId } from "preact/hooks";
 import { Loading } from "../components/Loading.tsx";
 import { chat } from "../sdk/chat/index.ts";
 import { getThread } from "../sdk/chat/thread.ts";
@@ -15,26 +26,33 @@ import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
 
-export function Chatbot(
-  props: RenderableProps<JSX.HTMLAttributes<HTMLDivElement>>,
-): JSX.Element {
-  const isOpen = useSignal(false);
+interface ChatbotProps {
+  class: string;
+}
+
+const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl`;
+
+export function Chatbot(props: ChatbotProps): JSX.Element {
+  if (!IS_BROWSER) {
+    return (
+      <div class={props.class}>
+        <div className={chatbotButtonStyles}>
+          <IconMessageChatbot class="size-8" />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div {...props} class={props.class}>
-      <button
-        class="flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800"
-        onClick={() => {
-          isOpen.value = !isOpen.value;
-        }}
-        type="button"
+    <Popover className={props.class}>
+      <PopoverButton
+        className={chatbotButtonStyles}
         aria-label="Meet our Chatbot!"
       >
         <IconMessageChatbot class="size-8" />
-      </button>
+      </PopoverButton>
       <Transition
         appear={true}
-        show={isOpen.value}
         enter={tw`transition-opacity duration-75`}
         enterFrom={tw`opacity-0`}
         enterTo={tw`opacity-100`}
@@ -42,14 +60,13 @@ export function Chatbot(
         leaveFrom={tw`opacity-100`}
         leaveTo={tw`opacity-0`}
       >
-        {isOpen.value && (
-          // biome-ignore lint/complexity/noUselessFragments: It's necessary.
-          <Suspense fallback={<></>}>
-            <ChatbotBox class="absolute bottom-20 right-0" />
+        <PopoverPanel>
+          <Suspense fallback={<Fragment />}>
+            <ChatbotBox class="absolute bottom-20 right-0 shadow-2xl" />
           </Suspense>
-        )}
+        </PopoverPanel>
       </Transition>
-    </div>
+    </Popover>
   );
 }
 
@@ -70,7 +87,6 @@ type Db = DbItem[];
 
 function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const messageValue = useSignal("");
-  const inputId = useId();
   const isAsking = useSignal(false);
   const thread = useIndexedDB<string>(
     "thread",
@@ -104,7 +120,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         {messages.value.map((msg) => (
           <div
             key={`${msg.role}${msg.message}`}
-            class={`${getReplySide(msg.role)} ${replyStyles}`}
+            class={clsx(getReplySide(msg.role), replyStyles)}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
             dangerouslySetInnerHTML={{ __html: render(msg.message) }}
           />
@@ -114,7 +130,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
       <form
         class="py-2 place-items-center"
         onSubmit={async (e) => {
-          // TODO(lishaduck): enable moderation
+          // TODO(lishaduck): Enable moderation.
 
           e.preventDefault();
 
@@ -150,25 +166,24 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           isAsking.value = false;
         }}
       >
-        <label for={inputId}>Ask A Question, Any Question!</label>
-        <div class="relative">
-          <input
-            id={inputId}
+        <Fieldset disabled={!IS_BROWSER} class="relative">
+          <Label>Ask A Question, Any Question!</Label>
+          <Input
             value={messageValue.value}
             autoComplete="off"
-            class="pr-10 w-full rounded-lg dark:text-slate-950 whitespace-normal"
-            onInput={(e) => {
+            className="w-full whitespace-normal rounded-lg pr-10 shadow-sm dark:text-slate-950"
+            onInput={(e: JSX.TargetedInputEvent<HTMLInputElement>) => {
               messageValue.value = (e.target as HTMLInputElement).value;
             }}
           />
-          <button
-            class="absolute right-2 top-0 p-2"
+          <Button
+            className="absolute right-2 p-2"
             type="submit"
             aria-label="Send"
           >
             <IconSend class="dark:text-slate-950" />
-          </button>
-        </div>
+          </Button>
+        </Fieldset>
       </form>
     </div>
   );

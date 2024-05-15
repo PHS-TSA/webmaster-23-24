@@ -17,10 +17,22 @@ export function useCsp(): void {
     csp.directives.manifestSrc ??= [];
     csp.directives.baseUri ??= [];
 
-    csp.directives.scriptSrc.push(STRICT_DYNAMIC, UNSAFE_INLINE);
-    csp.directives.scriptSrcElem.push(SELF, UNSAFE_INLINE);
+    csp.directives.scriptSrc.push(
+      STRICT_DYNAMIC,
+      UNSAFE_INLINE, // Backwards compatibility for old browsers.
+      "https:", // Backwards compatibility for older browsers.
+      "http:", // Backwards compatibility for oldest browsers.
+    );
+    csp.directives.scriptSrcElem.push(
+      SELF,
+      UNSAFE_INLINE, // Needed for Fresh hot-reload.
+    );
     csp.directives.styleSrc.push(SELF);
-    csp.directives.styleSrcElem.push(SELF, STRICT_DYNAMIC);
+    csp.directives.styleSrcElem.push(
+      SELF,
+      STRICT_DYNAMIC,
+      UNSAFE_INLINE, // Backwards compatibility for old browsers.
+    );
     csp.directives.imgSrc.push(SELF, "data:");
     csp.directives.connectSrc.push(SELF);
     csp.directives.manifestSrc.push(SELF);

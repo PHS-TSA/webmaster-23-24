@@ -11,7 +11,7 @@ const connInfo = {
 } as const satisfies ServeHandlerInfo;
 
 /*
-  TODO(lishaduck): write a testing library for Fresh
+  TODO(lishaduck): Write a testing library for Fresh.
   Plan:
   - fork `fresh_marionette`,
   - make it use Astral instead of Puppeteer, and

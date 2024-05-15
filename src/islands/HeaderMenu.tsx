@@ -1,7 +1,14 @@
-import { Popover, Transition } from "@headlessui/react";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import {
+  Popover,
+  PopoverButton,
+  PopoverPanel,
+  Transition,
+} from "@headlessui/react";
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { IconChevronDown } from "../utils/icons.ts";
-import type { Menu, MenuItem } from "../utils/site-organization.ts";
+import type { Menu } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
 /**
@@ -35,7 +42,7 @@ export function makeBorderStyle(active: boolean): string {
 /**
  * The style for the menu when it is focused.
  */
-export const prettyFocus = tw`rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
+export const prettyFocus = tw`rounded-sm data-[focus]:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
 
 /**
  * Properties for the {@link HeaderMenu} component.
@@ -62,6 +69,19 @@ export function HeaderMenu(props: Menu & WithActive): JSX.Element {
   return <PopoverMenu {...props} />;
 }
 
+function menuButtonStyles(active: boolean): string {
+  return clsx(
+    tw`flex h-8 flex-row`,
+    prettyFocus,
+    makeBorderStyle(active),
+    makeTextStyle(active),
+  );
+}
+
+function ButtonIcon(): JSX.Element {
+  return <IconChevronDown class="w-6 h-6" aria-hidden="true" />;
+}
+
 /**
  * Render a dropdown menu component.
  * It contains a header and a list of items.
@@ -80,14 +100,22 @@ function PopoverMenu({
   items,
   active,
 }: Menu & WithActive): JSX.Element {
-  return (
-    <Popover class="relative">
-      <Popover.Button class={`h-8 ${prettyFocus} ${makeBorderStyle(active)}`}>
-        <span class={`flex flex-row ${makeTextStyle(active)}`}>
-          {title} <IconChevronDown class="w-6 h-6" aria-hidden="true" />
-        </span>
-      </Popover.Button>
+  if (!IS_BROWSER) {
+    // TODO(lishaduck): Add a dummy impl.
+    return (
+      <div class={menuButtonStyles(active)}>
+        <div>{title}</div>
+        <ButtonIcon />
+      </div>
+    );
+  }
 
+  return (
+    <Popover>
+      <PopoverButton className={menuButtonStyles(active)}>
+        {title}
+        <ButtonIcon />
+      </PopoverButton>
       <Transition
         enter={tw`transition ease-out duration-200`}
         enterFrom={tw`opacity-0 translate-y-1`}
@@ -96,24 +124,27 @@ function PopoverMenu({
         leaveFrom={tw`opacity-100 translate-y-0`}
         leaveTo={tw`opacity-0 translate-y-1`}
       >
-        <Popover.Panel class="max-w-full">
-          <div class="absolute left-0 right-auto top-1 z-10 grid max-w-fit origin-top-right grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200 rounded-md bg-slate-50 px-4 py-1 shadow-lg ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
-            <a href={`${url}`} class={makeTextStyle(false)}>
-              About {title}
-            </a>
-            {items.map(
-              (link: MenuItem): JSX.Element => (
-                <a
-                  href={`${url}${link.href}`}
-                  key={link}
-                  class={makeTextStyle(false)}
-                >
-                  {link.name}
-                </a>
+        <PopoverPanel
+          className="origin-top-right [--anchor-gap:8px] [--anchor-padding]"
+          anchor="bottom end"
+        >
+          <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 rounded-md bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
+            {[{ href: "", name: `About ${title}` } as const, ...items].map(
+              (link): JSX.Element => (
+                <li key={link} class="py-2 transition">
+                  <a
+                    href={`${url}${link.href}`}
+                    class={`block overflow-y-hidden whitespace-break-spaces text-balance rounded px-3 hover:bg-slate-950/5 hover:dark:bg-slate-50/5 ${makeTextStyle(
+                      false,
+                    )}`}
+                  >
+                    {link.name}
+                  </a>
+                </li>
               ),
             )}
-          </div>
-        </Popover.Panel>
+          </ul>
+        </PopoverPanel>
       </Transition>
     </Popover>
   );
