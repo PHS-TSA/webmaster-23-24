@@ -1,5 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import { DEBUG } from "$fresh/src/server/constants.ts";
 import type { JSX } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
@@ -27,8 +28,6 @@ export const handler: Handlers = {
     req: Request,
     ctx: FreshContextHelper<CalculatorProps>,
   ): Promise<Response> {
-    const visitor = await getIpLocation(ctx.remoteAddr.hostname);
-
     const url = new URL(req.url);
     const state = url.searchParams.get("region[value]");
     const isHilly = url.searchParams.get("hills");
@@ -40,6 +39,10 @@ export const handler: Handlers = {
     const requiresPermit = url.searchParams.get("permit");
 
     if (!state) {
+      const visitor = DEBUG
+        ? undefined
+        : await getIpLocation(ctx.remoteAddr.hostname);
+
       return ctx.render({
         state: "search",
         region: visitor?.region,

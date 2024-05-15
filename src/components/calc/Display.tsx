@@ -85,7 +85,11 @@ function InfoColumn({ title, children, best }: InfoColumnProps): JSX.Element {
     <div class="relative flex flex-col gap-4 basis-2/5 lg:basis-1/4">
       <div class="flex gap-3">
         <h2 class="font-bold text-xl h-14">{title}</h2>
-        {best && <IconCheck color="blue" />}
+        {best && (
+          <div title="This option is the most cost-effective!">
+            <IconCheck color="blue" />
+          </div>
+        )}
       </div>
       {children}
     </div>

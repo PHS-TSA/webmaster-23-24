@@ -33,7 +33,7 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
       currentIP = ip;
     }
 
-    return makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
+    return await makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
   } catch {
     return undefined;
   }
@@ -51,10 +51,10 @@ export async function makeRequest<T extends ZodTypeUnknown>(
   schema: T,
 ): Promise<z.infer<T>> {
   // Send the request.
-  const json = await (await fetch(endpoint)).json();
+  const res = await fetch(endpoint);
 
   // Validate the response.
-  return schema.parse(json);
+  return schema.parse(await res.json());
 }
 
 /**

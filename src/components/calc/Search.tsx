@@ -25,7 +25,7 @@ export function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
       />
       <Selector
         name="geo-type"
-        question="What type of geothermal system would you like?"
+        question="What type of geothermal system is applicable for your home?"
         list={[
           { name: "Horizontal loop", value: "horizontal" },
           { name: "Vertical loop", value: "vertical" },
@@ -34,13 +34,22 @@ export function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
         ]}
         current="horizontal"
         required
-      />
+        hasInfo={true}
+      >
+        See{" "}
+        <a href="/solutions/geothermal/what/">
+          What Are Geothermal Energy Solutions?
+        </a>
+      </Selector>
       <InputField
         name="area"
         question="What is the square footage of your home?"
         required
       />
-      <Checkbox name="permit" labelText="Does your county require a permit?" />
+      <Checkbox
+        name="permit"
+        labelText="Does your county require a permit for construction?"
+      />
 
       <Submit>Submit</Submit>
     </form>

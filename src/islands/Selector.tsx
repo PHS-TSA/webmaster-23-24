@@ -9,9 +9,10 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSignal } from "@preact/signals";
-import type { JSX } from "preact";
+import type { ComponentChildren, JSX } from "preact";
 import { IconCheck, IconChevronDown } from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
+import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {
   name: string;
@@ -19,6 +20,10 @@ export interface SelectorProps<T extends string, U extends T> {
   list: SelectorListObject<T>[];
   current?: U | undefined;
   required?: boolean;
+  /** A hacky way to get Fresh to serialize the `info` prop. */
+  children?: ComponentChildren;
+  /** A hacky way to get Fresh *not* to serialize the `info` prop. */
+  hasInfo?: boolean;
 }
 
 export interface SelectorListObject<T extends string> {
@@ -43,8 +48,12 @@ export function Selector<T extends string, U extends T>({
   list,
   current: currentValue,
   required,
+  children: info,
+  hasInfo,
 }: SelectorProps<T, U>): JSX.Element {
-  const current = useSignal(list.find((val) => val.name === currentValue));
+  const current = useSignal(
+    list.find((val) => val.name === currentValue) ?? { name: "", value: "" },
+  );
   const query = useSignal("");
 
   if (!IS_BROWSER) {
@@ -88,7 +97,17 @@ export function Selector<T extends string, U extends T>({
           }
         }}
       >
-        <Label className={labelStyles}>{question}</Label>
+        <Label className={labelStyles}>
+          {question}
+          {hasInfo && (
+            <>
+              {" "}
+              <Info>{info}</Info>
+              {/* Hack b/c I don't have time to debug. */}
+              <span class="hidden">{info}</span>
+            </>
+          )}
+        </Label>
         <div class={detach1Styles}>
           <div class={detach2Styles}>
             <ComboboxInput
