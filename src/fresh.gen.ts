@@ -16,6 +16,7 @@ import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $Chatbot from "./islands/Chatbot.tsx";
 import * as $Checkbox from "./islands/Checkbox.tsx";
+import * as $HeaderGroup from "./islands/HeaderGroup.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
 import * as $Info from "./islands/Info.tsx";
 import * as $InputField from "./islands/InputField.tsx";
@@ -41,6 +42,7 @@ const manifest = {
   islands: {
     "./islands/Chatbot.tsx": $Chatbot,
     "./islands/Checkbox.tsx": $Checkbox,
+    "./islands/HeaderGroup.tsx": $HeaderGroup,
     "./islands/HeaderMenu.tsx": $HeaderMenu,
     "./islands/Info.tsx": $Info,
     "./islands/InputField.tsx": $InputField,

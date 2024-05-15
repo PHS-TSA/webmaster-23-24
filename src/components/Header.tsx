@@ -1,4 +1,5 @@
 import type { JSX } from "preact";
+import { HeaderGroup } from "../islands/HeaderGroup.tsx";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import {
@@ -7,6 +8,7 @@ import {
   extraMenus,
   menus,
 } from "../utils/site-organization.ts";
+import { tw } from "../utils/tailwind.ts";
 import { LinkMenu } from "./HeaderMenu.server.tsx";
 import { Logo } from "./Logo.tsx";
 
@@ -20,6 +22,8 @@ export interface HeaderProps {
   readonly active: string;
 }
 
+const itemStyles = tw`flex h-8 flex-row items-end`;
+
 /**
  * Render a header component, which is used as a header for pages.
  * @param props - The component's properties.
@@ -32,20 +36,20 @@ export function Header({ active }: HeaderProps): JSX.Element {
       <div class="flex-shrink-0 flex-grow">
         <HomeLink />
       </div>
-      <ul class="flex flex-shrink flex-row flex-wrap items-center gap-6">
+      <HeaderGroup>
         {menus.map((menu: Menu) => (
-          <li key={menu.title} class="flex h-8 flex-row items-end">
+          <li key={menu.title} class={itemStyles}>
             <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
           </li>
         ))}
         {extraMenus.map(
           ({ title, url }: BasicMenu): JSX.Element => (
-            <li key={url} class="flex h-8 flex-row items-end">
+            <li key={url} class={itemStyles}>
               <LinkMenu active={active === url} title={title} url={url} />
             </li>
           ),
         )}
-      </ul>
+      </HeaderGroup>
     </header>
   );
 }
