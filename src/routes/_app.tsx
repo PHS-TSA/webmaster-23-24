@@ -58,7 +58,7 @@ const metas = (
  */
 export default function App({ Component }: PageProps): JSX.Element {
   return (
-    <html lang="en-US">
+    <html lang="en-US" class="scroll-smooth">
       <Head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -70,10 +70,7 @@ export default function App({ Component }: PageProps): JSX.Element {
         <link rel="stylesheet" href={asset("/styles.css")} />
       </Head>
 
-      <body
-        f-client-nav
-        class="scroll-smooth dark:bg-slate-950 dark:text-slate-50"
-      >
+      <body f-client-nav class="dark:bg-slate-950 dark:text-slate-50">
         <Partial name="body">
           <Component />
         </Partial>
