@@ -13,7 +13,7 @@ export interface CheckboxProps {
 const fieldStyles = tw`top-16 flex w-72 flex-col items-center gap-4`;
 const labelStyles = tw`text-lg`;
 // Removal of ring based on https://romansorin.com/blog/disabling-the-tailwind-input-ring
-const inputStyles = tw`cursor-default rounded border-2 border-slate-500 bg-slate-200 shadow-md focus:outline-none focus:ring-1 focus:ring-offset-0 focus-visible:border-blue-600 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
+const inputStyles = tw`cursor-default rounded border-2 border-slate-500 bg-slate-200 shadow-md focus-visible:outline-none focus:ring-1 focus:ring-offset-0 focus-visible:border-blue-600 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
 
 export function Checkbox({
   name,
@@ -42,7 +42,7 @@ export function Checkbox({
       <Input
         name={name}
         type="checkbox"
-        className={() => clsx(tw`form-checkbox`, inputStyles)}
+        className={clsx(tw`form-checkbox`, inputStyles)}
         required={required}
       />
     </Field>

@@ -1,5 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import type { RouteConfig } from "$fresh/server.ts";
+import { clsx } from "clsx";
 import type { JSX, RenderableProps } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
@@ -31,7 +32,10 @@ function Card({
 }: RenderableProps<CardProps>): JSX.Element {
   return (
     <div
-      class={`inline-grid items-center rounded-xl bg-slate-300 dark:bg-slate-700 p-8 md:grid md:grid-cols-4 ${cols}`}
+      class={clsx(
+        "inline-grid items-center rounded-xl bg-slate-300 p-8 shadow-lg md:grid md:grid-cols-4 dark:bg-slate-700",
+        cols,
+      )}
     >
       <img
         src={image}

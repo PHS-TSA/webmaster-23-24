@@ -16,7 +16,7 @@ import { set } from "idb-keyval";
 import type { JSX } from "preact";
 import { Fragment, Suspense } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
-import { floatingButtonStyles } from "../components/floating-button.ts";
+import { floatingButtonStyles } from "../components/styles.ts";
 import { chat } from "../sdk/chat/index.ts";
 import { getThread } from "../sdk/chat/thread.ts";
 import { useIndexedDB } from "../utils/hooks/indexeddb.ts";
@@ -117,7 +117,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         />{" "}
         Why Switch?
         <div
-          class="relative inline-block -top-2 -right-1 bg-green-500 rounded-full size-2 ring-1 dark:ring-slate-950 ring-slate-50"
+          class="relative -right-1 -top-2 inline-block size-2 rounded-full bg-green-500 ring-1 ring-slate-50 dark:ring-slate-950"
           title="GPT-4o is online!"
         />
       </div>

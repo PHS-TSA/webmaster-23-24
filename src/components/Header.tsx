@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { HeaderGroup } from "../islands/HeaderGroup.tsx";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
@@ -11,6 +12,7 @@ import {
 import { tw } from "../utils/tailwind.ts";
 import { LinkMenu } from "./HeaderMenu.server.tsx";
 import { Logo } from "./Logo.tsx";
+import { prettyFocus } from "./styles.ts";
 
 /**
  * Properties for the {@link Header} component.
@@ -70,7 +72,10 @@ export function Header({ active }: HeaderProps): JSX.Element {
 function HomeLink(): JSX.Element {
   return (
     <a
-      class="flex max-w-fit flex-row items-center text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+      class={clsx(
+        "flex max-w-fit flex-row items-center rounded-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200",
+        prettyFocus,
+      )}
       href="/"
     >
       <Logo aria-hidden="true" class="size-10" />

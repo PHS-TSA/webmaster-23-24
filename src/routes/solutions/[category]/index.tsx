@@ -146,7 +146,7 @@ export default function Category({
                   <h2 class="relative" id={slug}>
                     {/* biome-ignore lint/a11y/useAnchorContent: Biome doesn't support aria-label. */}
                     <a
-                      class="absolute -left-8 hover:text-slate-600 dark:hover:text-slate-400 not-prose"
+                      class="absolute -left-8 hover:text-slate-600 dark:hover:text-slate-400"
                       key="anchorLink"
                       href={`#${slug}`}
                       aria-hidden
