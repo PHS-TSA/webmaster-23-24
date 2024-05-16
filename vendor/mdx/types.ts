@@ -1,5 +1,5 @@
 import type { ComponentType, JSX } from "preact";
-import type { SolutionData } from "../solutions.ts";
+import type { SolutionData } from "../../src/utils/solutions.ts";
 
 /**
  * A valid JSX string component.

@@ -2,13 +2,13 @@ import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "@std/path";
 import type { JSX } from "preact";
+import type { MDXModule } from "@vendor/mdx/types.ts";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { IconSolarPanel } from "../../../utils/icons.ts";
-import type { MDXModule } from "../../../utils/mdx/types.ts";
 
 export const config = {
   csp: true,

@@ -24,8 +24,9 @@
   },
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
+    "$gfm": "https://deno.land/x/gfm@0.6.0/mod.ts",
     "$tabler_icons/": "https://deno.land/x/tabler_icons_tsx@0.0.6/tsx/",
-    "@deno/gfm": "https://deno.land/x/gfm@0.6.0/mod.ts",
+    "@vendor/": "./vendor/",
     "@headlessui/react": "https://esm.sh/v135/*@headlessui/react@2.0.3",
     "@headlessui/tailwindcss": "npm:@headlessui/tailwindcss@0.2.0",
     "@mdx-js/mdx": "npm:@mdx-js/mdx@3.0.1",

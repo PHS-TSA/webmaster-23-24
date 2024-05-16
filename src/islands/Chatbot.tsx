@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { render } from "@deno/gfm";
+import { render } from "$gfm";
 import {
   Button,
   Fieldset,
