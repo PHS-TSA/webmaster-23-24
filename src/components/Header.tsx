@@ -32,24 +32,32 @@ const itemStyles = tw`flex h-8 flex-row items-end`;
  */
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
-    <header class="max-w-screen-xlg sticky top-0 flex w-full flex-col flex-wrap gap-4 bg-slate-50/95 px-8 py-4 sm:flex-row dark:bg-slate-950/95 backdrop-blur-md shadow-2xl z-30">
-      <div class="flex-shrink-0 flex-grow">
-        <HomeLink />
-      </div>
-      <HeaderGroup>
-        {menus.map((menu: Menu) => (
-          <li key={menu.title} class={itemStyles}>
-            <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
-          </li>
-        ))}
-        {extraMenus.map(
-          ({ title, url }: BasicMenu): JSX.Element => (
-            <li key={url} class={itemStyles}>
-              <LinkMenu active={active === url} title={title} url={url} />
+    <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 shadow-2xl backdrop-blur-md dark:bg-slate-950/95">
+      <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
+        <div class="flex-shrink-0 flex-grow">
+          <HomeLink />
+        </div>
+        <HeaderGroup>
+          {menus.map((menu: Menu) => (
+            <li key={menu.title} class={itemStyles}>
+              <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
             </li>
-          ),
-        )}
-      </HeaderGroup>
+          ))}
+          {extraMenus.map(
+            ({ title, url }: BasicMenu): JSX.Element => (
+              <li key={url} class={itemStyles}>
+                <LinkMenu active={active === url} title={title} url={url} />
+              </li>
+            ),
+          )}
+        </HeaderGroup>
+      </div>
+      {/.+\/.+\/.+$/.test(active) && (
+        <div
+          class="progress relative -left-8 top-4 z-40 h-1 w-screen rounded-se-sm bg-green-500 dark:bg-green-700"
+          aria-hidden="true"
+        />
+      )}
     </header>
   );
 }

@@ -86,10 +86,6 @@ export default function Solution({
         >
           <p>{description}</p>
         </Cover>
-        <div
-          class="progress fixed left-0 top-0 h-1 w-full rounded-ee-sm bg-green-500 dark:bg-green-700"
-          aria-hidden="true"
-        />
         <Content>
           <data.page.default components={{ img: ContentImg }} />
         </Content>
