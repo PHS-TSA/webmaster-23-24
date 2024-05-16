@@ -71,7 +71,7 @@ export function HeaderMenu(props: Menu & WithActive): JSX.Element {
 
 function menuButtonStyles(active: boolean): string {
   return clsx(
-    tw`flex h-8 flex-row whitespace-nowrap`,
+    tw`flex h-8 flex-row whitespace-nowrap focus-visible:outline-none gap-0.5`,
     prettyFocus,
     makeBorderStyle(active),
     makeTextStyle(active),
@@ -101,7 +101,6 @@ function PopoverMenu({
   active,
 }: Menu & WithActive): JSX.Element {
   if (!IS_BROWSER) {
-    // TODO(lishaduck): Add a dummy impl.
     return (
       <div class={menuButtonStyles(active)}>
         <div>{title}</div>
@@ -125,10 +124,10 @@ function PopoverMenu({
         leaveTo={tw`opacity-0 translate-y-1`}
       >
         <PopoverPanel
-          className="origin-top-right [--anchor-gap:8px] [--anchor-padding]"
+          className="z-50 origin-top-right rounded-md shadow-2xl [--anchor-gap:8px]"
           anchor="bottom end"
         >
-          <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 rounded-md bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
+          <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
             {[{ href: "", name: `About ${title}` } as const, ...items].map(
               (link): JSX.Element => (
                 <li key={link} class="py-2 transition">
