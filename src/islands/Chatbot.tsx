@@ -117,21 +117,21 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         />{" "}
         GPT-4o
       </div>
-      <div class="flex flex-col-reverse gap-4 overflow-y-auto">
+      <ul class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
-          <div class={replyStyles}>
+          <li class={replyStyles}>
             <Loading />
-          </div>
+          </li>
         )}
         {messages.value.map((msg) => (
-          <div
+          <li
             key={`${msg.role}${msg.message}`}
             class={clsx(getReplySide(msg.role), replyStyles)}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
             dangerouslySetInnerHTML={{ __html: render(msg.message) }}
           />
         ))}
-      </div>
+      </ul>
 
       <form
         class="py-2 place-items-center"
