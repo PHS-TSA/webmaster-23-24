@@ -109,9 +109,6 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         "dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box",
         props.class,
       )}
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
     >
       <div class="h-8 text-lg font-mono">
         <img
@@ -147,7 +144,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           e.preventDefault();
 
           if (thread === undefined) {
-            throw new Error("Why didn't we suspend before now?");
+            throw new Error("Why didn't we Suspend-se before now?");
           }
 
           const message = messageValue.value;
