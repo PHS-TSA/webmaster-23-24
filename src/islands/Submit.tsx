@@ -3,7 +3,7 @@ import { Button } from "@headlessui/react";
 import type { ComponentChildren, JSX } from "preact";
 import { tw } from "../utils/tailwind.ts";
 
-interface SubmitProps {
+export interface SubmitProps {
   readonly children: ComponentChildren;
 }
 

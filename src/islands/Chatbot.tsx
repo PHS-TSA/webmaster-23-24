@@ -25,8 +25,8 @@ import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
 
-interface ChatbotProps {
-  class: string;
+export interface ChatbotProps {
+  readonly class: string;
 }
 
 const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 shadow-md dark:bg-blue-800`;

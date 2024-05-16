@@ -2,8 +2,8 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { type ComponentChildren, Fragment, type JSX } from "preact";
 import { IconInfoCircle } from "../utils/icons.ts";
 
-interface InfoProps {
-  children: ComponentChildren;
+export interface InfoProps {
+  readonly children: ComponentChildren;
 }
 
 export function Info({ children }: InfoProps): JSX.Element {

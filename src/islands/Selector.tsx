@@ -15,15 +15,15 @@ import { tw } from "../utils/tailwind.ts";
 import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {
-  name: string;
-  question: string;
-  list: SelectorListObject<T>[];
-  current?: U | undefined;
-  required?: boolean;
+  readonly name: string;
+  readonly question: string;
+  readonly list: SelectorListObject<T>[];
+  readonly current?: U | undefined;
+  readonly required?: boolean;
   /** A hacky way to get Fresh to serialize the `info` prop. */
-  children?: ComponentChildren;
+  readonly children?: ComponentChildren;
   /** A hacky way to get Fresh *not* to serialize the `info` prop. */
-  hasInfo?: boolean;
+  readonly hasInfo?: boolean;
 }
 
 export interface SelectorListObject<T extends string> {

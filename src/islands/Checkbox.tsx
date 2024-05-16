@@ -5,9 +5,9 @@ import type { JSX } from "preact";
 import { tw } from "../utils/tailwind.ts";
 
 export interface CheckboxProps {
-  name: string;
-  labelText: string;
-  required?: boolean;
+  readonly name: string;
+  readonly labelText: string;
+  readonly required?: boolean;
 }
 
 const fieldStyles = tw`top-16 flex w-72 flex-col items-center gap-4`;

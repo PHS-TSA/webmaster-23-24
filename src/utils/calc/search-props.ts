@@ -4,12 +4,12 @@ import type { State, StateData } from "./solar.ts";
 export type CalculatorProps = CalculatorSearchProps | CalculatorShowProps;
 
 export interface CalculatorSearchProps {
-  state: "search";
-  region: State | undefined;
+  readonly state: "search";
+  readonly region: State | undefined;
 }
 
 export interface CalculatorShowProps {
-  state: "display";
-  solarRegionData: StateData;
-  geoCostData: GeoCostBreakdown;
+  readonly state: "display";
+  readonly solarRegionData: StateData;
+  readonly geoCostData: GeoCostBreakdown;
 }

@@ -15,7 +15,7 @@ type AdmonitionType =
   | "caution";
 
 export interface AdmonitionProps {
-  type?: AdmonitionType;
+  readonly type?: AdmonitionType;
 }
 
 const noteStyles = tw`bg-blue-300 divide-blue-500 border-blue-400 dark:divide-blue-400 dark:border-blue-500 dark:bg-blue-600`;

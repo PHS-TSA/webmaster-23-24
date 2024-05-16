@@ -75,9 +75,9 @@ export function CalculatorDisplay(data: CalculatorShowProps): JSX.Element {
 }
 
 interface InfoColumnProps {
-  title: string;
-  children: ComponentChildren;
-  best?: boolean | undefined;
+  readonly title: string;
+  readonly children: ComponentChildren;
+  readonly best?: boolean | undefined;
 }
 
 function InfoColumn({ title, children, best }: InfoColumnProps): JSX.Element {
@@ -97,8 +97,8 @@ function InfoColumn({ title, children, best }: InfoColumnProps): JSX.Element {
 }
 
 interface InfoProps {
-  title: string;
-  text: string;
+  readonly title: string;
+  readonly text: string;
 }
 
 function Info({ title, text }: InfoProps): JSX.Element {

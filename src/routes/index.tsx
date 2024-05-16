@@ -16,10 +16,10 @@ export const config = {
 const pageTitle = "Home" as const;
 
 interface CardProps {
-  image: string;
-  alt: string;
-  cols?: string;
-  imgSide: "left" | "right";
+  readonly image: string;
+  readonly alt: string;
+  readonly cols?: string;
+  readonly imgSide: "left" | "right";
 }
 
 function Card({

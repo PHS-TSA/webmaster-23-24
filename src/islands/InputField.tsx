@@ -3,7 +3,7 @@ import { Field, Input, Label } from "@headlessui/react";
 import type { JSX } from "preact";
 import { tw } from "../utils/tailwind.ts";
 
-interface InputFieldProps {
+export interface InputFieldProps {
   readonly name: string;
   readonly question: string;
   readonly required?: boolean;
