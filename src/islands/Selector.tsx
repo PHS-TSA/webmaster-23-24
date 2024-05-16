@@ -96,6 +96,9 @@ export function Selector<T extends string, U extends T>({
             current.value = newValue;
           }
         }}
+        onClose={() => {
+          query.value = "";
+        }}
       >
         <Label className={labelStyles}>
           {question}
