@@ -18,7 +18,7 @@ import { tw } from "../utils/tailwind.ts";
  * @returns The text style for the menu.
  */
 export function makeTextStyle(active: boolean): string {
-  return tw`whitespace-nowrap py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
+  return tw`py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
     active
       ? tw`font-bold text-slate-700 dark:text-slate-200`
       : tw`text-slate-500 dark:text-slate-400`
@@ -71,7 +71,7 @@ export function HeaderMenu(props: Menu & WithActive): JSX.Element {
 
 function menuButtonStyles(active: boolean): string {
   return clsx(
-    tw`flex h-8 flex-row`,
+    tw`flex h-8 flex-row whitespace-nowrap`,
     prettyFocus,
     makeBorderStyle(active),
     makeTextStyle(active),
@@ -134,9 +134,10 @@ function PopoverMenu({
                 <li key={link} class="py-2 transition">
                   <a
                     href={`${url}${link.href}`}
-                    class={`block overflow-y-hidden whitespace-break-spaces text-balance rounded px-3 hover:bg-slate-950/5 hover:dark:bg-slate-50/5 ${makeTextStyle(
-                      false,
-                    )}`}
+                    class={clsx(
+                      "block overflow-y-hidden text-balance rounded px-3 hover:bg-slate-950/5 hover:dark:bg-slate-50/5",
+                      makeTextStyle(false),
+                    )}
                   >
                     {link.name}
                   </a>
