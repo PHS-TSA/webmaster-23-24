@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { Checkbox as Checkmark, Field, Label } from "@headlessui/react";
+import { Field, Input, Label } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { tw } from "../utils/tailwind.ts";
@@ -39,15 +39,10 @@ export function Checkbox({
   return (
     <Field disabled={!IS_BROWSER} class={fieldStyles}>
       <Label class={labelStyles}>{labelText}</Label>
-      <Checkmark
+      <Input
         name={name}
-        className={({ checked }) =>
-          clsx(
-            tw`form-checkbox`,
-            checked && tw`form-checkbox:checked`, // TODO(lishaduck): One backslash away from working!
-            inputStyles,
-          )
-        }
+        type="checkbox"
+        className={() => clsx(tw`form-checkbox`, inputStyles)}
         required={required}
       />
     </Field>
