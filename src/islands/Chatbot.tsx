@@ -105,11 +105,24 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   return (
     <div
       {...props}
-      class={`dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box ${props.class}`}
+      class={clsx(
+        "dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box",
+        props.class,
+      )}
       onClick={(e) => {
         e.stopPropagation();
       }}
     >
+      <div class="h-8 text-lg font-mono">
+        <img
+          alt=""
+          src="/images/openai.avif"
+          class="inline rounded-full text-center align-middle"
+          height={24}
+          width={24}
+        />{" "}
+        GPT-4o
+      </div>
       <div class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
           <div class={replyStyles}>
