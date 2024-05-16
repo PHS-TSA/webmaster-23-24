@@ -1,8 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "@std/path";
-import type { JSX } from "preact";
 import type { MDXModule } from "@vendor/mdx/types.ts";
+import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
@@ -86,8 +86,8 @@ export default function Solution({
         >
           <p>{description}</p>
         </Cover>
+        <div class="progress fixed left-0 top-0 h-1 w-full rounded-ee-sm bg-green-500 dark:bg-green-700" />
         <Content>
-          {/* `components` for `img`s are broken :( */}
           <data.page.default components={{ img: ContentImg }} />
         </Content>
       </main>

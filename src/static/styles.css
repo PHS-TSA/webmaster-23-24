@@ -25,7 +25,7 @@
  */
 @tailwind variants;
 
-/* Based on https://css-tricks.com/single-element-loaders-the-dots/ */
+/* Based on <https://css-tricks.com/single-element-loaders-the-dots/>. */
 .loader,
 .loader:before,
 .loader:after {
@@ -58,4 +58,35 @@
   60% {
     background-position: center;
   }
+}
+
+/* Based on <https://scroll-driven-animations.style/demos/progress-bar/css/>. */
+html {
+  scroll-timeline: --page-scroll block;
+}
+
+@keyframes grow-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes show-progress {
+  0%,
+  30% {
+    opacity: 0;
+  }
+  31%,
+  100% {
+    opacity: 1;
+  }
+}
+
+.progress {
+  transform-origin: 0 50%;
+  animation: grow-progress auto linear, show-progress auto linear;
+  animation-timeline: --page-scroll;
 }
