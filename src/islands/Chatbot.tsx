@@ -117,7 +117,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         />{" "}
         Why Switch?
         <div
-          class="relative inline-block -top-2 bg-green-500 rounded-full size-2 ring-1"
+          class="relative inline-block -top-2 -right-1 bg-green-500 rounded-full size-2 ring-1 dark:ring-slate-950 ring-slate-50"
           title="GPT-4o is online!"
         />
       </div>
