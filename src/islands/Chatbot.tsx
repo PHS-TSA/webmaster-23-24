@@ -115,7 +115,11 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           height={24}
           width={24}
         />{" "}
-        GPT-4o
+        Why Switch?
+        <div
+          class="relative inline-block -top-2 bg-green-500 rounded-full size-2 ring-1"
+          title="GPT-4o is online!"
+        />
       </div>
       <ul class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
