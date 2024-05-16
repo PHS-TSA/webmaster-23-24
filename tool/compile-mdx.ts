@@ -182,7 +182,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
   compiled.data.matter.category =
     compiled.dirname !== "." ? compiled.dirname : compiled.stem;
 

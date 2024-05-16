@@ -32,7 +32,7 @@ const itemStyles = tw`flex h-8 flex-row items-end`;
  */
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
-    <header class="max-w-screen-xlg flex w-full flex-col flex-wrap gap-4 bg-slate-50 px-8 py-4 sm:flex-row dark:bg-slate-950">
+    <header class="max-w-screen-xlg sticky top-0 flex w-full flex-col flex-wrap gap-4 bg-slate-50/95 px-8 py-4 sm:flex-row dark:bg-slate-950/95 backdrop-blur-md shadow-2xl z-30">
       <div class="flex-shrink-0 flex-grow">
         <HomeLink />
       </div>
