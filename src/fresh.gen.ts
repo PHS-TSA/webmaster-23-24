@@ -20,6 +20,7 @@ import * as $HeaderGroup from "./islands/HeaderGroup.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
 import * as $Info from "./islands/Info.tsx";
 import * as $InputField from "./islands/InputField.tsx";
+import * as $ScrollToTop from "./islands/ScrollToTop.tsx";
 import * as $Selector from "./islands/Selector.tsx";
 import * as $Submit from "./islands/Submit.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -46,6 +47,7 @@ const manifest = {
     "./islands/HeaderMenu.tsx": $HeaderMenu,
     "./islands/Info.tsx": $Info,
     "./islands/InputField.tsx": $InputField,
+    "./islands/ScrollToTop.tsx": $ScrollToTop,
     "./islands/Selector.tsx": $Selector,
     "./islands/Submit.tsx": $Submit,
   },

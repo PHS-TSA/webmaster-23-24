@@ -16,6 +16,7 @@ import { set } from "idb-keyval";
 import type { JSX } from "preact";
 import { Fragment, Suspense } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
+import { floatingButtonStyles } from "../components/floating-button.ts";
 import { chat } from "../sdk/chat/index.ts";
 import { getThread } from "../sdk/chat/thread.ts";
 import { useIndexedDB } from "../utils/hooks/indexeddb.ts";
@@ -29,15 +30,11 @@ export interface ChatbotProps {
   readonly class: string;
 }
 
-const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 shadow-md dark:bg-blue-800`;
-
 export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
     return (
-      <div class={props.class}>
-        <div className={chatbotButtonStyles}>
-          <IconMessageChatbot class="size-8" />
-        </div>
+      <div class={clsx(floatingButtonStyles, props.class)}>
+        <IconMessageChatbot class="size-8" />
       </div>
     );
   }
@@ -45,7 +42,7 @@ export function Chatbot(props: ChatbotProps): JSX.Element {
   return (
     <Popover className={props.class}>
       <PopoverButton
-        className={chatbotButtonStyles}
+        className={floatingButtonStyles}
         aria-label="Meet our Chatbot!"
       >
         <IconMessageChatbot class="size-8" />

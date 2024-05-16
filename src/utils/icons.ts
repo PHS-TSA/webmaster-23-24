@@ -5,6 +5,7 @@ import IconBrandReactComponent from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwindComponent from "$tabler_icons/brand-tailwind.tsx";
 import IconCheckComponent from "$tabler_icons/check.tsx";
 import IconChevronDownComponent from "$tabler_icons/chevron-down.tsx";
+import IconChevronUpComponent from "$tabler_icons/chevron-up.tsx";
 import IconFlameComponent from "$tabler_icons/flame.tsx";
 import IconInfoCircleComponent from "$tabler_icons/info-circle.tsx";
 import IconLemon2Component from "$tabler_icons/lemon-2.tsx";
@@ -50,6 +51,11 @@ export const IconBrandTailwind: Icon = IconBrandTailwindComponent;
  * An icon of a chevron pointing down.
  */
 export const IconChevronDown: Icon = IconChevronDownComponent;
+
+/**
+ * An icon of a chevron pointing up.
+ */
+export const IconChevronUp: Icon = IconChevronUpComponent;
 
 /**
  * A lemon icon.

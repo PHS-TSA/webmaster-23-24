@@ -3,6 +3,7 @@ import type { JSX } from "preact";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
 import { Chatbot } from "../islands/Chatbot.tsx";
+import { ScrollToTop } from "../islands/ScrollToTop.tsx";
 
 /**
  * Render the layout for all pages.
@@ -17,7 +18,8 @@ export default function Layout({ Component, url }: PageProps): JSX.Element {
     <div class="flex min-h-screen flex-col place-content-center">
       <Header active={url.pathname} />
       <Component />
-      <Chatbot class="fixed right-3 bottom-10 sm:right-10" />
+      <ScrollToTop class="z-50 fixed right-3 bottom-28 sm:right-10" />
+      <Chatbot class="z-50 fixed right-3 bottom-10 sm:right-10" />
       <Footer class="mt-auto" />
     </div>
   );

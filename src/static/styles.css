@@ -90,3 +90,20 @@ html {
   animation: grow-progress auto linear, show-progress auto linear;
   animation-timeline: --page-scroll;
 }
+
+@keyframes show-button {
+  0%,
+  10% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  20% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.appear-10\% {
+  animation: show-button auto linear;
+  animation-timeline: --page-scroll;
+}
