@@ -121,7 +121,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           title="GPT-4o is online!"
         />
       </div>
-      <ul class="flex flex-col-reverse gap-4 overflow-y-auto">
+      <ul class="flex flex-col-reverse gap-4 overflow-y-auto fade-list">
         {isAsking.value && (
           <li class={replyStyles}>
             <Loading />
