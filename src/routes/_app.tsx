@@ -58,7 +58,11 @@ const metas = (
  */
 export default function App({ Component }: PageProps): JSX.Element {
   return (
-    <html lang="en-US" class="scroll-smooth">
+    <html
+      lang="en-US"
+      // Many, many thanks to <https://getpublii.com/blog/one-line-css-solution-to-prevent-anchor-links-from-scrolling-behind-a-sticky-header.html>!
+      class="scroll-smooth scroll-pt-60 sm:scroll-pt-44 md:scroll-pt-28 lg:scroll-pt-20"
+    >
       <Head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
