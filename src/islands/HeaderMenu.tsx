@@ -18,7 +18,7 @@ import { tw } from "../utils/tailwind.ts";
  * @param active - If the menu is for the current page.
  * @returns The text style for the menu.
  */
-export function makeTextStyle(active: boolean): string {
+function makeTextStyle(active: boolean): string {
   return tw`py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
     active
       ? tw`font-bold text-slate-700 dark:text-slate-200`
@@ -32,7 +32,7 @@ export function makeTextStyle(active: boolean): string {
  * @param active - If the menu is for the current page.
  * @returns The border style for the menu.
  */
-export function makeBorderStyle(active: boolean): string {
+function makeBorderStyle(active: boolean): string {
   return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
     active
       ? tw`border-b-2 border-slate-700 dark:border-slate-200`

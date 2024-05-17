@@ -46,7 +46,7 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
  * @param schema - The Zod schema to validate the data against.
  * @returns - The validated API content.
  */
-export async function makeRequest<T extends ZodTypeUnknown>(
+async function makeRequest<T extends ZodTypeUnknown>(
   endpoint: string,
   schema: T,
 ): Promise<z.infer<T>> {
@@ -60,7 +60,7 @@ export async function makeRequest<T extends ZodTypeUnknown>(
 /**
  * Get the current device's IP from the https://ipify.org API.
  */
-export function getIp(): Promise<Ip> {
+function getIp(): Promise<Ip> {
   // make http request and return the IP as json
   return makeRequest(`${ipEndpoint}?format=json`, ipSchema);
 }
