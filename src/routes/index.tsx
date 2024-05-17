@@ -1,4 +1,4 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head, asset } from "$fresh/runtime.ts";
 import type { RouteConfig } from "$fresh/server.ts";
 import { clsx } from "clsx";
 import type { JSX, RenderableProps } from "preact";
@@ -17,7 +17,8 @@ export const config = {
 const pageTitle = "Home" as const;
 
 interface CardProps {
-  readonly image: string;
+  readonly image?: string;
+  readonly video?: string;
   readonly alt: string;
   readonly cols?: string;
   readonly imgSide: "left" | "right";
@@ -25,11 +26,18 @@ interface CardProps {
 
 function Card({
   image,
+  video,
   alt,
   children,
   cols,
   imgSide,
 }: RenderableProps<CardProps>): JSX.Element {
+  const mediaStyle = `rounded md:row-start-1 md:row-end-2 ${
+    imgSide === "left"
+      ? "md:col-start-1 md:col-end-2"
+      : "md:col-start-4 md:col-end-5"
+  }`;
+
   return (
     <div
       class={clsx(
@@ -37,15 +45,18 @@ function Card({
         cols,
       )}
     >
-      <img
-        src={image}
-        alt={alt}
-        class={`md:row-start-1 md:row-end-2 ${
-          imgSide === "left"
-            ? "md:col-start-1 md:col-end-2"
-            : "md:col-start-4 md:col-end-5"
-        }`}
-      />
+      {video && (
+        <video
+          src={asset(video)}
+          alt={alt}
+          loop={true}
+          class={mediaStyle}
+          controls={false}
+          muted={true}
+          autoplay={true}
+        />
+      )}
+      {image && <img src={asset(image)} alt={alt} class={mediaStyle} />}
 
       <p
         class={`prose prose-slate prose-xl dark:prose-invert p-4 md:row-start-1 md:row-end-2 ${
@@ -110,7 +121,7 @@ export default function Home(): JSX.Element {
           energy doesn't have this risk.
         </Card>
         <Card
-          image="/images/emissions.gif"
+          video="/images/emissions.webm"
           alt="A comparison of carbon emissions between various renewable and non-renewable energy sources"
           cols="md:col-start-2 md:col-end-5"
           imgSide="left"

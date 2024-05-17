@@ -1,4 +1,4 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head, asset } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "@std/path";
 import type { MDXModule } from "@vendor/mdx/types.ts";
@@ -96,5 +96,14 @@ export default function Solution({
 
 function ContentImg(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
   // biome-ignore lint/a11y/useAltText: It doesn't know that alt comes through the props spread.
-  return <img {...props} loading="lazy" class={`rounded-sm ${props.class}`} />;
+  return (
+    <img
+      {...props}
+      src={asset(
+        typeof props.src === "string" ? props.src : props.src?.value ?? "",
+      )}
+      loading="lazy"
+      class={`rounded-sm ${props.class}`}
+    />
+  );
 }

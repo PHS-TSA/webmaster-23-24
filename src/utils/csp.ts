@@ -13,6 +13,7 @@ export function useCsp(): void {
     csp.directives.styleSrc ??= [];
     csp.directives.styleSrcElem ??= [];
     csp.directives.imgSrc ??= [];
+    csp.directives.mediaSrc ??= [];
     csp.directives.connectSrc ??= [];
     csp.directives.manifestSrc ??= [];
     csp.directives.baseUri ??= [];
@@ -34,6 +35,7 @@ export function useCsp(): void {
       UNSAFE_INLINE, // Backwards compatibility for old browsers.
     );
     csp.directives.imgSrc.push(SELF, "data:");
+    csp.directives.mediaSrc.push(SELF);
     csp.directives.connectSrc.push(SELF);
     csp.directives.manifestSrc.push(SELF);
     csp.directives.baseUri.push(NONE);
