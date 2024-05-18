@@ -132,7 +132,7 @@ export default function Home(): JSX.Element {
         <Card
           media={{
             type: "image",
-            src: "/images/impact.svg",
+            src: "/images/impact.avif",
             alt: "A categorization of non-renewable, renewable and green energy sources",
             side: "left",
             width: 768,
