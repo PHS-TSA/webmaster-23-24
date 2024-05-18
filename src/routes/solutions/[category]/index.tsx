@@ -6,10 +6,10 @@ import { z } from "zod";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
+import { IconBolt, IconLink } from "../../../components/icons.ts";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { IconBolt, IconLink } from "../../../utils/icons.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export const config = {

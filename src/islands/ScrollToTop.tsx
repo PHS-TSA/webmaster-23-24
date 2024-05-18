@@ -1,7 +1,7 @@
 import { clsx } from "clsx";
 import type { JSX } from "preact";
+import { IconChevronUp } from "../components/icons.ts";
 import { floatingButtonStyles } from "../components/styles.ts";
-import { IconChevronUp } from "../utils/icons.ts";
 
 export interface ScrollToTopProps {
   readonly class: string;

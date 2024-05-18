@@ -1,10 +1,6 @@
 import type { JSX, RenderableProps } from "preact";
-import {
-  IconAlertTriangle,
-  IconFlame,
-  IconInfoCircle,
-} from "../utils/icons.ts";
 import { tw } from "../utils/tailwind.ts";
+import { IconAlertTriangle, IconFlame, IconInfoCircle } from "./icons.ts";
 
 type AdmonitionType =
   | "note"

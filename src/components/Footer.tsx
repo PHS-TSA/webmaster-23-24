@@ -2,20 +2,20 @@ import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { siteName, slogan } from "../site.ts";
 import {
-  type Icon,
-  IconBrandDeno,
-  IconBrandReact,
-  IconBrandTailwind,
-  IconLemon2,
-  IconSolarPanel2,
-} from "../utils/icons.ts";
-import {
   type BasicMenu,
   type Menu,
   type MenuItem,
   menus,
 } from "../utils/site-organization.ts";
 import { extraMenus } from "../utils/site-organization.ts";
+import {
+  type Icon,
+  IconBrandDeno,
+  IconBrandReact,
+  IconBrandTailwind,
+  IconLemon2,
+  IconSolarPanel2,
+} from "./icons.ts";
 
 /**
  * The icons of some of the tools that were used to build the site.

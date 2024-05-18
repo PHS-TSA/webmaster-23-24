@@ -10,7 +10,7 @@ import {
 } from "@headlessui/react";
 import { useSignal } from "@preact/signals";
 import type { ComponentChildren, JSX } from "preact";
-import { IconCheck, IconChevronDown } from "../utils/icons.ts";
+import { IconCheck, IconChevronDown } from "../components/icons.ts";
 import { tw } from "../utils/tailwind.ts";
 import { Info } from "./Info.tsx";
 

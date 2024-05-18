@@ -1,8 +1,8 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { clsx } from "clsx";
 import { type ComponentChildren, Fragment, type JSX } from "preact";
+import { IconInfoCircle } from "../components/icons.ts";
 import { prettyFocus } from "../components/styles.ts";
-import { IconInfoCircle } from "../utils/icons.ts";
 
 export interface InfoProps {
   readonly children: ComponentChildren;

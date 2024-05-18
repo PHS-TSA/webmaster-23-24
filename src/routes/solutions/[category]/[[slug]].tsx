@@ -6,9 +6,9 @@ import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
+import { IconSolarPanel } from "../../../components/icons.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { IconSolarPanel } from "../../../utils/icons.ts";
 
 export const config = {
   csp: true,

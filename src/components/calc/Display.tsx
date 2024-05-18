@@ -7,8 +7,8 @@ import {
   calculatePricingIfRequiresPermit,
   calculatePricingMultiplierFromArea,
 } from "../../utils/calc/geo.ts";
-import { IconCheck } from "../../utils/icons.ts";
 import { usdFormat, yearFormat } from "../../utils/intl.ts";
+import { IconCheck } from "../icons.ts";
 import type { CalculatorShowProps } from "./props.ts";
 
 export function CalculatorDisplay(data: CalculatorShowProps): JSX.Element {

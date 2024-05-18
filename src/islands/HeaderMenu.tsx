@@ -7,8 +7,8 @@ import {
 } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
+import { IconChevronDown } from "../components/icons.ts";
 import { prettyFocus } from "../components/styles.ts";
-import { IconChevronDown } from "../utils/icons.ts";
 import type { Menu } from "../utils/site-organization.ts";
 import { tw } from "../utils/tailwind.ts";
 
