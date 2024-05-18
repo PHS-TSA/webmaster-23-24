@@ -18,7 +18,7 @@ export interface CoverProps {
   /**
    * The additional content to render.
    */
-  readonly children: ComponentChildren;
+  readonly children?: ComponentChildren;
 }
 
 /**
