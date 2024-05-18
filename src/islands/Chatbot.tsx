@@ -164,12 +164,12 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           }
 
           messages.value = await Promise.all(
-            reply.map(async (val: Message): Promise<DbItem> => {
-              return {
+            reply.map(
+              async (val: Message): Promise<DbItem> => ({
                 role: val.role,
                 message: await formatRefs(val),
-              };
-            }),
+              }),
+            ),
           );
 
           isAsking.value = false;

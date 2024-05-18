@@ -12,9 +12,12 @@ export function CalculatorSearch(data: CalculatorSearchProps): JSX.Element {
       <Selector
         name="region"
         question="What state are you from?"
-        list={states.map((state: State): SelectorListObject<State> => {
-          return { name: state, value: state };
-        })}
+        list={states.map(
+          (state: State): SelectorListObject<State> => ({
+            name: state,
+            value: state,
+          }),
+        )}
         current={data.region}
         required
       />
