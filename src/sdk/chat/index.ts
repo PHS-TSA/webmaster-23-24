@@ -7,17 +7,16 @@ export async function chat(
   thread: string,
   message: string,
 ): Promise<ChatThread | undefined> {
-  const res = await fetch(
-    `/api/chat/?thread=${encodeURIComponent(thread)}&q=${encodeURIComponent(
-      message,
-    )}`,
-  );
-  const json = await res.json();
-  const unparsed = chatThreadSchema.safeParse(json);
+  try {
+    const res = await fetch(
+      `/api/chat/?thread=${encodeURIComponent(thread)}&q=${encodeURIComponent(
+        message,
+      )}`,
+    );
+    const json = await res.json();
 
-  if (unparsed.success) {
-    return unparsed.data;
+    return chatThreadSchema.parse(json);
+  } catch {
+    return undefined;
   }
-
-  return undefined;
 }
