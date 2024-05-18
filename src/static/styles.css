@@ -98,3 +98,8 @@ html {
   animation: show-button auto linear;
   animation-timeline: --page-scroll;
 }
+
+/* This fixes a layout bug in the chatbot. */
+.octicon-link {
+  display: none;
+}
