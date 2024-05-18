@@ -1,4 +1,5 @@
 import IconAlertTriangleComponent from "$tabler_icons/alert-triangle.tsx";
+import IconBoltComponent from "$tabler_icons/bolt.tsx";
 import IconBrandDenoComponent from "$tabler_icons/brand-deno.tsx";
 import IconBrandReactComponent from "$tabler_icons/brand-react.tsx";
 import IconBrandTailwindComponent from "$tabler_icons/brand-tailwind.tsx";
@@ -70,6 +71,11 @@ export const IconSolarPanel2: Icon = IconSolarPanel2Component;
  * @see {@link IconSolarPanel2}
  */
 export const IconSolarPanel: Icon = IconSolarPanelComponent;
+
+/**
+ * A bolt icon.
+ */
+export const IconBolt: Icon = IconBoltComponent;
 
 /**
  * An info circle icon.

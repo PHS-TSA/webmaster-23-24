@@ -9,7 +9,7 @@ import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { IconLink, IconSolarPanel } from "../../../utils/icons.ts";
+import { IconBolt, IconLink } from "../../../utils/icons.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export const config = {
@@ -128,7 +128,7 @@ export default function Category({
         <Cover
           title={pageTitle}
           icon={
-            <IconSolarPanel
+            <IconBolt
               class="size-52 text-yellow-200 dark:text-yellow-400"
               aria-hidden="true"
             />
