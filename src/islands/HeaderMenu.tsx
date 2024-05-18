@@ -60,7 +60,7 @@ export function menuButtonStyles(active: boolean): string {
 }
 
 function ButtonIcon(): JSX.Element {
-  return <IconChevronDown class="w-6 h-6" aria-hidden="true" />;
+  return <IconChevronDown size={24} class="size-6" aria-hidden="true" />;
 }
 
 /**

@@ -1,7 +1,8 @@
 import { Head, asset } from "$fresh/runtime.ts";
 import type { RouteConfig } from "$fresh/server.ts";
 import { clsx } from "clsx";
-import type { JSX, RenderableProps } from "preact";
+import type { JSX } from "preact";
+import type { ComponentChildren } from "preact";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { siteName } from "../site.ts";
@@ -17,23 +18,33 @@ export const config = {
 const pageTitle = "Home" as const;
 
 interface CardProps {
-  readonly image?: string;
-  readonly video?: string;
-  readonly alt: string;
+  readonly children: ComponentChildren;
   readonly cols?: string;
-  readonly imgSide: "left" | "right";
+  readonly media: CardMedia;
 }
 
-function Card({
-  image,
-  video,
-  alt,
-  children,
-  cols,
-  imgSide,
-}: RenderableProps<CardProps>): JSX.Element {
+type CardMedia = CardImage | CardVideo;
+
+interface CardMediaBase {
+  readonly type: "image" | "video";
+  readonly src: string;
+  readonly alt: string;
+  readonly side: "left" | "right";
+}
+
+interface CardImage extends CardMediaBase {
+  readonly type: "image";
+  readonly width: number;
+  readonly height: number;
+}
+
+interface CardVideo extends CardMediaBase {
+  readonly type: "video";
+}
+
+function Card({ children, cols, media }: CardProps): JSX.Element {
   const mediaStyle = `rounded md:row-start-1 md:row-end-2 ${
-    imgSide === "left"
+    media.side === "left"
       ? "md:col-start-1 md:col-end-2"
       : "md:col-start-4 md:col-end-5"
   }`;
@@ -45,10 +56,10 @@ function Card({
         cols,
       )}
     >
-      {video && (
+      {media.type === "video" && (
         <video
-          src={asset(video)}
-          alt={alt}
+          src={asset(media.src)}
+          alt={media.alt}
           loop={true}
           class={mediaStyle}
           controls={false}
@@ -56,11 +67,19 @@ function Card({
           autoplay={true}
         />
       )}
-      {image && <img src={asset(image)} alt={alt} class={mediaStyle} />}
+      {media.type === "image" && (
+        <img
+          src={asset(media.src)}
+          alt={media.alt}
+          class={mediaStyle}
+          height={media.height}
+          width={media.width}
+        />
+      )}
 
       <p
         class={`prose prose-slate prose-xl dark:prose-invert p-4 md:row-start-1 md:row-end-2 ${
-          imgSide === "left"
+          media.side === "left"
             ? "md:col-start-2 md:col-end-5"
             : "md:col-start-1 md:col-end-4"
         }`}
@@ -93,10 +112,15 @@ export default function Home(): JSX.Element {
 
       <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
-          image="/images/intro.avif"
-          alt="A wind farm"
+          media={{
+            type: "image",
+            src: "/images/intro.avif",
+            alt: "A wind farm",
+            side: "right",
+            width: 656,
+            height: 300,
+          }}
           cols="md:col-start-1 md:col-end-4"
-          imgSide="right"
         >
           Over the past 50 years, people have truly recognized global warming
           and the threat it poses. Every year, thousands of scientists spend
@@ -106,10 +130,15 @@ export default function Home(): JSX.Element {
           First though, what exactly is green energy?
         </Card>
         <Card
-          image="/images/impact.svg"
-          alt="A categorization of non-renewable, renewable and green energy sources"
+          media={{
+            type: "image",
+            src: "/images/impact.svg",
+            alt: "A categorization of non-renewable, renewable and green energy sources",
+            side: "left",
+            width: 768,
+            height: 460,
+          }}
           cols="md:col-start-1 md:col-end-5"
-          imgSide="left"
         >
           According to the Environmental Protection Agency, or EPA, "green power
           is a subset of renewable energy. It represents those renewable energy
@@ -121,10 +150,13 @@ export default function Home(): JSX.Element {
           energy doesn't have this risk.
         </Card>
         <Card
-          video="/images/emissions.webm"
-          alt="A comparison of carbon emissions between various renewable and non-renewable energy sources"
+          media={{
+            type: "video",
+            src: "/images/emissions.webm",
+            alt: "A comparison of carbon emissions between various renewable and non-renewable energy sources",
+            side: "left",
+          }}
           cols="md:col-start-2 md:col-end-5"
-          imgSide="left"
         >
           How can you help invest in green energy and reduce carbon emissions?
           It's actually pretty simple. You can buy solar panels for your house,
@@ -132,10 +164,15 @@ export default function Home(): JSX.Element {
           so many ways to save money and save the environment at the same time!
         </Card>
         <Card
-          image="/images/utility-companies.avif"
-          alt="Man putting up solar panels"
+          media={{
+            type: "image",
+            src: "/images/utility-companies.avif",
+            alt: "Man putting up solar panels",
+            side: "right",
+            width: 500,
+            height: 375,
+          }}
           cols="md:col-start-1 md:col-end-4"
-          imgSide="right"
         >
           Recently, the government passed the Public Land Renewable Energy
           Development Act of 2023, which gives land grants to companies creating

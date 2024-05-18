@@ -38,7 +38,13 @@ const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 
 const inputStyles = tw`rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
 const buttonStyles = tw`absolute inset-y-0 right-0 flex items-center pr-2`;
 function ButtonIcon(): JSX.Element {
-  return <IconChevronDown class="h-5 w-5 text-slate-400" aria-hidden="true" />;
+  return (
+    <IconChevronDown
+      size={20}
+      class="size-5 text-slate-400"
+      aria-hidden="true"
+    />
+  );
 }
 const buttonTitle = "Options";
 
@@ -166,7 +172,11 @@ export function Selector<T extends string, U extends T>({
                               focus ? tw`text-slate-50` : tw`text-green-700`
                             }`}
                           >
-                            <IconCheck class="h-5 w-5" aria-hidden="true" />
+                            <IconCheck
+                              size={20}
+                              class="size-5"
+                              aria-hidden="true"
+                            />
                           </span>
                         )}
                       </>

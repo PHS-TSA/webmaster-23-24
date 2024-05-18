@@ -1,3 +1,4 @@
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { logoAlt } from "../site.ts";
 
@@ -11,10 +12,10 @@ import { logoAlt } from "../site.ts";
 export function Logo(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
   return (
     <img
-      class={`my-6 ${props.class}`}
+      class={clsx("my-6", props.class)}
       src="/logo.svg"
-      width="128"
-      height="128"
+      width={500}
+      height={500}
       alt={logoAlt}
     />
   );

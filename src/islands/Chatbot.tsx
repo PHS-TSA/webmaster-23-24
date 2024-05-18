@@ -111,9 +111,9 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
         <img
           alt=""
           src="/images/openai.avif"
-          class="inline rounded-full text-center align-middle"
-          height={24}
-          width={24}
+          class="inline rounded-full text-center align-middle size-6"
+          height={200}
+          width={200}
         />{" "}
         Why Switch?
         <div

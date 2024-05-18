@@ -1,4 +1,4 @@
-import type { JSX, RenderableProps } from "preact";
+import type { ComponentChildren, JSX } from "preact";
 import { Logo } from "./Logo.tsx";
 
 /**
@@ -14,6 +14,11 @@ export interface CoverProps {
    * The icon to render as the attention grabber.
    */
   readonly icon?: JSX.Element;
+
+  /**
+   * The additional content to render.
+   */
+  readonly children: ComponentChildren;
 }
 
 /**
@@ -30,8 +35,8 @@ export interface CoverProps {
 export function Cover({
   title,
   children,
-  icon = <Logo />,
-}: RenderableProps<CoverProps>): JSX.Element {
+  icon = <Logo class="size-32" />,
+}: CoverProps): JSX.Element {
   return (
     <div class="flex flex-row justify-center bg-green-500 px-4 py-8 dark:bg-green-700">
       <div class="flex max-w-screen-sm flex-col items-center justify-center gap-y-4 text-balance text-center lg:max-w-screen-md">
