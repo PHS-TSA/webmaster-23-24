@@ -16,11 +16,15 @@ import { set } from "idb-keyval";
 import type { JSX } from "preact";
 import { Fragment, Suspense } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
-import { IconMessageChatbot, IconSend } from "../components/icons.ts";
+import {
+  IconMessageChatbot,
+  IconReload,
+  IconSend,
+} from "../components/icons.ts";
 import { floatingButtonStyles } from "../components/styles.ts";
 import { chat } from "../sdk/chat/index.ts";
-import { getThread } from "../sdk/chat/thread.ts";
-import { useIndexedDB } from "../utils/hooks/indexeddb.ts";
+import { getThreadId } from "../sdk/chat/thread.ts";
+import { useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
@@ -83,12 +87,11 @@ type Db = DbItem[];
 function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const messageValue = useSignal("");
   const isAsking = useSignal(false);
-  const thread = useIndexedDB<string>(
-    "thread",
-    async () => (await getThread())?.id,
-  );
 
-  const messages_ = useIndexedDB<Db>(
+  const thread = useIndexedDb("thread", getThreadId);
+  const threadId = useSignal(thread);
+
+  const messages_ = useIndexedDb<Db>(
     "messages",
     // deno-lint-ignore require-await
     async () => [],
@@ -109,6 +112,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
       <div class="h-8 text-lg font-mono">
         <img
           alt=""
+          title="Powered by OpenAI's GPT-4o!"
           src="/images/openai.avif"
           class="inline rounded-full text-center align-middle size-6"
           height={200}
@@ -119,13 +123,23 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           class="relative -right-1 -top-2 inline-block size-2 rounded-full bg-green-500 ring-1 ring-slate-50 dark:ring-slate-950"
           title="GPT-4o is online!"
         />
+        <Button
+          class="float-end"
+          title="Restart your conversation."
+          onClick={async () => {
+            threadId.value = await getThreadId();
+            messages.value = [];
+          }}
+        >
+          <IconReload />
+        </Button>
       </div>
-      <ul class="flex flex-col-reverse gap-4 overflow-y-auto fade-list">
+      <ul class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
           <li class={replyStyles}>
             <Loading />
           </li>
-        )}
+        )}{" "}
         {messages.value.map((msg) => (
           <li
             key={`${msg.role}${msg.message}`}
@@ -143,7 +157,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
 
           e.preventDefault();
 
-          if (thread === undefined) {
+          if (threadId.value === undefined) {
             throw new Error("Why didn't we Suspend-se before now?");
           }
 
@@ -156,7 +170,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           isAsking.value = true;
           messages.value = [{ role: "user", message }, ...messages.value];
 
-          const reply = await chat(thread, message);
+          const reply = await chat(threadId.value, message);
 
           if (reply === undefined) {
             // Don't crash when offline.

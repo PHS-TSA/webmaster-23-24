@@ -80,66 +80,6 @@ html {
   animation-timeline: --page-scroll;
 }
 
-/* Based on <https://scroll-driven-animations.style/demos/scroll-shadows/css/>. */
-
-.fade-list::before,
-.fade-list::after {
-  content: "";
-  display: block;
-  position: sticky;
-  left: 0em;
-  right: 0em;
-  height: 0.75rem;
-}
-
-.fade-list::before {
-  top: 0;
-  background: radial-gradient(
-    farthest-side at 50% 0,
-    rgb(0 0 0 / 0.25),
-    rgb(0 0 0 / 0)
-  );
-}
-
-.fade-list::after {
-  bottom: 0;
-  background: radial-gradient(
-    farthest-side at 50% 100%,
-    rgb(0 0 0 / 0.25),
-    rgb(0 0 0 / 0)
-  );
-}
-
-@keyframes reveal {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.fade-list {
-  overflow-y: auto;
-  scroll-timeline: --scroll-timeline y;
-}
-
-.fade-list::before,
-.fade-list::after {
-  animation-name: reveal;
-  animation-timeline: --scroll-timeline;
-  animation-fill-mode: both;
-}
-
-.fade-list::before {
-  animation-range: 1em 2em;
-}
-
-.fade-list::after {
-  animation-direction: reverse;
-  animation-range: calc(100% - 2em) calc(100% - 1em);
-}
-
 /* Look at me! I wrote an animation all by myself! 🤣 */
 
 @keyframes show-button {

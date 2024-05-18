@@ -3,6 +3,14 @@ import { get, set } from "idb-keyval";
 import { useCallback } from "preact/hooks";
 import { usePromise } from "./suspense.ts";
 
+export function useIndexedDb<T>(
+  key: string,
+  def?: () => Promise<T | undefined>,
+): T | undefined {
+  const callback = useCallback(() => getIndexedDB(key, def), [key, def]);
+  return usePromise(callback());
+}
+
 /**
  * Use a value from the IndexedDB.
  * If the value doesn't exist, set it to the default.
@@ -14,27 +22,23 @@ import { usePromise } from "./suspense.ts";
  * @param key - The key of the item to fetch.
  * @param def - A function returning a promise that might resolve to the default.
  */
-export function useIndexedDB<T>(
+export async function getIndexedDB<T>(
   key: string,
   def?: () => Promise<T | undefined>,
-): T | undefined {
+): Promise<T | undefined> {
   if (!IS_BROWSER) {
     throw new Error("This is browser-only!");
   }
 
-  const callback = useCallback(async () => {
-    const val = await get<T>(key);
+  const val = await get<T>(key);
 
-    if (val === undefined && def !== undefined) {
-      const defaultValue = await def();
-      if (defaultValue !== undefined) {
-        await set(key, defaultValue);
-        return defaultValue;
-      }
+  if (val === undefined && def !== undefined) {
+    const defaultValue = await def();
+    if (defaultValue !== undefined) {
+      await set(key, defaultValue);
+      return defaultValue;
     }
+  }
 
-    return val;
-  }, [key, def]);
-
-  return usePromise(callback());
+  return val;
 }

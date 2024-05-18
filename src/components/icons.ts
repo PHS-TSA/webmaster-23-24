@@ -11,6 +11,7 @@ import IconInfoCircleComponent from "$tabler_icons/info-circle.tsx";
 import IconLemon2Component from "$tabler_icons/lemon-2.tsx";
 import IconLinkComponent from "$tabler_icons/link.tsx";
 import IconMessageChatbotComponent from "$tabler_icons/message-chatbot.tsx";
+import IconReloadComponent from "$tabler_icons/reload.tsx";
 import IconSendComponent from "$tabler_icons/send.tsx";
 import IconSolarPanel2Component from "$tabler_icons/solar-panel-2.tsx";
 import IconSolarPanelComponent from "$tabler_icons/solar-panel.tsx";
@@ -115,3 +116,8 @@ export const IconMessageChatbot: Icon = IconMessageChatbotComponent;
  * It's a paper airplaneQ
  */
 export const IconSend: Icon = IconSendComponent;
+
+/**
+ * A reload icon.
+ */
+export const IconReload: Icon = IconReloadComponent;

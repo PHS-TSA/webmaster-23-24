@@ -10,3 +10,9 @@ export async function getThread(): Promise<Thread | undefined> {
     return undefined;
   }
 }
+
+export async function getThreadId(): Promise<string | undefined> {
+  const thread = await getThread();
+
+  return thread?.id;
+}
