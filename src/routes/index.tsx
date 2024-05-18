@@ -61,7 +61,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
           src={asset(media.src)}
           alt={media.alt}
           loop={true}
-          class={mediaStyle}
+          class={clsx(mediaStyle, "shadow-md")}
           controls={false}
           muted={true}
           autoplay={true}
@@ -71,7 +71,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
         <img
           src={asset(media.src)}
           alt={media.alt}
-          class={mediaStyle}
+          class={clsx(mediaStyle, "shadow-md")}
           height={media.height}
           width={media.width}
         />
