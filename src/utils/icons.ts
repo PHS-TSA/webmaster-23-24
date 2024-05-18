@@ -91,6 +91,9 @@ export const IconFlame: Icon = IconFlameComponent;
  */
 export const IconCheck: Icon = IconCheckComponent;
 
+/**
+ * An anchor link icon.
+ */
 export const IconLink: Icon = IconLinkComponent;
 
 /**
