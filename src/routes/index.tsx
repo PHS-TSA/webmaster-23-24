@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import type { JSX } from "preact";
 import type { ComponentChildren } from "preact";
 import { Cover } from "../components/Cover.tsx";
+import { Logo } from "../components/Logo.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { siteName } from "../site.ts";
 import { useCsp } from "../utils/csp.ts";
@@ -79,7 +80,7 @@ export default function Home(): JSX.Element {
       <Head>
         <Meta title={pageTitle} />
       </Head>
-      <Cover title={siteName}>
+      <Cover icon={<Logo animated={true} class="size-32" />} title={siteName}>
         <p>
           Looking for information about solar power? You've come to the right
           place!
