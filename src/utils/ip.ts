@@ -3,6 +3,7 @@
  * @module
  */
 
+import { join } from "@std/path";
 import { z } from "zod";
 import { regionSchema } from "./calc/solar.ts";
 import type { ZodTypeUnknown } from "./zod.ts";
@@ -33,7 +34,10 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
       currentIP = ip;
     }
 
-    return await makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
+    return await makeRequest(
+      join(geoEndpoint, currentIP ?? "", "json"),
+      geoSchema,
+    );
   } catch {
     return undefined;
   }

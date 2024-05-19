@@ -40,8 +40,7 @@ export const handler: Handlers<SolutionProps> = {
         return await ctx.renderNotFound();
       }
 
-      const base = join(contentDir, category);
-      const extensionless = join(base, slug || "index");
+      const extensionless = join(contentDir, category, slug ?? "index");
       const filepath = `${extensionless}.js`;
 
       const file: MDXModule = await import(filepath);
