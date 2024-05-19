@@ -14,7 +14,7 @@ import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
 import { set } from "idb-keyval";
 import type { JSX } from "preact";
-import { Fragment, Suspense } from "preact/compat";
+import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
 import {
   IconMessageChatbot,
@@ -101,6 +101,12 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
     set("messages", messages.value);
   });
 
+  const scrollRef = useRef<HTMLUListElement>(null);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: It depends on it indirectly.
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 9999999 });
+  }, [messages.value]);
+
   return (
     <div
       {...props}
@@ -134,7 +140,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           <IconReload />
         </Button>
       </div>
-      <ul class="flex flex-col-reverse gap-4 overflow-y-auto">
+      <ul ref={scrollRef} class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
           <li class={replyStyles}>
             <Loading />
