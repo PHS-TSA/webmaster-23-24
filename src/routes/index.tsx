@@ -82,8 +82,8 @@ export default function Home(): JSX.Element {
       </Head>
       <Cover icon={<Logo animated={true} class="size-32" />} title={siteName}>
         <p>
-          Looking for information about solar power? You've come to the right
-          place!
+          Looking for information about modern power sources? You've come to the
+          right place!
         </p>
       </Cover>
 
