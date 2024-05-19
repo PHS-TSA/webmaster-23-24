@@ -15,7 +15,7 @@ export const config = {
 } as const satisfies RouteConfig;
 
 /**
- * Properties for the {@link Solution} component.
+ * Properties for the {@linkcode Solution} component.
  */
 export interface SolutionProps {
   /**

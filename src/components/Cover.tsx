@@ -2,7 +2,7 @@ import type { ComponentChildren, JSX } from "preact";
 import { Logo } from "./Logo.tsx";
 
 /**
- * Properties for the {@link Cover} component.
+ * Properties for the {@linkcode Cover} component.
  */
 export interface CoverProps {
   /**

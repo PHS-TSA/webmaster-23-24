@@ -15,7 +15,7 @@ import { Logo } from "./Logo.tsx";
 import { prettyFocus } from "./styles.ts";
 
 /**
- * Properties for the {@link Header} component.
+ * Properties for the {@linkcode Header} component.
  */
 export interface HeaderProps {
   /**

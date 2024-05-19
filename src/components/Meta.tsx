@@ -9,7 +9,7 @@ import {
 import { Title } from "./Title.tsx";
 
 /**
- * Properties for the {@link Meta} component.
+ * Properties for the {@linkcode Meta} component.
  */
 export interface MetaProps {
   /**

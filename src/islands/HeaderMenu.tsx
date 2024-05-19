@@ -41,7 +41,7 @@ function makeBorderStyle(active: boolean): string {
 }
 
 /**
- * Properties for the {@link HeaderMenu} component.
+ * Properties for the {@linkcode HeaderMenu} component.
  */
 export interface WithActive {
   /**

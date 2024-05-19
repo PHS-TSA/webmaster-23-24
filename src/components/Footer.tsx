@@ -64,7 +64,7 @@ interface Tool {
 }
 
 /**
- * Properties for the {@link Footer} component.
+ * Properties for the {@linkcode Footer} component.
  */
 export type FooterProps = JSX.HTMLAttributes<HTMLElement>;
 

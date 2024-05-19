@@ -2,7 +2,7 @@ import type { JSX } from "preact";
 import { makeTitle } from "../site.ts";
 
 /**
- * Properties for the {@link Title} component.
+ * Properties for the {@linkcode Title} component.
  */
 export interface TitleProps {
   /**
