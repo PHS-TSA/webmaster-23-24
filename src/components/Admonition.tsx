@@ -2,7 +2,7 @@ import type { JSX, RenderableProps } from "preact";
 import { tw } from "../utils/tailwind.ts";
 import { IconAlertTriangle, IconFlame, IconInfoCircle } from "./icons.ts";
 
-type AdmonitionType =
+export type AdmonitionType =
   | "note"
   | "warning"
   | "tip"

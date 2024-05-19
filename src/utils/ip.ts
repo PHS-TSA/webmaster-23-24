@@ -8,7 +8,7 @@ import { z } from "zod";
 import { regionSchema } from "./calc/solar.ts";
 import type { ZodTypeUnknown } from "./zod.ts";
 
-type Geo = z.infer<typeof geoSchema>;
+export type Geo = z.infer<typeof geoSchema>;
 type Ip = z.infer<typeof ipSchema>;
 
 const geoSchema = z.object({ region: regionSchema });

@@ -24,7 +24,7 @@ export const titleList = ["what", "environment", "cost", "worth-it"];
 /**
  * Represent the data for the solution pages.
  */
-const solutionDataSchema = z
+export const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
     description: z
@@ -43,7 +43,7 @@ const solutionDataSchema = z
 /**
  * Represent a set of solution pages.
  */
-const solutionPageSchema = z
+export const solutionPageSchema = z
   .object({
     slug: z
       .string()

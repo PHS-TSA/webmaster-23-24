@@ -20,16 +20,16 @@ export type CategoryProps = z.infer<typeof categoryProps>;
 export type CategoryPages = z.infer<typeof categoryPropsPages>;
 export type CategoryData = z.infer<typeof categoryPropsPageData>;
 
-const categoryPropsPageData = z.object({
+export const categoryPropsPageData = z.object({
   short: z.string(),
   linkText: z.string(),
   title: z.string(),
   linkTo: z.string(),
 });
 
-const categoryPropsPages = categoryPropsPageData.array();
+export const categoryPropsPages = categoryPropsPageData.array();
 
-const categoryProps = z.object({
+export const categoryProps = z.object({
   pages: categoryPropsPages,
   title: z.string(),
   description: z.string().refine((value) => !value.endsWith(".")),
