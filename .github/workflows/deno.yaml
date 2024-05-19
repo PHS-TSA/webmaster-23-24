@@ -71,6 +71,8 @@ jobs:
             deno.json
       - name: 🔦 Lighthouse
         uses: treosh/lighthouse-ci-action@1b0e7c33270fbba31a18a0fbb1de7cc5256b6d39 # 11.4.0
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
         with:
           urls: |
             ${{ steps.deno-deploy.outputs.url }}
@@ -79,4 +81,5 @@ jobs:
             ${{ steps.deno-deploy.outputs.url }}solutions/geothermal/environment/
             ${{ steps.deno-deploy.outputs.url }}calculator/
           uploadArtifacts: true
+          temporaryPublicStorage: true
           configPath: lighthouserc.json
