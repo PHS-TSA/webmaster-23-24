@@ -23,23 +23,12 @@ interface CardProps {
   readonly media: CardMedia;
 }
 
-type CardMedia = CardImage | CardVideo;
-
-interface CardMediaBase {
-  readonly type: "image" | "video";
+interface CardMedia {
   readonly src: string;
   readonly alt: string;
-  readonly side: "left" | "right";
-}
-
-interface CardImage extends CardMediaBase {
-  readonly type: "image";
   readonly width: number;
   readonly height: number;
-}
-
-interface CardVideo extends CardMediaBase {
-  readonly type: "video";
+  readonly side: "left" | "right";
 }
 
 function Card({ children, cols, media }: CardProps): JSX.Element {
@@ -56,26 +45,13 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
         cols,
       )}
     >
-      {media.type === "video" && (
-        <video
-          src={asset(media.src)}
-          alt={media.alt}
-          loop={true}
-          class={clsx(mediaStyle, "shadow-md")}
-          controls={false}
-          muted={true}
-          autoplay={true}
-        />
-      )}
-      {media.type === "image" && (
-        <img
-          src={asset(media.src)}
-          alt={media.alt}
-          class={clsx(mediaStyle, "shadow-md")}
-          height={media.height}
-          width={media.width}
-        />
-      )}
+      <img
+        src={asset(media.src)}
+        alt={media.alt}
+        class={clsx(mediaStyle, "shadow-md")}
+        height={media.height}
+        width={media.width}
+      />
 
       <p
         class={`prose prose-slate prose-xl dark:prose-invert p-4 md:row-start-1 md:row-end-2 ${
@@ -113,7 +89,6 @@ export default function Home(): JSX.Element {
       <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
         <Card
           media={{
-            type: "image",
             src: "/images/intro.avif",
             alt: "A wind farm",
             side: "right",
@@ -131,7 +106,6 @@ export default function Home(): JSX.Element {
         </Card>
         <Card
           media={{
-            type: "image",
             src: "/images/impact.avif",
             alt: "A categorization of non-renewable, renewable and green energy sources",
             side: "left",
@@ -151,10 +125,11 @@ export default function Home(): JSX.Element {
         </Card>
         <Card
           media={{
-            type: "video",
-            src: "/images/emissions.webm",
+            src: "/images/emissions.webp",
             alt: "A comparison of carbon emissions between various renewable and non-renewable energy sources",
             side: "left",
+            width: 1841,
+            height: 1105,
           }}
           cols="md:col-start-2 md:col-end-5"
         >
@@ -165,7 +140,6 @@ export default function Home(): JSX.Element {
         </Card>
         <Card
           media={{
-            type: "image",
             src: "/images/utility-companies.avif",
             alt: "Man putting up solar panels",
             side: "right",
