@@ -28,6 +28,11 @@ export type Icon = ComponentType<{
 }>;
 
 /**
+ * A lightning bolt icon.
+ */
+export const IconBolt: Icon = IconBoltComponent;
+
+/**
  * The Deno logo.
  */
 export const IconBrandDeno: Icon = IconBrandDenoComponent;
@@ -72,11 +77,6 @@ export const IconSolarPanel2: Icon = IconSolarPanel2Component;
  * @see {@link IconSolarPanel2}
  */
 export const IconSolarPanel: Icon = IconSolarPanelComponent;
-
-/**
- * A bolt icon.
- */
-export const IconBolt: Icon = IconBoltComponent;
 
 /**
  * An info circle icon.
