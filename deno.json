@@ -4,7 +4,7 @@
     "check": "deno task lint & deno task typecheck",
     "lint": "deno lint & deno task biome:check",
     "ci": "deno lint & deno task biome:ci & deno task typecheck",
-    "typecheck": "deno check src/**/*.ts src/**/*.tsx",
+    "typecheck": "deno check src/**/*.ts src/**/*.tsx tool/**/*.ts",
     "test": "deno test --allow-env --allow-read --coverage=cov/",
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
