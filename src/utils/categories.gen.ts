@@ -4,7 +4,7 @@ export const solutions = [
   {
     "slug": "what",
     "data": {
-      "title": "What is Solar Power?",
+      "title": "What Is Solar Power?",
       "description": "Solar power is a fascinating technology that converts energy from the sun into electricity",
       "category": "solar",
       "sectionHeader": "What Is It?"
@@ -43,14 +43,14 @@ export const solutions = [
       "title": "What Are Geothermal Energy Solutions?",
       "description": "Geothermal Energy is an undertapped energy resource",
       "category": "geothermal",
-      "sectionHeader": "What is It?"
+      "sectionHeader": "What Is It?"
     }
   },
   {
     "slug": "environment",
     "data": {
       "title": "How Does Geothermal Energy Impact the Environment?",
-      "description": "When it comes to carbon emissions, geothermal energy is very efficient",
+      "description": "When it comes to carbon emissions, geothermal energy is one of the most efficient options",
       "category": "geothermal",
       "sectionHeader": "How Does It Affect the Environment?"
     }
@@ -59,7 +59,7 @@ export const solutions = [
     "slug": "cost",
     "data": {
       "title": "How Much Do a Geothermal Energy Solutions Cost?",
-      "description": "The cost to install a geothermal system can range anywhere from $10,000 all the way up to $25,000",
+      "description": "The cost to install a geothermal system can range anywhere from $10,000 to $25,000",
       "category": "geothermal",
       "sectionHeader": "How Much Does It Cost?"
     }
@@ -76,7 +76,7 @@ export const solutions = [
   {
     "slug": "what",
     "data": {
-      "title": "What is Recycling?",
+      "title": "What Is Recycling?",
       "description": "Recycling is the process of taking inorganic waste materials and turning them into new products",
       "category": "recycling",
       "sectionHeader": "What Is it?"
@@ -130,10 +130,10 @@ export const solutions = [
   {
     "slug": "electric-cars",
     "data": {
-      "title": "Electric Cars",
+      "title": "Electric Vehicles",
       "description": "Transportation is one of the largest sources of carbon emissions in the US",
       "category": "other",
-      "sectionHeader": "Electric Cars"
+      "sectionHeader": "Electric Vehicles"
     }
   },
   {
@@ -158,7 +158,7 @@ export const solutions = [
     "slug": "nuclear-power",
     "data": {
       "title": "Nuclear Power",
-      "description": "Fission, fusion—what’s up with nuclear power",
+      "description": "Fission, fusion—what is up with nuclear power?",
       "category": "other",
       "sectionHeader": "Nuclear Power"
     }
