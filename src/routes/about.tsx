@@ -4,6 +4,7 @@ import type { JSX } from "preact";
 import { Content } from "../components/Content.tsx";
 import { Cover } from "../components/Cover.tsx";
 import { Meta } from "../components/Meta.tsx";
+import { Info } from "../islands/Info.tsx";
 import { useCsp } from "../utils/csp.ts";
 
 export const config = {
@@ -36,19 +37,28 @@ export default function About(): JSX.Element {
             <p>
               Logo and Graphics created with{" "}
               <a href="https://www.canva.com/">Canva</a>. All images are from{" "}
-              <a href="https://www.pickpik.com">PickPik</a> (
-              <a href="https://www.pickpik.com/terms-of-service">
-                custom, royalty-free license
-              </a>
-              ), <a href="https://unsplash.com">Unsplash</a> (
-              <a href="https://unsplash.com/license">Unsplash license</a>), and{" "}
-              <a href="https://www.rawpixel.com">Rawpixel</a> (
-              <a href="https://www.rawpixel.com/services/licenses">CC0</a>).
-              Icons are from <a href="https://tabler.io/icons">Tabler</a> (
-              <a href="https://github.com/tabler/tabler-icons/blob/main/LICENSE">
-                MIT Licensed
-              </a>
-              ).
+              <a href="https://www.pickpik.com">PickPik</a>,
+              <Info>
+                <a href="https://www.pickpik.com/terms-of-service">
+                  PickPik uses a custom, royalty-free license.
+                </a>
+              </Info>{" "}
+              <a href="https://unsplash.com">Unsplash</a>,
+              <Info>
+                <a href="https://unsplash.com/license">Unsplash license</a>
+              </Info>{" "}
+              and <a href="https://www.rawpixel.com">Rawpixel</a>.
+              <Info>
+                <a href="https://www.rawpixel.com/services/licenses">
+                  Our usage falls under CC0.
+                </a>
+              </Info>{" "}
+              Icons are from <a href="https://tabler.io/icons">Tabler</a>.
+              <Info>
+                <a href="https://github.com/tabler/tabler-icons/blob/main/LICENSE">
+                  MIT licensed
+                </a>
+              </Info>
             </p>
             <h2>Hosting</h2>
             <p>
