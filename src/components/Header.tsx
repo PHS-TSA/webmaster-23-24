@@ -35,9 +35,11 @@ const itemStyles = tw`flex h-8 flex-row items-end`;
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
     <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 backdrop-blur-md dark:bg-slate-950/95 animate-scroll-shadow">
-      <div class="flex flex-row flex-wrap gap-2 place-content-center lg:place-content-start pb-1">
-        <HomeLink class="flex-shrink-0 flex-grow" />
-        <HeaderGroup>
+      <div class="flex flex-row flex-wrap lg:justify-between items-center justify-center pb-1">
+        <div class="flex justify-center lg:justify-start w-full lg:w-auto">
+          <HomeLink />
+        </div>
+        <HeaderGroup class="flex justify-center lg:justify-start w-full lg:w-auto">
           {menus.map((menu: Menu) => (
             <li key={menu.title} class={itemStyles}>
               <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
@@ -63,7 +65,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
 }
 
 interface HomeLinkProps {
-  readonly class: string;
+  readonly class?: string;
 }
 
 /**
