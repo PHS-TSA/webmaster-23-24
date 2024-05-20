@@ -42,7 +42,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
   return (
     <div
       class={clsx(
-        "inline-grid items-center rounded-xl bg-slate-300 p-8 shadow-lg md:grid md:grid-cols-4 dark:bg-slate-700",
+        "inline-grid items-center justify-items-center rounded-xl bg-slate-300 p-8 shadow-lg md:grid md:grid-cols-4 dark:bg-slate-700",
         cols,
       )}
     >
@@ -134,7 +134,7 @@ export default function Home(): JSX.Element {
             width: 768,
             height: 460,
           }}
-          cols="md:col-start-1 md:col-end-5"
+          cols="md:col-start-2 md:col-end-5"
         >
           According to the Environmental Protection Agency, or EPA, "green power
           is a subset of renewable energy. It represents those renewable energy
@@ -149,11 +149,11 @@ export default function Home(): JSX.Element {
           media={{
             src: "/images/emissions.webp",
             alt: "A comparison of carbon emissions between various renewable and non-renewable energy sources",
-            side: "left",
+            side: "right",
             width: 1841,
             height: 1105,
           }}
-          cols="md:col-start-2 md:col-end-5"
+          cols="md:col-start-1 md:col-end-4"
         >
           How can you help invest in green energy and reduce carbon emissions?
           It's actually pretty simple. You can buy solar panels for your house,
@@ -164,11 +164,11 @@ export default function Home(): JSX.Element {
           media={{
             src: "/images/utility-companies.avif",
             alt: "Man putting up solar panels",
-            side: "right",
+            side: "left",
             width: 500,
             height: 375,
           }}
-          cols="md:col-start-1 md:col-end-4"
+          cols="md:col-start-2 md:col-end-5"
         >
           Recently, the government passed the Public Land Renewable Energy
           Development Act of 2023, which gives land grants to companies creating
