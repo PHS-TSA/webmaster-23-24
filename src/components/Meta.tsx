@@ -30,9 +30,9 @@ export interface MetaProps {
 
 /**
  * Render a meta component, which stores metadata about the page.
- * It contains the title and description of the page, as well as some Open Graph and Twitter* metadata for social media.
+ * It contains the title and description of the page, as well as some Open Graph and Twitter[^1] metadata for social media.
  *
- * * No, it's not X yet. Backwards compatibility :)
+ * [^1]: No, it's not X yet. Backwards compatibility :)
  *
  * @param props - The component's properties.
  * @param props.title - The title of the page.
