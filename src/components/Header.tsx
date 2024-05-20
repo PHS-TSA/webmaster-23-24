@@ -54,7 +54,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
           )}
         </HeaderGroup>
       </div>
-      {/(.+\/.+\/.+$|about\/$)/.test(active) && (
+      {/\/(solutions\/.+\/.*|about\/|green\/)$/.test(active) && (
         <div
           class="progress relative -left-8 top-[1.125rem] z-40 -m-[0.125rem] h-1 w-screen rounded-se-sm bg-green-500 dark:bg-green-700"
           aria-hidden="true"
