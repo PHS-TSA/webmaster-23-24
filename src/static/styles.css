@@ -68,11 +68,10 @@
   0%,
   10% {
     opacity: 0;
-    visibility: hidden;
   }
-  20% {
+  20%,
+  100% {
     opacity: 1;
-    visibility: visible;
   }
 }
 
