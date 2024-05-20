@@ -105,7 +105,7 @@ export function HeaderMenu({
         leaveTo={tw`opacity-0 translate-y-1`}
       >
         <PopoverPanel
-          className="animate-anchor-gap z-50 origin-top-right rounded-md shadow-2xl"
+          className="animate-anchor-gap z-30 origin-top-right rounded-md shadow-2xl"
           anchor="bottom end"
         >
           <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
