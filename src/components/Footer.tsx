@@ -22,14 +22,14 @@ import {
  */
 const icons = [
   {
+    icon: IconBrandDeno,
+    href: "https://deno.com/deploy/",
+    name: "Deno",
+  },
+  {
     icon: IconLemon2,
     href: "https://fresh.deno.dev/",
     name: "Fresh",
-  },
-  {
-    icon: IconBrandDeno,
-    href: "https://deno.com/",
-    name: "Deno",
   },
   {
     icon: IconBrandReact,
