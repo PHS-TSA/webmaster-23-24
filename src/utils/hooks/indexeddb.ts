@@ -42,3 +42,17 @@ export async function getIndexedDB<T>(
 
   return val;
 }
+
+/**
+ * Set a value in the IndexedDB.
+ *
+ * @param key - The key of the item to set.
+ * @param value - The value to set.
+ */
+export async function setIndexedDb<T>(key: string, value: T): Promise<void> {
+  if (!IS_BROWSER) {
+    throw new Error("This is browser-only!");
+  }
+
+  await set(key, value);
+}

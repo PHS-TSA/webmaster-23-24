@@ -12,7 +12,6 @@ import {
 } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
-import { set } from "idb-keyval";
 import type { JSX } from "preact";
 import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
@@ -24,7 +23,7 @@ import {
 import { floatingButtonStyles } from "../components/styles.ts";
 import { chat } from "../sdk/chat/index.ts";
 import { getThreadId } from "../sdk/chat/thread.ts";
-import { useIndexedDb } from "../utils/hooks/indexeddb.ts";
+import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
@@ -88,8 +87,11 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const messageValue = useSignal("");
   const isAsking = useSignal(false);
 
-  const thread = useIndexedDb("thread", getThreadId);
-  const threadId = useSignal(thread);
+  const thread_ = useIndexedDb("thread", getThreadId);
+  const threadId = useSignal(thread_);
+  useSignalEffect(() => {
+    setIndexedDb("thread", threadId.value);
+  });
 
   const messages_ = useIndexedDb<Db>(
     "messages",
@@ -98,7 +100,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   );
   const messages = useSignal(messages_ ?? []);
   useSignalEffect(() => {
-    set("messages", messages.value);
+    setIndexedDb("messages", messages.value);
   });
 
   const scrollRef = useRef<HTMLUListElement>(null);

@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { useCallback, useMemo, useState } from "preact/hooks";
 
-export function usePromise<T>(promise: Promise<T>): T | undefined {
+export function usePromise<T>(promise: Promise<T>): T {
   const status = useSignal<"pending" | "fulfilled" | "rejected">("pending");
   const result = useSignal<T | undefined>(undefined);
   const error = useSignal<unknown>(undefined);
@@ -25,7 +25,8 @@ export function usePromise<T>(promise: Promise<T>): T | undefined {
       throw data; // Suspend
 
     case "fulfilled":
-      return result.value; // Result is a fulfilled promise
+      // biome-ignore lint/style/noNonNullAssertion: It's impossible for result to be undefined here.
+      return result.value!; // Result is a fulfilled promise
 
     case "rejected":
       throw error.value; // Result is an error
