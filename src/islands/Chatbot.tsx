@@ -214,7 +214,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           <Button
             className="absolute right-2 p-2"
             type="submit"
-            aria-label="Send"
+            title="Send your message."
           >
             <IconSend class="dark:text-slate-950" />
           </Button>
