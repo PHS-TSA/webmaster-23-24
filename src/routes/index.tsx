@@ -3,7 +3,7 @@ import type { RouteConfig } from "$fresh/server.ts";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import type { ComponentChildren } from "preact";
-import { Cover } from "../components/Cover.tsx";
+import { Cover, type HeroProps } from "../components/Cover.tsx";
 import { Logo } from "../components/Logo.tsx";
 import { Meta } from "../components/Meta.tsx";
 import { siteName } from "../site.ts";
@@ -67,6 +67,35 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
   );
 }
 
+function CarouselHero({ children }: HeroProps): JSX.Element {
+  return (
+    <div class="flex flex-col justify-center px-4 py-8 h-svh relative">
+      <div class="absolute inset-0 carousel">
+        {/* TODO: Higher quality images */}
+        {/* TODO: Call to action */}
+        <img
+          src={asset("/images/intro.avif")}
+          alt=""
+          class="absolute w-full h-full object-cover"
+        />
+        <img
+          src={asset("/images/electric-cars.avif")}
+          alt=""
+          class="absolute w-full h-full object-cover"
+        />
+        <img
+          src={asset("/images/turbines.avif")}
+          alt=""
+          class="absolute w-full h-full object-cover"
+        />
+      </div>
+      <div class="relative z-10 flex items-center justify-center">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 /**
  * Render the home page.
  *
@@ -80,7 +109,11 @@ export default function Home(): JSX.Element {
       <Head>
         <Meta title={pageTitle} />
       </Head>
-      <Cover icon={<Logo animated={true} class="size-32" />} title={siteName}>
+      <Cover
+        Hero={CarouselHero}
+        icon={<Logo animated={true} class="size-32" />}
+        title={siteName}
+      >
         <p>
           Looking for information about modern power sources? You've come to the
           right place!
