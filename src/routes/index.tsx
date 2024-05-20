@@ -79,7 +79,7 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
           class="absolute w-full h-full object-cover"
         />
         <img
-          src={asset("/images/electric-cars.avif")}
+          src={asset("/images/electric-car.avif")}
           alt=""
           class="absolute w-full h-full object-cover"
         />
