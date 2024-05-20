@@ -34,7 +34,7 @@ const itemStyles = tw`flex h-8 flex-row items-end`;
  */
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
-    <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 shadow-2xl backdrop-blur-md dark:bg-slate-950/95">
+    <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 backdrop-blur-md dark:bg-slate-950/95 animate-scroll-shadow">
       <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
         <div class="flex-shrink-0 flex-grow">
           <HomeLink />
@@ -56,7 +56,7 @@ export function Header({ active }: HeaderProps): JSX.Element {
       </div>
       {/\/(solutions\/.+\/.*|about\/|green\/)$/.test(active) && (
         <div
-          class="progress relative -left-8 top-[1.125rem] z-40 -m-[0.125rem] h-1 w-screen rounded-se-sm bg-green-500 dark:bg-green-700"
+          class="progress relative -left-8 top-[1.125rem] z-40 -m-[0.125rem] h-1 w-screen rounded-se-sm bg-green-400/90 dark:bg-green-600/90"
           aria-hidden="true"
         />
       )}
