@@ -24,7 +24,7 @@ export interface HeaderProps {
   readonly active: string;
 }
 
-const itemStyles = tw`flex h-8 flex-row items-end`;
+const itemStyles = tw`flex h-8 flex-row items-end py-1`;
 
 /**
  * Render a header component, which is used as a header for pages.

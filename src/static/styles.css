@@ -118,6 +118,21 @@ html {
   }
 }
 
+@keyframes move-panel {
+  from {
+    --anchor-gap: 0.5rem;
+  }
+  to {
+    --anchor-gap: 0.25rem;
+  }
+}
+
+.animate-anchor-gap {
+  animation: move-panel linear both;
+  animation-timeline: --page-scroll;
+  animation-range: 0 150px;
+}
+
 .progress {
   animation: move-progress linear both, grow-progress auto linear;
   animation-timeline: --page-scroll, --page-scroll;
