@@ -47,6 +47,10 @@ export default function About(): JSX.Element {
               <Info>
                 <a href="https://unsplash.com/license">Unsplash license</a>
               </Info>{" "}
+              <a href="https://www.pexels.com/">Pexels</a>,
+              <Info>
+                <a href="https://www.pexels.com/license/">Pexels License</a>
+              </Info>{" "}
               and <a href="https://www.rawpixel.com">Rawpixel</a>.
               <Info>
                 <a href="https://www.rawpixel.com/services/licenses">
@@ -178,7 +182,7 @@ export default function About(): JSX.Element {
             </p>
             <h2>Documentation</h2>
             <div class="flex gap-6" f-client-nav={false}>
-              {/* TODO */}
+              {/* TODO(lishaduck): Update work log */}
               <a
                 class="rounded-md bg-slate-900 p-2 text-slate-100 no-underline hover:bg-slate-800 hover:text-slate-200 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 dark:hover:text-slate-800"
                 role="button"

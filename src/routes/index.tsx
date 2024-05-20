@@ -71,8 +71,8 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
     <div class="flex flex-col justify-center px-4 py-8 h-svh relative">
       <div class="absolute inset-0 carousel">
-        {/* TODO: Higher quality images */}
-        {/* TODO: Call to action */}
+        {/* TODO(MattsAttack): Higher quality images */}
+        {/* TODO(lishaduck): Call to action */}
         <img
           src={asset("/images/intro.avif")}
           alt=""
