@@ -35,10 +35,8 @@ const itemStyles = tw`flex h-8 flex-row items-end`;
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
     <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 backdrop-blur-md dark:bg-slate-950/95 animate-scroll-shadow">
-      <div class="flex flex-col flex-wrap gap-4 sm:flex-row">
-        <div class="flex-shrink-0 flex-grow">
-          <HomeLink />
-        </div>
+      <div class="flex flex-row flex-wrap gap-2 place-content-center lg:place-content-start">
+        <HomeLink class="flex-shrink-0 flex-grow" />
         <HeaderGroup>
           {menus.map((menu: Menu) => (
             <li key={menu.title} class={itemStyles}>
@@ -64,17 +62,22 @@ export function Header({ active }: HeaderProps): JSX.Element {
   );
 }
 
+interface HomeLinkProps {
+  readonly class: string;
+}
+
 /**
  * Render the link to the home page.
  *
  * @returns The rendered home link component.
  */
-function HomeLink(): JSX.Element {
+function HomeLink(props: HomeLinkProps): JSX.Element {
   return (
     <a
       class={clsx(
         "flex max-w-fit flex-row items-center rounded-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200",
         prettyFocus,
+        props.class,
       )}
       href="/"
     >
