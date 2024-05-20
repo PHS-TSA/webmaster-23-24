@@ -24,7 +24,7 @@ export interface HeaderProps {
   readonly active: string;
 }
 
-const itemStyles = tw`flex h-8 flex-row items-end py-1`;
+const itemStyles = tw`flex h-8 flex-row items-end`;
 
 /**
  * Render a header component, which is used as a header for pages.
@@ -35,7 +35,7 @@ const itemStyles = tw`flex h-8 flex-row items-end py-1`;
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
     <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 backdrop-blur-md dark:bg-slate-950/95 animate-scroll-shadow">
-      <div class="flex flex-row flex-wrap gap-2 place-content-center lg:place-content-start">
+      <div class="flex flex-row flex-wrap gap-2 place-content-center lg:place-content-start pb-1">
         <HomeLink class="flex-shrink-0 flex-grow" />
         <HeaderGroup>
           {menus.map((menu: Menu) => (
