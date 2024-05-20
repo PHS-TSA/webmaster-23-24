@@ -1,3 +1,4 @@
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { clsx } from "clsx";
 import { type ComponentChildren, Fragment, type JSX } from "preact";
@@ -9,6 +10,21 @@ export interface InfoProps {
 }
 
 export function Info({ children }: InfoProps): JSX.Element {
+  if (!IS_BROWSER) {
+    return (
+      <button
+        type="button"
+        title="More Information"
+        class={clsx(
+          "inline-flex size-5 place-items-center rounded-full",
+          prettyFocus,
+        )}
+      >
+        <IconInfoCircle class="inline" size={20} />
+      </button>
+    );
+  }
+
   return (
     <Popover as={Fragment}>
       <PopoverButton

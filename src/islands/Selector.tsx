@@ -112,8 +112,6 @@ export function Selector<T extends string, U extends T>({
             <>
               {" "}
               <Info>{info}</Info>
-              {/* Hack b/c I don't have time to debug. */}
-              <span class="hidden">{info}</span>
             </>
           )}
         </Label>
