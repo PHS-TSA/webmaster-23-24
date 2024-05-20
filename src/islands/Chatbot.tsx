@@ -90,7 +90,9 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const thread_ = useIndexedDb("thread", getThreadId);
   const threadId = useSignal(thread_);
   useSignalEffect(() => {
-    setIndexedDb("thread", threadId.value);
+    (async () => {
+      await setIndexedDb("thread", threadId.value);
+    })();
   });
 
   const messages_ = useIndexedDb<Db>(
@@ -100,7 +102,9 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   );
   const messages = useSignal(messages_ ?? []);
   useSignalEffect(() => {
-    setIndexedDb("messages", messages.value);
+    (async () => {
+      await setIndexedDb("messages", messages.value);
+    })();
   });
 
   const scrollRef = useRef<HTMLUListElement>(null);
