@@ -92,6 +92,10 @@ export const extraMenus = [
     url: "/calculator/",
   },
   {
+    title: "Going Green?",
+    url: "/green/",
+  },
+  {
     title: "About",
     url: "/about/",
   },
