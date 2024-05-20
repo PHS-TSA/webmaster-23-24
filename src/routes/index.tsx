@@ -55,7 +55,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
       />
 
       <p
-        class={`prose prose-slate prose-xl dark:prose-invert p-4 md:row-start-1 md:row-end-2 ${
+        class={`prose prose-xl prose-slate max-w-full p-4 dark:prose-invert md:row-start-1 md:row-end-2 ${
           media.side === "left"
             ? "md:col-start-2 md:col-end-5"
             : "md:col-start-1 md:col-end-4"
