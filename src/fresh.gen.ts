@@ -10,7 +10,8 @@ import * as $about from "./routes/about.tsx";
 import * as $api_chat_index from "./routes/api/chat/index.ts";
 import * as $api_chat_references from "./routes/api/chat/references.ts";
 import * as $api_chat_thread from "./routes/api/chat/thread.ts";
-import * as $calculator from "./routes/calculator.tsx";
+import * as $calculator_index from "./routes/calculator/index.tsx";
+import * as $calculator_results from "./routes/calculator/results.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
@@ -35,7 +36,8 @@ const manifest = {
     "./routes/api/chat/index.ts": $api_chat_index,
     "./routes/api/chat/references.ts": $api_chat_references,
     "./routes/api/chat/thread.ts": $api_chat_thread,
-    "./routes/calculator.tsx": $calculator,
+    "./routes/calculator/index.tsx": $calculator_index,
+    "./routes/calculator/results.tsx": $calculator_results,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,
     "./routes/solutions/[category]/index.tsx": $solutions_category_index,
