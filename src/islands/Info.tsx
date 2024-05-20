@@ -28,7 +28,6 @@ export function Info({ children }: InfoProps): JSX.Element {
   return (
     <Popover as={Fragment}>
       <PopoverButton
-        type="button"
         title="More Information"
         class={clsx(
           "inline-flex size-5 place-items-center rounded-full",
