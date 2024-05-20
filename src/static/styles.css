@@ -144,7 +144,13 @@ html {
 .carousel {
   & > * {
     opacity: 0;
-    animation: animate-fade 20s infinite;
+    transform-origin: center;
+    transform: scale(1.25);
+    overflow: hidden;
+    object-fit: cover;
+    animation: image-down linear both, animate-fade 20s infinite;
+    animation-timeline: --page-scroll, auto;
+    animation-range: 0 100svh, normal;
   }
 
   & > :nth-child(1) {
@@ -175,5 +181,16 @@ html {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes image-down {
+  from {
+    left: 0%;
+    top: 0%;
+  }
+  to {
+    left: 0%;
+    top: 60%;
   }
 }

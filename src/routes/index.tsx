@@ -70,24 +70,12 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
     <div class="flex flex-col justify-center px-4 py-8 h-svh relative">
-      <div class="absolute inset-0 carousel">
+      <div class="absolute inset-0 carousel *:absolute *:size-full *:object-cover *:-z-40">
         {/* TODO(MattsAttack): Higher quality images */}
         {/* TODO(lishaduck): Call to action */}
-        <img
-          src={asset("/images/intro.avif")}
-          alt=""
-          class="absolute w-full h-full object-cover"
-        />
-        <img
-          src={asset("/images/electric-car.avif")}
-          alt=""
-          class="absolute w-full h-full object-cover"
-        />
-        <img
-          src={asset("/images/turbines.avif")}
-          alt=""
-          class="absolute w-full h-full object-cover"
-        />
+        <img src={asset("/images/intro.avif")} alt="" />
+        <img src={asset("/images/electric-car.avif")} alt="" />
+        <img src={asset("/images/turbines.avif")} alt="" />
       </div>
       <div class="relative z-10 flex items-center justify-center">
         {children}
