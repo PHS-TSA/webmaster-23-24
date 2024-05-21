@@ -20,7 +20,10 @@ import {
   IconReload,
   IconSend,
 } from "../components/icons.ts";
-import { floatingButtonStyles } from "../components/styles.ts";
+import {
+  blueButtonStyles,
+  floatingButtonStyles,
+} from "../components/styles.ts";
 import { chat } from "../sdk/chat/index.ts";
 import { getThreadId } from "../sdk/chat/thread.ts";
 import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
@@ -28,26 +31,22 @@ import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tailwind.ts";
 
-export interface ChatbotProps {
-  readonly class: string;
-}
+export function Chatbot(): JSX.Element {
+  const icon = <IconMessageChatbot class="size-8" />;
+  const buttonStyles = clsx(floatingButtonStyles, blueButtonStyles);
 
-export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
     return (
-      <div class={clsx(floatingButtonStyles, props.class)}>
-        <IconMessageChatbot class="size-8" />
-      </div>
+      <button type="button" class={buttonStyles}>
+        {icon}
+      </button>
     );
   }
 
   return (
-    <Popover className={props.class}>
-      <PopoverButton
-        className={floatingButtonStyles}
-        aria-label="Meet our Chatbot!"
-      >
-        <IconMessageChatbot class="size-8" />
+    <Popover>
+      <PopoverButton className={buttonStyles} aria-label="Meet our Chatbot!">
+        {icon}
       </PopoverButton>
       <Transition
         appear={true}

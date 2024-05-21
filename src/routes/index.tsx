@@ -6,6 +6,7 @@ import type { ComponentChildren } from "preact";
 import { Cover, type HeroProps } from "../components/Cover.tsx";
 import { Logo } from "../components/Logo.tsx";
 import { Meta } from "../components/Meta.tsx";
+import { ScrollDown } from "../islands/ScrollDown.tsx";
 import { siteName } from "../site.ts";
 import { useCsp } from "../utils/csp.ts";
 
@@ -70,7 +71,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
     <div class="flex flex-col justify-center px-4 py-8 h-svh relative">
-      <div class="absolute inset-0 carousel *:absolute *:size-full *:object-cover *:-z-40">
+      <div class="carousel">
         {/* TODO(MattsAttack): Higher quality images */}
         {/* TODO(lishaduck): Call to action */}
         <img src={asset("/images/intro.avif")} alt="" />
@@ -79,6 +80,10 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
       </div>
       <div class="relative z-10 flex items-center justify-center">
         {children}
+      </div>
+      {/* TODO(lishaduck): Figure out why left-1/2 applies to the left, not the center. */}
+      <div class="absolute left-1/2 -translate-x-1/2 bottom-10">
+        <ScrollDown />
       </div>
     </div>
   );

@@ -3,12 +3,11 @@ import { Button } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { IconChevronUp } from "../components/icons.ts";
-import { floatingButtonStyles } from "../components/styles.ts";
+import {
+  blueButtonStyles,
+  floatingButtonStyles,
+} from "../components/styles.ts";
 import { tw } from "../utils/tailwind.ts";
-
-export interface ScrollToTopProps {
-  readonly class: string;
-}
 
 function scrollToTop(): void {
   globalThis.scrollTo({ top: 0 });
@@ -17,13 +16,19 @@ function scrollToTop(): void {
 const scrollToTopButtonStyles = tw`opacity-0 appear-10%`;
 const scrollToTopButtonLabel = "Scroll back to the top of the page.";
 
-export function ScrollToTop(props: ScrollToTopProps): JSX.Element {
+export function ScrollToTop(): JSX.Element {
+  const buttonStyles = clsx(
+    floatingButtonStyles,
+    blueButtonStyles,
+    scrollToTopButtonStyles,
+  );
+
   if (!IS_BROWSER) {
     return (
       <button
         type="button"
         aria-label={scrollToTopButtonLabel}
-        class={clsx(floatingButtonStyles, props.class, scrollToTopButtonStyles)}
+        class={buttonStyles}
         onClick={scrollToTop}
       >
         <IconChevronUp />
@@ -34,11 +39,7 @@ export function ScrollToTop(props: ScrollToTopProps): JSX.Element {
   return (
     <Button
       aria-label={scrollToTopButtonLabel}
-      className={clsx(
-        floatingButtonStyles,
-        props.class,
-        scrollToTopButtonStyles,
-      )}
+      className={buttonStyles}
       onClick={scrollToTop}
     >
       <IconChevronUp />
