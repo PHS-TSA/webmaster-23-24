@@ -23,6 +23,7 @@ export interface SelectorProps<T extends string, U extends T> {
   /** A hacky way to get Fresh to serialize the `info` prop. */
   readonly children?: ComponentChildren;
   /** A hacky way to get Fresh *not* to serialize the `info` prop. */
+  // TODO(lishaduck): Is this really needed?
   readonly hasInfo?: boolean;
 }
 
