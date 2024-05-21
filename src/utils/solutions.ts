@@ -35,6 +35,10 @@ export const solutionDataSchema = z
     sectionHeader: z
       .string()
       .describe("The section header for the category index page."),
+    heroImage: z
+      .string()
+      .refine((value) => /images\/.+.avif$/.test(value))
+      .describe("The image to use for the hero."),
   })
   .passthrough()
   .readonly()
@@ -49,7 +53,7 @@ export const solutionPageSchema = z
       .string()
       .optional()
       .describe("The slug of the solution without a trailing slash."),
-    data: solutionDataSchema.describe(solutionDataSchemaDescription),
+    data: solutionDataSchema,
   })
   .strict()
   .readonly()

@@ -122,16 +122,27 @@
     transform-origin: 0 50%;
   }
 
-  /* Homepage carousel. */
-  .carousel {
+  /* General hero styling. */
+  .hero {
     @apply absolute inset-0 overflow-hidden;
 
-    & > * {
-      @apply absolute -z-40 size-full origin-center scale-125 object-cover opacity-0;
+    & > img {
+      @apply absolute -z-40 size-full origin-center scale-125 object-cover;
 
-      animation: image-down linear both, animate-fade 20s infinite;
-      animation-timeline: --page-scroll, auto;
-      animation-range: 0 100svh, normal;
+      animation: image-down linear both;
+      animation-timeline: --page-scroll;
+      animation-range: 0 100svh;
+    }
+  }
+
+  /* Homepage carousel. */
+  .carousel {
+    & > img {
+      @apply opacity-0;
+
+      animation: animate-fade 20s infinite;
+      animation-timeline: auto;
+      animation-range: normal;
     }
 
     & > :nth-child(1) {
@@ -168,6 +179,13 @@
     to {
       @apply left-0 top-3/5;
     }
+  }
+
+  .carousel > *,
+  .hero > * {
+    animation: image-down linear both, animate-fade 20s infinite;
+    animation-timeline: --page-scroll, auto;
+    animation-range: 0 100svh, normal;
   }
 }
 

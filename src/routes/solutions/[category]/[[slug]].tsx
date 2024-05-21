@@ -2,9 +2,10 @@ import { Head, asset } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "@std/path";
 import type { MDXModule } from "@vendor/mdx/types.ts";
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
-import { Cover } from "../../../components/Cover.tsx";
+import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
 import { IconSolarPanel } from "../../../components/icons.ts";
 import { useCsp } from "../../../utils/csp.ts";
@@ -22,6 +23,9 @@ export interface SolutionProps {
    * The page to render.
    */
   readonly page: MDXModule;
+
+  readonly slug: string;
+  readonly category: string;
 }
 
 const contentDir = "../../../content" as const;
@@ -36,16 +40,16 @@ export const handler: Handlers<SolutionProps> = {
   ): Promise<Response> {
     try {
       const { category, slug } = ctx.params;
-      if (category === undefined || category === "") {
+      if (category === undefined || category === "" || slug === undefined) {
         return await ctx.renderNotFound();
       }
 
-      const extensionless = join(contentDir, category, slug ?? "index");
+      const extensionless = join(contentDir, category, slug);
       const filepath = `${extensionless}.js`;
 
       const file: MDXModule = await import(filepath);
 
-      return await ctx.render({ page: file });
+      return await ctx.render({ page: file, slug, category });
     } catch (e) {
       console.error(e);
 
@@ -67,6 +71,7 @@ export default function Solution({
   useCsp();
 
   const { title: pageTitle, description } = data.page.frontmatter;
+  const heroImage = `/images/${data.category}-${data.slug}.avif`;
 
   return (
     <>
@@ -76,6 +81,7 @@ export default function Solution({
       <main>
         <Cover
           title={pageTitle}
+          Hero={ImageHero(heroImage)}
           icon={
             <IconSolarPanel
               class="size-52 text-yellow-200 dark:text-yellow-400"
@@ -93,6 +99,19 @@ export default function Solution({
   );
 }
 
+function ImageHero(img: string): ({ children }: HeroProps) => JSX.Element {
+  return ({ children }) => (
+    <div class="flex flex-col px-4 py-2 sm:py-3 md:py-4 lg:py-8 h-[65svh] md:h-[75svh] lg:h-svh relative">
+      <div class="hero">
+        <img src={asset(img)} alt="" />
+      </div>
+      <div class="relative z-10 flex items-center justify-center">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function ContentImg(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
   // biome-ignore lint/a11y/useAltText: It doesn't know that alt comes through the props spread.
   return (
@@ -102,7 +121,7 @@ function ContentImg(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
         typeof props.src === "string" ? props.src : props.src?.value ?? "",
       )}
       loading="lazy"
-      class={`rounded-sm ${props.class}`}
+      class={clsx("rounded-sm", props.class)}
     />
   );
 }

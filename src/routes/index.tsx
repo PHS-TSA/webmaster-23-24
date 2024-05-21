@@ -71,11 +71,11 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
     <div class="flex flex-col px-4 py-2 sm:py-3 md:py-4 lg:py-8 h-[65svh] md:h-[75svh] lg:h-svh relative">
-      <div class="carousel">
+      <div class="carousel hero">
         {/* TODO(lishaduck): Call to action */}
         <img src={asset("/images/solar-environment.avif")} alt="" />
-        <img src={asset("/images/geothermal-worth.avif")} alt="" />
-        <img src={asset("/images/turbines.avif")} alt="" />
+        <img src={asset("/images/geothermal-worth-it.avif")} alt="" />
+        <img src={asset("/images/other-wind.avif")} alt="" />
       </div>
       <div class="relative z-10 flex items-center justify-center">
         {children}

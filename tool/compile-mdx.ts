@@ -280,7 +280,10 @@ function categoriesFile(files: VFile[]): string {
 
     return {
       slug: stem === category ? undefined : stem,
-      data: file.data.matter,
+      data: {
+        heroImage: `images/${category}-${stem}.avif`,
+        ...file.data.matter,
+      },
     };
   });
   const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
