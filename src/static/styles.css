@@ -87,10 +87,10 @@
   /* Based on <https://scroll-driven-animations.style/demos/progress-bar/css/>. */
   @keyframes grow-progress {
     from {
-      @apply scale-x-0;
+      transform: scaleX(0);
     }
     to {
-      @apply scale-x-100;
+      transform: scaleX(1);
     }
   }
 
