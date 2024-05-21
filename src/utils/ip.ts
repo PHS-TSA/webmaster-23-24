@@ -11,7 +11,7 @@ import type { ZodTypeUnknown } from "./zod.ts";
 export type Geo = z.infer<typeof geoSchema>;
 type Ip = z.infer<typeof ipSchema>;
 
-const geoSchema = z.object({ region: regionSchema });
+export const geoSchema = z.object({ region: regionSchema });
 const ipSchema = z.object({ ip: z.string() });
 
 const ipEndpoint = "https://api.ipify.org";

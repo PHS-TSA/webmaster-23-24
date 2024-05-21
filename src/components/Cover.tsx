@@ -54,7 +54,7 @@ export function Cover({
 }
 
 export interface HeroProps {
-  children?: ComponentChildren;
+  readonly children?: ComponentChildren;
 }
 
 function Hulk({ children }: HeroProps): JSX.Element {

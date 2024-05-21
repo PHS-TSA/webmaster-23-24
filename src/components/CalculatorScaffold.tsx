@@ -1,6 +1,6 @@
 import type { ComponentChildren, JSX } from "preact";
 
-interface CalculatorScaffoldProps {
+export interface CalculatorScaffoldProps {
   readonly children: ComponentChildren;
 }
 

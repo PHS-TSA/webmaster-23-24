@@ -51,8 +51,8 @@ function getTitle(type: AdmonitionType): string {
   }
 }
 
-interface AdmonitionIconProps {
-  type: AdmonitionType;
+interface AdmonitionIconProps extends AdmonitionProps {
+  readonly type: AdmonitionType;
 }
 
 function AdmonitionIcon({ type }: AdmonitionIconProps): JSX.Element {

@@ -6,7 +6,7 @@ import { logoAlt } from "../site.ts";
 /** Properties for the {@linkcode Logo} component. */
 export interface LogoProps extends JSX.HTMLAttributes<HTMLImageElement> {
   /** Should the "?" in the logo be animated? */
-  animated?: boolean;
+  readonly animated?: boolean;
 }
 
 /**
