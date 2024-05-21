@@ -70,7 +70,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
-    <div class="relative flex h-[65svh] flex-col px-4 py-2 sm:py-3 md:h-[75svh] md:py-4 lg:h-svh lg:place-content-center lg:py-8">
+    <div class="relative flex h-[65svh] flex-col px-4 pt-2 sm:pt-3 md:h-[75svh] md:pt-4 lg:h-svh lg:pt-24">
       <div class="carousel hero">
         {/* TODO(lishaduck): Call to action */}
         <img src={asset("/images/solar-environment.avif")} alt="" />
