@@ -12,6 +12,7 @@
 (async () => await import("../content/recycling/worth-it.js"));
 (async () => await import("../content/other/appliances.js"));
 (async () => await import("../content/other/billing.js"));
+(async () => await import("../content/other/biomass.js"));
 (async () => await import("../content/other/electric-cars.js"));
 (async () => await import("../content/other/hydroelectric.js"));
 (async () => await import("../content/other/led-lights.js"));

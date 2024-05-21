@@ -142,6 +142,16 @@ export const solutions = [
     }
   },
   {
+    "slug": "biomass",
+    "data": {
+      "title": "Biomass",
+      "description": "Biomass is an efficient energy source",
+      "category": "other",
+      "sectionHeader": "Biomass",
+      "heroImage": "images/other-biomass.avif"
+    }
+  },
+  {
     "slug": "electric-cars",
     "data": {
       "title": "Electric Vehicles",
