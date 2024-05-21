@@ -22,7 +22,7 @@ export function ScrollDown(): JSX.Element {
         class={clsx(floatingButtonStyles, scrollDownButtonStyles)}
         onClick={scrollDown}
       >
-        <IconChevronDown />
+        <IconChevronDown class="size-8" />
       </button>
     );
   }
