@@ -44,8 +44,10 @@ export function Cover({
     <Hero>
       <div class="flex max-w-screen-sm flex-col items-center justify-center gap-y-4 text-balance text-center lg:max-w-screen-md">
         {icon}
-        <h1 class="text-pretty text-4xl font-bold">{title}</h1>
-        {children}
+        <div class="inset-0 rounded-md p-4 backdrop-blur-sm">
+          <h1 class="text-pretty text-4xl font-bold">{title}</h1>
+          {children}
+        </div>
       </div>
     </Hero>
   );

@@ -102,7 +102,7 @@ export default function Home(): JSX.Element {
       </Head>
       <Cover
         Hero={CarouselHero}
-        icon={<Logo animated={true} class="size-32" />}
+        icon={<Logo animated={true} class="size-32 backdrop-blur-sm" />}
         title={siteName}
       >
         <p>
