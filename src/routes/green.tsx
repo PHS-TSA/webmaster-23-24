@@ -35,12 +35,11 @@ export default function Green(): JSX.Element {
           <div class="!whitespace-normal">
             <h2>Going Green?</h2>
             <p>
-              Are you investigating going green? Here are some easy best
-              practices!
+              Are you investigating going green? Here are some easy ways to get
+              started!
               <ul>
                 <li>
-                  Investigate if your power company supports green energy
-                  initiatives.{" "}
+                  Check if your power company supports green energy initiatives.{" "}
                   <Info>
                     See{" "}
                     <a href="/solutions/other/utilities/">
@@ -60,8 +59,25 @@ export default function Green(): JSX.Element {
                     See <a href="/solutions/other/billing/">Online Billing</a>
                   </Info>
                 </li>
+                <li>
+                  Consider installing a solar or geothermal energy system.{" "}
+                  <Info>
+                    Try out our <a href="/calculator/">pricing calculator</a>!
+                  </Info>
+                </li>
+                <li>
+                  Sign up for green energy news.{" "}
+                  <Info>
+                    CleanEnergy.gov{" "}
+                    <a href="https://whitehouse.us1.list-manage.com/subscribe?u=c2703e4c5744511c4475d3999&id=f0fd3ebb6e">
+                      newsletter signup
+                    </a>
+                  </Info>
+                </li>
               </ul>
             </p>
+            Any other questions? Feel free to ask our AI chatbot over there on
+            the bottom right!
           </div>
         </Content>
       </main>
