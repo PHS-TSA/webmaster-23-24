@@ -9,7 +9,7 @@
     "test:coverage": "deno coverage --lcov cov/ > cov/cov.lcov",
     "test:coverage:genhtml": "genhtml -o cov/html cov/cov.lcov",
     "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run --env -A --watch src/dev.ts",
+    "start": "deno run --env -A --watch=static/ src/dev.ts",
     "build": "deno task compile:mdx && deno run --env -A src/dev.ts build",
     "preview": "deno run --env -A src/main.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update .",
