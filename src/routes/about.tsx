@@ -178,6 +178,17 @@ export default function About(): JSX.Element {
                     Hydro Power Explained | US Energy Information Administration
                   </a>
                 </li>
+                <li>
+                  <a href="https://bioenergykdf.net/system/files/1/KC_091102094519.pdf">
+                    Coal Versus Biomass Electricity Generation—Comparing
+                    Environmental Implications Using Life Cycle Assessment
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.energystar.gov/products/light_bulbs">
+                    Light Bulbs | ENERGY STAR®
+                  </a>
+                </li>
               </ul>
             </p>
             <h2>Documentation</h2>
