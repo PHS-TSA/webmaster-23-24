@@ -70,7 +70,7 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
-    <div class="flex flex-col justify-center px-4 py-8 h-svh relative">
+    <div class="flex flex-col px-4 py-2 sm:py-3 md:py-4 lg:py-8 h-[65svh] md:h-[75svh] lg:h-svh relative">
       <div class="carousel">
         {/* TODO(MattsAttack): Higher quality images */}
         {/* TODO(lishaduck): Call to action */}
@@ -81,8 +81,7 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
       <div class="relative z-10 flex items-center justify-center">
         {children}
       </div>
-      {/* TODO(lishaduck): Figure out why left-1/2 applies to the left, not the center. */}
-      <div class="absolute left-1/2 -translate-x-1/2 bottom-10">
+      <div class="absolute bottom-4 sm:bottom-1 md:bottom-14 lg:bottom-32 left-1/2 -translate-x-1/2">
         <ScrollDown />
       </div>
     </div>

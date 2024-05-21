@@ -10,7 +10,7 @@ function scrollDown(): void {
   globalThis.scrollTo({ top: globalThis.innerHeight });
 }
 
-const scrollDownButtonStyles = tw`appear-10 animate-bounce`;
+const scrollDownButtonStyles = tw`animate-bounce hover:bg-slate-50/15`;
 const scrollDownButtonLabel = "Scroll to content.";
 
 export function ScrollDown(): JSX.Element {
