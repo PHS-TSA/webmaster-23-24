@@ -7,7 +7,7 @@ import type { JSX } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
-import { IconSolarPanel } from "../../../components/icons.ts";
+import { type Icon, IconSolarPanel } from "../../../components/icons.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 
@@ -26,6 +26,7 @@ export interface SolutionProps {
 
   readonly slug: string;
   readonly category: string;
+  readonly icon: Icon;
 }
 
 const contentDir = "../../../content" as const;
@@ -49,7 +50,11 @@ export const handler: Handlers<SolutionProps> = {
 
       const file: MDXModule = await import(filepath);
 
-      return await ctx.render({ page: file, slug, category });
+      const icon: Icon = file.frontmatter.icon
+        ? (await import(`$tabler_icons/${file.frontmatter.icon}.tsx`)).default
+        : IconSolarPanel;
+
+      return await ctx.render({ page: file, slug, category, icon });
     } catch (e) {
       console.error(e);
 
@@ -83,7 +88,7 @@ export default function Solution({
           title={pageTitle}
           Hero={ImageHero(heroImage)}
           icon={
-            <IconSolarPanel
+            <data.icon
               class="size-52 text-yellow-200 dark:text-yellow-400"
               aria-hidden="true"
             />

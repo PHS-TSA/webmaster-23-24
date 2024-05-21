@@ -39,6 +39,9 @@ export const solutionDataSchema = z
       .string()
       .refine((value) => /images\/.+.avif$/.test(value))
       .describe("The image to use for the hero."),
+    icon: z
+      .string()
+      .describe("The url of a tabler icon. Resolves with the import map"),
   })
   .passthrough()
   .readonly()
