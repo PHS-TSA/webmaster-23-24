@@ -9,15 +9,8 @@ export default {
   plugins: [typography, forms, scrollbars, headless],
   theme: {
     extend: {
-      gridTemplateColumns: {
-        "footer-desktop": "1fr repeat(2, auto)",
-        "footer-mobile": "1fr auto",
-        "auto-2": "repeat(2,auto)",
-      },
-      gridTemplateRows: {
-        "footer-mobile": "repeat(2, auto)",
-        "footer-desktop": "1fr",
-        "message-box": "1fr auto",
+      inset: {
+        "3/5": "60%",
       },
     },
   },
