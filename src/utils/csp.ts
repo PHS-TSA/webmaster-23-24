@@ -37,6 +37,7 @@ export function useCsp(): void {
     );
     csp.directives.imgSrc.push(SELF, "data:");
     csp.directives.mediaSrc.push(SELF);
+    csp.directives.connectSrc.push(SELF);
     csp.directives.manifestSrc.push(SELF);
     csp.directives.frameSrc.push(SELF);
   });
