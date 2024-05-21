@@ -31,20 +31,20 @@ export const config = {
  */
 const pageTitle = "Calculator Results" as const;
 
-export const handler: Handlers = {
-  GET(
+export const handler: Handlers<CalculatorShowProps> = {
+  async GET(
     req: Request,
     ctx: FreshContextHelper<CalculatorShowProps>,
-  ): Response | Promise<Response> {
+  ): Promise<Response> {
     const url = new URL(req.url);
     const data = url.searchParams;
     const parsedData = parseData(data);
 
     if (parsedData === undefined) {
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
 
-    return ctx.render(parsedData);
+    return await ctx.render(parsedData);
   },
 
   async POST(
@@ -55,10 +55,10 @@ export const handler: Handlers = {
     const parsedData = parseData(data);
 
     if (parsedData === undefined) {
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
 
-    return ctx.render(parsedData);
+    return await ctx.render(parsedData);
   },
 };
 

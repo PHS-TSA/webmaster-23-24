@@ -58,7 +58,7 @@ export const handler: Handlers<SolutionProps> = {
     } catch (e) {
       console.error(e);
 
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
   },
 };

@@ -23,7 +23,7 @@ export const config = {
  */
 const pageTitle = "Calculator" as const;
 
-export const handler: Handlers = {
+export const handler: Handlers<CalculatorSearchProps> = {
   async GET(
     _req: Request,
     ctx: FreshContextHelper<CalculatorSearchProps>,
@@ -32,7 +32,7 @@ export const handler: Handlers = {
       ? undefined
       : await getIpLocation(ctx.remoteAddr.hostname);
 
-    return ctx.render({
+    return await ctx.render({
       region: visitor?.region,
     });
   },

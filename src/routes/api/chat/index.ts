@@ -1,4 +1,5 @@
 import type { Handlers } from "$fresh/server.ts";
+import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { ask } from "../../../utils/openai/assistant.ts";
 import type {
   Message,
@@ -6,12 +7,15 @@ import type {
 } from "../../../utils/openai/schemas.ts";
 
 export const handler: Handlers<TextContentBlock | null> = {
-  async GET(req, ctx): Promise<Response> {
+  async GET(
+    req: Request,
+    ctx: FreshContextHelper<TextContentBlock | null>,
+  ): Promise<Response> {
     const url = new URL(req.url);
     const message = url.searchParams.get("q");
     const thread_id = url.searchParams.get("thread");
     if (message === null || thread_id === null) {
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
 
     const response = ask(message, thread_id);
