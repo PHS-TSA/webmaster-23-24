@@ -174,10 +174,13 @@ export default function Home(): JSX.Element {
           cols="md:col-start-2 md:col-end-5"
         >
           Recently, the government passed the Public Land Renewable Energy
-          Development Act of 2023, which gives land grants to companies creating
-          green energy. This is similar to what happened with railroad grants in
-          the 19th century, which caused an economic boom. Make sure not to miss
-          out on the great opportunities that this offers consumers!
+          Development Act of 2023, which gives land grants to companies in the
+          green energy field. This is similar to what happened with railroad
+          grants in the 19th century, which caused an economic boom.
+          Additionally, the Biden-Harris administration passed The Inflation
+          Reduction Act of 2022. This bill provides tax deductions for green
+          renovations. Make sure not to miss out on the great opportunities that
+          these bills offer consumers!
         </Card>
       </div>
     </>
