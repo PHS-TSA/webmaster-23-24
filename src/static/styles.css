@@ -127,10 +127,8 @@
   /* General hero styling. */
   .hero {
     @apply absolute inset-0 overflow-hidden;
-
-    & > img {
+    > img {
       @apply absolute -z-40 size-full origin-center scale-125 object-cover;
-
       animation: image-down linear both;
       animation-timeline: --page-scroll;
       animation-range: 0 100svh;
@@ -138,25 +136,8 @@
   }
 
   .carousel {
-    & > img {
-      @apply opacity-0;
-
+    > img {
       animation: animate-fade 20s infinite;
-    }
-
-    & > :nth-child(1) {
-      animation-delay: 0s;
-    }
-
-    & > :nth-child(2) {
-      animation-delay: 5s;
-    }
-
-    & > :nth-child(3) {
-      animation-delay: 10s;
-    }
-    & > :nth-child(4) {
-      animation-delay: 15s;
     }
   }
 
@@ -164,6 +145,28 @@
     animation: image-down linear both, animate-fade 20s infinite;
     animation-timeline: --page-scroll, auto;
     animation-range: 0 100svh, normal;
+  }
+
+  .carousel {
+    > img {
+      @apply opacity-0;
+
+      &:nth-child(1) {
+        animation-delay: 0s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 5s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: 10s;
+      }
+
+      &:nth-child(4) {
+        animation-delay: 15s;
+      }
+    }
   }
 
   @keyframes animate-fade {
