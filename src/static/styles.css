@@ -71,26 +71,32 @@
     }
   }
 
-  /* Header shadow (Slightly based on <https://scroll-driven-animations.style/demos/shrinking-header-shadow/css/>.) */
-  @keyframes add-shadow {
-    to {
-      @apply py-0 shadow-2xl;
-    }
-  }
-
+  /*
+   * Header shadow slightly based on <https://scroll-driven-animations.style/demos/shrinking-header-shadow/css/>.
+   * Scroll progress based on <https://scroll-driven-animations.style/demos/progress-bar/css/>.
+   */
   .animate-scroll-shadow {
     animation: add-shadow linear both;
     animation-timeline: --page-scroll;
     animation-range: 0 150px;
   }
 
-  /* Based on <https://scroll-driven-animations.style/demos/progress-bar/css/>. */
-  @keyframes grow-progress {
-    from {
-      transform: scaleX(0);
-    }
+  .progress {
+    animation: move-progress linear both, grow-progress auto linear;
+    animation-timeline: --page-scroll, --page-scroll;
+    animation-range: 0 150px, 0% 100%;
+    transform-origin: 0 50%;
+  }
+
+  .animate-anchor-gap {
+    animation: move-panel linear both;
+    animation-timeline: --page-scroll;
+    animation-range: 0 150px;
+  }
+
+  @keyframes add-shadow {
     to {
-      transform: scaleX(1);
+      @apply py-0 shadow-2xl;
     }
   }
 
@@ -109,17 +115,13 @@
     }
   }
 
-  .animate-anchor-gap {
-    animation: move-panel linear both;
-    animation-timeline: --page-scroll;
-    animation-range: 0 150px;
-  }
-
-  .progress {
-    animation: move-progress linear both, grow-progress auto linear;
-    animation-timeline: --page-scroll, --page-scroll;
-    animation-range: 0 150px, 0% 100%;
-    transform-origin: 0 50%;
+  @keyframes grow-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
   }
 
   /* General hero styling. */
@@ -135,7 +137,6 @@
     }
   }
 
-  /* Homepage carousel. */
   .carousel {
     & > img {
       @apply opacity-0;
@@ -156,6 +157,12 @@
     & > :nth-child(3) {
       animation-delay: 10s;
     }
+  }
+
+  .carousel.hero > * {
+    animation: image-down linear both, animate-fade 20s infinite;
+    animation-timeline: --page-scroll, auto;
+    animation-range: 0 100svh, normal;
   }
 
   @keyframes animate-fade {
@@ -180,16 +187,14 @@
       @apply left-0 top-3/5;
     }
   }
-
-  .carousel.hero > * {
-    animation: image-down linear both, animate-fade 20s infinite;
-    animation-timeline: --page-scroll, auto;
-    animation-range: 0 100svh, normal;
-  }
 }
 
 @layer utilities {
   /* Look at me! I wrote an animation all by myself! 🤣 */
+  .appear-10\% {
+    animation: show-button auto linear;
+    animation-timeline: --page-scroll;
+  }
 
   @keyframes show-button {
     0%,
@@ -200,11 +205,6 @@
     100% {
       @apply opacity-100;
     }
-  }
-
-  .appear-10\% {
-    animation: show-button auto linear;
-    animation-timeline: --page-scroll;
   }
 
   /* Footer styles. */
