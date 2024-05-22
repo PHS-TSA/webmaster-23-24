@@ -3,10 +3,10 @@ import type { RouteConfig } from "$fresh/server.ts";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import type { ComponentChildren } from "preact";
+import { Carousel } from "../components/Carousel.tsx";
 import { Cover, type HeroProps } from "../components/Cover.tsx";
 import { Logo } from "../components/Logo.tsx";
 import { Meta } from "../components/Meta.tsx";
-import { ScrollDown } from "../islands/ScrollDown.tsx";
 import { siteName } from "../site.ts";
 import { useCsp } from "../utils/csp.ts";
 
@@ -70,19 +70,16 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
 
 function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
-    <div class="relative flex h-[65svh] flex-col px-4 pt-2 sm:pt-3 md:h-[75svh] md:pt-4 lg:h-svh lg:pt-24">
-      <div class="carousel hero">
-        <img src={asset("/images/solar-environment.avif")} alt="" />
-        <img src={asset("/images/geothermal-worth-it.avif")} alt="" />
-        <img src={asset("/images/other-wind.avif")} alt="" />
-      </div>
-      <div class="relative z-10 flex items-center justify-center">
-        {children}
-      </div>
-      <div class="absolute bottom-4 sm:bottom-1 md:bottom-14 lg:bottom-32 left-1/2 -translate-x-1/2">
-        <ScrollDown />
-      </div>
-    </div>
+    <Carousel
+      heros={[
+        "/images/solar-environment.avif",
+        "/images/geothermal-worth-it.avif",
+        "/images/other-wind.avif",
+      ]}
+      scrollDown={true}
+    >
+      {children}
+    </Carousel>
   );
 }
 
