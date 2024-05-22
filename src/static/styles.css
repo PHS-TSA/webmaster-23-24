@@ -84,10 +84,13 @@
   }
 
   .progress {
+    display: none;
+
     @supports (animation-timeline: --page-scroll, --page-scroll) {
       animation: move-progress linear both, grow-progress auto linear;
       animation-range: 0 150px, 0% 100%;
       transform-origin: 0 50%;
+      display: block;
     }
   }
 
