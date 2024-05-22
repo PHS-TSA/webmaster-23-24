@@ -142,8 +142,6 @@
       @apply opacity-0;
 
       animation: animate-fade 20s infinite;
-      animation-timeline: auto;
-      animation-range: normal;
     }
 
     & > :nth-child(1) {
