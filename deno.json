@@ -111,7 +111,10 @@
   "nodeModulesDir": true,
   "lint": {
     "rules": {
-      "tags": ["fresh", "recommended"],
+      "tags": [
+        "fresh",
+        "recommended"
+      ],
       "include": [
         "ban-untagged-todo",
         "explicit-function-return-type",
@@ -126,5 +129,17 @@
       ]
     }
   },
-  "exclude": ["**/_fresh/*", "**/*.gen.ts", "src/content/"]
+  "exclude": [
+    "**/_fresh/*",
+    "**/*.gen.ts",
+    "src/content/"
+  ],
+  "deploy": {
+    "project": "b28334c7-f98b-42e1-aa61-15af53a0ffc0",
+    "exclude": [
+      "**/node_modules"
+    ],
+    "include": [],
+    "entrypoint": "src/main.ts"
+  }
 }
