@@ -1,7 +1,7 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Field, Input, Label } from "@headlessui/react";
 import type { JSX } from "preact";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 export interface InputFieldProps {
   readonly name: string;

@@ -7,7 +7,7 @@ import {
   blueButtonStyles,
   floatingButtonStyles,
 } from "../components/styles.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 function scrollToTop(): void {
   globalThis.scrollTo({ top: 0 });

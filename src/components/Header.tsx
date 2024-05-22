@@ -9,7 +9,7 @@ import {
   extraMenus,
   menus,
 } from "../utils/site-organization.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 import { LinkMenu } from "./HeaderMenu.server.tsx";
 import { Logo } from "./Logo.tsx";
 import { prettyFocus } from "./styles.ts";

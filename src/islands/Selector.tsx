@@ -11,7 +11,7 @@ import {
 import { useSignal } from "@preact/signals";
 import type { ComponentChildren, JSX } from "preact";
 import { IconCheck, IconChevronDown } from "../components/icons.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {

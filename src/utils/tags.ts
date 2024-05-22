@@ -12,3 +12,10 @@ export function tw(
 ): string {
   return String.raw({ raw: strings }, ...values);
 }
+
+export function css(
+  strings: TemplateStringsArray,
+  ...values: readonly unknown[]
+): string {
+  return String.raw({ raw: strings }, ...values);
+}

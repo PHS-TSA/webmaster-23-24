@@ -3,7 +3,7 @@ import { PopoverGroup } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import type { ComponentChildren } from "preact";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 const listStyles = tw`flex flex-shrink flex-row flex-wrap items-center gap-6`;
 

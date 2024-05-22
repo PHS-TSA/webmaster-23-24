@@ -10,7 +10,7 @@ import type { JSX } from "preact";
 import { IconChevronDown } from "../components/icons.ts";
 import { prettyFocus } from "../components/styles.ts";
 import type { Menu } from "../utils/site-organization.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 /**
  * Make the text style for the menu.

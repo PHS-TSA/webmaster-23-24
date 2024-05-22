@@ -29,7 +29,7 @@ import { getThreadId } from "../sdk/chat/thread.ts";
 import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 export function Chatbot(): JSX.Element {
   const icon = <IconMessageChatbot class="size-8" />;

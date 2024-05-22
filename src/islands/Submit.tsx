@@ -1,7 +1,7 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Button } from "@headlessui/react";
 import type { ComponentChildren, JSX } from "preact";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 export interface SubmitProps {
   readonly children: ComponentChildren;

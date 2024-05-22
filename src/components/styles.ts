@@ -1,4 +1,4 @@
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 /**
  * A nice round button.
