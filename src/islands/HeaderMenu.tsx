@@ -115,7 +115,7 @@ export function HeaderMenu({
                   <a
                     href={`${url}${link.href}`}
                     class={clsx(
-                      "block overflow-y-hidden text-balance rounded px-3 hover:bg-slate-950/5 hover:dark:bg-slate-50/5",
+                      "block overflow-y-hidden text-balance rounded px-3 hover:bg-slate-950/5 dark:hover:bg-slate-50/5",
                       makeTextStyle(false),
                     )}
                   >
