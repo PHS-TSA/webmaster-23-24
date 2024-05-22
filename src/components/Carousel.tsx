@@ -52,6 +52,7 @@ export function Carousel({
     .carousel.hero > img {
       @supports(animation-timeline: --page-scroll, auto) {
         animation: image-down linear both, animate-fade ${totalAnimationTime}s infinite;
+        animation-timeline: --page-scroll, auto;
         animation-range: 0 100svh, normal;
       }
     }
