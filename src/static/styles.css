@@ -27,7 +27,8 @@
 
 @layer base {
   html {
-    scroll-timeline: --page-scroll block;
+    @supports (scroll-timeline: --page-scroll block) {
+    }
   }
 
   /* This fixes a layout bug in the chatbot. */
@@ -76,22 +77,25 @@
    * Scroll progress based on <https://scroll-driven-animations.style/demos/progress-bar/css/>.
    */
   .animate-scroll-shadow {
-    animation: add-shadow linear both;
-    animation-timeline: --page-scroll;
-    animation-range: 0 150px;
+    @supports (animation-timeline: --page-scroll) {
+      animation: add-shadow linear both;
+      animation-range: 0 150px;
+    }
   }
 
   .progress {
-    animation: move-progress linear both, grow-progress auto linear;
-    animation-timeline: --page-scroll, --page-scroll;
-    animation-range: 0 150px, 0% 100%;
-    transform-origin: 0 50%;
+    @supports (animation-timeline: --page-scroll, --page-scroll) {
+      animation: move-progress linear both, grow-progress auto linear;
+      animation-range: 0 150px, 0% 100%;
+      transform-origin: 0 50%;
+    }
   }
 
   .animate-anchor-gap {
-    animation: move-panel linear both;
-    animation-timeline: --page-scroll;
-    animation-range: 0 150px;
+    @supports (animation-timeline: --page-scroll) {
+      animation: move-panel linear both;
+      animation-range: 0 150px;
+    }
   }
 
   @keyframes add-shadow {
@@ -129,9 +133,10 @@
     @apply absolute inset-0 overflow-hidden;
     > img {
       @apply absolute -z-40 size-full origin-center scale-125 object-cover;
-      animation: image-down linear both;
-      animation-timeline: --page-scroll;
-      animation-range: 0 100svh;
+      @supports (animation-timeline: --page-scroll) {
+        animation: image-down linear both;
+        animation-range: 0 100svh;
+      }
     }
   }
 
@@ -148,8 +153,9 @@
 @layer utilities {
   /* Look at me! I wrote an animation all by myself! 🤣 */
   .appear-10\% {
-    animation: show-button auto linear;
-    animation-timeline: --page-scroll;
+    @supports (animation-timeline: --page-scroll) {
+      animation: show-button auto linear;
+    }
   }
 
   @keyframes show-button {
