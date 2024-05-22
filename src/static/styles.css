@@ -157,7 +157,7 @@
     }
   }
 
-  .carousel.hero > * {
+  .carousel.hero > img {
     animation: image-down linear both, animate-fade 20s infinite;
     animation-timeline: --page-scroll, auto;
     animation-range: 0 100svh, normal;
