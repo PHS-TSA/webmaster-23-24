@@ -281,7 +281,7 @@ function categoriesFile(files: VFile[]): string {
     return {
       slug: stem === category ? undefined : stem,
       data: {
-        heroImage: `images/${category}-${stem}.avif`,
+        heroImage: `/images/${category}-${stem}.avif`,
         ...file.data.matter,
       },
     };

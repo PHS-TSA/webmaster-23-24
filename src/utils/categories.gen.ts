@@ -8,7 +8,7 @@ export const solutions = [
       "description": "Solar power is a fascinating technology that converts energy from the sun into electricity",
       "category": "solar",
       "sectionHeader": "What Is It?",
-      "heroImage": "images/solar-what.avif",
+      "heroImage": "/images/solar-what.avif",
       "icon": "solar-panel-2"
     }
   },
@@ -19,7 +19,7 @@ export const solutions = [
       "description": "The best thing about solar power is that it has nearly zero negative effects on the environment",
       "category": "solar",
       "sectionHeader": "How Does It Impact the Environment?",
-      "heroImage": "images/solar-environment.avif",
+      "heroImage": "/images/solar-environment.avif",
       "icon": "sun-electricity"
     }
   },
@@ -30,7 +30,7 @@ export const solutions = [
       "description": "The cost of solar panels can vary depending on your state and region",
       "category": "solar",
       "sectionHeader": "How Much Does It Cost?",
-      "heroImage": "images/solar-cost.avif",
+      "heroImage": "/images/solar-cost.avif",
       "icon": "solar-panel"
     }
   },
@@ -41,7 +41,7 @@ export const solutions = [
       "description": "Overall, solar panels are a worthwhile investment",
       "category": "solar",
       "sectionHeader": "Is It Worth It?",
-      "heroImage": "images/solar-worth-it.avif",
+      "heroImage": "/images/solar-worth-it.avif",
       "icon": "solar-electricity"
     }
   },
@@ -52,7 +52,7 @@ export const solutions = [
       "description": "Geothermal Energy is an undertapped energy resource",
       "category": "geothermal",
       "sectionHeader": "What Is It?",
-      "heroImage": "images/geothermal-what.avif",
+      "heroImage": "/images/geothermal-what.avif",
       "icon": "steam"
     }
   },
@@ -63,7 +63,7 @@ export const solutions = [
       "description": "When it comes to carbon emissions, geothermal energy is one of the most efficient options",
       "category": "geothermal",
       "sectionHeader": "How Does It Affect the Environment?",
-      "heroImage": "images/geothermal-environment.avif",
+      "heroImage": "/images/geothermal-environment.avif",
       "icon": "steam"
     }
   },
@@ -74,7 +74,7 @@ export const solutions = [
       "description": "The cost to install a geothermal system can range anywhere from $10,000 to $25,000",
       "category": "geothermal",
       "sectionHeader": "How Much Does It Cost?",
-      "heroImage": "images/geothermal-cost.avif",
+      "heroImage": "/images/geothermal-cost.avif",
       "icon": "steam"
     }
   },
@@ -85,7 +85,7 @@ export const solutions = [
       "description": "Deciding to invest in a geothermal energy solution can be tricky",
       "category": "geothermal",
       "sectionHeader": "Is It Worth It?",
-      "heroImage": "images/geothermal-worth-it.avif",
+      "heroImage": "/images/geothermal-worth-it.avif",
       "icon": "steam"
     }
   },
@@ -96,7 +96,7 @@ export const solutions = [
       "description": "Recycling is the process of taking inorganic waste materials and turning them into new products",
       "category": "recycling",
       "sectionHeader": "What Is it?",
-      "heroImage": "images/recycling-what.avif",
+      "heroImage": "/images/recycling-what.avif",
       "icon": "recycle"
     }
   },
@@ -107,7 +107,7 @@ export const solutions = [
       "description": "The process of recycling reduces pollution and emissions",
       "category": "recycling",
       "sectionHeader": "How Does It Affect the Environment?",
-      "heroImage": "images/recycling-environment.avif",
+      "heroImage": "/images/recycling-environment.avif",
       "icon": "recycle"
     }
   },
@@ -118,7 +118,7 @@ export const solutions = [
       "description": "The cost of recycling on municipal governments can vary anywhere from $100 to $300 per ton",
       "category": "recycling",
       "sectionHeader": "How Much Does It Cost?",
-      "heroImage": "images/recycling-cost.avif",
+      "heroImage": "/images/recycling-cost.avif",
       "icon": "recycle"
     }
   },
@@ -129,7 +129,7 @@ export const solutions = [
       "description": "The process of recycling prevents waste materials from ending up in landfills",
       "category": "recycling",
       "sectionHeader": "Is It Worth It?",
-      "heroImage": "images/recycling-worth-it.avif",
+      "heroImage": "/images/recycling-worth-it.avif",
       "icon": "recycle"
     }
   },
@@ -140,7 +140,7 @@ export const solutions = [
       "description": "Don’t waste natural gas",
       "category": "other",
       "sectionHeader": "Electric Appliances",
-      "heroImage": "images/other-appliances.avif",
+      "heroImage": "/images/other-appliances.avif",
       "icon": "cooker"
     }
   },
@@ -151,7 +151,7 @@ export const solutions = [
       "description": "Online billing saves paper and time",
       "category": "other",
       "sectionHeader": "Online Billing",
-      "heroImage": "images/other-billing.avif",
+      "heroImage": "/images/other-billing.avif",
       "icon": "pig-money"
     }
   },
@@ -162,7 +162,7 @@ export const solutions = [
       "description": "Biomass is an efficient energy source",
       "category": "other",
       "sectionHeader": "Biomass",
-      "heroImage": "images/other-biomass.avif",
+      "heroImage": "/images/other-biomass.avif",
       "icon": "wood"
     }
   },
@@ -173,7 +173,7 @@ export const solutions = [
       "description": "Transportation is one of the largest sources of carbon emissions in the US",
       "category": "other",
       "sectionHeader": "Electric Vehicles",
-      "heroImage": "images/other-electric-cars.avif",
+      "heroImage": "/images/other-electric-cars.avif",
       "icon": "car"
     }
   },
@@ -184,7 +184,7 @@ export const solutions = [
       "description": "The power of water",
       "category": "other",
       "sectionHeader": "Hydroelectric Power",
-      "heroImage": "images/other-hydroelectric.avif",
+      "heroImage": "/images/other-hydroelectric.avif",
       "icon": "waves-electricity"
     }
   },
@@ -195,7 +195,7 @@ export const solutions = [
       "description": "LED lights use 90% less energy than traditional light bulbs",
       "category": "other",
       "sectionHeader": "LED Lights",
-      "heroImage": "images/other-led-lights.avif",
+      "heroImage": "/images/other-led-lights.avif",
       "icon": "bulb-filled"
     }
   },
@@ -206,7 +206,7 @@ export const solutions = [
       "description": "Fission, fusion—what is up with nuclear power?",
       "category": "other",
       "sectionHeader": "Nuclear Power",
-      "heroImage": "images/other-nuclear-power.avif",
+      "heroImage": "/images/other-nuclear-power.avif",
       "icon": "atom-2"
     }
   },
@@ -217,7 +217,7 @@ export const solutions = [
       "description": "Saving both money and effort, solar-powered lawn lights are a great investment for your green lawn!",
       "category": "other",
       "sectionHeader": "Solar Powered Lights",
-      "heroImage": "images/other-solar-lawn-lights.avif",
+      "heroImage": "/images/other-solar-lawn-lights.avif",
       "icon": "bulb"
     }
   },
@@ -228,7 +228,7 @@ export const solutions = [
       "description": "Many electric companies now offer programs to exclusively buy solar",
       "category": "other",
       "sectionHeader": "Utility Companies’ Green Programs",
-      "heroImage": "images/other-utilities.avif",
+      "heroImage": "/images/other-utilities.avif",
       "icon": "adjustments-bolt"
     }
   },
@@ -239,7 +239,7 @@ export const solutions = [
       "description": "Wind is good for more than just cooling you off on a hot summer day",
       "category": "other",
       "sectionHeader": "Wind Power",
-      "heroImage": "images/other-wind.avif",
+      "heroImage": "/images/other-wind.avif",
       "icon": "wind-electricity"
     }
   }
