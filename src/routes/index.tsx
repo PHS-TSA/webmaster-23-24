@@ -73,6 +73,7 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
     <Carousel
       heros={[
         "/images/solar-environment.avif",
+        "/images/other-electric-cars.avif",
         "/images/geothermal-worth-it.avif",
         "/images/other-wind.avif",
       ]}
