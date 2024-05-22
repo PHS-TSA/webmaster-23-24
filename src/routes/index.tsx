@@ -72,7 +72,6 @@ function CarouselHero({ children }: HeroProps): JSX.Element {
   return (
     <div class="relative flex h-[65svh] flex-col px-4 pt-2 sm:pt-3 md:h-[75svh] md:pt-4 lg:h-svh lg:pt-24">
       <div class="carousel hero">
-        {/* TODO(lishaduck): Call to action */}
         <img src={asset("/images/solar-environment.avif")} alt="" />
         <img src={asset("/images/geothermal-worth-it.avif")} alt="" />
         <img src={asset("/images/other-wind.avif")} alt="" />
@@ -111,78 +110,95 @@ export default function Home(): JSX.Element {
         </p>
       </Cover>
 
-      <div class="gap-y-10 bg-slate-200 px-5 py-5 sm:px-10 sm:py-10 lg:px-20 lg:py-20 grid md:grid-cols-4 dark:bg-slate-800">
-        <Card
-          media={{
-            src: "/images/intro.avif",
-            alt: "A wind farm",
-            side: "right",
-            width: 656,
-            height: 300,
-          }}
-          cols="md:col-start-1 md:col-end-4"
-        >
-          Over the past 50 years, people have truly recognized global warming
-          and the threat it poses. Every year, thousands of scientists spend
-          countless hours trying to figure out how to reduce the effects of
-          climate change. The most promising solution by far is green energy. By
-          swapping over to green energy, we can cut the problem off at the root.
-          First though, what exactly is green energy?
-        </Card>
-        <Card
-          media={{
-            src: "/images/impact.avif",
-            alt: "A categorization of non-renewable, renewable and green energy sources",
-            side: "left",
-            width: 768,
-            height: 460,
-          }}
-          cols="md:col-start-2 md:col-end-5"
-        >
-          According to the Environmental Protection Agency, or EPA, "green power
-          is a subset of renewable energy. It represents those renewable energy
-          resources and technologies that provide the greatest environmental
-          benefit." Many people don't realize that this "environmental benefit"
-          doesn't just impact far-off tropics, it also impacts your local
-          environment. Conventional power sources such as oil often ravage
-          environments when events like oil spills happen. In contrast, green
-          energy doesn't have this risk.
-        </Card>
-        <Card
-          media={{
-            src: "/images/emissions.webp",
-            alt: "A comparison of carbon emissions between various renewable and non-renewable energy sources",
-            side: "right",
-            width: 1841,
-            height: 1105,
-          }}
-          cols="md:col-start-1 md:col-end-4"
-        >
-          How can you help invest in green energy and reduce carbon emissions?
-          It's actually pretty simple. You can buy solar panels for your house,
-          purchase a geothermal heating system, or even just recycle. There are
-          so many ways to save money and save the environment at the same time!
-        </Card>
-        <Card
-          media={{
-            src: "/images/other-utilities.avif",
-            alt: "Man putting up solar panels",
-            side: "left",
-            width: 500,
-            height: 375,
-          }}
-          cols="md:col-start-2 md:col-end-5"
-        >
-          Recently, the government passed the Public Land Renewable Energy
-          Development Act of 2023, which gives land grants to companies in the
-          green energy field. This is similar to what happened with railroad
-          grants in the 19th century, which caused an economic boom.
-          Additionally, the Biden-Harris administration passed The Inflation
-          Reduction Act of 2022. This bill provides tax deductions for green
-          renovations. Make sure not to miss out on the great opportunities that
-          these bills offer consumers!
-        </Card>
+      <div class="bg-slate-200 p-5 sm:p-10 lg:p-20 dark:bg-slate-800">
+        <div class="grid gap-y-10 md:grid-cols-4">
+          <Card
+            media={{
+              src: "/images/intro.avif",
+              alt: "A wind farm",
+              side: "right",
+              width: 656,
+              height: 300,
+            }}
+            cols="md:col-start-1 md:col-end-4"
+          >
+            Over the past 50 years, people have truly recognized global warming
+            and the threat it poses. Every year, thousands of scientists spend
+            countless hours trying to figure out how to reduce the effects of
+            climate change. The most promising solution by far is green energy.
+            By swapping over to green energy, we can cut the problem off at the
+            root. First though, what exactly is green energy?
+          </Card>
+          <Card
+            media={{
+              src: "/images/impact.avif",
+              alt: "A categorization of non-renewable, renewable and green energy sources",
+              side: "left",
+              width: 768,
+              height: 460,
+            }}
+            cols="md:col-start-2 md:col-end-5"
+          >
+            According to the Environmental Protection Agency, or EPA, "green
+            power is a subset of renewable energy. It represents those renewable
+            energy resources and technologies that provide the greatest
+            environmental benefit." Many people don't realize that this
+            "environmental benefit" doesn't just impact far-off tropics, it also
+            impacts your local environment. Conventional power sources such as
+            oil often ravage environments when events like oil spills happen. In
+            contrast, green energy doesn't have this risk.
+          </Card>
+          <Card
+            media={{
+              src: "/images/emissions.webp",
+              alt: "A comparison of carbon emissions between various renewable and non-renewable energy sources",
+              side: "right",
+              width: 1841,
+              height: 1105,
+            }}
+            cols="md:col-start-1 md:col-end-4"
+          >
+            How can you help invest in green energy and reduce carbon emissions?
+            It's actually pretty simple. You can buy solar panels for your
+            house, purchase a geothermal heating system, or even just recycle.
+            There are so many ways to save money and save the environment at the
+            same time!
+          </Card>
+          <Card
+            media={{
+              src: "/images/other-utilities.avif",
+              alt: "Man putting up solar panels",
+              side: "left",
+              width: 500,
+              height: 375,
+            }}
+            cols="md:col-start-2 md:col-end-5"
+          >
+            Recently, the government passed the Public Land Renewable Energy
+            Development Act of 2023, which gives land grants to companies in the
+            green energy field. This is similar to what happened with railroad
+            grants in the 19th century, which caused an economic boom.
+            Additionally, the Biden-Harris administration passed The Inflation
+            Reduction Act of 2022. This bill provides tax deductions for green
+            renovations. Make sure not to miss out on the great opportunities
+            that these bills offer consumers!
+          </Card>
+        </div>
+        <div class="p-16">
+          <CallToAction />
+        </div>
       </div>
     </>
+  );
+}
+
+function CallToAction(): JSX.Element {
+  return (
+    <a
+      class="w-fit rounded bg-slate-400 p-4 text-slate-900 shadow-sm hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-100 dark:hover:bg-slate-700"
+      href="/green/"
+    >
+      Convinced? 5 Easy Ways to Get Started Today!
+    </a>
   );
 }
