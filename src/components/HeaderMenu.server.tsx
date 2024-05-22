@@ -1,10 +1,5 @@
 import type { JSX } from "preact";
-import {
-  type WithActive,
-  makeBorderStyle,
-  makeTextStyle,
-  prettyFocus,
-} from "../islands/HeaderMenu.tsx";
+import { type WithActive, menuButtonStyles } from "../islands/HeaderMenu.tsx";
 import type { BasicMenu } from "../utils/site-organization.ts";
 
 /**
@@ -23,12 +18,7 @@ export function LinkMenu({
   title,
 }: BasicMenu & WithActive): JSX.Element {
   return (
-    <a
-      href={url}
-      class={`h-8 ${prettyFocus} ${makeTextStyle(active)} ${makeBorderStyle(
-        active,
-      )}`}
-    >
+    <a href={url} class={menuButtonStyles(active)}>
       {title}
     </a>
   );

@@ -1,8 +1,10 @@
 import type { PageProps } from "$fresh/server.ts";
+import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
 import { Chatbot } from "../islands/Chatbot.tsx";
+import { ScrollToTop } from "../islands/ScrollToTop.tsx";
 
 /**
  * Render the layout for all pages.
@@ -13,11 +15,18 @@ import { Chatbot } from "../islands/Chatbot.tsx";
  * @returns The rendered layout.
  */
 export default function Layout({ Component, url }: PageProps): JSX.Element {
+  const buttonPosStyles = "z-50 fixed right-3 sm:right-10";
+
   return (
     <div class="flex min-h-screen flex-col place-content-center">
       <Header active={url.pathname} />
       <Component />
-      <Chatbot class="fixed right-3 bottom-10 sm:right-10" />
+      <div class={clsx(buttonPosStyles, "bottom-28")}>
+        <ScrollToTop />
+      </div>
+      <div class={clsx(buttonPosStyles, "bottom-10")}>
+        <Chatbot />
+      </div>
       <Footer class="mt-auto" />
     </div>
   );

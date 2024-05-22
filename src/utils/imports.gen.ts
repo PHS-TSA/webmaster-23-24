@@ -12,6 +12,7 @@
 (async () => await import("../content/recycling/worth-it.js"));
 (async () => await import("../content/other/appliances.js"));
 (async () => await import("../content/other/billing.js"));
+(async () => await import("../content/other/biomass.js"));
 (async () => await import("../content/other/electric-cars.js"));
 (async () => await import("../content/other/hydroelectric.js"));
 (async () => await import("../content/other/led-lights.js"));
@@ -19,3 +20,19 @@
 (async () => await import("../content/other/solar-lawn-lights.js"));
 (async () => await import("../content/other/utilities.js"));
 (async () => await import("../content/other/wind.js"));
+(async () => await import("$tabler_icons/solar-panel-2.tsx"));
+(async () => await import("$tabler_icons/sun-electricity.tsx"));
+(async () => await import("$tabler_icons/solar-panel.tsx"));
+(async () => await import("$tabler_icons/solar-electricity.tsx"));
+(async () => await import("$tabler_icons/steam.tsx"));
+(async () => await import("$tabler_icons/recycle.tsx"));
+(async () => await import("$tabler_icons/cooker.tsx"));
+(async () => await import("$tabler_icons/pig-money.tsx"));
+(async () => await import("$tabler_icons/wood.tsx"));
+(async () => await import("$tabler_icons/car.tsx"));
+(async () => await import("$tabler_icons/waves-electricity.tsx"));
+(async () => await import("$tabler_icons/bulb-filled.tsx"));
+(async () => await import("$tabler_icons/atom-2.tsx"));
+(async () => await import("$tabler_icons/bulb.tsx"));
+(async () => await import("$tabler_icons/adjustments-bolt.tsx"));
+(async () => await import("$tabler_icons/wind-electricity.tsx"));

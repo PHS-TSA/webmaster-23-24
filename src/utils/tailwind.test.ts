@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { tw } from "./tailwind.ts";
+import { tw } from "./tags.ts";
 
 /**
  * Tests for the tailwind template tag utility.

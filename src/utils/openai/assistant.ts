@@ -1,7 +1,7 @@
 import { OpenAI } from "openai";
 import type { FileObject, Message, Thread } from "./schemas.ts";
 
-export const client: OpenAI = new OpenAI({
+const client: OpenAI = new OpenAI({
   baseURL: Deno.env.get("OPENAI_BASE_URL"),
 });
 const ASSISTANT_ID = Deno.env.get("ASSISTANT_ID") ?? "";

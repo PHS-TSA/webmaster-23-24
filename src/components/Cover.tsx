@@ -1,8 +1,8 @@
-import type { JSX, RenderableProps } from "preact";
+import type { ComponentChildren, ComponentType, JSX } from "preact";
 import { Logo } from "./Logo.tsx";
 
 /**
- * Properties for the {@link Cover} component.
+ * Properties for the {@linkcode Cover} component.
  */
 export interface CoverProps {
   /**
@@ -13,7 +13,14 @@ export interface CoverProps {
   /**
    * The icon to render as the attention grabber.
    */
-  readonly icon?: JSX.Element;
+  readonly icon?: ComponentChildren;
+
+  /**
+   * The additional content to render.
+   */
+  readonly children?: ComponentChildren;
+
+  readonly Hero?: ComponentType<HeroProps>;
 }
 
 /**
@@ -30,15 +37,30 @@ export interface CoverProps {
 export function Cover({
   title,
   children,
-  icon = <Logo />,
-}: RenderableProps<CoverProps>): JSX.Element {
+  icon = <Logo class="size-32" />,
+  Hero = Hulk,
+}: CoverProps): JSX.Element {
   return (
-    <div class="flex flex-row justify-center bg-green-500 px-4 py-8 dark:bg-green-700">
+    <Hero>
       <div class="flex max-w-screen-sm flex-col items-center justify-center gap-y-4 text-balance text-center lg:max-w-screen-md">
         {icon}
-        <h1 class="text-4xl font-bold">{title}</h1>
-        {children}
+        <div class="inset-0 rounded-md p-4 backdrop-blur-sm bg-slate-50/55 dark:bg-slate-950/55">
+          <h1 class="text-pretty text-4xl font-bold">{title}</h1>
+          {children}
+        </div>
       </div>
+    </Hero>
+  );
+}
+
+export interface HeroProps {
+  readonly children?: ComponentChildren;
+}
+
+function Hulk({ children }: HeroProps): JSX.Element {
+  return (
+    <div class="flex flex-row justify-center bg-green-500 px-4 py-8 dark:bg-green-700">
+      {children}
     </div>
   );
 }

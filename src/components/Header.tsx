@@ -1,4 +1,6 @@
+import { clsx } from "clsx";
 import type { JSX } from "preact";
+import { HeaderGroup } from "../islands/HeaderGroup.tsx";
 import { HeaderMenu } from "../islands/HeaderMenu.tsx";
 import { siteName } from "../site.ts";
 import {
@@ -7,11 +9,13 @@ import {
   extraMenus,
   menus,
 } from "../utils/site-organization.ts";
+import { tw } from "../utils/tags.ts";
 import { LinkMenu } from "./HeaderMenu.server.tsx";
 import { Logo } from "./Logo.tsx";
+import { prettyFocus } from "./styles.ts";
 
 /**
- * Properties for the {@link Header} component.
+ * Properties for the {@linkcode Header} component.
  */
 export interface HeaderProps {
   /**
@@ -19,6 +23,8 @@ export interface HeaderProps {
    */
   readonly active: string;
 }
+
+const itemStyles = tw`flex h-8 flex-row items-end`;
 
 /**
  * Render a header component, which is used as a header for pages.
@@ -28,26 +34,38 @@ export interface HeaderProps {
  */
 export function Header({ active }: HeaderProps): JSX.Element {
   return (
-    <header class="max-w-screen-xlg flex w-full flex-col flex-wrap gap-4 bg-slate-50 px-8 py-4 sm:flex-row dark:bg-slate-950">
-      <div class="flex-shrink-0 flex-grow">
-        <HomeLink />
-      </div>
-      <ul class="flex flex-shrink flex-row flex-wrap items-center gap-6">
-        {menus.map((menu: Menu) => (
-          <li key={menu.title} class="flex h-8 flex-row items-end">
-            <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
-          </li>
-        ))}
-        {extraMenus.map(
-          ({ title, url }: BasicMenu): JSX.Element => (
-            <li key={url} class="flex h-8 flex-row items-end">
-              <LinkMenu active={active === url} title={title} url={url} />
+    <header class="max-w-screen-xlg sticky top-0 z-30 w-full bg-slate-50/95 px-8 py-4 backdrop-blur-md dark:bg-slate-950/95 animate-scroll-shadow">
+      <div class="flex flex-row flex-wrap lg:justify-between items-center justify-center pb-1">
+        <div class="flex justify-center lg:justify-start w-full lg:w-auto">
+          <HomeLink />
+        </div>
+        <HeaderGroup class="flex justify-center lg:justify-start w-full lg:w-auto">
+          {menus.map((menu: Menu) => (
+            <li key={menu.title} class={itemStyles}>
+              <HeaderMenu {...menu} active={active.startsWith(menu.url)} />
             </li>
-          ),
-        )}
-      </ul>
+          ))}
+          {extraMenus.map(
+            ({ title, url }: BasicMenu): JSX.Element => (
+              <li key={url} class={itemStyles}>
+                <LinkMenu active={active === url} title={title} url={url} />
+              </li>
+            ),
+          )}
+        </HeaderGroup>
+      </div>
+      {/\/(solutions\/.+\/.*|about\/|green\/)$/.test(active) && (
+        <div
+          class="progress relative -left-8 top-[1.125rem] z-40 -m-[0.125rem] h-1 w-screen rounded-ee-sm bg-green-400/90 dark:bg-green-600/90"
+          aria-hidden="true"
+        />
+      )}
     </header>
   );
+}
+
+interface HomeLinkProps {
+  readonly class?: string;
 }
 
 /**
@@ -55,10 +73,14 @@ export function Header({ active }: HeaderProps): JSX.Element {
  *
  * @returns The rendered home link component.
  */
-function HomeLink(): JSX.Element {
+function HomeLink(props: HomeLinkProps): JSX.Element {
   return (
     <a
-      class="flex max-w-fit flex-row items-center text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+      class={clsx(
+        "flex max-w-fit flex-row items-center rounded-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200",
+        prettyFocus,
+        props.class,
+      )}
       href="/"
     >
       <Logo aria-hidden="true" class="size-10" />

@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { render } from "@deno/gfm";
+import { render } from "$gfm";
 import {
   Button,
   Fieldset,
@@ -12,44 +12,41 @@ import {
 } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
-import { set } from "idb-keyval";
 import type { JSX } from "preact";
-import { Fragment } from "preact";
-import { Suspense } from "preact/compat";
+import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
+import {
+  IconMessageChatbot,
+  IconReload,
+  IconSend,
+} from "../components/icons.ts";
+import {
+  blueButtonStyles,
+  floatingButtonStyles,
+} from "../components/styles.ts";
 import { chat } from "../sdk/chat/index.ts";
-import { getThread } from "../sdk/chat/thread.ts";
-import { IconMessageChatbot } from "../utils/icons.ts";
-import { IconSend } from "../utils/icons.ts";
-import { useIndexedDB } from "../utils/indexeddb.ts";
+import { getThreadId } from "../sdk/chat/thread.ts";
+import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
-interface ChatbotProps {
-  class: string;
-}
+export function Chatbot(): JSX.Element {
+  const icon = <IconMessageChatbot class="size-8" />;
+  const buttonStyles = clsx(floatingButtonStyles, blueButtonStyles);
 
-const chatbotButtonStyles = tw`flex size-14 flex-row items-center justify-center rounded-full bg-blue-400 dark:bg-blue-800 shadow-2xl`;
-
-export function Chatbot(props: ChatbotProps): JSX.Element {
   if (!IS_BROWSER) {
     return (
-      <div class={props.class}>
-        <div className={chatbotButtonStyles}>
-          <IconMessageChatbot class="size-8" />
-        </div>
-      </div>
+      <button type="button" class={buttonStyles}>
+        {icon}
+      </button>
     );
   }
 
   return (
-    <Popover className={props.class}>
-      <PopoverButton
-        className={chatbotButtonStyles}
-        aria-label="Meet our Chatbot!"
-      >
-        <IconMessageChatbot class="size-8" />
+    <Popover>
+      <PopoverButton className={buttonStyles} aria-label="Meet our Chatbot!">
+        {icon}
       </PopoverButton>
       <Transition
         appear={true}
@@ -88,44 +85,81 @@ type Db = DbItem[];
 function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
   const messageValue = useSignal("");
   const isAsking = useSignal(false);
-  const thread = useIndexedDB<string>(
-    "thread",
-    async () => (await getThread())?.id,
-  );
 
-  const messages_ = useIndexedDB<Db>(
+  const thread_ = useIndexedDb("thread", getThreadId);
+  const threadId = useSignal(thread_);
+  useSignalEffect(() => {
+    (async () => {
+      await setIndexedDb("thread", threadId.value);
+    })();
+  });
+
+  const messages_ = useIndexedDb<Db>(
     "messages",
     // deno-lint-ignore require-await
     async () => [],
   );
   const messages = useSignal(messages_ ?? []);
   useSignalEffect(() => {
-    set("messages", messages.value);
+    (async () => {
+      await setIndexedDb("messages", messages.value);
+    })();
   });
+
+  const scrollRef = useRef<HTMLUListElement>(null);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: It depends on it indirectly.
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 9999999 });
+  }, [messages.value]);
 
   return (
     <div
       {...props}
-      class={`dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box ${props.class}`}
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
+      class={clsx(
+        "dark:bg-blue-800 bg-blue-400 w-[90vw] sm:w-80 h-96 rounded-lg p-5 grid grid-flow-row auto-rows-min grid-rows-message-box",
+        props.class,
+      )}
     >
-      <div class="flex flex-col-reverse gap-4 overflow-y-auto">
+      <div class="h-8 text-lg font-mono">
+        <img
+          alt=""
+          title="Powered by OpenAI's GPT-4o!"
+          src="/images/openai.avif"
+          class="inline rounded-full text-center align-middle size-6"
+          height={200}
+          width={200}
+        />{" "}
+        Why Switch?
+        <div
+          class="relative -right-1 -top-2 inline-block size-2 rounded-full bg-green-500 ring-1 ring-slate-50 dark:ring-slate-950"
+          title="GPT-4o is online!"
+        />
+        <Button
+          class="float-end"
+          title="Restart your conversation."
+          onClick={async () => {
+            threadId.value = await getThreadId();
+            messages.value = [];
+          }}
+        >
+          <IconReload />
+        </Button>
+      </div>
+      <ul ref={scrollRef} class="flex flex-col-reverse gap-4 overflow-y-auto">
         {isAsking.value && (
-          <div class={replyStyles}>
+          <li class={replyStyles}>
             <Loading />
-          </div>
-        )}
+          </li>
+        )}{" "}
         {messages.value.map((msg) => (
-          <div
+          <li
             key={`${msg.role}${msg.message}`}
             class={clsx(getReplySide(msg.role), replyStyles)}
             // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
             dangerouslySetInnerHTML={{ __html: render(msg.message) }}
           />
         ))}
-      </div>
+      </ul>
 
       <form
         class="py-2 place-items-center"
@@ -134,8 +168,8 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
 
           e.preventDefault();
 
-          if (thread === undefined) {
-            throw new Error("Why didn't we suspend before now?");
+          if (threadId.value === undefined) {
+            throw new Error("Why didn't we Suspend-se before now?");
           }
 
           const message = messageValue.value;
@@ -147,7 +181,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           isAsking.value = true;
           messages.value = [{ role: "user", message }, ...messages.value];
 
-          const reply = await chat(thread, message);
+          const reply = await chat(threadId.value, message);
 
           if (reply === undefined) {
             // Don't crash when offline.
@@ -155,12 +189,12 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           }
 
           messages.value = await Promise.all(
-            reply.map(async (val: Message): Promise<DbItem> => {
-              return {
+            reply.map(
+              async (val: Message): Promise<DbItem> => ({
                 role: val.role,
                 message: await formatRefs(val),
-              };
-            }),
+              }),
+            ),
           );
 
           isAsking.value = false;
@@ -179,7 +213,7 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           <Button
             className="absolute right-2 p-2"
             type="submit"
-            aria-label="Send"
+            title="Send your message."
           >
             <IconSend class="dark:text-slate-950" />
           </Button>

@@ -1,12 +1,8 @@
 import type { JSX, RenderableProps } from "preact";
-import {
-  IconAlertTriangle,
-  IconFlame,
-  IconInfoCircle,
-} from "../utils/icons.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
+import { IconAlertTriangle, IconFlame, IconInfoCircle } from "./icons.ts";
 
-type AdmonitionType =
+export type AdmonitionType =
   | "note"
   | "warning"
   | "tip"
@@ -15,7 +11,7 @@ type AdmonitionType =
   | "caution";
 
 export interface AdmonitionProps {
-  type?: AdmonitionType;
+  readonly type?: AdmonitionType;
 }
 
 const noteStyles = tw`bg-blue-300 divide-blue-500 border-blue-400 dark:divide-blue-400 dark:border-blue-500 dark:bg-blue-600`;
@@ -55,8 +51,8 @@ function getTitle(type: AdmonitionType): string {
   }
 }
 
-interface AdmonitionIconProps {
-  type: AdmonitionType;
+interface AdmonitionIconProps extends AdmonitionProps {
+  readonly type: AdmonitionType;
 }
 
 function AdmonitionIcon({ type }: AdmonitionIconProps): JSX.Element {

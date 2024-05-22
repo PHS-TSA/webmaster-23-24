@@ -1,15 +1,15 @@
 import { z } from "zod";
 
 export interface StateData {
-  /** Years */
-  payoff: number;
+  /** In years */
+  readonly payoff: number;
 
   /** Per month */
-  savings: number;
-  install: number;
+  readonly savings: number;
+  readonly install: number;
   /** A percentage */
-  rebate: number;
-  emissions: number;
+  readonly rebate: number;
+  readonly emissions: number;
 }
 
 export type State = z.infer<typeof regionSchema>;

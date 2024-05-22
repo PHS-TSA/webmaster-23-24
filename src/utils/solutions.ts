@@ -24,7 +24,7 @@ export const titleList = ["what", "environment", "cost", "worth-it"];
 /**
  * Represent the data for the solution pages.
  */
-const solutionDataSchema = z
+export const solutionDataSchema = z
   .object({
     title: z.string().describe("The title of the solution."),
     description: z
@@ -35,6 +35,13 @@ const solutionDataSchema = z
     sectionHeader: z
       .string()
       .describe("The section header for the category index page."),
+    heroImage: z
+      .string()
+      .refine((value) => /images\/.+.avif$/.test(value))
+      .describe("The image to use for the hero."),
+    icon: z
+      .string()
+      .describe("The url of a tabler icon. Resolves with the import map"),
   })
   .passthrough()
   .readonly()
@@ -43,13 +50,13 @@ const solutionDataSchema = z
 /**
  * Represent a set of solution pages.
  */
-const solutionPageSchema = z
+export const solutionPageSchema = z
   .object({
     slug: z
       .string()
       .optional()
       .describe("The slug of the solution without a trailing slash."),
-    data: solutionDataSchema.describe(solutionDataSchemaDescription),
+    data: solutionDataSchema,
   })
   .strict()
   .readonly()

@@ -3,14 +3,15 @@
  * @module
  */
 
+import { join } from "@std/path";
 import { z } from "zod";
 import { regionSchema } from "./calc/solar.ts";
 import type { ZodTypeUnknown } from "./zod.ts";
 
-type Geo = z.infer<typeof geoSchema>;
+export type Geo = z.infer<typeof geoSchema>;
 type Ip = z.infer<typeof ipSchema>;
 
-const geoSchema = z.object({ region: regionSchema });
+export const geoSchema = z.object({ region: regionSchema });
 const ipSchema = z.object({ ip: z.string() });
 
 const ipEndpoint = "https://api.ipify.org";
@@ -33,7 +34,10 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
       currentIP = ip;
     }
 
-    return makeRequest(`${geoEndpoint}/${currentIP}/json/`, geoSchema);
+    return await makeRequest(
+      join(geoEndpoint, currentIP ?? "", "json"),
+      geoSchema,
+    );
   } catch {
     return undefined;
   }
@@ -46,21 +50,21 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
  * @param schema - The Zod schema to validate the data against.
  * @returns - The validated API content.
  */
-export async function makeRequest<T extends ZodTypeUnknown>(
+async function makeRequest<T extends ZodTypeUnknown>(
   endpoint: string,
   schema: T,
 ): Promise<z.infer<T>> {
   // Send the request.
-  const json = await (await fetch(endpoint)).json();
+  const res = await fetch(endpoint);
 
   // Validate the response.
-  return schema.parse(json);
+  return schema.parse(await res.json());
 }
 
 /**
  * Get the current device's IP from the https://ipify.org API.
  */
-export function getIp(): Promise<Ip> {
+function getIp(): Promise<Ip> {
   // make http request and return the IP as json
   return makeRequest(`${ipEndpoint}?format=json`, ipSchema);
 }

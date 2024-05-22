@@ -10,16 +10,16 @@ export const geothermalLoopType = z.union([
 ]);
 
 export interface GeoCostBreakdown {
-  /** $2000 */
-  isHilly: boolean;
-  /** $2000 */
-  needsRenovations: boolean;
-  /** See case statement */
-  type: GeoType;
-  /** See if statements */
-  squareFootage: number;
-  /** 250 */
-  requiresPermit: boolean;
+  /** +$2000 */
+  readonly isHilly: boolean;
+  /** +$2000 */
+  readonly needsRenovations: boolean;
+  /** Varies */
+  readonly type: GeoType;
+  /** Varies */
+  readonly squareFootage: number;
+  /** +$250 */
+  readonly requiresPermit: boolean;
 }
 
 export function calculatePricingIfHardInstallation(

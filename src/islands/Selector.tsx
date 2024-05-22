@@ -9,16 +9,22 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSignal } from "@preact/signals";
-import type { JSX } from "preact";
-import { IconCheck, IconChevronDown } from "../utils/icons.ts";
-import { tw } from "../utils/tailwind.ts";
+import type { ComponentChildren, JSX } from "preact";
+import { IconCheck, IconChevronDown } from "../components/icons.ts";
+import { tw } from "../utils/tags.ts";
+import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {
-  name: string;
-  question: string;
-  list: SelectorListObject<T>[];
-  current?: U | undefined;
-  required?: boolean;
+  readonly name: string;
+  readonly question: string;
+  readonly list: SelectorListObject<T>[];
+  readonly current?: U | undefined;
+  readonly required?: boolean;
+  /** A hacky way to get Fresh to serialize the `info` prop. */
+  readonly children?: ComponentChildren;
+  /** A hacky way to get Fresh *not* to serialize the `info` prop. */
+  // TODO(lishaduck): Is this really needed?
+  readonly hasInfo?: boolean;
 }
 
 export interface SelectorListObject<T extends string> {
@@ -29,11 +35,17 @@ export interface SelectorListObject<T extends string> {
 const wrapperStyles = tw`top-16 flex w-72 flex-col items-center gap-4`;
 const labelStyles = tw`text-lg`;
 const detach1Styles = tw`relative mt-1 w-min`;
-const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75 dark:focus-visible:ring-offset-teal-700`;
+const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2  sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75`;
 const inputStyles = tw`rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
 const buttonStyles = tw`absolute inset-y-0 right-0 flex items-center pr-2`;
 function ButtonIcon(): JSX.Element {
-  return <IconChevronDown class="h-5 w-5 text-slate-400" aria-hidden="true" />;
+  return (
+    <IconChevronDown
+      size={20}
+      class="size-5 text-slate-400"
+      aria-hidden="true"
+    />
+  );
 }
 const buttonTitle = "Options";
 
@@ -43,8 +55,12 @@ export function Selector<T extends string, U extends T>({
   list,
   current: currentValue,
   required,
+  children: info,
+  hasInfo,
 }: SelectorProps<T, U>): JSX.Element {
-  const current = useSignal(list.find((val) => val.name === currentValue));
+  const current = useSignal(
+    list.find((val) => val.name === currentValue) ?? { name: "", value: "" },
+  );
   const query = useSignal("");
 
   if (!IS_BROWSER) {
@@ -87,8 +103,19 @@ export function Selector<T extends string, U extends T>({
             current.value = newValue;
           }
         }}
+        onClose={() => {
+          query.value = "";
+        }}
       >
-        <Label className={labelStyles}>{question}</Label>
+        <Label className={labelStyles}>
+          {question}
+          {hasInfo && (
+            <>
+              {" "}
+              <Info>{info}</Info>
+            </>
+          )}
+        </Label>
         <div class={detach1Styles}>
           <div class={detach2Styles}>
             <ComboboxInput
@@ -144,7 +171,11 @@ export function Selector<T extends string, U extends T>({
                               focus ? tw`text-slate-50` : tw`text-green-700`
                             }`}
                           >
-                            <IconCheck class="h-5 w-5" aria-hidden="true" />
+                            <IconCheck
+                              size={20}
+                              class="size-5"
+                              aria-hidden="true"
+                            />
                           </span>
                         )}
                       </>

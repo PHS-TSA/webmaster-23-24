@@ -10,14 +10,20 @@ import * as $about from "./routes/about.tsx";
 import * as $api_chat_index from "./routes/api/chat/index.ts";
 import * as $api_chat_references from "./routes/api/chat/references.ts";
 import * as $api_chat_thread from "./routes/api/chat/thread.ts";
-import * as $calculator from "./routes/calculator.tsx";
+import * as $calculator_index from "./routes/calculator/index.tsx";
+import * as $calculator_results from "./routes/calculator/results.tsx";
+import * as $green from "./routes/green.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $solutions_category_slug_ from "./routes/solutions/[category]/[[slug]].tsx";
 import * as $solutions_category_index from "./routes/solutions/[category]/index.tsx";
 import * as $Chatbot from "./islands/Chatbot.tsx";
 import * as $Checkbox from "./islands/Checkbox.tsx";
+import * as $HeaderGroup from "./islands/HeaderGroup.tsx";
 import * as $HeaderMenu from "./islands/HeaderMenu.tsx";
+import * as $Info from "./islands/Info.tsx";
 import * as $InputField from "./islands/InputField.tsx";
+import * as $ScrollDown from "./islands/ScrollDown.tsx";
+import * as $ScrollToTop from "./islands/ScrollToTop.tsx";
 import * as $Selector from "./islands/Selector.tsx";
 import * as $Submit from "./islands/Submit.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -32,7 +38,9 @@ const manifest = {
     "./routes/api/chat/index.ts": $api_chat_index,
     "./routes/api/chat/references.ts": $api_chat_references,
     "./routes/api/chat/thread.ts": $api_chat_thread,
-    "./routes/calculator.tsx": $calculator,
+    "./routes/calculator/index.tsx": $calculator_index,
+    "./routes/calculator/results.tsx": $calculator_results,
+    "./routes/green.tsx": $green,
     "./routes/index.tsx": $index,
     "./routes/solutions/[category]/[[slug]].tsx": $solutions_category_slug_,
     "./routes/solutions/[category]/index.tsx": $solutions_category_index,
@@ -40,8 +48,12 @@ const manifest = {
   islands: {
     "./islands/Chatbot.tsx": $Chatbot,
     "./islands/Checkbox.tsx": $Checkbox,
+    "./islands/HeaderGroup.tsx": $HeaderGroup,
     "./islands/HeaderMenu.tsx": $HeaderMenu,
+    "./islands/Info.tsx": $Info,
     "./islands/InputField.tsx": $InputField,
+    "./islands/ScrollDown.tsx": $ScrollDown,
+    "./islands/ScrollToTop.tsx": $ScrollToTop,
     "./islands/Selector.tsx": $Selector,
     "./islands/Submit.tsx": $Submit,
   },

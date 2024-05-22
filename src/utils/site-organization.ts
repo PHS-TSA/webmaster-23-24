@@ -40,7 +40,7 @@ export interface MenuItem {
 }
 
 /**
- * Convert the {@link solutions} into to {@link Menu | menus} based on the category.
+ * Convert the {@linkplain solutions} into to {@linkplain Menu | menus} based on the category.
  *
  * @returns The generated menus.
  */
@@ -84,12 +84,16 @@ function generateMenus(): Menu[] {
 export const menus = generateMenus();
 
 /**
- * The additional menus that are not generated with the {@link solutions}.
+ * The additional menus that are not generated with the {@linkplain solutions}.
  */
 export const extraMenus = [
   {
     title: "Calculator",
     url: "/calculator/",
+  },
+  {
+    title: "Going Green?",
+    url: "/green/",
   },
   {
     title: "About",

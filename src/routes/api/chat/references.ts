@@ -7,7 +7,7 @@ export const handler: Handlers<TextContentBlock | null> = {
     const url = new URL(req.url);
     const fileId = url.searchParams.get("file_id");
     if (fileId === null) {
-      return ctx.renderNotFound();
+      return await ctx.renderNotFound();
     }
 
     const file = await retrieve(fileId);

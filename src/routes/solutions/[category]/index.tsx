@@ -1,15 +1,16 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import type { JSX } from "preact";
+import type { ComponentType, JSX } from "preact";
 import { Fragment } from "preact";
 import { z } from "zod";
+import { Carousel } from "../../../components/Carousel.tsx";
 import { Content } from "../../../components/Content.tsx";
-import { Cover } from "../../../components/Cover.tsx";
+import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
+import { IconBolt, IconLink } from "../../../components/icons.ts";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { IconLink, IconSolarPanel } from "../../../utils/icons.ts";
 import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
 
 export const config = {
@@ -20,19 +21,21 @@ export type CategoryProps = z.infer<typeof categoryProps>;
 export type CategoryPages = z.infer<typeof categoryPropsPages>;
 export type CategoryData = z.infer<typeof categoryPropsPageData>;
 
-const categoryPropsPageData = z.object({
+export const categoryPropsPageData = z.object({
   short: z.string(),
   linkText: z.string(),
   title: z.string(),
   linkTo: z.string(),
+  picture: z.string(),
 });
 
-const categoryPropsPages = categoryPropsPageData.array();
+export const categoryPropsPages = categoryPropsPageData.array();
 
-const categoryProps = z.object({
+export const categoryProps = z.object({
   pages: categoryPropsPages,
   title: z.string(),
   description: z.string().refine((value) => !value.endsWith(".")),
+  heros: z.string().array(),
 });
 
 /**
@@ -66,6 +69,7 @@ export const handler: Handlers<CategoryProps> = {
                 linkText: solutionData.title,
                 title: solutionData.sectionHeader,
                 linkTo: solution.slug,
+                picture: solution.data.heroImage,
               },
             ];
           }
@@ -76,6 +80,7 @@ export const handler: Handlers<CategoryProps> = {
         pages: categoryPropsPages.parse(data),
         title: categoryMetadata[category].title,
         description: categoryMetadata[category].description,
+        heros: data.map((page) => page.picture),
       });
     } catch (e) {
       console.error(e);
@@ -117,7 +122,7 @@ export default function Category({
 }: PageProps<CategoryProps>): JSX.Element {
   useCsp();
 
-  const { title: pageTitle, description, pages } = data;
+  const { title: pageTitle, description, pages, heros } = data;
 
   return (
     <>
@@ -127,8 +132,9 @@ export default function Category({
       <main>
         <Cover
           title={pageTitle}
+          Hero={CategoryCarousel(heros)}
           icon={
-            <IconSolarPanel
+            <IconBolt
               class="size-52 text-yellow-200 dark:text-yellow-400"
               aria-hidden="true"
             />
@@ -146,7 +152,7 @@ export default function Category({
                   <h2 class="relative" id={slug}>
                     {/* biome-ignore lint/a11y/useAnchorContent: Biome doesn't support aria-label. */}
                     <a
-                      class="absolute -left-8"
+                      class="absolute -left-8 hover:text-slate-600 dark:hover:text-slate-400"
                       key="anchorLink"
                       href={`#${slug}`}
                       aria-hidden
@@ -170,4 +176,8 @@ export default function Category({
       </main>
     </>
   );
+}
+
+function CategoryCarousel(heros: string[]): ComponentType<HeroProps> {
+  return ({ children }) => <Carousel heros={heros}>{children}</Carousel>;
 }

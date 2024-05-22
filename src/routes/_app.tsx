@@ -58,7 +58,11 @@ const metas = (
  */
 export default function App({ Component }: PageProps): JSX.Element {
   return (
-    <html lang="en-US">
+    <html
+      lang="en-US"
+      // Many, many thanks to <https://getpublii.com/blog/one-line-css-solution-to-prevent-anchor-links-from-scrolling-behind-a-sticky-header.html>!
+      class="scroll-smooth scroll-pt-60 sm:scroll-pt-44 md:scroll-pt-28 lg:scroll-pt-20 scrollbar-thin scrollbar-track-green-900/10 scrollbar-thumb-green-400/90 dark:scrollbar-track-green-100/10 dark:scrollbar-thumb-green-600/90"
+    >
       <Head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -70,7 +74,7 @@ export default function App({ Component }: PageProps): JSX.Element {
         <link rel="stylesheet" href={asset("/styles.css")} />
       </Head>
 
-      <body f-client-nav class="dark:bg-slate-950 dark:text-slate-50">
+      <body f-client-nav={false} class="dark:bg-slate-950 dark:text-slate-50">
         <Partial name="body">
           <Component />
         </Partial>

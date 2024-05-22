@@ -13,9 +13,11 @@ export function useCsp(): void {
     csp.directives.styleSrc ??= [];
     csp.directives.styleSrcElem ??= [];
     csp.directives.imgSrc ??= [];
+    csp.directives.mediaSrc ??= [];
     csp.directives.connectSrc ??= [];
     csp.directives.manifestSrc ??= [];
-    csp.directives.baseUri ??= [];
+    csp.directives.baseUri ??= [NONE];
+    csp.directives.frameSrc ??= [];
 
     csp.directives.scriptSrc.push(
       STRICT_DYNAMIC,
@@ -34,8 +36,9 @@ export function useCsp(): void {
       UNSAFE_INLINE, // Backwards compatibility for old browsers.
     );
     csp.directives.imgSrc.push(SELF, "data:");
+    csp.directives.mediaSrc.push(SELF);
     csp.directives.connectSrc.push(SELF);
     csp.directives.manifestSrc.push(SELF);
-    csp.directives.baseUri.push(NONE);
+    csp.directives.frameSrc.push(SELF);
   });
 }

@@ -182,7 +182,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".js";
 
-  // @ts-expect-error: Typescript dislikes current Deno deduping of Unified.
+  // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
   compiled.data.matter.category =
     compiled.dirname !== "." ? compiled.dirname : compiled.stem;
 
@@ -242,8 +242,24 @@ function sortFiles(a: VFile, b: VFile): number {
  */
 async function staticImports(files: VFile[]): Promise<void> {
   const fileNames = files.map((file): string => file.path);
-  const fileContent = staticImportsFile(fileNames);
+  const icons = files.flatMap((file) =>
+    file.data.matter?.icon ? [file.data.matter.icon] : [],
+  );
+  const fileContent = staticImportsFile(fileNames, icons);
   await writeGenFile(fileContent, "imports");
+}
+
+function createImport(url: string): string {
+  return `(async () => await import("${url}"));`;
+}
+
+function createImports(
+  imports: string[],
+  transformer: (url: string) => string,
+): string {
+  return [
+    ...new Set(imports.map((url) => createImport(transformer(url)))),
+  ].join("\n");
 }
 
 /**
@@ -255,11 +271,11 @@ async function staticImports(files: VFile[]): Promise<void> {
  * @param files The names of files.
  * @returns The contents of a Javascript file containing a bunch of FEs.
  */
-function staticImportsFile(files: string[]): string {
-  return files
-    .map((file) => `(async () => await import("../content/${file}"));`)
-    .join("\n")
-    .concat("\n");
+function staticImportsFile(files: string[], icons: string[]): string {
+  const contentFiles = createImports(files, (file) => `../content/${file}`);
+  const iconFiles = createImports(icons, (icon) => `$tabler_icons/${icon}.tsx`);
+
+  return `${contentFiles}\n${iconFiles}\n`;
 }
 
 /**
@@ -280,7 +296,10 @@ function categoriesFile(files: VFile[]): string {
 
     return {
       slug: stem === category ? undefined : stem,
-      data: file.data.matter,
+      data: {
+        heroImage: `/images/${category}-${stem}.avif`,
+        ...file.data.matter,
+      },
     };
   });
   const parsedProfiles = solutionPagesSchema.parse(sortedFiles);

@@ -7,9 +7,10 @@ import {
 } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
-import { IconChevronDown } from "../utils/icons.ts";
+import { IconChevronDown } from "../components/icons.ts";
+import { prettyFocus } from "../components/styles.ts";
 import type { Menu } from "../utils/site-organization.ts";
-import { tw } from "../utils/tailwind.ts";
+import { tw } from "../utils/tags.ts";
 
 /**
  * Make the text style for the menu.
@@ -17,8 +18,8 @@ import { tw } from "../utils/tailwind.ts";
  * @param active - If the menu is for the current page.
  * @returns The text style for the menu.
  */
-export function makeTextStyle(active: boolean): string {
-  return tw`whitespace-nowrap py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
+function makeTextStyle(active: boolean): string {
+  return tw`py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
     active
       ? tw`font-bold text-slate-700 dark:text-slate-200`
       : tw`text-slate-500 dark:text-slate-400`
@@ -31,7 +32,7 @@ export function makeTextStyle(active: boolean): string {
  * @param active - If the menu is for the current page.
  * @returns The border style for the menu.
  */
-export function makeBorderStyle(active: boolean): string {
+function makeBorderStyle(active: boolean): string {
   return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
     active
       ? tw`border-b-2 border-slate-700 dark:border-slate-200`
@@ -40,12 +41,7 @@ export function makeBorderStyle(active: boolean): string {
 }
 
 /**
- * The style for the menu when it is focused.
- */
-export const prettyFocus = tw`rounded-sm data-[focus]:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75`;
-
-/**
- * Properties for the {@link HeaderMenu} component.
+ * Properties for the {@linkcode HeaderMenu} component.
  */
 export interface WithActive {
   /**
@@ -54,24 +50,9 @@ export interface WithActive {
   readonly active: boolean;
 }
 
-/**
- * Render a menu component.
- * It can either be a link to a page, or a dropdown menu.
- *
- * @param props - The component's properties.
- * @param props.title - The title of the menu.
- * @param props.url - The URL of the menu.
- * @param props.items - The items to render.
- * @param props.active - If the menu is for the current page.
- * @returns The rendered menu component.
- */
-export function HeaderMenu(props: Menu & WithActive): JSX.Element {
-  return <PopoverMenu {...props} />;
-}
-
-function menuButtonStyles(active: boolean): string {
+export function menuButtonStyles(active: boolean): string {
   return clsx(
-    tw`flex h-8 flex-row`,
+    tw`flex h-8 flex-row gap-0.5 whitespace-nowrap rounded-sm p-1 focus-visible:outline-none focus-visible:ring-1`,
     prettyFocus,
     makeBorderStyle(active),
     makeTextStyle(active),
@@ -79,7 +60,7 @@ function menuButtonStyles(active: boolean): string {
 }
 
 function ButtonIcon(): JSX.Element {
-  return <IconChevronDown class="w-6 h-6" aria-hidden="true" />;
+  return <IconChevronDown size={24} class="size-6" aria-hidden="true" />;
 }
 
 /**
@@ -94,14 +75,13 @@ function ButtonIcon(): JSX.Element {
  * @param props.active - If the menu is for the current page.
  * @returns The rendered menu component.
  */
-function PopoverMenu({
+export function HeaderMenu({
   title,
   url,
   items,
   active,
 }: Menu & WithActive): JSX.Element {
   if (!IS_BROWSER) {
-    // TODO(lishaduck): Add a dummy impl.
     return (
       <div class={menuButtonStyles(active)}>
         <div>{title}</div>
@@ -125,18 +105,19 @@ function PopoverMenu({
         leaveTo={tw`opacity-0 translate-y-1`}
       >
         <PopoverPanel
-          className="origin-top-right [--anchor-gap:8px] [--anchor-padding]"
+          className="animate-anchor-gap z-30 origin-top-right rounded-md shadow-2xl"
           anchor="bottom end"
         >
-          <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 rounded-md bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
+          <ul class="grid max-w-64 grid-flow-row gap-x-4 gap-y-0.5 divide-y divide-slate-200/95 bg-slate-50 px-4 py-1 ring-1 ring-slate-950/5 focus:outline-none sm:left-auto sm:right-0 dark:divide-slate-800 dark:bg-slate-950 dark:ring-slate-50/5">
             {[{ href: "", name: `About ${title}` } as const, ...items].map(
               (link): JSX.Element => (
                 <li key={link} class="py-2 transition">
                   <a
                     href={`${url}${link.href}`}
-                    class={`block overflow-y-hidden whitespace-break-spaces text-balance rounded px-3 hover:bg-slate-950/5 hover:dark:bg-slate-50/5 ${makeTextStyle(
-                      false,
-                    )}`}
+                    class={clsx(
+                      "block overflow-y-hidden text-balance rounded px-3 hover:bg-slate-950/5 dark:hover:bg-slate-50/5",
+                      makeTextStyle(false),
+                    )}
                   >
                     {link.name}
                   </a>

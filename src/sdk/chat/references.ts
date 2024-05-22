@@ -6,15 +6,14 @@ import {
 export async function getFileData(
   fileId: string,
 ): Promise<FileObject | undefined> {
-  const res = await fetch(
-    `/api/chat/references/?file_id=${encodeURIComponent(fileId)}`,
-  );
-  const json = await res.json();
-  const unparsed = fileObjectSchema.safeParse(json);
+  try {
+    const res = await fetch(
+      `/api/chat/references/?file_id=${encodeURIComponent(fileId)}`,
+    );
+    const json = await res.json();
 
-  if (unparsed.success) {
-    return unparsed.data;
+    return fileObjectSchema.parse(json);
+  } catch {
+    return undefined;
   }
-
-  return undefined;
 }
