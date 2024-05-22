@@ -4,6 +4,7 @@ import { join } from "@std/path";
 import type { MDXModule } from "@vendor/mdx/types.ts";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
+import type { ComponentType } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
@@ -104,7 +105,7 @@ export default function Solution({
   );
 }
 
-function ImageHero(img: string): ({ children }: HeroProps) => JSX.Element {
+function ImageHero(img: string): ComponentType<HeroProps> {
   return ({ children }) => (
     <div class="flex flex-col px-4 py-2 sm:py-3 md:py-4 lg:py-8 h-[65svh] md:h-[75svh] lg:h-svh relative">
       <div class="hero">
