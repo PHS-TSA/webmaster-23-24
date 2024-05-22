@@ -170,7 +170,7 @@ export const solutions = [
     "slug": "electric-cars",
     "data": {
       "title": "Electric Vehicles",
-      "description": "Transportation is one of the largest sources of carbon emissions in the US",
+      "description": "Transportation is one of the largest sources of carbon emissions in the United States",
       "category": "other",
       "sectionHeader": "Electric Vehicles",
       "heroImage": "/images/other-electric-cars.avif",
