@@ -189,6 +189,12 @@ export default function About(): JSX.Element {
                     Light Bulbs | ENERGY STAR®
                   </a>
                 </li>
+                <li>
+                  <a href="https://www.eia.gov/energyexplained/biomass/biomass-and-the-environment.php">
+                    Biomass and the environment - U.S. Energy Information
+                    Administration (EIA)
+                  </a>
+                </li>
               </ul>
             </p>
             <h2>Documentation</h2>
