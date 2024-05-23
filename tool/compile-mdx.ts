@@ -166,6 +166,7 @@ const rehypePlugins = [rehypeMathjax] as const satisfies PluggableList;
 /** MDX compilation options. */
 const compileOptions = {
   jsxImportSource: "preact",
+  jsx: true,
   rehypePlugins,
   remarkPlugins,
 } as const satisfies CompileOptions;
@@ -180,7 +181,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
 
   const compiled = await compile(file, compileOptions);
-  compiled.extname = ".js";
+  compiled.extname = ".jsx";
 
   // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
   compiled.data.matter.category =
