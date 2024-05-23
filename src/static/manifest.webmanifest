@@ -34,6 +34,12 @@
     {
       "src": "/logo-xs.png",
       "type": "image/png",
+      "sizes": "96x96",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo-2xs.png",
+      "type": "image/png",
       "sizes": "64x64",
       "purpose": "any"
     },
@@ -46,13 +52,85 @@
   "shortcuts": [
     {
       "name": "About",
-      "url": "/about/"
+      "url": "/about/",
+      "icons": [
+        {
+          "src": "/logo-xs.png",
+          "type": "image/png",
+          "sizes": "96x96",
+          "purpose": "any"
+        },
+        {
+          "src": "/logo-xs.png",
+          "type": "image/png",
+          "sizes": "96x96",
+          "purpose": "any"
+        }
+      ]
     },
     {
       "name": "Calculate Pricing",
       "short_name": "calculator",
       "url": "/calculator/",
-      "description": "Calculate and compare the pricing of solar and geothermal energy solutions."
+      "description": "Calculate and compare the pricing of solar and geothermal energy solutions.",
+      "icons": [
+        {
+          "src": "/logo-xs.png",
+          "type": "image/png",
+          "sizes": "96x96",
+          "purpose": "any"
+        },
+        {
+          "src": "/logo-xs.png",
+          "type": "image/png",
+          "sizes": "96x96",
+          "purpose": "any"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/wide/1.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "The homepage features stunning pictures."
+    },
+    {
+      "src": "/screenshots/wide/2.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "We provide an informative, easy to use calculator."
+    },
+    {
+      "src": "/screenshots/wide/3.png",
+      "sizes": "2880x1800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Our chatbot is helpful and can provide assistance on just about any related topic."
+    },
+    {
+      "src": "/screenshots/narrow/1.png",
+      "sizes": "628x1256",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "The homepage features stunning pictures."
+    },
+    {
+      "src": "/screenshots/narrow/2.png",
+      "sizes": "628x1256",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "We provide an informative, easy to use calculator."
+    },
+    {
+      "src": "/screenshots/narrow/3.png",
+      "sizes": "628x1256",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Our chatbot is helpful and can provide assistance on just about any related topic."
     }
   ],
   "categories": ["education"],
