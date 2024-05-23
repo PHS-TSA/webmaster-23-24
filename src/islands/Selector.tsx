@@ -32,8 +32,8 @@ export interface SelectorListObject<T extends string> {
   value: T;
 }
 
-const wrapperStyles = tw`top-16 flex w-72 flex-col items-center gap-4`;
-const labelStyles = tw`text-lg`;
+const wrapperStyles = tw`top-16 flex w-48 md:w-72 flex-col items-center gap-4`;
+const labelStyles = tw`md:text-lg`;
 const detach1Styles = tw`relative mt-1 w-min`;
 const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2  sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75`;
 const inputStyles = tw`rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
