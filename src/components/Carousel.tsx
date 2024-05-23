@@ -1,5 +1,6 @@
 import { asset } from "$fresh/runtime.ts";
 import type { JSX } from "preact";
+import { useMemo } from "preact/hooks";
 import { ScrollDown } from "../islands/ScrollDown.tsx";
 import { css } from "../utils/tags.ts";
 import type { HeroProps } from "./Cover.tsx";
@@ -14,57 +15,10 @@ export function Carousel({
   heros,
   scrollDown,
 }: CarouselProps): JSX.Element {
-  const totalAnimationTime = heros.length * 5;
-  const visibilityPercentage = 100 / (2 * heros.length);
-
-  const keyframes = css`
-    0% {
-      opacity: 0;
-    }
-    ${visibilityPercentage}%,
-    ${2 * visibilityPercentage}% {
-      opacity: 1;
-    }
-    ${3 * visibilityPercentage}%,
-    100% {
-      opacity: 0;
-    }
-`;
-
-  const delays = heros
-    .map((_, i) => {
-      return css`
-        &:nth-child(${i + 1}) {
-          animation-delay: ${
-            (i * 2 * visibilityPercentage * totalAnimationTime) / 100
-          }s;
-        }
-    `;
-    })
-    .join("\n");
-
-  const styles = css`
-    .carousel > img {
-      opacity: 0;
-      animation: animate-fade ${totalAnimationTime}s infinite;
-    }
-
-    .carousel.hero > img {
-      @supports(animation-timeline: --page-scroll, auto) {
-        animation: image-down linear both, animate-fade ${totalAnimationTime}s infinite;
-        animation-timeline: --page-scroll, auto;
-        animation-range: 0 100svh, normal;
-      }
-    }
-
-    .carousel > img {
-      ${delays}
-    }
-
-    @keyframes animate-fade {
-      ${keyframes}
-    }
-  `;
+  const styles = useMemo(
+    () => createCarouselStyles(heros.length),
+    [heros.length],
+  );
 
   return (
     <div class="relative flex h-[65svh] flex-col px-4 pt-2 sm:pt-3 md:h-[75svh] md:pt-4 lg:h-svh lg:pt-24">
@@ -86,4 +40,58 @@ export function Carousel({
       )}
     </div>
   );
+}
+
+function createCarouselStyles(number: number): string {
+  const totalAnimationTime = number * 5;
+  const visibilityPercentage = 100 / (2 * number);
+
+  const keyframes = css`
+    @keyframes animate-fade {
+      0% {
+        opacity: 0;
+      }
+      ${visibilityPercentage}%,
+      ${2 * visibilityPercentage}% {
+        opacity: 1;
+      }
+      ${3 * visibilityPercentage}%,
+      100% {
+        opacity: 0;
+      }
+    }
+`;
+
+  const delays = Array.from({ length: number })
+    .map((_, i) => {
+      return css`
+        &:nth-child(${i + 1}) {
+          animation-delay: ${
+            (i * 2 * visibilityPercentage * totalAnimationTime) / 100
+          }s;
+        }
+    `;
+    })
+    .join("\n");
+
+  return css`
+    .carousel > img {
+      opacity: 0;
+      animation: animate-fade ${totalAnimationTime}s infinite;
+    }
+
+    .carousel.hero > img {
+      @supports(animation-timeline: --page-scroll, auto) {
+        animation: image-down linear both, animate-fade ${totalAnimationTime}s infinite;
+        animation-timeline: --page-scroll, auto;
+        animation-range: 0 100svh, normal;
+      }
+    }
+
+    .carousel > img {
+      ${delays}
+    }
+
+    ${keyframes}
+  `;
 }
