@@ -1,12 +1,17 @@
-/// <reference no-default-lib="true" />
-/// <reference lib="dom" />
-/// <reference lib="dom.iterable" />
-/// <reference lib="dom.asynciterable" />
-/// <reference lib="deno.ns" />
+import { App, fsRoutes, staticFiles, trailingSlashes } from "fresh";
 
-import { start } from "$fresh/server.ts";
-import config from "./fresh.config.ts";
-import manifest from "./fresh.gen.ts";
-import "./utils/imports.gen.ts";
+export const app = new App()
+  // Add static file serving middleware
+  .use(staticFiles())
+  .use(trailingSlashes("always"));
 
-await start(manifest, config);
+// Enable file-system based routing
+await fsRoutes(app, {
+  loadIsland: (path) => import(`./islands/${path}`),
+  loadRoute: (path) => import(`./routes/${path}`),
+});
+
+// If this module is called directly, start the server
+if (import.meta.main) {
+  await app.listen();
+}

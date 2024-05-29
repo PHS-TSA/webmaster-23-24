@@ -1,4 +1,4 @@
-import type { Handlers } from "$fresh/server.ts";
+import type { Handlers } from "fresh";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 import { ask } from "../../../utils/openai/assistant.ts";
 import type {
@@ -8,10 +8,9 @@ import type {
 
 export const handler: Handlers<TextContentBlock | null> = {
   async GET(
-    req: Request,
     ctx: FreshContextHelper<TextContentBlock | null>,
   ): Promise<Response> {
-    const url = new URL(req.url);
+    const url = new URL(ctx.req.url);
     const message = url.searchParams.get("q");
     const thread_id = url.searchParams.get("thread");
     if (message === null || thread_id === null) {

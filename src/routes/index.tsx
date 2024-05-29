@@ -1,5 +1,5 @@
-import { Head, asset } from "$fresh/runtime.ts";
-import type { RouteConfig } from "$fresh/server.ts";
+import type { RouteConfig } from "fresh";
+import { Head, asset } from "fresh/runtime";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import type { ComponentChildren } from "preact";

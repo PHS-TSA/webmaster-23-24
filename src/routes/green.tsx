@@ -1,5 +1,5 @@
-import { Head } from "$fresh/runtime.ts";
-import type { RouteConfig } from "$fresh/server.ts";
+import type { RouteConfig } from "fresh";
+import { Head } from "fresh/runtime";
 import type { JSX } from "preact";
 import { Content } from "../components/Content.tsx";
 import { Cover } from "../components/Cover.tsx";

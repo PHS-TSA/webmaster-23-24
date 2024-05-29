@@ -4,7 +4,7 @@ import {
   STRICT_DYNAMIC,
   UNSAFE_INLINE,
   useCSP,
-} from "$fresh/runtime.ts";
+} from "fresh/runtime";
 
 export function useCsp(): void {
   useCSP((csp) => {

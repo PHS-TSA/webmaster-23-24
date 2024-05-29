@@ -1,4 +1,4 @@
-import type { FreshContext } from "$fresh/server.ts";
+import type { FreshContext } from "fresh";
 
 /**
  * A helper type for a fresh context.

@@ -1,5 +1,5 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
 import { render } from "$gfm";
+import { IS_BROWSER } from "fresh/runtime";
 import {
   Button,
   Fieldset,

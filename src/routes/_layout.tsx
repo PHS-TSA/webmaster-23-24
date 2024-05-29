@@ -1,4 +1,4 @@
-import type { PageProps } from "$fresh/server.ts";
+import type { PageProps } from "fresh";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Footer } from "../components/Footer.tsx";

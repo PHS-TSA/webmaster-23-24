@@ -1,4 +1,4 @@
-import { asset } from "$fresh/runtime.ts";
+import { asset } from "fresh/runtime";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { logoAlt } from "../site.ts";
