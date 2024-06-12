@@ -271,14 +271,15 @@ function createImports(
 
 /**
  * Create a file containing static imports for all the files.
- * An FE is an IIFE that isn't immediately invoked.
- * More likely, an IIFE is actually an FE that's immediately invoked.
+ * An FE is an IIFE that is not immediately invoked.
+ * More likely, an IIFE is actually an FE that *is* immediately invoked.
  * The mysteries of life...
  *
  * @param files The names of files.
  * @returns The contents of a Javascript file containing a bunch of FEs.
  */
 function staticImportsFile(files: string[], icons: string[]): string {
+  // TODO(lishaduck): Don't hardcode `"../content"`.
   const contentFiles = createImports(files, (file) => `../content/${file}`);
   const iconFiles = createImports(icons, (icon) => `$tabler_icons/${icon}.tsx`);
 
