@@ -184,12 +184,24 @@ const compileSolution = (
   Effect.gen(function* () {
     yield* Effect.sync(() => matter(file)); // Extract the frontmatter into `data.matter`.
 
-    const compiled = yield* Effect.promise(() => compile(file, compileOptions));
-    compiled.extname = ".jsx";
+    const compiled = yield* Effect.tryPromise(() =>
+      compile(file, compileOptions),
+    );
+    if (!compiled.data.matter) {
+      return yield* Effect.dieMessage("");
+    }
 
-    // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
-    compiled.data.matter.category =
-      compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+    compiled.extname = ".jsx";
+    compiled.data = {
+      ...compiled.data,
+      matter: {
+        ...compiled.data.matter,
+        category:
+          compiled.dirname && compiled.dirname !== "."
+            ? compiled.dirname
+            : compiled.stem ?? "",
+      },
+    };
 
     return compiled;
   });
