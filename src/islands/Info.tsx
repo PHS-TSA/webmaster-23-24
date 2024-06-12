@@ -21,6 +21,7 @@ export function Info({ children }: InfoProps): JSX.Element {
         )}
       >
         <IconInfoCircle class="inline" size={20} />
+        <div class="hidden">{children}</div>
       </button>
     );
   }
