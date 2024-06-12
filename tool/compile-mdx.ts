@@ -29,7 +29,7 @@ declare module "vfile" {
     /**
      * The frontmatter of the file.
      */
-    matter: SolutionData;
+    readonly matter: SolutionData;
   }
 }
 
@@ -195,9 +195,12 @@ async function compileSolution(file: VFile): Promise<VFile> {
     return compiled;
   }
 
-  compiled.data.matter = {
-    ...compiled.data.matter,
-    category: category,
+  compiled.data = {
+    ...compiled.data,
+    matter: {
+      ...compiled.data.matter,
+      category: category,
+    },
   };
 
   return compiled;
