@@ -41,7 +41,7 @@ export const solutionDataSchema = z
       .describe("The image to use for the hero."),
     icon: z
       .string()
-      .describe("The url of a tabler icon. Resolves with the import map"),
+      .describe("The url of a Tabler icon. Resolves with the import map"),
   })
   .passthrough()
   .readonly()
