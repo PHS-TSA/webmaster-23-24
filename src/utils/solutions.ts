@@ -37,7 +37,7 @@ export const solutionDataSchema = z
       .describe("The section header for the category index page."),
     heroImage: z
       .string()
-      .refine((value) => /images\/.+.avif$/.test(value))
+      .refine((value) => value.match(avifImageRegex))
       .describe("The image to use for the hero."),
     icon: z
       .string()
@@ -46,6 +46,8 @@ export const solutionDataSchema = z
   .passthrough()
   .readonly()
   .describe(solutionDataSchemaDescription);
+
+const avifImageRegex = /images\/.+.avif$/;
 
 /**
  * Represent a set of solution pages.
