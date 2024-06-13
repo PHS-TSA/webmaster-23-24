@@ -1,4 +1,4 @@
-import { asset } from "$fresh/runtime.ts";
+import { asset } from "fresh/runtime";
 import type { JSX } from "preact";
 import { useMemo } from "preact/hooks";
 import { ScrollDown } from "../islands/ScrollDown.tsx";

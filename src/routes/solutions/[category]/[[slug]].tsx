@@ -1,5 +1,5 @@
-import { Head, asset } from "$fresh/runtime.ts";
-import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "fresh";
+import { Head, asset } from "fresh/runtime";
 import { join } from "@std/path";
 import type { MDXModule } from "@vendor/mdx/types.ts";
 import { clsx } from "clsx";
@@ -36,10 +36,7 @@ const contentDir = "../../../content" as const;
  * The server handler for the solution page.
  */
 export const handler: Handlers<SolutionProps> = {
-  async GET(
-    _req: Request,
-    ctx: FreshContextHelper<SolutionProps>,
-  ): Promise<Response> {
+  async GET(ctx: FreshContextHelper<SolutionProps>): Promise<Response> {
     try {
       const { category, slug } = ctx.params;
       if (category === undefined || category === "" || slug === undefined) {

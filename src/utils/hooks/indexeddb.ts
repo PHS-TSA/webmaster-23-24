@@ -1,4 +1,4 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
+import { IS_BROWSER } from "fresh/runtime";
 import { get, set } from "idb-keyval";
 import { useCallback } from "preact/hooks";
 import { usePromise } from "./suspense.ts";

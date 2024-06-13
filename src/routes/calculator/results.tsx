@@ -1,5 +1,5 @@
-import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "fresh";
+import { Head } from "fresh/runtime";
 import type { ComponentChildren, JSX } from "preact";
 import CalculatorScaffold from "../../components/CalculatorScaffold.tsx";
 import { Cover } from "../../components/Cover.tsx";
@@ -32,11 +32,8 @@ export const config = {
 const pageTitle = "Calculator Results" as const;
 
 export const handler: Handlers<CalculatorShowProps> = {
-  async GET(
-    req: Request,
-    ctx: FreshContextHelper<CalculatorShowProps>,
-  ): Promise<Response> {
-    const url = new URL(req.url);
+  async GET(ctx: FreshContextHelper<CalculatorShowProps>): Promise<Response> {
+    const url = new URL(ctx.req.url);
     const data = url.searchParams;
     const parsedData = parseData(data);
 
@@ -47,11 +44,8 @@ export const handler: Handlers<CalculatorShowProps> = {
     return await ctx.render(parsedData);
   },
 
-  async POST(
-    req: Request,
-    ctx: FreshContextHelper<CalculatorShowProps>,
-  ): Promise<Response> {
-    const data = await req.formData();
+  async POST(ctx: FreshContextHelper<CalculatorShowProps>): Promise<Response> {
+    const data = await ctx.req.formData();
     const parsedData = parseData(data);
 
     if (parsedData === undefined) {

@@ -1,4 +1,4 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
+import { IS_BROWSER } from "fresh/runtime";
 import { Field, Input, Label } from "@headlessui/react";
 import { clsx } from "clsx";
 import type { JSX } from "preact";

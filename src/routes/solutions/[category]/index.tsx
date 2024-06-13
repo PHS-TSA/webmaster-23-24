@@ -1,5 +1,5 @@
-import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import type { Handlers, PageProps, RouteConfig } from "fresh";
+import { Head } from "fresh/runtime";
 import type { ComponentType, JSX } from "preact";
 import { Fragment } from "preact";
 import { z } from "zod";
@@ -42,10 +42,7 @@ export const categoryProps = z.object({
  * The server handler for the solution page.
  */
 export const handler: Handlers<CategoryProps> = {
-  async GET(
-    _req: Request,
-    ctx: FreshContextHelper<CategoryProps>,
-  ): Promise<Response> {
+  async GET(ctx: FreshContextHelper<CategoryProps>): Promise<Response> {
     try {
       const { category } = ctx.params;
       if (

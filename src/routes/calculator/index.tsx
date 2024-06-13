@@ -1,6 +1,5 @@
-import { Head } from "$fresh/runtime.ts";
-import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { DEBUG } from "$fresh/src/server/constants.ts";
+import type { Handlers, PageProps, RouteConfig } from "fresh";
+import { Head } from "fresh/runtime";
 import type { JSX } from "preact";
 import CalculatorScaffold from "../../components/CalculatorScaffold.tsx";
 import { Cover } from "../../components/Cover.tsx";
@@ -24,13 +23,8 @@ export const config = {
 const pageTitle = "Calculator" as const;
 
 export const handler: Handlers<CalculatorSearchProps> = {
-  async GET(
-    _req: Request,
-    ctx: FreshContextHelper<CalculatorSearchProps>,
-  ): Promise<Response> {
-    const visitor = DEBUG
-      ? undefined
-      : await getIpLocation(ctx.remoteAddr.hostname);
+  async GET(ctx: FreshContextHelper<CalculatorSearchProps>): Promise<Response> {
+    const visitor = await getIpLocation(ctx.remoteAddr.hostname);
 
     return await ctx.render({
       region: visitor?.region,
