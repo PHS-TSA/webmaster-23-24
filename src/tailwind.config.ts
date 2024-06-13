@@ -2,11 +2,10 @@ import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import scrollbars from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
-import headless from "../vendor/@headlessui/tailwind/mod.ts";
 
 export default {
   content: ["{routes,islands,components}/**/*.{ts,tsx}"],
-  plugins: [typography, forms, scrollbars, headless],
+  plugins: [typography, forms, scrollbars],
   theme: {
     extend: {
       inset: {

@@ -1,2 +1,2 @@
-src/content/*.js linguist-generated=true
+src/content/*.jsx linguist-generated=true
 **/*.gen.ts linguist-generated=true

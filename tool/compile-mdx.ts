@@ -80,13 +80,15 @@ async function* getSolutions(
 ): AsyncGenerator<VFile, void, unknown> {
   for await (const entry of Deno.readDir(resolve(basePath, currentPath))) {
     const fullPath = resolve(basePath, currentPath, entry.name);
-    if (entry.isFile && entry.name.match(/\.mdx?$/) !== null) {
+    if (entry.isFile && entry.name.match(mdxRegex) !== null) {
       yield getSolution(fullPath, currentPath, entry.name);
     } else if (entry.isDirectory) {
       yield* getSolutions(basePath, join(currentPath, entry.name));
     }
   }
 }
+
+const mdxRegex = /\.mdx?$/;
 
 /**
  * Get the contents of a file.
@@ -166,6 +168,7 @@ const rehypePlugins = [rehypeMathjax] as const satisfies PluggableList;
 /** MDX compilation options. */
 const compileOptions = {
   jsxImportSource: "preact",
+  jsx: true,
   rehypePlugins,
   remarkPlugins,
 } as const satisfies CompileOptions;
@@ -180,7 +183,7 @@ async function compileSolution(file: VFile): Promise<VFile> {
   matter(file); // Extract the frontmatter into `data.matter`.
 
   const compiled = await compile(file, compileOptions);
-  compiled.extname = ".js";
+  compiled.extname = ".jsx";
 
   // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
   compiled.data.matter.category =

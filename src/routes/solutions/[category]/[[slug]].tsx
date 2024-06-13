@@ -47,7 +47,7 @@ export const handler: Handlers<SolutionProps> = {
       }
 
       const extensionless = join(contentDir, category, slug);
-      const filepath = `${extensionless}.js`;
+      const filepath = `${extensionless}.jsx`;
 
       const file: MDXModule = await import(filepath);
 

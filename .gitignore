@@ -15,4 +15,4 @@ cov/
 cov.lcov
 
 # Compiled MDX
-src/content/**/*.js
+src/content/**/*.jsx
