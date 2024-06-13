@@ -80,13 +80,15 @@ async function* getSolutions(
 ): AsyncGenerator<VFile, void, unknown> {
   for await (const entry of Deno.readDir(resolve(basePath, currentPath))) {
     const fullPath = resolve(basePath, currentPath, entry.name);
-    if (entry.isFile && entry.name.match(/\.mdx?$/) !== null) {
+    if (entry.isFile && entry.name.match(mdxRegex) !== null) {
       yield getSolution(fullPath, currentPath, entry.name);
     } else if (entry.isDirectory) {
       yield* getSolutions(basePath, join(currentPath, entry.name));
     }
   }
 }
+
+const mdxRegex = /\.mdx?$/;
 
 /**
  * Get the contents of a file.

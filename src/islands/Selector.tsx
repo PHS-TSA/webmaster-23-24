@@ -153,7 +153,7 @@ export function Selector<T extends string, U extends T>({
                 filtered.map((item) => (
                   <ComboboxOption
                     key={item.name}
-                    className="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 ui-active:bg-green-500 ui-active:text-slate-50 ui-not-active:text-slate-900 dark:ui-active:bg-green-700 ui-not-active:dark:text-slate-100"
+                    className="relative cursor-default select-none rounded-md py-2 pl-10 pr-4 text-slate-900 data-[focus]:bg-green-500 data-[focus]:text-slate-50 dark:text-slate-100 dark:data-[focus]:bg-green-700"
                     value={item}
                   >
                     {({ selected, focus }) => (

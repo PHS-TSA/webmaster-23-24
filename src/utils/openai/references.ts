@@ -33,7 +33,9 @@ export async function formatRefs(message: Message): Promise<string> {
   // Iterate over all content blocks
   for (const contentBlock of message.content) {
     if (contentBlock.type !== "text") {
-      throw new Error();
+      throw new Error(
+        "We only support text content blocks. We don't expose a way create these.",
+      );
     }
 
     // Extract the message content
