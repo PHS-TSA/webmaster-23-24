@@ -1,6 +1,7 @@
+import { type ParseResult, Schema } from "@effect/schema";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
-import { Cause, Chunk, Console, Effect, Order, Stream } from "effect";
+import { Cause, Chunk, Console, Effect, Either, Order, Stream } from "effect";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkLintCheckboxContentIndent from "remark-lint-checkbox-content-indent";
@@ -20,8 +21,8 @@ import { matter } from "vfile-matter";
 import { type Options as LintOptions, reporter } from "vfile-reporter";
 import {
   type SolutionData,
+  SolutionPagesSchema,
   categoryList,
-  solutionPagesSchema,
   titleList,
 } from "../src/utils/solutions.ts";
 import { readTextFile, walkDir, writeTextFile } from "./effect-deno.ts";
@@ -302,9 +303,13 @@ function staticImportsFile(files: string[]): string {
  */
 const categories = (
   files: VFile[],
-): Effect.Effect<void, Cause.UnknownException, never> =>
+): Effect.Effect<
+  void,
+  Cause.UnknownException | ParseResult.ParseError,
+  never
+> =>
   Effect.gen(function* () {
-    const fileContent = categoriesFile(files);
+    const fileContent = yield* categoriesFile(files);
 
     yield* writeGenFile(fileContent, "categories");
   });
@@ -312,27 +317,31 @@ const categories = (
 /**
  * Create a file containing the categories of all the files.
  */
-function categoriesFile(files: VFile[]): string {
-  const sortedFiles = files.map((file) => {
-    const stem = file.stem ?? "";
-    const category = file.data.matter?.category ?? "";
+const categoriesFile = (
+  files: VFile[],
+): Either.Either<string, ParseResult.ParseError> =>
+  Either.gen(function* () {
+    const sortedFiles = files.map((file) => {
+      const stem = file.stem ?? "";
+      const category = file.data.matter?.category ?? "";
 
-    return {
-      slug: stem === category ? undefined : stem,
-      data: {
-        heroImage: `/images/${category}-${stem}.avif`,
-        ...file.data.matter,
-      },
-    };
-  });
-  const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
-  const json = JSON.stringify(parsedProfiles, undefined, 2);
+      return {
+        slug: stem === category ? undefined : stem,
+        data: {
+          heroImage: `/images/${category}-${stem}.avif`,
+          ...file.data.matter,
+        },
+      };
+    });
+    const parsedProfiles =
+      yield* Schema.decodeUnknownEither(SolutionPagesSchema)(sortedFiles);
+    const json = JSON.stringify(parsedProfiles, undefined, 2);
 
-  return `import type { SolutionPages } from "./solutions.ts";
+    return `import type { SolutionPages } from "./solutions.ts";
 
 export const solutions = ${json} as const satisfies SolutionPages;
 `;
-}
+  });
 
 /**
  * Write a file to the `utils` directory.
