@@ -124,7 +124,7 @@ function ContentImg(props: JSX.HTMLAttributes<HTMLImageElement>): JSX.Element {
     <img
       {...props}
       src={asset(
-        typeof props.src === "string" ? props.src : props.src?.value ?? "",
+        typeof props.src === "string" ? props.src : (props.src?.value ?? ""),
       )}
       loading="lazy"
       class={clsx("rounded-sm", props.class)}

@@ -21,7 +21,6 @@ export function HeaderGroup({
   }
 
   return (
-    // @ts-expect-error: `PopoverGroup`'s types are wacky.
     <PopoverGroup as={"ul"} className={clsx(listStyles, props)}>
       {children}
     </PopoverGroup>

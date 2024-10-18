@@ -8,6 +8,7 @@ import manifest from "../fresh.gen.ts";
  */
 const connInfo = {
   remoteAddr: { hostname: "127.0.0.1", port: 53496, transport: "tcp" },
+  completed: Promise.resolve(),
 } as const satisfies ServeHandlerInfo;
 
 /*

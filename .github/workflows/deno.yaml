@@ -22,8 +22,7 @@ permissions:
 
 env:
   CI: true
-  DENO_VERSION: v1.43.3
-  DENO_FUTURE: 1
+  DENO_VERSION: v2.0.2
 
 jobs:
   deploy:

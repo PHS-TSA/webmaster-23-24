@@ -26,7 +26,7 @@ import * as $ScrollDown from "./islands/ScrollDown.tsx";
 import * as $ScrollToTop from "./islands/ScrollToTop.tsx";
 import * as $Selector from "./islands/Selector.tsx";
 import * as $Submit from "./islands/Submit.tsx";
-import { type Manifest } from "$fresh/server.ts";
+import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
