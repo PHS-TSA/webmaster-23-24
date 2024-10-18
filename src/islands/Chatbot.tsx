@@ -1,5 +1,4 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { render } from "$gfm";
 import {
   Button,
   Fieldset,
@@ -14,6 +13,7 @@ import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
+import Markdown from "react-markdown";
 import { Loading } from "../components/Loading.tsx";
 import {
   IconMessageChatbot,
@@ -155,9 +155,9 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           <li
             key={`${msg.role}${msg.message}`}
             class={clsx(getReplySide(msg.role), replyStyles)}
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
-            dangerouslySetInnerHTML={{ __html: render(msg.message) }}
-          />
+          >
+            <Markdown>{msg.message}</Markdown>
+          </li>
         ))}
       </ul>
 
