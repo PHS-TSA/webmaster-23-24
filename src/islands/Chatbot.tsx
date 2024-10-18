@@ -13,7 +13,6 @@ import { useSignal, useSignalEffect } from "@preact/signals";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
-import Markdown from "react-markdown";
 import { Loading } from "../components/Loading.tsx";
 import {
   IconMessageChatbot,
@@ -30,6 +29,7 @@ import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tags.ts";
+import { Markdown } from "./Markdown.tsx";
 
 export function Chatbot(): JSX.Element {
   const icon = <IconMessageChatbot class="size-8" />;
