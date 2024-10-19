@@ -1,5 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import { IconBolt, IconLink } from "@tabler/icons-preact";
 import type { ComponentType, JSX } from "preact";
 import { Fragment } from "preact";
 import { z } from "zod";
@@ -7,7 +8,6 @@ import { Carousel } from "../../../components/Carousel.tsx";
 import { Content } from "../../../components/Content.tsx";
 import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
-import { IconBolt, IconLink } from "../../../components/icons.ts";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";

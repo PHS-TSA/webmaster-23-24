@@ -41,13 +41,15 @@ export const solutionDataSchema = z
       .describe("The image to use for the hero."),
     icon: z
       .string()
-      .describe("The url of a Tabler icon. Resolves with the import map"),
+      .refine((value) => value.match(iconRegex))
+      .describe("The Tabler icon to use for the solution."),
   })
   .passthrough()
   .readonly()
   .describe(solutionDataSchemaDescription);
 
 const avifImageRegex = /images\/.+.avif$/;
+const iconRegex = /^Icon[A-Z][A-Za-z0-9]+$/;
 
 /**
  * Represent a set of solution pages.

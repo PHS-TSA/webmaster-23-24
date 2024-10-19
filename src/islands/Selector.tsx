@@ -9,8 +9,8 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSignal } from "@preact/signals";
+import { IconCheck, IconChevronDown } from "@tabler/icons-preact";
 import type { ComponentChildren, JSX } from "preact";
-import { IconCheck, IconChevronDown } from "../components/icons.ts";
 import { tw } from "../utils/tags.ts";
 import { Info } from "./Info.tsx";
 

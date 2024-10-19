@@ -9,7 +9,7 @@ export const solutions = [
       "category": "solar",
       "sectionHeader": "What Is It?",
       "heroImage": "/images/solar-what.avif",
-      "icon": "solar-panel-2"
+      "icon": "IconSolarPanel2"
     }
   },
   {
@@ -20,7 +20,7 @@ export const solutions = [
       "category": "solar",
       "sectionHeader": "How Does It Impact the Environment?",
       "heroImage": "/images/solar-environment.avif",
-      "icon": "sun-electricity"
+      "icon": "IconSunElectricity"
     }
   },
   {
@@ -31,7 +31,7 @@ export const solutions = [
       "category": "solar",
       "sectionHeader": "How Much Does It Cost?",
       "heroImage": "/images/solar-cost.avif",
-      "icon": "solar-panel"
+      "icon": "IconSolarPanel"
     }
   },
   {
@@ -42,7 +42,7 @@ export const solutions = [
       "category": "solar",
       "sectionHeader": "Is It Worth It?",
       "heroImage": "/images/solar-worth-it.avif",
-      "icon": "solar-electricity"
+      "icon": "IconSolarElectricity"
     }
   },
   {
@@ -53,7 +53,7 @@ export const solutions = [
       "category": "geothermal",
       "sectionHeader": "What Is It?",
       "heroImage": "/images/geothermal-what.avif",
-      "icon": "steam"
+      "icon": "IconSteam"
     }
   },
   {
@@ -64,7 +64,7 @@ export const solutions = [
       "category": "geothermal",
       "sectionHeader": "How Does It Affect the Environment?",
       "heroImage": "/images/geothermal-environment.avif",
-      "icon": "steam"
+      "icon": "IconSteam"
     }
   },
   {
@@ -75,7 +75,7 @@ export const solutions = [
       "category": "geothermal",
       "sectionHeader": "How Much Does It Cost?",
       "heroImage": "/images/geothermal-cost.avif",
-      "icon": "steam"
+      "icon": "IconSteam"
     }
   },
   {
@@ -86,7 +86,7 @@ export const solutions = [
       "category": "geothermal",
       "sectionHeader": "Is It Worth It?",
       "heroImage": "/images/geothermal-worth-it.avif",
-      "icon": "steam"
+      "icon": "IconSteam"
     }
   },
   {
@@ -97,7 +97,7 @@ export const solutions = [
       "category": "recycling",
       "sectionHeader": "What Is it?",
       "heroImage": "/images/recycling-what.avif",
-      "icon": "recycle"
+      "icon": "IconRecycle"
     }
   },
   {
@@ -108,7 +108,7 @@ export const solutions = [
       "category": "recycling",
       "sectionHeader": "How Does It Affect the Environment?",
       "heroImage": "/images/recycling-environment.avif",
-      "icon": "recycle"
+      "icon": "IconRecycle"
     }
   },
   {
@@ -119,7 +119,7 @@ export const solutions = [
       "category": "recycling",
       "sectionHeader": "How Much Does It Cost?",
       "heroImage": "/images/recycling-cost.avif",
-      "icon": "recycle"
+      "icon": "IconRecycle"
     }
   },
   {
@@ -130,7 +130,7 @@ export const solutions = [
       "category": "recycling",
       "sectionHeader": "Is It Worth It?",
       "heroImage": "/images/recycling-worth-it.avif",
-      "icon": "recycle"
+      "icon": "IconRecycle"
     }
   },
   {
@@ -141,7 +141,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Electric Appliances",
       "heroImage": "/images/other-appliances.avif",
-      "icon": "cooker"
+      "icon": "IconCooker"
     }
   },
   {
@@ -152,7 +152,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Online Billing",
       "heroImage": "/images/other-billing.avif",
-      "icon": "pig-money"
+      "icon": "IconPigMoney"
     }
   },
   {
@@ -163,7 +163,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Biomass",
       "heroImage": "/images/other-biomass.avif",
-      "icon": "wood"
+      "icon": "IconWood"
     }
   },
   {
@@ -174,7 +174,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Electric Vehicles",
       "heroImage": "/images/other-electric-cars.avif",
-      "icon": "car"
+      "icon": "IconCar"
     }
   },
   {
@@ -185,7 +185,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Hydroelectric Power",
       "heroImage": "/images/other-hydroelectric.avif",
-      "icon": "waves-electricity"
+      "icon": "IconWavesElectricity"
     }
   },
   {
@@ -196,7 +196,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "LED Lights",
       "heroImage": "/images/other-led-lights.avif",
-      "icon": "bulb-filled"
+      "icon": "IconBulbFilled"
     }
   },
   {
@@ -207,7 +207,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Nuclear Power",
       "heroImage": "/images/other-nuclear-power.avif",
-      "icon": "atom-2"
+      "icon": "IconAtom2"
     }
   },
   {
@@ -218,7 +218,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Solar Powered Lights",
       "heroImage": "/images/other-solar-lawn-lights.avif",
-      "icon": "bulb"
+      "icon": "IconBulb"
     }
   },
   {
@@ -229,7 +229,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Utility Companies’ Green Programs",
       "heroImage": "/images/other-utilities.avif",
-      "icon": "adjustments-bolt"
+      "icon": "IconAdjustmentsBolt"
     }
   },
   {
@@ -240,7 +240,7 @@ export const solutions = [
       "category": "other",
       "sectionHeader": "Wind Power",
       "heroImage": "/images/other-wind.avif",
-      "icon": "wind-electricity"
+      "icon": "IconWindElectricity"
     }
   }
 ] as const satisfies SolutionPages;

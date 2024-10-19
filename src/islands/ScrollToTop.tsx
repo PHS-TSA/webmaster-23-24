@@ -1,8 +1,8 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Button } from "@headlessui/react";
+import { IconChevronUp } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
-import { IconChevronUp } from "../components/icons.ts";
 import {
   blueButtonStyles,
   floatingButtonStyles,

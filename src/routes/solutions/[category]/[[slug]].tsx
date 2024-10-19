@@ -1,6 +1,7 @@
 import { Head, asset } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { join } from "@std/path";
+import { type Icon, IconSolarPanel, icons } from "@tabler/icons-preact";
 import type { MDXModule } from "@vendor/mdx/types.ts";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
@@ -8,7 +9,6 @@ import type { ComponentType } from "preact";
 import { Content } from "../../../components/Content.tsx";
 import { Cover, type HeroProps } from "../../../components/Cover.tsx";
 import { Meta } from "../../../components/Meta.tsx";
-import { type Icon, IconSolarPanel } from "../../../components/icons.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
 
@@ -51,9 +51,11 @@ export const handler: Handlers<SolutionProps> = {
 
       const file: MDXModule = await import(filepath);
 
-      const icon: Icon = file.frontmatter.icon
-        ? (await import(`$tabler_icons/${file.frontmatter.icon}.tsx`)).default
-        : IconSolarPanel;
+      const icon: Icon =
+        file.frontmatter.icon && Object.hasOwn(icons, file.frontmatter.icon)
+          ? // @ts-expect-error: This is more than just a little hacky, but hey. If it works, it works.
+            icons[file.frontmatter.icon]
+          : IconSolarPanel;
 
       return await ctx.render({ page: file, slug, category, icon });
     } catch (e) {

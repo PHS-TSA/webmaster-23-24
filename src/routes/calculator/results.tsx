@@ -1,10 +1,10 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import { IconCheck } from "@tabler/icons-preact";
 import type { ComponentChildren, JSX } from "preact";
 import CalculatorScaffold from "../../components/CalculatorScaffold.tsx";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
-import { IconCheck } from "../../components/icons.ts";
 import {
   type GeoCostBreakdown,
   geothermalLoopType,

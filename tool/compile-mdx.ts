@@ -244,10 +244,7 @@ function sortFiles(a: VFile, b: VFile): number {
  */
 async function staticImports(files: VFile[]): Promise<void> {
   const fileNames = files.map((file): string => file.path);
-  const icons = files.flatMap((file) =>
-    file.data.matter?.icon ? [file.data.matter.icon] : [],
-  );
-  const fileContent = staticImportsFile(fileNames, icons);
+  const fileContent = staticImportsFile(fileNames);
   await writeGenFile(fileContent, "imports");
 }
 
@@ -273,11 +270,10 @@ function createImports(
  * @param files The names of files.
  * @returns The contents of a Javascript file containing a bunch of FEs.
  */
-function staticImportsFile(files: string[], icons: string[]): string {
+function staticImportsFile(files: string[]): string {
   const contentFiles = createImports(files, (file) => `../content/${file}`);
-  const iconFiles = createImports(icons, (icon) => `$tabler_icons/${icon}.tsx`);
 
-  return `${contentFiles}\n${iconFiles}\n`;
+  return `${contentFiles}\n`;
 }
 
 /**

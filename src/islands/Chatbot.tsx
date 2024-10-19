@@ -10,15 +10,11 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
+import { IconMessageChatbot, IconReload, IconSend } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
-import {
-  IconMessageChatbot,
-  IconReload,
-  IconSend,
-} from "../components/icons.ts";
 import {
   blueButtonStyles,
   floatingButtonStyles,
