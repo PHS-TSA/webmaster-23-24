@@ -92,7 +92,6 @@ export default function Calculator({
             ]}
             current="horizontal"
             required
-            hasInfo={true}
           >
             See{" "}
             <a href="/solutions/geothermal/what/">
