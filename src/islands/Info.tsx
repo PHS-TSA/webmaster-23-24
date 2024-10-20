@@ -1,8 +1,8 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { IconInfoCircle } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import { type ComponentChildren, Fragment, type JSX } from "preact";
-import { IconInfoCircle } from "../components/icons.ts";
 import { prettyFocus } from "../components/styles.ts";
 
 export interface InfoProps {

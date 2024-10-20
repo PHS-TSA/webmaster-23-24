@@ -1,3 +1,4 @@
+import { icons } from "@tabler/icons-preact";
 import { z } from "zod";
 
 /**
@@ -41,7 +42,8 @@ export const solutionDataSchema = z
       .describe("The image to use for the hero."),
     icon: z
       .string()
-      .describe("The url of a Tabler icon. Resolves with the import map"),
+      .refine((value) => Object.hasOwn(icons, value))
+      .describe("The Tabler icon to use for the solution."),
   })
   .passthrough()
   .readonly()

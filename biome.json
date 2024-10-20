@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -14,21 +14,38 @@
       "all": true,
       "nursery": {
         "all": true,
+        "noImgElement": "off",
+        "noNestedTernary": "off",
+        "useComponentExportOnlyModules": "off",
+        "useConsistentCurlyBraces": "off",
+        "useExplicitType": "off",
         "useImportRestrictions": "off",
-        "useSortedClasses": "off",
-        "noConsole": "off",
-        "useDefaultSwitchClause": "off",
-        "noReactSpecificProps": "off",
-        "noLabelWithoutControl": "off"
+        "useSortedClasses": "off"
       },
       "style": {
-        "noImplicitBoolean": "off",
         "noDefaultExport": "off",
-        "useNamingConvention": "off",
-        "useFilenamingConvention": "off"
+        "noImplicitBoolean": "off",
+        "useDefaultSwitchClause": "off",
+        "useFilenamingConvention": "off",
+        "useNamingConvention": "off"
       },
       "complexity": {
         "useLiteralKeys": "off"
+      },
+      "suspicious": {
+        "noConsole": {
+          "level": "warn",
+          "options": {
+            "allow": ["error", "info", "warn"]
+          }
+        },
+        "noReactSpecificProps": "off"
+      },
+      "correctness": {
+        "noUndeclaredDependencies": "off"
+      },
+      "a11y": {
+        "noLabelWithoutControl": "off"
       }
     }
   },
@@ -40,7 +57,7 @@
   },
   "files": {
     "include": ["./src/**/*.ts", "./src/**/*.tsx", "tool/*.ts"],
-    "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json", "deno.json"]
+    "ignore": ["**/*.gen.ts", "src/content/", ".vscode/*.json"]
   },
   "javascript": {
     "globals": ["Deno"]

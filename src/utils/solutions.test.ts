@@ -16,7 +16,7 @@ Deno.test("Solution pages schema.", async (t: Deno.TestContext): Promise<void> =
           category: "",
           sectionHeader: "",
           heroImage: "/images/pic.avif",
-          icon: "",
+          icon: "IconSolarPanel",
         },
       },
     ];

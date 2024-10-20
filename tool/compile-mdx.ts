@@ -29,7 +29,7 @@ declare module "vfile" {
     /**
      * The frontmatter of the file.
      */
-    readonly matter: SolutionData;
+    matter: SolutionData;
   }
 }
 
@@ -185,9 +185,20 @@ async function compileSolution(file: VFile): Promise<VFile> {
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".jsx";
 
-  // @ts-expect-error: The types are a bit off, but I'm feeling lazy.
-  compiled.data.matter.category =
-    compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+  const category = compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+
+  if (compiled.data.matter === undefined || category === undefined) {
+    // If the frontmatter is missing, skip post-processing.
+    console.warn(
+      `Skipping postprocessing for "${compiled.path}" due to missing frontmatter.`,
+    );
+    return compiled;
+  }
+
+  compiled.data.matter = {
+    ...compiled.data.matter,
+    category: category,
+  };
 
   return compiled;
 }
@@ -245,10 +256,7 @@ function sortFiles(a: VFile, b: VFile): number {
  */
 async function staticImports(files: VFile[]): Promise<void> {
   const fileNames = files.map((file): string => file.path);
-  const icons = files.flatMap((file) =>
-    file.data.matter?.icon ? [file.data.matter.icon] : [],
-  );
-  const fileContent = staticImportsFile(fileNames, icons);
+  const fileContent = staticImportsFile(fileNames);
   await writeGenFile(fileContent, "imports");
 }
 
@@ -274,11 +282,10 @@ function createImports(
  * @param files The names of files.
  * @returns The contents of a Javascript file containing a bunch of FEs.
  */
-function staticImportsFile(files: string[], icons: string[]): string {
+function staticImportsFile(files: string[]): string {
   const contentFiles = createImports(files, (file) => `../content/${file}`);
-  const iconFiles = createImports(icons, (icon) => `$tabler_icons/${icon}.tsx`);
 
-  return `${contentFiles}\n${iconFiles}\n`;
+  return `${contentFiles}\n`;
 }
 
 /**

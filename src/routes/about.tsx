@@ -199,21 +199,20 @@ export default function About(): JSX.Element {
             </p>
             <h2>Documentation</h2>
             <div class="flex gap-6">
-              {/* TODO(lishaduck): Update work log */}
-              <a
+              <button
                 class="rounded-md bg-slate-900 p-2 text-slate-100 no-underline hover:bg-slate-800 hover:text-slate-200 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 dark:hover:text-slate-800"
-                role="button"
+                type="button"
                 href={asset("/documentation/copyright-checklist.pdf")}
               >
                 Copyright Checklist
-              </a>
-              <a
+              </button>
+              <button
                 class="rounded-md bg-slate-900 p-2 text-slate-100 no-underline hover:bg-slate-800 hover:text-slate-200 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200 dark:hover:text-slate-800"
-                role="button"
+                type="button"
                 href={asset("/documentation/work-log.pdf")}
               >
                 Work Log
-              </a>
+              </button>
             </div>
           </div>
         </Content>

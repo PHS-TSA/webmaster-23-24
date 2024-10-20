@@ -5,9 +5,9 @@ import {
   PopoverPanel,
   Transition,
 } from "@headlessui/react";
+import { IconChevronDown } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
-import { IconChevronDown } from "../components/icons.ts";
 import { prettyFocus } from "../components/styles.ts";
 import type { Menu } from "../utils/site-organization.ts";
 import { tw } from "../utils/tags.ts";

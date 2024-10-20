@@ -1,5 +1,4 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { render } from "$gfm";
 import {
   Button,
   Fieldset,
@@ -11,15 +10,11 @@ import {
   Transition,
 } from "@headlessui/react";
 import { useSignal, useSignalEffect } from "@preact/signals";
+import { IconMessageChatbot, IconReload, IconSend } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { Fragment, Suspense, useEffect, useRef } from "preact/compat";
 import { Loading } from "../components/Loading.tsx";
-import {
-  IconMessageChatbot,
-  IconReload,
-  IconSend,
-} from "../components/icons.ts";
 import {
   blueButtonStyles,
   floatingButtonStyles,
@@ -30,6 +25,7 @@ import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tags.ts";
+import { Markdown } from "./Markdown.tsx";
 
 export function Chatbot(): JSX.Element {
   const icon = <IconMessageChatbot class="size-8" />;
@@ -155,9 +151,9 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
           <li
             key={`${msg.role}${msg.message}`}
             class={clsx(getReplySide(msg.role), replyStyles)}
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: It's back!
-            dangerouslySetInnerHTML={{ __html: render(msg.message) }}
-          />
+          >
+            <Markdown>{msg.message}</Markdown>
+          </li>
         ))}
       </ul>
 

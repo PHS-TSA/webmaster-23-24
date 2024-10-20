@@ -1,6 +1,10 @@
+import {
+  IconAlertTriangle,
+  IconFlame,
+  IconInfoCircle,
+} from "@tabler/icons-preact";
 import type { JSX, RenderableProps } from "preact";
 import { tw } from "../utils/tags.ts";
-import { IconAlertTriangle, IconFlame, IconInfoCircle } from "./icons.ts";
 
 export type AdmonitionType =
   | "note"
