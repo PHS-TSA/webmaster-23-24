@@ -29,7 +29,7 @@ declare module "vfile" {
     /**
      * The frontmatter of the file.
      */
-    readonly matter: SolutionData;
+    matter: SolutionData;
   }
 }
 
@@ -185,8 +185,20 @@ async function compileSolution(file: VFile): Promise<VFile> {
   const compiled = await compile(file, compileOptions);
   compiled.extname = ".jsx";
 
-  compiled.data.matter.category =
-    compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+  const category = compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+
+  if (compiled.data.matter === undefined || category === undefined) {
+    // If the frontmatter is missing, skip post-processing.
+    console.warn(
+      `Skipping postprocessing for "${compiled.path}" due to missing frontmatter.`,
+    );
+    return compiled;
+  }
+
+  compiled.data.matter = {
+    ...compiled.data.matter,
+    category: category,
+  };
 
   return compiled;
 }
