@@ -11,7 +11,7 @@ import { Meta } from "../../../components/Meta.tsx";
 import { solutions } from "../../../utils/categories.gen.ts";
 import { useCsp } from "../../../utils/csp.ts";
 import type { FreshContextHelper } from "../../../utils/handlers.ts";
-import { hasSlug, isKey } from "../../../utils/type-helpers.ts";
+import { hasSlug } from "../../../utils/type-helpers.ts";
 
 export const config = {
   csp: true,
@@ -51,7 +51,7 @@ export const handler: Handlers<CategoryProps> = {
       if (
         category === undefined ||
         category === "" ||
-        !isKey(categoryMetadata, category)
+        !Object.hasOwn(categoryMetadata, category)
       ) {
         return await ctx.renderNotFound();
       }
@@ -76,10 +76,16 @@ export const handler: Handlers<CategoryProps> = {
         }
       }
 
+      const metadata =
+        categoryMetadata[
+          // See microsoft/TypeScript#44253
+          category as keyof typeof categoryMetadata
+        ];
+
       return await ctx.render({
         pages: categoryPropsPages.parse(data),
-        title: categoryMetadata[category].title,
-        description: categoryMetadata[category].description,
+        title: metadata.title,
+        description: metadata.description,
         heros: data.map((page) => page.picture),
       });
     } catch (e) {

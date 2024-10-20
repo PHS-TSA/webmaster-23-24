@@ -20,7 +20,6 @@ import { type StateData, stateData } from "../../utils/calc/solar.ts";
 import { useCsp } from "../../utils/csp.ts";
 import type { FreshContextHelper } from "../../utils/handlers.ts";
 import { usdFormat, yearFormat } from "../../utils/intl.ts";
-import { isKey } from "../../utils/type-helpers.ts";
 
 export const config = {
   csp: true,
@@ -76,11 +75,15 @@ function parseData(
 
   if (
     geoType.success &&
-    typeof region === "string" &&
-    isKey(stateData, region)
+    region !== undefined &&
+    Object.hasOwn(stateData, region)
   ) {
     return {
-      solarRegionData: stateData[region],
+      solarRegionData:
+        stateData[
+          // See microsoft/TypeScript#44253
+          region as keyof typeof stateData
+        ],
       geoCostData: {
         isHilly: Boolean(isHilly),
         needsRenovations: Boolean(renovations),
