@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer.tsx";
 import { Header } from "../components/Header.tsx";
 import { Chatbot } from "../islands/Chatbot.tsx";
 import { ScrollToTop } from "../islands/ScrollToTop.tsx";
+import { constants as openAiConstants } from "../utils/openai/assistant.ts";
 
 /**
  * Render the layout for all pages.
@@ -24,9 +25,11 @@ export default function Layout({ Component, url }: PageProps): JSX.Element {
       <div class={clsx(buttonPosStyles, "bottom-28")}>
         <ScrollToTop />
       </div>
-      <div class={clsx(buttonPosStyles, "bottom-10")}>
-        <Chatbot />
-      </div>
+      {openAiConstants === undefined ? null : (
+        <div class={clsx(buttonPosStyles, "bottom-10")}>
+          <Chatbot />
+        </div>
+      )}
       <Footer class="mt-auto" />
     </div>
   );

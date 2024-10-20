@@ -22,12 +22,20 @@ import {
 import { chat } from "../sdk/chat/index.ts";
 import { getThreadId } from "../sdk/chat/thread.ts";
 import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
+import { constants as openAiConstants } from "../utils/openai/assistant.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tags.ts";
 import { Markdown } from "./Markdown.tsx";
 
 export function Chatbot(): JSX.Element {
+  if (openAiConstants === undefined) {
+    // This is also handled in the layout,
+    // but this stops us from shooting ourselves in the foot later,
+    // in case we change something.
+    return <></>;
+  }
+
   const icon = <IconMessageChatbot class="size-8" />;
   const buttonStyles = clsx(floatingButtonStyles, blueButtonStyles);
 
