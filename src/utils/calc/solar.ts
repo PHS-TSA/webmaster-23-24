@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { Schema } from "@effect/schema";
 
 export interface StateData {
   /** In years */
@@ -12,7 +12,7 @@ export interface StateData {
   readonly emissions: number;
 }
 
-export type State = z.infer<typeof regionSchema>;
+export type State = typeof RegionSchema.Type;
 
 export const stateData = {
   Alabama: {
@@ -377,11 +377,14 @@ export const stateData = {
 // @ts-expect-error: Typescript types the core JS libs awfully ;).
 export const states: (keyof typeof stateData)[] = Object.keys(stateData);
 
-export const regionSchema = z.custom<keyof typeof stateData>(
-  (region) =>
-    z
-      .string()
-      // @ts-expect-error: And, of course, the stricter states typing breaks this ;).
-      .refine((region2) => states.includes(region2))
-      .safeParse(region).success,
+export const RegionSchema = Schema.declare<keyof typeof stateData>(
+  (region): region is keyof typeof stateData =>
+    Schema.is(
+      Schema.String.pipe(
+        Schema.filter(
+          // @ts-expect-error: And, of course, the stricter states typing breaks this ;).
+          (region) => states.includes(region),
+        ),
+      ),
+    )(region),
 );
