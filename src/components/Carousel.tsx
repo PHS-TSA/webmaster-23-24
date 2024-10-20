@@ -62,7 +62,7 @@ function createCarouselStyles(number: number): string {
     }
 `;
 
-  const delays = Array.from({ length: number })
+  const delayList = Array.from({ length: number })
     .map((_, i) => {
       return css`
         &:nth-child(${i + 1}) {
@@ -73,6 +73,10 @@ function createCarouselStyles(number: number): string {
     `;
     })
     .join("\n");
+  const delays = css`
+    .carousel > img {
+      ${delayList}
+    }`;
 
   return css`
     .carousel > img {
@@ -88,9 +92,7 @@ function createCarouselStyles(number: number): string {
       }
     }
 
-    .carousel > img {
-      ${delays}
-    }
+    ${delays}
 
     ${keyframes}
   `;
