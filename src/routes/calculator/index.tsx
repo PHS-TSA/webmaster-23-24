@@ -28,6 +28,8 @@ export const handler: Handlers<CalculatorSearchProps> = {
     _req: Request,
     ctx: FreshContextHelper<CalculatorSearchProps>,
   ): Promise<Response> {
+    // Debug is true when developing to avoid rate limiting.
+    // If you need to test this code, replace `DEBUG` with `false`.
     const visitor = DEBUG
       ? undefined
       : await getIpLocation(ctx.remoteAddr.hostname);
