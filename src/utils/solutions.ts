@@ -1,3 +1,4 @@
+import { icons } from "@tabler/icons-preact";
 import { z } from "zod";
 
 /**
@@ -41,7 +42,7 @@ export const solutionDataSchema = z
       .describe("The image to use for the hero."),
     icon: z
       .string()
-      .refine((value) => value.match(iconRegex))
+      .refine((value) => Object.hasOwn(icons, value))
       .describe("The Tabler icon to use for the solution."),
   })
   .passthrough()
@@ -49,7 +50,6 @@ export const solutionDataSchema = z
   .describe(solutionDataSchemaDescription);
 
 const avifImageRegex = /images\/.+.avif$/;
-const iconRegex = /^Icon[A-Z][A-Za-z0-9]+$/;
 
 /**
  * Represent a set of solution pages.
