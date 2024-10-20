@@ -22,9 +22,6 @@ export interface SelectorProps<T extends string, U extends T> {
   readonly required?: boolean;
   /** A hacky way to get Fresh to serialize the `info` prop. */
   readonly children?: ComponentChildren;
-  /** A hacky way to get Fresh *not* to serialize the `info` prop. */
-  // TODO(lishaduck): Is this really needed?
-  readonly hasInfo?: boolean;
 }
 
 export interface SelectorListObject<T extends string> {
@@ -56,7 +53,6 @@ export function Selector<T extends string, U extends T>({
   current: currentValue,
   required,
   children: info,
-  hasInfo,
 }: SelectorProps<T, U>): JSX.Element {
   const current = useSignal(
     list.find((val) => val.name === currentValue) ?? { name: "", value: "" },
@@ -109,7 +105,7 @@ export function Selector<T extends string, U extends T>({
       >
         <Label className={labelStyles}>
           {question}
-          {hasInfo && (
+          {info !== undefined && (
             <>
               {" "}
               <Info>{info}</Info>
