@@ -1,39 +1,50 @@
+import { Schema } from "@effect/schema";
 import type { Message } from "openai/resources/beta/threads/messages.ts";
 import type { Thread as OThread } from "openai/resources/beta/threads/threads.ts";
 import type { FileObject as OFileObject } from "openai/resources/mod.ts";
-import { z } from "zod";
 
-export type FileObject = z.infer<typeof fileObjectSchema>;
-export type Thread = z.infer<typeof threadSchema>;
-export type ChatThread = z.infer<typeof chatThreadSchema>;
+export type FileObject = typeof FileObjectSchema.Type;
+export type Thread = typeof ThreadSchema.Type;
+export type ChatThread = typeof ChatThreadSchema.Type;
+export type ChatMessage = typeof MessageSchema.Type;
 
 /**
  * @remarks
- * This is very basic, and doesn't check anything beyond that it's an object.
+ * This is a very unsafe stub.
+ * It does zero validation.
  *
  * @see {@link OFileObject}
  */
-export const fileObjectSchema = z.custom<OFileObject>(
-  (val) => z.object({}).safeParse(val).success,
+export const FileObjectSchema = Schema.declare<OFileObject>(
+  (_): _ is OFileObject => true,
 );
 
 /**
  * @remarks
- * This is very basic, and doesn't check anything beyond that it's an object.
+ * This is a very unsafe stub.
+ * It does zero validation.
  *
  * @see {@link OThread}
  */
-export const threadSchema = z.custom<OThread>(
-  (val) => z.object({}).safeParse(val).success,
-);
+export const ThreadSchema = Schema.declare<OThread>((_): _ is OThread => true);
 
 /**
  * @remarks
- * This is very basic, and doesn't check anything beyond that it's an array of objects.
+ * This is a very unsafe stub.
+ * It does zero validation.
+ *
+ * @see {@link Message}
  */
-export const chatThreadSchema = z.custom<Message[]>(
-  (val) => z.object({}).array().safeParse(val).success,
-);
+export const MessageSchema = Schema.declare<Message>((_): _ is Message => true);
+
+/**
+ * @remarks
+ * This is a very unsafe stub.
+ * It does zero validation.
+ *
+ * @see {@link MessageSchema}
+ */
+export const ChatThreadSchema = Schema.Array(MessageSchema);
 
 export type {
   Message,
