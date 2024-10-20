@@ -140,7 +140,6 @@ function RenderCategory(props: Menu): JSX.Element {
  * @param props.title - The title of the link.
  * @returns The rendered category header.
  */
-// TODO(lishaduck): Add a <Link> component to centralize anchor styling.
 function RenderCategoryHeader({ url, title }: BasicMenu): JSX.Element {
   return (
     <a

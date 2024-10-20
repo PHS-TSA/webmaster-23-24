@@ -168,8 +168,6 @@ function ChatbotBox(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
       <form
         class="py-2 place-items-center"
         onSubmit={async (e) => {
-          // TODO(lishaduck): Enable moderation.
-
           e.preventDefault();
 
           if (threadId.value === undefined) {
