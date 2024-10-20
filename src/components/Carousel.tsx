@@ -6,7 +6,7 @@ import { css } from "../utils/tags.ts";
 import type { HeroProps } from "./Cover.tsx";
 
 export interface CarouselProps extends HeroProps {
-  heros: string[];
+  heros: readonly string[];
   scrollDown?: boolean;
 }
 

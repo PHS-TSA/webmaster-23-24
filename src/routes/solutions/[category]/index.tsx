@@ -1,9 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
+import { Schema } from "@effect/schema";
 import { IconBolt, IconLink } from "@tabler/icons-preact";
 import type { ComponentType, JSX } from "preact";
 import { Fragment } from "preact";
-import { z } from "zod";
 import { Carousel } from "../../../components/Carousel.tsx";
 import { Content } from "../../../components/Content.tsx";
 import { Cover, type HeroProps } from "../../../components/Cover.tsx";
@@ -17,25 +17,27 @@ export const config = {
   csp: true,
 } as const satisfies RouteConfig;
 
-export type CategoryProps = z.infer<typeof categoryProps>;
-export type CategoryPages = z.infer<typeof categoryPropsPages>;
-export type CategoryData = z.infer<typeof categoryPropsPageData>;
+export type CategoryProps = typeof CategoryProps.Type;
+export type CategoryPages = typeof CategoryPropsPages.Type;
+export type CategoryData = typeof CategoryPropsPageData.Type;
 
-export const categoryPropsPageData = z.object({
-  short: z.string(),
-  linkText: z.string(),
-  title: z.string(),
-  linkTo: z.string(),
-  picture: z.string(),
+export const CategoryPropsPageData = Schema.Struct({
+  short: Schema.String,
+  linkText: Schema.String,
+  title: Schema.String,
+  linkTo: Schema.String,
+  picture: Schema.String,
 });
 
-export const categoryPropsPages = categoryPropsPageData.array();
+export const CategoryPropsPages = CategoryPropsPageData.pipe(Schema.Array);
 
-export const categoryProps = z.object({
-  pages: categoryPropsPages,
-  title: z.string(),
-  description: z.string().refine((value) => !value.endsWith(".")),
-  heros: z.string().array(),
+export const CategoryProps = Schema.Struct({
+  pages: CategoryPropsPages,
+  title: Schema.String,
+  description: Schema.String.pipe(
+    Schema.filter((value) => !value.endsWith(".")),
+  ),
+  heros: Schema.String.pipe(Schema.Array),
 });
 
 /**
@@ -83,7 +85,7 @@ export const handler: Handlers<CategoryProps> = {
         ];
 
       return await ctx.render({
-        pages: categoryPropsPages.parse(data),
+        pages: Schema.decodeSync(CategoryPropsPages)(data),
         title: metadata.title,
         description: metadata.description,
         heros: data.map((page) => page.picture),
@@ -184,6 +186,6 @@ export default function Category({
   );
 }
 
-function CategoryCarousel(heros: string[]): ComponentType<HeroProps> {
+function CategoryCarousel(heros: readonly string[]): ComponentType<HeroProps> {
   return ({ children }) => <Carousel heros={heros}>{children}</Carousel>;
 }
