@@ -1,19 +1,35 @@
 import { OpenAI } from "openai";
 import type { FileObject, Message, Thread } from "./schemas.ts";
 
-const client: OpenAI = new OpenAI({
-  baseURL: Deno.env.get("OPENAI_BASE_URL"),
-});
-const ASSISTANT_ID = Deno.env.get("ASSISTANT_ID") ?? "";
+function getClient(): { client: OpenAI; assistant_id: string } | undefined {
+  try {
+    const client: OpenAI = new OpenAI({
+      baseURL: Deno.env.get("OPENAI_BASE_URL"),
+    });
+    const assistant_id = Deno.env.get("ASSISTANT_ID");
 
-export async function newThread(): Promise<Thread> {
+    if (!assistant_id) {
+      // Goes to the catch, then returns undefined.
+      throw new Error("ASSISTANT_ID is required.");
+    }
+
+    return { client, assistant_id };
+  } catch {
+    return undefined;
+  }
+}
+
+export const constants = getClient();
+
+export async function newThread(client: OpenAI): Promise<Thread> {
   return await client.beta.threads.create();
 }
 
 export async function* ask(
   q: string,
   thread_id: string,
-  assistant_id: string = ASSISTANT_ID,
+  assistant_id: string,
+  client: OpenAI,
 ): AsyncGenerator<Message, void, unknown> {
   await client.beta.threads.messages.create(thread_id, {
     role: "user",
@@ -28,6 +44,9 @@ export async function* ask(
   }
 }
 
-export async function retrieve(fileId: string): Promise<FileObject> {
+export async function retrieve(
+  fileId: string,
+  client: OpenAI,
+): Promise<FileObject> {
   return await client.files.retrieve(fileId);
 }
