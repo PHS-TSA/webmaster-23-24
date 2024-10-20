@@ -1,6 +1,7 @@
+import { Schema } from "@effect/schema";
 import {
   type FileObject,
-  fileObjectSchema,
+  FileObjectSchema,
 } from "../../utils/openai/schemas.ts";
 
 export async function getFileData(
@@ -12,7 +13,7 @@ export async function getFileData(
     );
     const json = await res.json();
 
-    return fileObjectSchema.parse(json);
+    return Schema.decodeUnknownSync(FileObjectSchema)(json);
   } catch {
     return undefined;
   }
