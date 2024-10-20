@@ -1,6 +1,7 @@
+import { Schema } from "@effect/schema";
 import {
   type ChatThread,
-  chatThreadSchema,
+  ChatThreadSchema,
 } from "../../utils/openai/schemas.ts";
 
 export async function chat(
@@ -15,7 +16,7 @@ export async function chat(
     );
     const json = await res.json();
 
-    return chatThreadSchema.parse(json);
+    return Schema.decodeUnknownSync(ChatThreadSchema)(json);
   } catch {
     return undefined;
   }
