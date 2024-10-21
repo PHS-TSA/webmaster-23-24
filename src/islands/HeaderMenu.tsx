@@ -9,7 +9,6 @@ import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { prettyFocus } from "../components/styles.ts";
 import type { Menu } from "../utils/site-organization.ts";
-import { tw } from "../utils/tags.ts";
 
 /**
  * Make the text style for the menu.
@@ -18,11 +17,12 @@ import { tw } from "../utils/tags.ts";
  * @returns The text style for the menu.
  */
 function makeTextStyle(active: boolean): string {
-  return tw`py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
+  return clsx(
+    "py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200",
     active
-      ? tw`font-bold text-slate-700 dark:text-slate-200`
-      : tw`text-slate-500 dark:text-slate-400`
-  }`;
+      ? "font-bold text-slate-700 dark:text-slate-200"
+      : "text-slate-500 dark:text-slate-400",
+  );
 }
 
 /**
@@ -32,11 +32,12 @@ function makeTextStyle(active: boolean): string {
  * @returns The border style for the menu.
  */
 function makeBorderStyle(active: boolean): string {
-  return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
+  return clsx(
+    "hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200",
     active
-      ? tw`border-b-2 border-slate-700 dark:border-slate-200`
-      : tw`border-slate-500 dark:border-slate-400`
-  }`;
+      ? "border-b-2 border-slate-700 dark:border-slate-200"
+      : "border-slate-500 dark:border-slate-400",
+  );
 }
 
 /**

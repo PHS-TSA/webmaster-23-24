@@ -10,9 +10,8 @@ import {
 } from "@headlessui/react";
 import { useSignal } from "@preact/signals";
 import { IconCheck, IconChevronDown } from "@tabler/icons-preact";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import type { ComponentChildren, JSX } from "preact";
-import { tw } from "../utils/tags.ts";
 import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {
@@ -130,9 +129,10 @@ export function Selector<T extends string, U extends T>({
                     {({ selected, focus }) => (
                       <>
                         <span
-                          class={tw`block truncate text-left ${
-                            selected ? tw`font-medium` : tw`font-normal`
-                          }`}
+                          class={clsx(
+                            "block truncate text-left ",
+                            selected ? "font-medium" : "font-normal",
+                          )}
                         >
                           {item.name}
                         </span>
