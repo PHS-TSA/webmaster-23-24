@@ -33,7 +33,7 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
       currentIP = ip;
     }
 
-    return await makeRequest<typeof GeoSchema>(
+    return await makeRequest(
       join(geoEndpoint, currentIP ?? "", "json"),
       GeoSchema,
     );
@@ -52,7 +52,7 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
 async function makeRequest<
   T extends Schema.Schema<A>,
   A = Schema.Schema.Type<T>,
->(endpoint: string, schema: T): Promise<A> {
+>(endpoint: string, schema: T): Promise<NoInfer<A>> {
   // Send the request.
   const res = await fetch(endpoint);
 
