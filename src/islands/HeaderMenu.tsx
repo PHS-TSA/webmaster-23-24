@@ -1,4 +1,3 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
 import {
   Popover,
   PopoverButton,
@@ -52,15 +51,11 @@ export interface WithActive {
 
 export function menuButtonStyles(active: boolean): string {
   return clsx(
-    tw`flex h-8 flex-row gap-0.5 whitespace-nowrap rounded-sm p-1 focus-visible:outline-none focus-visible:ring-1`,
+    "flex h-8 flex-row gap-0.5 whitespace-nowrap rounded-sm p-1 focus-visible:outline-none focus-visible:ring-1",
     prettyFocus,
     makeBorderStyle(active),
     makeTextStyle(active),
   );
-}
-
-function ButtonIcon(): JSX.Element {
-  return <IconChevronDown size={24} class="size-6" aria-hidden="true" />;
 }
 
 /**
@@ -81,28 +76,19 @@ export function HeaderMenu({
   items,
   active,
 }: Menu & WithActive): JSX.Element {
-  if (!IS_BROWSER) {
-    return (
-      <div class={menuButtonStyles(active)}>
-        <div>{title}</div>
-        <ButtonIcon />
-      </div>
-    );
-  }
-
   return (
     <Popover>
       <PopoverButton className={menuButtonStyles(active)}>
         {title}
-        <ButtonIcon />
+        <IconChevronDown size={24} class="size-6" aria-hidden="true" />
       </PopoverButton>
       <Transition
-        enter={tw`transition ease-out duration-200`}
-        enterFrom={tw`opacity-0 translate-y-1`}
-        enterTo={tw`opacity-100 translate-y-0`}
-        leave={tw`transition ease-in duration-150`}
-        leaveFrom={tw`opacity-100 translate-y-0`}
-        leaveTo={tw`opacity-0 translate-y-1`}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
       >
         <PopoverPanel
           className="animate-anchor-gap z-30 origin-top-right rounded-md shadow-2xl"
