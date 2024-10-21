@@ -11,12 +11,15 @@
   },
   "editor.codeActionsOnSave": {
     "quickfix.biome": "always",
+    "source.fixAll.biome": "always",
     "source.organizeImports.biome": "always"
   },
   "css.customData": [".vscode/tailwind.json"],
   "tailwindCSS.experimental.classRegex": [
     "tw`([^`]*)",
-    ["tw\\(([^\\)]*)\\)", "`([^`]*)`"]
+    ["tw\\(([^\\)]*)\\)", "`([^`]*)`"],
+    "(?:enter|leave)(?:From|To)?=\\s*(?:\"|'|{`)([^(?:\"|'|`})]*)",
+    ["clsx\\(.*?\\)(?!\\])", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
   ],
   "explorer.fileNesting.patterns": {
     "*.mdx": "${capture}.js"
