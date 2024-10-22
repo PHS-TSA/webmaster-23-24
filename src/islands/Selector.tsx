@@ -12,6 +12,7 @@ import { useSignal } from "@preact/signals";
 import { IconCheck, IconChevronDown } from "@tabler/icons-preact";
 import { clsx } from "clsx";
 import type { ComponentChildren, JSX } from "preact";
+import { tw } from "../utils/tags.ts";
 import { Info } from "./Info.tsx";
 
 export interface SelectorProps<T extends string, U extends T> {
@@ -29,6 +30,13 @@ export interface SelectorListObject<T extends string> {
   value: T;
 }
 
+const wrapperStyles = tw`top-16 flex w-48 md:w-72 flex-col items-center gap-4`;
+const labelStyles = tw`md:text-lg`;
+const detach1Styles = tw`relative mt-1 w-min`;
+const detach2Styles = tw`relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2  sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75`;
+const inputStyles = tw`rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800`;
+const buttonStyles = tw`absolute inset-y-0 right-0 flex items-center pr-2`;
+
 function ButtonIcon(): JSX.Element {
   return (
     <IconChevronDown
@@ -38,6 +46,8 @@ function ButtonIcon(): JSX.Element {
     />
   );
 }
+
+const buttonTitle = "Options";
 
 export function Selector<T extends string, U extends T>({
   name,
@@ -52,6 +62,29 @@ export function Selector<T extends string, U extends T>({
   );
   const query = useSignal("");
 
+  // FIXME(lishaduck): The infos break again we just use HeadlessUI's SSR.
+  if (!IS_BROWSER) {
+    return (
+      <div class={wrapperStyles}>
+        <label class={labelStyles}>{question}</label>
+        <div class={detach1Styles}>
+          <div class={detach2Styles}>
+            <input
+              class={inputStyles}
+              autoComplete="off"
+              required={required}
+              value={current.value?.name}
+              aria-label={question}
+            />
+            <button title={buttonTitle} type="button" class={buttonStyles}>
+              <ButtonIcon />
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const filtered = list.filter((item) =>
     item.name
       .toLowerCase()
@@ -60,7 +93,7 @@ export function Selector<T extends string, U extends T>({
   );
 
   return (
-    <div class="top-16 flex w-48 md:w-72 flex-col items-center gap-4">
+    <div class={wrapperStyles}>
       <Combobox
         name={name}
         disabled={!IS_BROWSER}
@@ -74,7 +107,7 @@ export function Selector<T extends string, U extends T>({
           query.value = "";
         }}
       >
-        <Label className="md:text-lg">
+        <Label className={labelStyles}>
           {question}
           {info !== undefined && (
             <>
@@ -83,10 +116,10 @@ export function Selector<T extends string, U extends T>({
             </>
           )}
         </Label>
-        <div class="relative mt-1 w-min">
-          <div class="relative w-full cursor-default rounded-lg bg-slate-200 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-50/75 focus-visible:ring-offset-2  sm:text-sm dark:bg-slate-800 dark:focus-visible:ring-slate-950/75">
+        <div class={detach1Styles}>
+          <div class={detach2Styles}>
             <ComboboxInput
-              className="rounded border-2 border-slate-500 bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-800"
+              className={inputStyles}
               autoComplete="off"
               required={required}
               displayValue={(state: SelectorListObject<T>) => `${state.name}`}
@@ -96,10 +129,7 @@ export function Selector<T extends string, U extends T>({
                 }
               }}
             />
-            <ComboboxButton
-              title="Options"
-              className="absolute inset-y-0 right-0 flex items-center pr-2"
-            >
+            <ComboboxButton title={buttonTitle} className={buttonStyles}>
               <ButtonIcon />
             </ComboboxButton>
           </div>
