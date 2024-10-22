@@ -96,7 +96,7 @@
     }
   },
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "precompile",
     "jsxImportSource": "preact",
     "strict": true,
     "noFallthroughCasesInSwitch": true,
