@@ -20,6 +20,10 @@ on:
 permissions:
   contents: read # Needed to clone the repository
 
+defaults:
+  run:
+    shell: bash
+
 env:
   CI: true
   DENO_VERSION: v2.0.2

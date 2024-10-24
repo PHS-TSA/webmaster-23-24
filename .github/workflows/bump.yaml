@@ -1,0 +1,37 @@
+---
+name: Bump
+
+on:
+  schedule:
+    - cron: "0 14 * * *" # every day at 9 in the morning CST
+  workflow_dispatch:
+
+permissions:
+  contents: read # Needed to clone the repository
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CI: true
+
+jobs:
+  bump:
+    name: Bump dependencies
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Needed to write bump branches
+      pull-requests: write # Needed to write bump PRs
+
+    steps:
+      - name: 📚 Git checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          submodules: recursive
+          clean: true
+          persist-credentials: false
+          set-safe-directory: true
+      - name: 🐣 Bump dependencies
+        uses: hasundue/molt-action@2042116c4f16e14c08c98130f1470c19c5cbfd2f # v1.0.2
