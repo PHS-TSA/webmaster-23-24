@@ -35,7 +35,7 @@
     "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.15",
     "@types/hast": "npm:@types/hast@3.0.4",
     "@vendor/": "./vendor/",
-    "clsx": "npm:clsx@2.1.1",
+    "clsx": "npm:clsx@2.1.1/lite",
     "idb-keyval": "npm:idb-keyval@6.2.1",
     "openai": "https://deno.land/x/openai@v4.50.0/mod.ts",
     "openai/": "https://deno.land/x/openai@v4.50.0/",
@@ -96,7 +96,7 @@
     }
   },
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "precompile",
     "jsxImportSource": "preact",
     "strict": true,
     "noFallthroughCasesInSwitch": true,

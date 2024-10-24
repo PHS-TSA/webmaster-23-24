@@ -3,6 +3,7 @@ import {
   IconFlame,
   IconInfoCircle,
 } from "@tabler/icons-preact";
+import { clsx } from "clsx";
 import type { JSX, RenderableProps } from "preact";
 import { tw } from "../utils/tags.ts";
 
@@ -82,9 +83,10 @@ export function Admonition({
 }: RenderableProps<AdmonitionProps>): JSX.Element {
   return (
     <div
-      class={`flex w-2/3 flex-col divide-y rounded-lg border-2 *:px-4 ${getAdmonitionStyles(
-        type,
-      )}`}
+      class={clsx(
+        "flex w-2/3 flex-col divide-y rounded-lg border-2 *:px-4",
+        getAdmonitionStyles(type),
+      )}
     >
       <div class="flex flex-row items-center *:mr-4">
         <AdmonitionIcon type={type} /> {getTitle(type)}

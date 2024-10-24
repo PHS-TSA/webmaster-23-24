@@ -34,12 +34,6 @@ interface CardMedia {
 }
 
 function Card({ children, cols, media }: CardProps): JSX.Element {
-  const mediaStyle = `rounded md:row-start-1 md:row-end-2 ${
-    media.side === "left"
-      ? "md:col-start-1 md:col-end-2"
-      : "md:col-start-4 md:col-end-5"
-  }`;
-
   return (
     <div
       class={clsx(
@@ -50,17 +44,23 @@ function Card({ children, cols, media }: CardProps): JSX.Element {
       <img
         src={asset(media.src)}
         alt={media.alt}
-        class={clsx(mediaStyle, "shadow-md")}
+        class={clsx(
+          "rounded shadow-md md:row-start-1 md:row-end-2",
+          media.side === "left"
+            ? "md:col-start-1 md:col-end-2"
+            : "md:col-start-4 md:col-end-5",
+        )}
         height={media.height}
         width={media.width}
       />
 
       <p
-        class={`prose prose-xl prose-slate max-w-full p-4 dark:prose-invert md:row-start-1 md:row-end-2 ${
+        class={clsx(
+          "prose prose-xl prose-slate max-w-full p-4 dark:prose-invert md:row-start-1 md:row-end-2",
           media.side === "left"
             ? "md:col-start-2 md:col-end-5"
-            : "md:col-start-1 md:col-end-4"
-        }`}
+            : "md:col-start-1 md:col-end-4",
+        )}
       >
         {children}
       </p>

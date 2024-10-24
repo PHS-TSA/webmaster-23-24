@@ -1,4 +1,3 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
 import { Button } from "@headlessui/react";
 import { IconChevronUp } from "@tabler/icons-preact";
 import { clsx } from "clsx";
@@ -13,33 +12,15 @@ function scrollToTop(): void {
   globalThis.scrollTo({ top: 0 });
 }
 
-const scrollToTopButtonStyles = tw`opacity-0 appear-10%`;
-const scrollToTopButtonLabel = "Scroll back to the top of the page.";
-
 export function ScrollToTop(): JSX.Element {
-  const buttonStyles = clsx(
-    floatingButtonStyles,
-    blueButtonStyles,
-    scrollToTopButtonStyles,
-  );
-
-  if (!IS_BROWSER) {
-    return (
-      <button
-        type="button"
-        aria-label={scrollToTopButtonLabel}
-        class={buttonStyles}
-        onClick={scrollToTop}
-      >
-        <IconChevronUp />
-      </button>
-    );
-  }
-
   return (
     <Button
-      aria-label={scrollToTopButtonLabel}
-      className={buttonStyles}
+      aria-label="Scroll back to the top of the page."
+      className={clsx(
+        floatingButtonStyles,
+        blueButtonStyles,
+        tw`opacity-0 appear-10%`,
+      )}
       onClick={scrollToTop}
     >
       <IconChevronUp />

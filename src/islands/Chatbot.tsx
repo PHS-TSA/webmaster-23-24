@@ -22,44 +22,30 @@ import {
 import { chat } from "../sdk/chat/index.ts";
 import { getThreadId } from "../sdk/chat/thread.ts";
 import { setIndexedDb, useIndexedDb } from "../utils/hooks/indexeddb.ts";
-import { constants as openAiConstants } from "../utils/openai/assistant.ts";
 import { formatRefs } from "../utils/openai/references.ts";
 import type { Message } from "../utils/openai/schemas.ts";
 import { tw } from "../utils/tags.ts";
 import { Markdown } from "./Markdown.tsx";
 
 export function Chatbot(): JSX.Element {
-  if (openAiConstants === undefined) {
-    // This is also handled in the layout,
-    // but this stops us from shooting ourselves in the foot later,
-    // in case we change something.
-    return <></>;
-  }
-
   const icon = <IconMessageChatbot class="size-8" />;
-  const buttonStyles = clsx(floatingButtonStyles, blueButtonStyles);
-
-  if (!IS_BROWSER) {
-    return (
-      <button type="button" class={buttonStyles}>
-        {icon}
-      </button>
-    );
-  }
 
   return (
     <Popover>
-      <PopoverButton className={buttonStyles} aria-label="Meet our Chatbot!">
+      <PopoverButton
+        className={clsx(floatingButtonStyles, blueButtonStyles)}
+        aria-label="Meet our Chatbot!"
+      >
         {icon}
       </PopoverButton>
       <Transition
         appear={true}
-        enter={tw`transition-opacity duration-75`}
-        enterFrom={tw`opacity-0`}
-        enterTo={tw`opacity-100`}
-        leave={tw`transition-opacity duration-150`}
-        leaveFrom={tw`opacity-100`}
-        leaveTo={tw`opacity-0`}
+        enter="transition-opacity duration-75"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-150"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
       >
         <PopoverPanel>
           <Suspense fallback={<Fragment />}>

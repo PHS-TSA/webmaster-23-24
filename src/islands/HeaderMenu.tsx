@@ -1,4 +1,3 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
 import {
   Popover,
   PopoverButton,
@@ -10,7 +9,6 @@ import { clsx } from "clsx";
 import type { JSX } from "preact";
 import { prettyFocus } from "../components/styles.ts";
 import type { Menu } from "../utils/site-organization.ts";
-import { tw } from "../utils/tags.ts";
 
 /**
  * Make the text style for the menu.
@@ -19,11 +17,12 @@ import { tw } from "../utils/tags.ts";
  * @returns The text style for the menu.
  */
 function makeTextStyle(active: boolean): string {
-  return tw`py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200 ${
+  return clsx(
+    "py-1 hover:text-slate-700 data-[current]:font-bold dark:hover:text-slate-200",
     active
-      ? tw`font-bold text-slate-700 dark:text-slate-200`
-      : tw`text-slate-500 dark:text-slate-400`
-  }`;
+      ? "font-bold text-slate-700 dark:text-slate-200"
+      : "text-slate-500 dark:text-slate-400",
+  );
 }
 
 /**
@@ -33,11 +32,12 @@ function makeTextStyle(active: boolean): string {
  * @returns The border style for the menu.
  */
 function makeBorderStyle(active: boolean): string {
-  return tw` hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200 ${
+  return clsx(
+    "hover:border-slate-700 data-[current]:border-b-2 dark:hover:border-slate-200",
     active
-      ? tw`border-b-2 border-slate-700 dark:border-slate-200`
-      : tw`border-slate-500 dark:border-slate-400`
-  }`;
+      ? "border-b-2 border-slate-700 dark:border-slate-200"
+      : "border-slate-500 dark:border-slate-400",
+  );
 }
 
 /**
@@ -52,15 +52,11 @@ export interface WithActive {
 
 export function menuButtonStyles(active: boolean): string {
   return clsx(
-    tw`flex h-8 flex-row gap-0.5 whitespace-nowrap rounded-sm p-1 focus-visible:outline-none focus-visible:ring-1`,
+    "flex h-8 flex-row gap-0.5 whitespace-nowrap rounded-sm p-1 focus-visible:outline-none focus-visible:ring-1",
     prettyFocus,
     makeBorderStyle(active),
     makeTextStyle(active),
   );
-}
-
-function ButtonIcon(): JSX.Element {
-  return <IconChevronDown size={24} class="size-6" aria-hidden="true" />;
 }
 
 /**
@@ -81,28 +77,19 @@ export function HeaderMenu({
   items,
   active,
 }: Menu & WithActive): JSX.Element {
-  if (!IS_BROWSER) {
-    return (
-      <div class={menuButtonStyles(active)}>
-        <div>{title}</div>
-        <ButtonIcon />
-      </div>
-    );
-  }
-
   return (
     <Popover>
       <PopoverButton className={menuButtonStyles(active)}>
         {title}
-        <ButtonIcon />
+        <IconChevronDown size={24} class="size-6" aria-hidden="true" />
       </PopoverButton>
       <Transition
-        enter={tw`transition ease-out duration-200`}
-        enterFrom={tw`opacity-0 translate-y-1`}
-        enterTo={tw`opacity-100 translate-y-0`}
-        leave={tw`transition ease-in duration-150`}
-        leaveFrom={tw`opacity-100 translate-y-0`}
-        leaveTo={tw`opacity-0 translate-y-1`}
+        enter="transition ease-out duration-200"
+        enterFrom="opacity-0 translate-y-1"
+        enterTo="opacity-100 translate-y-0"
+        leave="transition ease-in duration-150"
+        leaveFrom="opacity-100 translate-y-0"
+        leaveTo="opacity-0 translate-y-1"
       >
         <PopoverPanel
           className="animate-anchor-gap z-30 origin-top-right rounded-md shadow-2xl"

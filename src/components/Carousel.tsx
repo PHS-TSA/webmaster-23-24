@@ -64,13 +64,13 @@ function createCarouselStyles(number: number): string {
 
   const delayList = Array.from({ length: number })
     .map((_, i) => {
+      const animationDelay =
+        (i * 2 * visibilityPercentage * totalAnimationTime) / 100;
+
       return css`
         &:nth-child(${i + 1}) {
-          animation-delay: ${
-            (i * 2 * visibilityPercentage * totalAnimationTime) / 100
-          }s;
-        }
-    `;
+          animation-delay: ${animationDelay}s;
+        }`;
     })
     .join("\n");
   const delays = css`
