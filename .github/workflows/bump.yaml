@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 14 * * *" # every day at 9 in the morning CST
   workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/bump.yaml
 
 permissions:
   contents: read # Needed to clone the repository
