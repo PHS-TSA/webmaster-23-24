@@ -1,4 +1,4 @@
-import { Schema } from "@effect/schema";
+import { Schema } from "effect";
 import type { Message } from "openai/resources/beta/threads/messages.ts";
 import type { Thread as OThread } from "openai/resources/beta/threads/threads.ts";
 import type { FileObject as OFileObject } from "openai/resources/mod.ts";

@@ -1,4 +1,4 @@
-import { Schema } from "@effect/schema";
+import { Schema } from "effect";
 import { type Thread, ThreadSchema } from "../../utils/openai/schemas.ts";
 
 export async function getThread(): Promise<Thread | undefined> {

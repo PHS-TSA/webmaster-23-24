@@ -1,8 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Schema } from "@effect/schema";
 import { IconCheck } from "@tabler/icons-preact";
-import { Either } from "effect";
+import { Either, Schema } from "effect";
 import type { ComponentChildren, JSX } from "preact";
 import CalculatorScaffold from "../../components/CalculatorScaffold.tsx";
 import { Cover } from "../../components/Cover.tsx";

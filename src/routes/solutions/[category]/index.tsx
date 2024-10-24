@@ -1,7 +1,7 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
-import { Schema } from "@effect/schema";
 import { IconBolt, IconLink } from "@tabler/icons-preact";
+import { Schema } from "effect";
 import type { ComponentType, JSX } from "preact";
 import { Fragment } from "preact";
 import { Carousel } from "../../../components/Carousel.tsx";
