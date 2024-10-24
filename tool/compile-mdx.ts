@@ -1,6 +1,6 @@
-import { type ParseResult, Schema } from "@effect/schema";
 import { type CompileOptions, compile } from "@mdx-js/mdx";
 import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
+import { type ParseResult, Schema } from "effect";
 import { Cause, Chunk, Console, Effect, Either, Order, Stream } from "effect";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";

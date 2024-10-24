@@ -1,5 +1,5 @@
-import { ParseResult, Schema } from "@effect/schema";
 import { assertEquals, assertThrows } from "@std/assert";
+import { ParseResult, Schema } from "effect";
 import { SolutionPagesSchema } from "./solutions.ts";
 
 /**

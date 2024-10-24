@@ -3,8 +3,8 @@
  * @module
  */
 
-import { Schema } from "@effect/schema";
 import { join } from "@std/path";
+import { Schema } from "effect";
 import { RegionSchema } from "./calc/solar.ts";
 
 export type Geo = typeof GeoSchema.Type;

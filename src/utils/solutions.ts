@@ -1,5 +1,5 @@
-import { Schema } from "@effect/schema";
 import { icons } from "@tabler/icons-preact";
+import { Schema } from "effect";
 
 /**
  * The metadata for a solution.
