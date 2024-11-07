@@ -4,15 +4,14 @@
  */
 
 import { join } from "@std/path";
-import { z } from "zod";
-import { regionSchema } from "./calc/solar.ts";
-import type { ZodTypeUnknown } from "./zod.ts";
+import { Schema } from "effect";
+import { RegionSchema } from "./calc/solar.ts";
 
-export type Geo = z.infer<typeof geoSchema>;
-type Ip = z.infer<typeof ipSchema>;
+export type Geo = typeof GeoSchema.Type;
+type Ip = typeof IpSchema.Type;
 
-export const geoSchema = z.object({ region: regionSchema });
-const ipSchema = z.object({ ip: z.string() });
+export const GeoSchema = Schema.Struct({ region: RegionSchema });
+const IpSchema = Schema.Struct({ ip: Schema.String });
 
 const ipEndpoint = "https://api.ipify.org";
 const geoEndpoint = "https://ipapi.co";
@@ -36,7 +35,7 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
 
     return await makeRequest(
       join(geoEndpoint, currentIP ?? "", "json"),
-      geoSchema,
+      GeoSchema,
     );
   } catch {
     return undefined;
@@ -47,18 +46,18 @@ export async function getIpLocation(ip?: string): Promise<Geo | undefined> {
  * Query a JSON API and validate the response.
  *
  * @param endpoint - The API to query (GET).
- * @param schema - The Zod schema to validate the data against.
+ * @param schema - The schema to validate the data against.
  * @returns - The validated API content.
  */
-async function makeRequest<T extends ZodTypeUnknown>(
-  endpoint: string,
-  schema: T,
-): Promise<z.infer<T>> {
+async function makeRequest<
+  T extends Schema.Schema<A>,
+  A = Schema.Schema.Type<T>,
+>(endpoint: string, schema: T): Promise<NoInfer<A>> {
   // Send the request.
   const res = await fetch(endpoint);
 
   // Validate the response.
-  return schema.parse(await res.json());
+  return Schema.decodeUnknownSync(schema)(await res.json());
 }
 
 /**
@@ -66,5 +65,5 @@ async function makeRequest<T extends ZodTypeUnknown>(
  */
 function getIp(): Promise<Ip> {
   // make http request and return the IP as json
-  return makeRequest(`${ipEndpoint}?format=json`, ipSchema);
+  return makeRequest(`${ipEndpoint}?format=json`, IpSchema);
 }

@@ -1,5 +1,7 @@
 import { type CompileOptions, compile } from "@mdx-js/mdx";
-import { dirname, fromFileUrl, join, resolve } from "@std/path";
+import { dirname, fromFileUrl, join, relative, resolve } from "@std/path";
+import { type ParseResult, Schema } from "effect";
+import { Cause, Chunk, Console, Effect, Either, Order, Stream } from "effect";
 import rehypeMathjax from "rehype-mathjax";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkLintCheckboxContentIndent from "remark-lint-checkbox-content-indent";
@@ -19,10 +21,11 @@ import { matter } from "vfile-matter";
 import { type Options as LintOptions, reporter } from "vfile-reporter";
 import {
   type SolutionData,
+  SolutionPagesSchema,
   categoryList,
-  solutionPagesSchema,
   titleList,
 } from "../src/utils/solutions.ts";
+import { readTextFile, walkDir, writeTextFile } from "./effect-deno.ts";
 
 declare module "vfile" {
   export interface DataMap {
@@ -44,26 +47,22 @@ const utilsDir = join(srcDir, "utils");
 /**
  * Compile the MDX files into JS.
  */
-async function run(): Promise<void> {
+const program = Effect.gen(function* () {
   const initialFiles = getSolutions(contentDir);
   const compiledFiles = compileSolutions(initialFiles);
 
-  const files: VFile[] = [];
-  for await (const file of compiledFiles) {
-    files.push(file);
-  }
-  files.sort(sortFiles);
+  const chunk = yield* compiledFiles.pipe(Stream.runCollect);
+  const files = chunk.pipe(Chunk.sort(sortFiles)).pipe(Chunk.toArray);
 
-  lint(files);
-
-  await Promise.all([
+  yield* Effect.all([
+    lint(files),
     writeSolutions(files),
     staticImports(files),
     categories(files),
   ]);
 
-  console.info(`Compiled ${files.length} MDX files into JS.`);
-}
+  yield* Console.info(`Compiled ${files.length} MDX files into JS.`);
+});
 
 /**
  * Get all of the MDX files in a directory.
@@ -74,21 +73,23 @@ async function run(): Promise<void> {
  * @remarks
  * This is an async generator because it's recursive.
  */
-async function* getSolutions(
+const getSolutions = (
   basePath: string,
-  currentPath = "",
-): AsyncGenerator<VFile, void, unknown> {
-  for await (const entry of Deno.readDir(resolve(basePath, currentPath))) {
-    const fullPath = resolve(basePath, currentPath, entry.name);
-    if (entry.isFile && entry.name.match(mdxRegex) !== null) {
-      yield getSolution(fullPath, currentPath, entry.name);
-    } else if (entry.isDirectory) {
-      yield* getSolutions(basePath, join(currentPath, entry.name));
-    }
-  }
-}
-
-const mdxRegex = /\.mdx?$/;
+): Stream.Stream<VFile, Cause.UnknownException> =>
+  walkDir(basePath, (e) => new Cause.UnknownException(e), {
+    exts: ["mdx"],
+  })
+    .pipe(Stream.filter((entry) => entry.isFile))
+    .pipe(
+      Stream.mapEffect((entry) =>
+        getSolution(
+          entry.path,
+          dirname(relative(basePath, entry.path)),
+          basePath,
+          entry.name,
+        ),
+      ),
+    );
 
 /**
  * Get the contents of a file.
@@ -98,20 +99,22 @@ const mdxRegex = /\.mdx?$/;
  * @param fileName - The name of the file.
  * @returns The file's contents.
  */
-async function getSolution(
+const getSolution = (
   fullPath: string,
   relPath: string,
+  basePath: string,
   fileName: string,
-): Promise<VFile> {
-  const fileContent = await Deno.readTextFile(fullPath);
+): Effect.Effect<VFile, Cause.UnknownException> =>
+  Effect.gen(function* () {
+    const fileContent = yield* readTextFile(fullPath);
 
-  return new VFile({
-    value: fileContent,
-    dirname: relPath,
-    basename: fileName,
-    cwd: fullPath,
+    return new VFile({
+      value: fileContent,
+      dirname: relPath,
+      basename: fileName,
+      cwd: basePath,
+    });
   });
-}
 
 /** Options for the lint reporter. */
 const lintReportOptions = {
@@ -123,13 +126,13 @@ const lintReportOptions = {
  *
  * @param files Markdown files.
  */
-function lint(files: VFile[]): void {
-  const lints = reporter(files, lintReportOptions);
-  if (lints !== "") {
-    console.error(lints);
-    Deno.exit(1);
-  }
-}
+const lint = (files: VFile[]): Effect.Effect<void, string> =>
+  Effect.gen(function* () {
+    const lints = yield* Effect.sync(() => reporter(files, lintReportOptions));
+    if (lints !== "") {
+      yield* Effect.fail(lints);
+    }
+  });
 
 /**
  * Compile MDX files into Preact JSX files.
@@ -137,13 +140,10 @@ function lint(files: VFile[]): void {
  * @param initialFiles A list of virtual MDX files for compilation.
  * @returns A list of virtual JS files.
  */
-async function* compileSolutions(
-  initialFiles: AsyncIterable<VFile>,
-): AsyncGenerator<VFile, void, unknown> {
-  for await (const entry of initialFiles) {
-    yield compileSolution(entry);
-  }
-}
+const compileSolutions = (
+  initialFiles: Stream.Stream<VFile, Cause.UnknownException>,
+): Stream.Stream<VFile, Cause.UnknownException> =>
+  initialFiles.pipe(Stream.mapEffect(compileSolution));
 
 /**
  * Plugins for the MDX compilation.
@@ -179,41 +179,44 @@ const compileOptions = {
  * @param file A virtual MDX file.
  * @returns A virtual JS file.
  */
-async function compileSolution(file: VFile): Promise<VFile> {
-  matter(file); // Extract the frontmatter into `data.matter`.
+const compileSolution = (
+  file: VFile,
+): Effect.Effect<VFile, Cause.UnknownException> =>
+  Effect.gen(function* () {
+    yield* Effect.sync(() => matter(file)); // Extract the frontmatter into `data.matter`.
 
-  const compiled = await compile(file, compileOptions);
-  compiled.extname = ".jsx";
+    const compiled = yield* Effect.promise(() => compile(file, compileOptions));
+    compiled.extname = ".jsx";
 
-  const category = compiled.dirname !== "." ? compiled.dirname : compiled.stem;
+    const category =
+      compiled.dirname !== "." ? compiled.dirname : compiled.stem;
 
-  if (compiled.data.matter === undefined || category === undefined) {
-    // If the frontmatter is missing, skip post-processing.
-    console.warn(
-      `Skipping postprocessing for "${compiled.path}" due to missing frontmatter.`,
-    );
+    if (compiled.data.matter === undefined || category === undefined) {
+      // If the frontmatter is missing, skip post-processing.
+      console.warn(
+        `Skipping postprocessing for "${compiled.path}" due to missing frontmatter.`,
+      );
+      return compiled;
+    }
+
+    compiled.data = {
+      ...compiled.data,
+      matter: {
+        ...compiled.data.matter,
+        category: category,
+      },
+    };
+
     return compiled;
-  }
+  });
 
-  compiled.data = {
-    ...compiled.data,
-    matter: {
-      ...compiled.data.matter,
-      category: category,
-    },
-  };
-
-  return compiled;
-}
-
-async function writeSolutions(solutions: VFile[]): Promise<void> {
-  const promises: Promise<void>[] = [];
-  for (const solution of solutions) {
-    promises.push(writeSolution(solution));
-  }
-
-  await Promise.all(promises);
-}
+const writeSolutions = (
+  solutions: VFile[],
+): Effect.Effect<void, Cause.UnknownException> =>
+  Effect.all(
+    solutions.map((solution) => writeSolution(solution)),
+    { concurrency: "unbounded" },
+  );
 
 /**
  * Write the file to the disk.
@@ -221,47 +224,50 @@ async function writeSolutions(solutions: VFile[]): Promise<void> {
  * @param solution A file to write.
  * @returns A promise resolving when the file's written.
  */
-async function writeSolution(solution: VFile): Promise<void> {
-  return await Deno.writeTextFile(
-    join(contentDir, solution.path),
-    solution.toString(),
-  );
-}
+const writeSolution = (
+  solution: VFile,
+): Effect.Effect<void, Cause.UnknownException, never> =>
+  writeTextFile(join(contentDir, solution.path), solution.toString());
 
-function sortFiles(a: VFile, b: VFile): number {
+// Adjusting compareByCategory to use Order.Order<VFile>
+const compareByCategory: Order.Order<VFile> = (a, b) => {
   const aCategory = a.data.matter?.category ?? "";
   const bCategory = b.data.matter?.category ?? "";
-  const aSlug = a.stem ?? "";
-  const bSlug = b.stem ?? "";
-
   const aCategoryIndex = categoryList.indexOf(aCategory);
   const bCategoryIndex = categoryList.indexOf(bCategory);
-  const aSlugIndex = titleList.indexOf(aSlug);
-  const bSlugIndex = titleList.indexOf(bSlug);
+  return Order.number(
+    aCategoryIndex === -1 ? Number.POSITIVE_INFINITY : aCategoryIndex,
+    bCategoryIndex === -1 ? Number.POSITIVE_INFINITY : bCategoryIndex,
+  );
+};
 
-  // If the category is not found in the list, set the index to Infinity.
-  const categoryComparison =
-    (aCategoryIndex === -1 ? Number.POSITIVE_INFINITY : aCategoryIndex) -
-    (bCategoryIndex === -1 ? Number.POSITIVE_INFINITY : bCategoryIndex);
+const compareBySlug = Order.combine<VFile>(
+  (a, b) => {
+    const aSlugIndex = titleList.indexOf(a.stem ?? "");
+    const bSlugIndex = titleList.indexOf(b.stem ?? "");
 
-  // If the slug is not found in the list, sort alphabetically.
-  const slugComparison =
-    aSlugIndex === -1 || bSlugIndex === -1
-      ? aSlug.localeCompare(bSlug)
-      : aSlugIndex - bSlugIndex;
+    // Compare indices if both slugs are found, otherwise return 0 to defer to the next orderer
+    return aSlugIndex !== -1 && bSlugIndex !== -1
+      ? Order.number(aSlugIndex, bSlugIndex)
+      : 0;
+  },
+  Order.mapInput(Order.string, (file) => file.stem ?? ""),
+);
 
-  // If the categories are the same, sort by title, otherwise, sort by category.
-  return categoryComparison === 0 ? slugComparison : categoryComparison;
-}
+// Main sorting function that uses category and slug comparisons.
+const sortFiles = Order.combine(compareByCategory, compareBySlug);
 
 /**
  * Write a file containing static imports for all the files.
  */
-async function staticImports(files: VFile[]): Promise<void> {
-  const fileNames = files.map((file): string => file.path);
-  const fileContent = staticImportsFile(fileNames);
-  await writeGenFile(fileContent, "imports");
-}
+const staticImports = (
+  files: VFile[],
+): Effect.Effect<void, Cause.UnknownException> =>
+  Effect.gen(function* () {
+    const fileNames = files.map((file): string => file.path);
+    const fileContent = staticImportsFile(fileNames);
+    yield* writeGenFile(fileContent, "imports");
+  });
 
 function createImport(url: string): string {
   return `(async () => await import("${url}"));`;
@@ -278,14 +284,15 @@ function createImports(
 
 /**
  * Create a file containing static imports for all the files.
- * An FE is an IIFE that isn't immediately invoked.
- * More likely, an IIFE is actually an FE that's immediately invoked.
+ * An FE is an IIFE that is not immediately invoked.
+ * More likely, an IIFE is actually an FE that *is* immediately invoked.
  * The mysteries of life...
  *
  * @param files The names of files.
  * @returns The contents of a Javascript file containing a bunch of FEs.
  */
 function staticImportsFile(files: string[]): string {
+  // TODO(lishaduck): Don't hardcode `"../content"`.
   const contentFiles = createImports(files, (file) => `../content/${file}`);
 
   return `${contentFiles}\n`;
@@ -294,47 +301,55 @@ function staticImportsFile(files: string[]): string {
 /**
  * Write a file containing the categories of all the files.
  */
-async function categories(files: VFile[]): Promise<void> {
-  const fileContent = categoriesFile(files);
-  await writeGenFile(fileContent, "categories");
-}
+const categories = (
+  files: VFile[],
+): Effect.Effect<
+  void,
+  Cause.UnknownException | ParseResult.ParseError,
+  never
+> =>
+  Effect.gen(function* () {
+    const fileContent = yield* categoriesFile(files);
+
+    yield* writeGenFile(fileContent, "categories");
+  });
 
 /**
  * Create a file containing the categories of all the files.
  */
-function categoriesFile(files: VFile[]): string {
-  const sortedFiles = files.map((file) => {
-    const stem = file.stem ?? "";
-    const category = file.data.matter?.category ?? "";
+const categoriesFile = (
+  files: VFile[],
+): Either.Either<string, ParseResult.ParseError> =>
+  Either.gen(function* () {
+    const sortedFiles = files.map((file) => {
+      const stem = file.stem ?? "";
+      const category = file.data.matter?.category ?? "";
 
-    return {
-      slug: stem === category ? undefined : stem,
-      data: {
-        heroImage: `/images/${category}-${stem}.avif`,
-        ...file.data.matter,
-      },
-    };
-  });
-  const parsedProfiles = solutionPagesSchema.parse(sortedFiles);
-  const json = JSON.stringify(parsedProfiles, undefined, 2);
+      return {
+        slug: stem === category ? undefined : stem,
+        data: {
+          heroImage: `/images/${category}-${stem}.avif`,
+          ...file.data.matter,
+        },
+      };
+    });
+    const parsedProfiles =
+      yield* Schema.decodeUnknownEither(SolutionPagesSchema)(sortedFiles);
+    const json = JSON.stringify(parsedProfiles, undefined, 2);
 
-  return `import type { SolutionPages } from "./solutions.ts";
+    return `import type { SolutionPages } from "./solutions.ts";
 
 export const solutions = ${json} as const satisfies SolutionPages;
 `;
-}
+  });
 
 /**
  * Write a file to the `utils` directory.
  */
-async function writeGenFile(
+const writeGenFile = (
   fileContent: string,
   fileName: string,
-): Promise<void> {
-  await Deno.writeTextFile(
-    resolve(utilsDir, `${fileName}.gen.ts`),
-    fileContent,
-  );
-}
+): Effect.Effect<void, Cause.UnknownException, never> =>
+  writeTextFile(resolve(utilsDir, `${fileName}.gen.ts`), fileContent);
 
-await run();
+await Effect.runPromise(program);

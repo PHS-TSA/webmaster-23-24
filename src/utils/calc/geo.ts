@@ -1,13 +1,13 @@
-import { z } from "zod";
+import { Schema } from "effect";
 
-export type GeoType = z.infer<typeof geothermalLoopType>;
+export type GeoType = typeof GeothermalLoopTypeSchema.Type;
 
-export const geothermalLoopType = z.union([
-  z.literal("horizontal"),
-  z.literal("vertical"),
-  z.literal("open"),
-  z.literal("closed"),
-]);
+export const GeothermalLoopTypeSchema = Schema.Literal(
+  "horizontal",
+  "vertical",
+  "open",
+  "closed",
+);
 
 export interface GeoCostBreakdown {
   /** +$2000 */

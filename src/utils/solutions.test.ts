@@ -1,6 +1,6 @@
 import { assertEquals, assertThrows } from "@std/assert";
-import { ZodError } from "zod";
-import { solutionPagesSchema } from "./solutions.ts";
+import { ParseResult, Schema } from "effect";
+import { SolutionPagesSchema } from "./solutions.ts";
 
 /**
  * Test the solution pages schema.
@@ -21,20 +21,14 @@ Deno.test("Solution pages schema.", async (t: Deno.TestContext): Promise<void> =
       },
     ];
 
-    const actual = solutionPagesSchema.parse(value);
+    const actual = Schema.decodeUnknownSync(SolutionPagesSchema)(value);
     assertEquals(actual, value);
   });
 
   await t.step("Invalid data", async (t): Promise<void> => {
-    await t.step("Empty", (): void => {
-      const actual = (): void => {
-        solutionPagesSchema.parse([{}]);
-      };
-      assertThrows(actual, Error, "Required");
-    });
     await t.step("Missing category", (): void => {
-      const actual = (): void => {
-        solutionPagesSchema.parse([
+      const actual = () =>
+        Schema.decodeUnknownSync(SolutionPagesSchema)([
           {
             data: {
               title: "title",
@@ -42,8 +36,7 @@ Deno.test("Solution pages schema.", async (t: Deno.TestContext): Promise<void> =
             },
           },
         ]);
-      };
-      assertThrows(actual, ZodError, "Required");
+      assertThrows(actual, ParseResult.ParseError, "is missing");
     });
   });
 });

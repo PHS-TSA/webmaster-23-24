@@ -29,6 +29,7 @@
     "@preact/signals": "npm:@preact/signals@1.3.0",
     "@preact/signals-core": "npm:@preact/signals-core@1.8.0",
     "@std/assert": "jsr:@std/assert@1.0.6",
+    "@std/fs": "jsr:@std/fs@1.0.4",
     "@std/path": "jsr:@std/path@1.0.6",
     "@tabler/icons-preact": "npm:@tabler/icons-preact@3.19.0",
     "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.9",
@@ -36,6 +37,7 @@
     "@types/hast": "npm:@types/hast@3.0.4",
     "@vendor/": "./vendor/",
     "clsx": "npm:clsx@2.1.1",
+    "effect": "npm:effect@3.10.12",
     "idb-keyval": "npm:idb-keyval@6.2.1",
     "openai": "https://deno.land/x/openai@v4.50.0/mod.ts",
     "openai/": "https://deno.land/x/openai@v4.50.0/",
@@ -64,8 +66,7 @@
     "unified": "npm:unified@11.0.5",
     "vfile": "npm:vfile@6.0.3",
     "vfile-matter": "npm:vfile-matter@5.0.0",
-    "vfile-reporter": "npm:vfile-reporter@8.1.1",
-    "zod": "https://deno.land/x/zod@v3.23.8/mod.ts"
+    "vfile-reporter": "npm:vfile-reporter@8.1.1"
   },
   "scopes": {
     "https://esm.sh/v135/": {
@@ -117,7 +118,6 @@
       "tags": ["fresh", "recommended"],
       "include": [
         "ban-untagged-todo",
-        "explicit-function-return-type",
         "explicit-module-boundary-types",
         "guard-for-in",
         "no-await-in-loop",

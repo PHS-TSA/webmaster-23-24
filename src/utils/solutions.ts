@@ -1,19 +1,17 @@
 import { icons } from "@tabler/icons-preact";
-import { z } from "zod";
+import { Schema } from "effect";
 
 /**
  * The metadata for a solution.
  */
-export type SolutionData = z.infer<typeof solutionDataSchema>;
+export type SolutionData = typeof SolutionDataSchema.Type;
 
 /**
  * The set of solution pages with their metadata.
  */
-export type SolutionPages = z.infer<typeof solutionPagesSchema>;
+export type SolutionPages = typeof SolutionPagesSchema.Type;
 
-export type SolutionPage = z.infer<typeof solutionPageSchema>;
-
-const solutionDataSchemaDescription = "Metadata for the solution." as const;
+export type SolutionPage = typeof SolutionPageSchema.Type;
 
 /**
  * A list of categories, in order.
@@ -25,46 +23,54 @@ export const titleList = ["what", "environment", "cost", "worth-it"];
 /**
  * Represent the data for the solution pages.
  */
-export const solutionDataSchema = z
-  .object({
-    title: z.string().describe("The title of the solution."),
-    description: z
-      .string()
-      .refine((value) => !value.endsWith("."))
-      .describe("The description of the solution."),
-    category: z.string().describe("The category of the solution."),
-    sectionHeader: z
-      .string()
-      .describe("The section header for the category index page."),
-    heroImage: z
-      .string()
-      .refine((value) => value.match(avifImageRegex))
-      .describe("The image to use for the hero."),
-    icon: z
-      .string()
-      .refine((value) => Object.hasOwn(icons, value))
-      .describe("The Tabler icon to use for the solution."),
-  })
-  .passthrough()
-  .readonly()
-  .describe(solutionDataSchemaDescription);
+export const SolutionDataSchema = Schema.Struct({
+  title: Schema.String.annotations({
+    description: "The title of the solution.",
+  }),
+  description: Schema.String.pipe(
+    Schema.filter((value) => !value.endsWith(".")),
+  ).annotations({
+    description: "The description of the solution.",
+  }),
+  category: Schema.String.annotations({
+    description: "The category of the solution.",
+  }),
+  sectionHeader: Schema.String.annotations({
+    description: "The section header for the category index page.",
+  }),
+  heroImage: Schema.String.pipe(
+    Schema.filter((value) => avifImageRegex.test(value)),
+  ).annotations({
+    description: "The image to use for the hero.",
+  }),
+  icon: Schema.String.pipe(
+    Schema.filter((value) => Object.hasOwn(icons, value)),
+  ).annotations({
+    description: "The Tabler icon to use for the solution.",
+  }),
+}).annotations({
+  description: "Metadata for the solution.",
+  parseOptions: {
+    onExcessProperty: "preserve",
+  },
+});
 
 const avifImageRegex = /images\/.+.avif$/;
 
 /**
  * Represent a set of solution pages.
  */
-export const solutionPageSchema = z
-  .object({
-    slug: z
-      .string()
-      .optional()
-      .describe("The slug of the solution without a trailing slash."),
-    data: solutionDataSchema,
-  })
-  .strict()
-  .readonly()
-  .describe("A solution page.");
+export const SolutionPageSchema = Schema.Struct({
+  slug: Schema.String.pipe(Schema.optional).annotations({
+    description: "The slug of the solution without a trailing slash.",
+  }),
+  data: SolutionDataSchema,
+}).annotations({
+  description: "A solution page.",
+  parseOptions: {
+    onExcessProperty: "error",
+  },
+});
 
 /**
  * Represent a set of possible solution pages.
@@ -74,14 +80,14 @@ export const solutionPageSchema = z
  *
  * Just for typechecking.
  */
-const solutionPageNullableSchema = solutionPageSchema.optional();
+const SolutionPageNullableSchema = SolutionPageSchema.pipe(Schema.partial);
 
 /**
  * Represent a set of possible solution pages.
  */
-const solutionPagesNullableSchema = solutionPageNullableSchema
-  .array()
-  .readonly();
+const SolutionPagesNullableSchema = SolutionPageNullableSchema.pipe(
+  Schema.Array,
+);
 
 /**
  * Represent the data for the solution pages.
@@ -94,13 +100,12 @@ const solutionPagesNullableSchema = solutionPageNullableSchema
  * This is used to verify that the MDX frontmatter is correct when the category code is generated.
  * This also generates types so that TypeScript can typecheck solutions at compile time.
  */
-export const solutionPagesSchema = solutionPagesNullableSchema.transform(
-  (
-    val: z.infer<typeof solutionPagesNullableSchema>,
-  ): readonly z.infer<typeof solutionPageSchema>[] =>
-    val.filter(
-      (
-        val: z.infer<typeof solutionPageNullableSchema>,
-      ): val is z.infer<typeof solutionPageSchema> => val !== undefined,
-    ),
+export const SolutionPagesSchema = Schema.transform(
+  SolutionPagesNullableSchema,
+  Schema.typeSchema(SolutionPageSchema).pipe(Schema.Array),
+  {
+    strict: true,
+    decode: (val) => val.filter((val) => Schema.is(SolutionPageSchema)(val)),
+    encode: (val) => val.filter((val) => val.data !== undefined),
+  },
 );

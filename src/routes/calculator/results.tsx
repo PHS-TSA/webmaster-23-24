@@ -1,15 +1,14 @@
 import { Head } from "$fresh/runtime.ts";
 import type { Handlers, PageProps, RouteConfig } from "$fresh/server.ts";
 import { IconCheck } from "@tabler/icons-preact";
+import { Either, Schema } from "effect";
 import type { ComponentChildren, JSX } from "preact";
 import CalculatorScaffold from "../../components/CalculatorScaffold.tsx";
 import { Cover } from "../../components/Cover.tsx";
 import { Meta } from "../../components/Meta.tsx";
 import {
   type GeoCostBreakdown,
-  geothermalLoopType,
-} from "../../utils/calc/geo.ts";
-import {
+  GeothermalLoopTypeSchema,
   calculatePricing,
   calculatePricingFromType,
   calculatePricingIfHardInstallation,
@@ -67,14 +66,14 @@ function parseData(
   const region = data.get("region[value]")?.toString();
   const isHilly = data.get("hills")?.toString() ?? "";
   const renovations = data.get("renovations")?.toString() ?? "";
-  const geoType = geothermalLoopType.safeParse(
+  const geoType = Schema.decodeUnknownEither(GeothermalLoopTypeSchema)(
     data.get("geo-type[value]")?.toString(),
   );
   const squareFootage = data.get("area")?.toString();
   const requiresPermit = data.get("permit")?.toString() ?? "";
 
   if (
-    geoType.success &&
+    Either.isRight(geoType) &&
     region !== undefined &&
     Object.hasOwn(stateData, region)
   ) {
@@ -87,7 +86,7 @@ function parseData(
       geoCostData: {
         isHilly: Boolean(isHilly),
         needsRenovations: Boolean(renovations),
-        type: geoType.data,
+        type: geoType.right,
         squareFootage: Number(squareFootage),
         requiresPermit: Boolean(requiresPermit),
       },
