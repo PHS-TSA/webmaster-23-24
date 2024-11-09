@@ -1,0 +1,11 @@
+{
+  "$schema": "https://gist.githubusercontent.com/jfhr/181123d7acc87ea329be3700d9c37594/raw/9dafefb638f8ff0660930cc48debefa1dfcd87ca/lighthouserc.schema.json",
+  "ci": {
+    "assert": {
+        "preset": "lighthouse:recommended",
+        "assertions": {
+            "is-crawlable": ["off"]
+        }
+    }
+  }
+}
