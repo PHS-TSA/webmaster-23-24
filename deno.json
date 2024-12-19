@@ -83,7 +83,7 @@
       "@react-stately/utils": "https://esm.sh/v135/*@react-stately/utils@3.10.4",
       "@react-types/shared": "npm:@react-types/shared@3.26.0",
       "@preact/signals-react": "npm:@preact/signals@2.0.0",
-      "@swc/helpers": "npm:@swc/helpers@0.5.13",
+      "@swc/helpers": "npm:@swc/helpers@0.5.15",
       "@tanstack/react-virtual": "https://esm.sh/v135/*@tanstack/react-virtual@3.10.8",
       "@tanstack/virtual-core": "npm:@tanstack/virtual-core@3.10.8",
       "@types/react": "npm:preact@10.24.3/compat",
