@@ -76,7 +76,7 @@
       "@floating-ui/react/": "https://esm.sh/v135/*@floating-ui/react@0.27.2/",
       "@floating-ui/react-dom": "https://esm.sh/v135/*@floating-ui/react-dom@2.1.2",
       "@floating-ui/utils": "npm:@floating-ui/utils@0.2.8",
-      "@react-aria/focus": "https://esm.sh/v135/*@react-aria/focus@3.18.4",
+      "@react-aria/focus": "https://esm.sh/v135/*@react-aria/focus@3.19.0",
       "@react-aria/interactions": "https://esm.sh/v135/*@react-aria/interactions@3.22.4",
       "@react-aria/ssr": "https://esm.sh/v135/*@react-aria/ssr@3.9.6",
       "@react-aria/utils": "https://esm.sh/v135/*@react-aria/utils@3.25.3",
