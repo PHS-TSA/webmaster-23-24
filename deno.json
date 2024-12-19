@@ -62,7 +62,7 @@
     "remark-preset-lint-recommended": "npm:remark-preset-lint-recommended@7.0.0",
     "remark-rehype": "npm:remark-rehype@11.1.1",
     "tailwind-scrollbar": "npm:tailwind-scrollbar@3.1.0",
-    "tailwindcss": "npm:tailwindcss@3.4.14",
+    "tailwindcss": "npm:tailwindcss@3.4.17",
     "unified": "npm:unified@11.0.5",
     "vfile": "npm:vfile@6.0.3",
     "vfile-matter": "npm:vfile-matter@5.0.0",
