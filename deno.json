@@ -85,7 +85,7 @@
       "@preact/signals-react": "npm:@preact/signals@2.0.0",
       "@swc/helpers": "npm:@swc/helpers@0.5.15",
       "@tanstack/react-virtual": "https://esm.sh/v135/*@tanstack/react-virtual@3.10.8",
-      "@tanstack/virtual-core": "npm:@tanstack/virtual-core@3.10.8",
+      "@tanstack/virtual-core": "npm:@tanstack/virtual-core@3.11.2",
       "@types/react": "npm:preact@10.24.3/compat",
       "client-only": "npm:client-only@0.0.1",
       "node:process": "https://esm.sh/v135/*node_process.js",
