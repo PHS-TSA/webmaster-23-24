@@ -81,7 +81,7 @@
       "@react-aria/ssr": "https://esm.sh/v135/*@react-aria/ssr@3.9.6",
       "@react-aria/utils": "https://esm.sh/v135/*@react-aria/utils@3.25.3",
       "@react-stately/utils": "https://esm.sh/v135/*@react-stately/utils@3.10.4",
-      "@react-types/shared": "npm:@react-types/shared@3.25.0",
+      "@react-types/shared": "npm:@react-types/shared@3.26.0",
       "@preact/signals-react": "npm:@preact/signals@2.0.0",
       "@swc/helpers": "npm:@swc/helpers@0.5.13",
       "@tanstack/react-virtual": "https://esm.sh/v135/*@tanstack/react-virtual@3.10.8",
