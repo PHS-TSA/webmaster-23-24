@@ -78,7 +78,7 @@
       "@floating-ui/utils": "npm:@floating-ui/utils@0.2.8",
       "@react-aria/focus": "https://esm.sh/v135/*@react-aria/focus@3.19.0",
       "@react-aria/interactions": "https://esm.sh/v135/*@react-aria/interactions@3.22.5",
-      "@react-aria/ssr": "https://esm.sh/v135/*@react-aria/ssr@3.9.6",
+      "@react-aria/ssr": "https://esm.sh/v135/*@react-aria/ssr@3.9.7",
       "@react-aria/utils": "https://esm.sh/v135/*@react-aria/utils@3.25.3",
       "@react-stately/utils": "https://esm.sh/v135/*@react-stately/utils@3.10.4",
       "@react-types/shared": "npm:@react-types/shared@3.26.0",
