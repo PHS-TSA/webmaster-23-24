@@ -71,7 +71,7 @@
   "scopes": {
     "https://esm.sh/v135/": {
       "@floating-ui/core": "npm:@floating-ui/core@1.6.8",
-      "@floating-ui/dom": "npm:@floating-ui/dom@1.6.11",
+      "@floating-ui/dom": "npm:@floating-ui/dom@1.6.12",
       "@floating-ui/react": "https://esm.sh/v135/*@floating-ui/react@0.26.25",
       "@floating-ui/react/": "https://esm.sh/v135/*@floating-ui/react@0.26.25/",
       "@floating-ui/react-dom": "https://esm.sh/v135/*@floating-ui/react-dom@2.1.2",
