@@ -29,7 +29,7 @@
     "@preact/signals": "npm:@preact/signals@2.0.0",
     "@preact/signals-core": "npm:@preact/signals-core@1.8.0",
     "@std/assert": "jsr:@std/assert@1.0.10",
-    "@std/fs": "jsr:@std/fs@1.0.4",
+    "@std/fs": "jsr:@std/fs@1.0.8",
     "@std/path": "jsr:@std/path@1.0.6",
     "@tabler/icons-preact": "npm:@tabler/icons-preact@3.19.0",
     "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.9",
