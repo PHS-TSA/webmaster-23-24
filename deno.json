@@ -50,7 +50,7 @@
     "remark-gfm": "npm:remark-gfm@4.0.1",
     "remark-lint-checkbox-content-indent": "npm:remark-lint-checkbox-content-indent@5.0.1",
     "remark-lint-definition-spacing": "npm:remark-lint-definition-spacing@4.0.1",
-    "remark-lint-heading-increment": "npm:remark-lint-heading-increment@4.0.0",
+    "remark-lint-heading-increment": "npm:remark-lint-heading-increment@4.0.1",
     "remark-lint-linebreak-style": "npm:remark-lint-linebreak-style@4.0.0",
     "remark-lint-no-consecutive-blank-lines": "npm:remark-lint-no-consecutive-blank-lines@5.0.0",
     "remark-lint-no-missing-blank-lines": "npm:remark-lint-no-missing-blank-lines@4.0.0",
