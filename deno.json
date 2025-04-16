@@ -33,7 +33,7 @@
     "@std/path": "jsr:@std/path@1.0.8",
     "@tabler/icons-preact": "npm:@tabler/icons-preact@3.31.0",
     "@tailwindcss/forms": "npm:@tailwindcss/forms@0.5.10",
-    "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.15",
+    "@tailwindcss/typography": "npm:@tailwindcss/typography@0.5.16",
     "@types/hast": "npm:@types/hast@3.0.4",
     "@vendor/": "./vendor/",
     "clsx": "npm:clsx@2.1.1",
